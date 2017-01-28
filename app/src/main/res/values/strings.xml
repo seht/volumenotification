@@ -59,7 +59,7 @@
     <string name="btn_6_label">Alarms</string>
 
     <string name="pref_buttons_title">Buttons</string>
-    <string name="pref_buttons_summary">Select and reorder the notification buttons</string>
+    <string name="pref_buttons_summary">Select and reorder the volume buttons</string>
     <string-array name="pref_buttons_entries">
         <item>- None -</item>
         <item>@string/btn_1_label</item>
@@ -95,8 +95,8 @@
     <string name="pref_theme_custom_background_summary">Supported formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
     <string name="pref_theme_custom_background_default">darkgrey</string>
 
-    <string name="pref_theme_custom_foreground_title">Button color</string>
-    <string name="pref_theme_custom_foreground_summary">* Supporting the same color formats as background.</string>
+    <string name="pref_theme_custom_foreground_title">Icon color</string>
+    <string name="pref_theme_custom_foreground_summary">* Supporting the same formats as background color.</string>
     <string name="pref_theme_custom_foreground_default">#00BFA5</string>
 
     <string name="pref_theme_custom_color_error_message">Invalid color or format</string>
@@ -106,7 +106,7 @@
     <bool name="pref_transparent_default">false</bool>
 
     <string name="pref_max_priority_title">High priority</string>
-    <string name="pref_max_priority_summary">* Enabling will keep the notification at the top and show the status bar icon, while disabling places the notification bellow a separator.</string>
+    <string name="pref_max_priority_summary">* Enabling will keep the notification at the top and may show a status bar icon, while disabling could place the notification bellow a separator.</string>
     <bool name="pref_max_priority_default">true</bool>
 
     <string name="pref_private_visibility_title">Hidden from lock screen</string>
@@ -118,7 +118,7 @@
     <bool name="pref_boot_default">true</bool>
 
     <string name="pref_hide_status_icon_title">Hidden status bar icon</string>
-    <string name="pref_hide_status_icon_summary">* When high priority is enabled, this will show a blank space in place of the icon in status bar.</string>
+    <string name="pref_hide_status_icon_summary">* When high priority is enabled, it may show a blank space in place of the icon in status bar.</string>
     <bool name="pref_hide_status_icon_default">true</bool>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
