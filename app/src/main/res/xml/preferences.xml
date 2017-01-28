@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2017 Seht (R) HyX
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="pref_cat_style"
+        android:title="@string/pref_cat_style_title">
+
+        <ListPreference
+            android:defaultValue="@string/pref_theme_default"
+            android:dialogTitle="@string/pref_theme_title"
+            android:entries="@array/pref_theme_entries"
+            android:entryValues="@array/pref_theme_values"
+            android:key="pref_theme"
+            android:summary="@string/pref_theme_summary"
+            android:title="@string/pref_theme_title" />
+
+        <net.hyx.app.volumenotification.DialogPrefButtons
+            android:dialogTitle="@string/pref_buttons_title"
+            android:key="pref_buttons_dialog"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/pref_buttons_summary"
+            android:title="@string/pref_buttons_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_transparent_default"
+            android:key="pref_transparent"
+            android:summary="@string/pref_transparent_summary"
+            android:title="@string/pref_transparent_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_cat_theme_custom"
+        android:title="@string/pref_cat_theme_custom_title">
+
+        <EditTextPreference
+            android:defaultValue="@string/pref_theme_custom_background_default"
+            android:key="pref_theme_custom_background"
+            android:summary="@string/pref_theme_custom_background_summary"
+            android:title="@string/pref_theme_custom_background_title" />
+        <EditTextPreference
+            android:defaultValue="@string/pref_theme_custom_foreground_default"
+            android:key="pref_theme_custom_foreground"
+            android:summary="@string/pref_theme_custom_foreground_summary"
+            android:title="@string/pref_theme_custom_foreground_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_cat_config"
+        android:title="@string/pref_cat_config_title">
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_boot_default"
+            android:key="pref_boot"
+            android:summary="@string/pref_boot_summary"
+            android:title="@string/pref_boot_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_max_priority_default"
+            android:key="pref_max_priority"
+            android:summary="@string/pref_max_priority_summary"
+            android:title="@string/pref_max_priority_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_private_visibility_default"
+            android:key="pref_private_visibility"
+            android:summary="@string/pref_private_visibility_summary"
+            android:title="@string/pref_private_visibility_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_hide_status_icon_default"
+            android:key="pref_hide_status_icon"
+            android:summary="@string/pref_hide_status_icon_summary"
+            android:title="@string/pref_hide_status_icon_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/pref_toggle_mute_default"
+            android:key="pref_toggle_mute"
+            android:summary="@string/pref_toggle_mute_summary"
+            android:title="@string/pref_toggle_mute_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
