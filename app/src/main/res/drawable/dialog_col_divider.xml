@@ -14,6 +14,8 @@
   ~ limitations under the License.
   -->
 
-<resources>
-
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size
+        android:width="8dp"
+        android:height="0dp" />
+</shape>

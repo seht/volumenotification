@@ -63,12 +63,19 @@ class NotificationFactory {
     }
 
     static void cancel(Context context) {
-        NotificationFactory notification_factory = new NotificationFactory(context);
-        notification_factory.manager.cancelAll();
+        NotificationFactory self = new NotificationFactory(context);
+        self.manager.cancelAll();
     }
 
     static void startService(Context context) {
-        context.startService(new Intent(context, NotificationService.class));
+        context.startService(new Intent(context, ServiceNotification.class));
+    }
+
+    static void setVolume(Context context, int selection) {
+        NotificationFactory self = new NotificationFactory(context);
+        ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE))
+                .adjustStreamVolume(self.getVolStreamType(selection), self.getVolDirection(selection),
+                        AudioManager.FLAG_SHOW_UI);
     }
 
     private void create() {
@@ -140,9 +147,8 @@ class NotificationFactory {
                     int id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
                     RemoteViews btn = new RemoteViews(context.getPackageName(), res);
 
-                    Intent intent = new Intent(context, ReceiverAudioManager.class);
-                    intent.putExtra("str", getVolStreamType(sel));
-                    intent.putExtra("dir", getVolDirection(sel));
+                    Intent intent = new Intent(context, ReceiverSetVolume.class);
+                    intent.putExtra("selection", sel);
 
                     PendingIntent event = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     btn.setOnClickPendingIntent(id, event);

@@ -47,8 +47,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".NotificationService"></service>
-
         <receiver android:name=".ReceiverReboot">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -57,7 +55,63 @@
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".ReceiverAudioManager"></receiver>
+        <receiver android:name=".ReceiverSetVolume"></receiver>
+
+        <service android:name=".ServiceNotification"></service>
+        <service
+            android:name=".ServiceTile1"
+            android:icon="@drawable/ic_btn_sel_1"
+            android:label="@string/btn_sel_1_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ServiceTile2"
+            android:icon="@drawable/ic_btn_sel_2"
+            android:label="@string/btn_sel_2_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ServiceTile3"
+            android:icon="@drawable/ic_btn_sel_3"
+            android:label="@string/btn_sel_3_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ServiceTile4"
+            android:icon="@drawable/ic_btn_sel_4"
+            android:label="@string/btn_sel_4_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ServiceTile5"
+            android:icon="@drawable/ic_btn_sel_5"
+            android:label="@string/btn_sel_5_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ServiceTile6"
+            android:icon="@drawable/ic_btn_sel_6"
+            android:label="@string/btn_sel_6_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
 
     </application>
 

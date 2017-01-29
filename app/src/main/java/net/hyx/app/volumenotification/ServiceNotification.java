@@ -16,20 +16,20 @@
 
 package net.hyx.app.volumenotification;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import android.app.IntentService;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.os.Bundle;
 
-public class ReceiverAudioManager extends BroadcastReceiver {
+
+public class ServiceNotification extends IntentService {
+
+    public ServiceNotification() {
+        super("ServiceNotification");
+    }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-
-        Bundle args = intent.getExtras();
-        ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE))
-                .adjustStreamVolume(args.getInt("str"), args.getInt("dir"), AudioManager.FLAG_SHOW_UI);
+    protected void onHandleIntent(Intent intent) {
+        NotificationFactory.notify(this);
+        stopSelf();
     }
 
 }
