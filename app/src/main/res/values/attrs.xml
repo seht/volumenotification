@@ -16,7 +16,7 @@
 
 <resources>
     <declare-styleable name="styleable">
-        <attr name="color_background" format="color" />
-        <attr name="color_foreground" format="color" />
+        <attr name="background_color" format="color" />
+        <attr name="icon_color" format="color" />
     </declare-styleable>
 </resources>

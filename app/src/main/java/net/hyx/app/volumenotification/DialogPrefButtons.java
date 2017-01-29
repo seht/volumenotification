@@ -30,9 +30,8 @@ public class DialogPrefButtons extends DialogPreference {
     private Context context;
     private Resources resources;
     private NotificationPreferences preferences;
-
-    private SparseArray<CheckBox> checkboxes = new SparseArray<>(NotificationFactory.button_limit);
-    private SparseArray<Spinner> spinners = new SparseArray<>(NotificationFactory.button_limit);
+    private SparseArray<CheckBox> checkboxes;
+    private SparseArray<Spinner> spinners;
 
     public DialogPrefButtons(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,6 +39,8 @@ public class DialogPrefButtons extends DialogPreference {
         this.context = context;
         resources = context.getResources();
         preferences = new NotificationPreferences(getContext());
+        checkboxes = new SparseArray<>(NotificationFactory.buttons_selection_size);
+        spinners = new SparseArray<>(NotificationFactory.buttons_selection_size);
 
         setPersistent(false);
         setDialogLayoutResource(R.layout.view_dialog_pref_buttons);
@@ -49,7 +50,7 @@ public class DialogPrefButtons extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        for (int pos = 1; pos <= checkboxes.size(); pos++) {
+        for (int pos = 1; pos <= NotificationFactory.buttons_selection_size; pos++) {
             int checkbox_id = resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", context.getPackageName());
             int spinner_id = resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", context.getPackageName());
 

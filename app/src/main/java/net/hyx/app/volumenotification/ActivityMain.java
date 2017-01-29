@@ -45,11 +45,11 @@ public class ActivityMain extends AppCompatActivity {
         }
     }
 
-    /*@Override
+    @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        openOptionsMenu();
-    }*/
+        //openOptionsMenu();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

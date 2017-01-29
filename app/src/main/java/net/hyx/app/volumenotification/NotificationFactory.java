@@ -33,7 +33,7 @@ import java.util.List;
 
 class NotificationFactory {
 
-    static int button_limit = 6;
+    static int buttons_selection_size = 6;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
@@ -114,8 +114,8 @@ class NotificationFactory {
         if (!theme.equals("theme_custom")) {
             int res = resources.getIdentifier("style_" + theme, "style", context.getPackageName());
             TypedArray attrs = context.obtainStyledAttributes(res, R.styleable.styleable);
-            background_color = attrs.getColor(R.styleable.styleable_color_background, Color.TRANSPARENT);
-            icon_color = attrs.getColor(R.styleable.styleable_color_foreground, Color.TRANSPARENT);
+            background_color = attrs.getColor(R.styleable.styleable_background_color, Color.TRANSPARENT);
+            icon_color = attrs.getColor(R.styleable.styleable_icon_color, Color.TRANSPARENT);
             attrs.recycle();
         } else {
             background_color = preferences.getCustomThemeBackgroundColor();
@@ -130,7 +130,7 @@ class NotificationFactory {
 
         view.removeAllViews(R.id.layout_buttons);
 
-        for (int pos = 1; pos <= button_limit; pos++) {
+        for (int pos = 1; pos <= buttons_selection_size; pos++) {
             if (preferences.getButtonChecked(pos)) {
                 int sel = preferences.getButtonSelection(pos);
                 if (sel > 0 && !buttons.contains(sel)) {

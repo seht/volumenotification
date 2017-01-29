@@ -35,6 +35,7 @@ public class ActivityPref extends AppCompatActivity implements OnSharedPreferenc
                 .registerOnSharedPreferenceChangeListener(this);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new NotificationSettingsFragment())
                 .commit();

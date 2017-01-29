@@ -17,28 +17,39 @@
 <resources>
 
     <style name="style_theme_material">
-        <item name="color_background">@color/theme_material_background</item>
-        <item name="color_foreground">@color/theme_material_foreground</item>
+        <item name="background_color">@color/theme_material_background</item>
+        <item name="icon_color">@color/theme_material_foreground</item>
     </style>
 
     <style name="style_theme_material_light">
-        <item name="color_background">@color/theme_material_light_background</item>
-        <item name="color_foreground">@color/theme_material_light_foreground</item>
+        <item name="background_color">@color/theme_material_light_background</item>
+        <item name="icon_color">@color/theme_material_light_foreground</item>
     </style>
 
     <style name="style_theme_material_blue_grey">
-        <item name="color_background">@color/theme_material_blue_grey_background</item>
-        <item name="color_foreground">@color/theme_material_blue_grey_foreground</item>
+        <item name="background_color">@color/theme_material_blue_grey_background</item>
+        <item name="icon_color">@color/theme_material_blue_grey_foreground</item>
     </style>
 
     <style name="style_theme_holo">
-        <item name="color_background">@color/theme_holo_background</item>
-        <item name="color_foreground">@color/theme_holo_foreground</item>
+        <item name="background_color">@color/theme_holo_background</item>
+        <item name="icon_color">@color/theme_holo_foreground</item>
     </style>
 
     <style name="style_theme_holo_light">
-        <item name="color_background">@color/theme_holo_light_background</item>
-        <item name="color_foreground">@color/theme_holo_light_foreground</item>
+        <item name="background_color">@color/theme_holo_light_background</item>
+        <item name="icon_color">@color/theme_holo_light_foreground</item>
+    </style>
+
+    <style name="style_image_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="style_image_button_compat" parent="@style/style_image_button">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
 </resources>
