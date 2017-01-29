@@ -37,7 +37,7 @@ public class ActivityMain extends AppCompatActivity {
 
         NotificationFactory.startService(this);
 
-        setTitle(getResources().getText(R.string.app_name));
+        //setTitle(getResources().getText(R.string.app_name));
         setContentView(R.layout.activity_main);
 
         if (getSupportActionBar() != null) {
