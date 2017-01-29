@@ -20,18 +20,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Bundle;
 
 public class ReceiverAudioManager extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        int stream_type = intent.getExtras().getInt("stream_type");
-        int direction = intent.getExtras().getInt("direction");
-
-        AudioManager audio_manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-
-        audio_manager.adjustStreamVolume(stream_type, direction, AudioManager.FLAG_SHOW_UI);
+        Bundle args = intent.getExtras();
+        ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE))
+                .adjustStreamVolume(args.getInt("str"), args.getInt("dir"), AudioManager.FLAG_SHOW_UI);
     }
 
 }

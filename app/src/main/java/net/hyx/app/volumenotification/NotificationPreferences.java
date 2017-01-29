@@ -21,7 +21,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 
 class NotificationPreferences {
 
@@ -45,13 +44,13 @@ class NotificationPreferences {
     }
 
     boolean getTransparent() {
-        boolean transparent_default = resources.getBoolean(R.bool.pref_transparent_default);
-        return preferences.getBoolean("pref_transparent", transparent_default);
+        boolean translucent_default = resources.getBoolean(R.bool.pref_translucent_default);
+        return preferences.getBoolean("pref_translucent", translucent_default);
     }
 
-    boolean getHideStatusIcon() {
-        boolean status_icon_default = resources.getBoolean(R.bool.pref_hide_status_icon_default);
-        return preferences.getBoolean("pref_hide_status_icon", status_icon_default);
+    boolean getHideStatus() {
+        boolean hide_status_default = resources.getBoolean(R.bool.pref_hide_status_default);
+        return preferences.getBoolean("pref_hide_status", hide_status_default);
     }
 
     boolean getToggleMute() {
@@ -59,36 +58,28 @@ class NotificationPreferences {
         return preferences.getBoolean("pref_toggle_mute", toggle_mute_default);
     }
 
-    boolean getButtonChecked(int position) {
-        String pref_key = "pref_buttons_btn_" + position + "_checked";
+    boolean getTopPriority() {
+        boolean top_priority_default = resources.getBoolean(R.bool.pref_top_priority_default);
+        return preferences.getBoolean("pref_top_priority", top_priority_default);
+    }
+
+    boolean getHideLocked() {
+        boolean hide_locked_default = resources.getBoolean(R.bool.pref_hide_locked_default);
+        return preferences.getBoolean("pref_hide_locked", hide_locked_default);
+    }
+
+    boolean getButtonChecked(int pos) {
+        String pref_key = "pref_buttons_checked_btn_" + pos;
         int default_res = resources.getIdentifier(pref_key + "_default", "bool", context.getPackageName());
         boolean checked_default = resources.getBoolean(default_res);
         return preferences.getBoolean(pref_key, checked_default);
     }
 
-    int getButtonSelection(int position) {
-        String pref_key = "pref_buttons_btn_" + position + "_selection";
+    int getButtonSelection(int pos) {
+        String pref_key = "pref_buttons_selection_btn_" + pos;
         int default_res = resources.getIdentifier(pref_key + "_default", "integer", context.getPackageName());
         int selection_default = resources.getInteger(default_res);
         return preferences.getInt(pref_key, selection_default);
-    }
-
-    int getPriority() {
-        boolean max_priority_default = resources.getBoolean(R.bool.pref_max_priority_default);
-        boolean max_priority = preferences.getBoolean("pref_max_priority", max_priority_default);
-        if (max_priority) {
-            return NotificationCompat.PRIORITY_MAX;
-        }
-        return NotificationCompat.PRIORITY_MIN;
-    }
-
-    int getVisibility() {
-        boolean private_visibility_default = resources.getBoolean(R.bool.pref_private_visibility_default);
-        boolean private_visibility = preferences.getBoolean("pref_private_visibility", private_visibility_default);
-        if (private_visibility) {
-            return NotificationCompat.VISIBILITY_SECRET;
-        }
-        return NotificationCompat.VISIBILITY_PUBLIC;
     }
 
     String getTheme() {
@@ -96,21 +87,19 @@ class NotificationPreferences {
         return preferences.getString("pref_theme", theme_default);
     }
 
-    int getThemeCustomBackgroundColor() {
-        String color_default = resources.getString(R.string.pref_theme_custom_background_default);
-        return getColor("pref_theme_custom_background", color_default);
+    int getCustomThemeBackgroundColor() {
+        String color_default = resources.getString(R.string.pref_custom_theme_background_color_default);
+        return getColor("pref_custom_theme_background_color", color_default);
     }
 
-    int getThemeCustomForegroundColor() {
-        String color_default = resources.getString(R.string.pref_theme_custom_foreground_default);
-        return getColor("pref_theme_custom_foreground", color_default);
+    int getCustomThemeIconColor() {
+        String color_default = resources.getString(R.string.pref_custom_theme_icon_color_default);
+        return getColor("pref_custom_theme_icon_color", color_default);
     }
 
     private int getColor(String pref_key, String default_value) {
-
         int color = 0;
         String color_value = preferences.getString(pref_key, default_value);
-
         try {
             if (!color_value.isEmpty()) {
                 color = Color.parseColor(color_value);

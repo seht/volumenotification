@@ -22,7 +22,6 @@
     <string name="menu_toggle_title">Enabled</string>
     <string name="menu_pref_title">Settings</string>
     <string name="menu_about_title">About</string>
-
     <string name="menu_about_url">https://github.com/seht/volumenotification</string>
 
     <string name="text_home_1">Please use the action bar menu to navigate the app.</string>
@@ -51,75 +50,75 @@
     </string-array>
     <string name="pref_theme_default">theme_material_light</string>
 
-    <string name="btn_1_label">Media playback</string>
-    <string name="btn_2_label">Voice calls</string>
-    <string name="btn_3_label">Notifications</string>
-    <string name="btn_4_label">Phone ring</string>
-    <string name="btn_5_label">System sounds</string>
-    <string name="btn_6_label">Alarms</string>
-
     <string name="pref_buttons_title">Buttons</string>
     <string name="pref_buttons_summary">Select and reorder the volume buttons</string>
     <string-array name="pref_buttons_entries">
         <item>- None -</item>
-        <item>@string/btn_1_label</item>
-        <item>@string/btn_2_label</item>
-        <item>@string/btn_3_label</item>
-        <item>@string/btn_4_label</item>
-        <item>@string/btn_5_label</item>
-        <item>@string/btn_6_label</item>
+        <item>@string/btn_sel_1_label</item>
+        <item>@string/btn_sel_2_label</item>
+        <item>@string/btn_sel_3_label</item>
+        <item>@string/btn_sel_4_label</item>
+        <item>@string/btn_sel_5_label</item>
+        <item>@string/btn_sel_6_label</item>
     </string-array>
 
-    <bool name="pref_buttons_btn_1_checked_default">true</bool>
-    <bool name="pref_buttons_btn_2_checked_default">true</bool>
-    <bool name="pref_buttons_btn_3_checked_default">true</bool>
-    <bool name="pref_buttons_btn_4_checked_default">false</bool>
-    <bool name="pref_buttons_btn_5_checked_default">false</bool>
-    <bool name="pref_buttons_btn_6_checked_default">false</bool>
+    <string name="btn_sel_1_label">Media playback</string>
+    <string name="btn_sel_2_label">Voice calls</string>
+    <string name="btn_sel_3_label">Notifications</string>
+    <string name="btn_sel_4_label">Phone ring</string>
+    <string name="btn_sel_5_label">System sounds</string>
+    <string name="btn_sel_6_label">Alarms</string>
 
-    <integer name="pref_buttons_btn_1_selection_default">1</integer>
-    <integer name="pref_buttons_btn_2_selection_default">2</integer>
-    <integer name="pref_buttons_btn_3_selection_default">3</integer>
-    <integer name="pref_buttons_btn_4_selection_default">4</integer>
-    <integer name="pref_buttons_btn_5_selection_default">5</integer>
-    <integer name="pref_buttons_btn_6_selection_default">6</integer>
+    <bool name="pref_buttons_checked_btn_1_default">true</bool>
+    <bool name="pref_buttons_checked_btn_2_default">true</bool>
+    <bool name="pref_buttons_checked_btn_3_default">true</bool>
+    <bool name="pref_buttons_checked_btn_4_default">false</bool>
+    <bool name="pref_buttons_checked_btn_5_default">false</bool>
+    <bool name="pref_buttons_checked_btn_6_default">false</bool>
+
+    <integer name="pref_buttons_selection_btn_1_default">1</integer>
+    <integer name="pref_buttons_selection_btn_2_default">2</integer>
+    <integer name="pref_buttons_selection_btn_3_default">3</integer>
+    <integer name="pref_buttons_selection_btn_4_default">4</integer>
+    <integer name="pref_buttons_selection_btn_5_default">5</integer>
+    <integer name="pref_buttons_selection_btn_6_default">6</integer>
 
     <string name="pref_cat_style_title">Appearance</string>
-    <string name="pref_cat_theme_custom_title">Custom theme</string>
+    <string name="pref_cat_custom_theme_title">Custom theme</string>
     <string name="pref_cat_config_title">Configuration</string>
 
-    <string name="pref_theme_custom_screen_title">Custom theme</string>
-    <string name="pref_theme_custom_screen_summary">Configure custom theme colors</string>
+    <string name="pref_custom_theme_title">Custom theme</string>
+    <string name="pref_custom_theme_summary">Configure custom theme colors</string>
 
-    <string name="pref_theme_custom_background_title">Background color</string>
-    <string name="pref_theme_custom_background_summary">Supported formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
-    <string name="pref_theme_custom_background_default">darkgrey</string>
+    <string name="pref_custom_theme_background_color_title">Background color</string>
+    <string name="pref_custom_theme_background_color_summary">Supported formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
+    <string name="pref_custom_theme_background_color_default">darkgrey</string>
 
-    <string name="pref_theme_custom_foreground_title">Icon color</string>
-    <string name="pref_theme_custom_foreground_summary">* Supporting the same formats as background color.</string>
-    <string name="pref_theme_custom_foreground_default">#00BFA5</string>
+    <string name="pref_custom_theme_icon_color_title">Icon color</string>
+    <string name="pref_custom_theme_icon_color_summary">* Supporting the same formats as background color.</string>
+    <string name="pref_custom_theme_icon_color_default">#00BFA5</string>
 
-    <string name="pref_theme_custom_color_error_message">Invalid color or format</string>
+    <string name="pref_custom_theme_color_error_message">Invalid color or format</string>
 
-    <string name="pref_transparent_title">Translucent background</string>
-    <string name="pref_transparent_summary">* Background transparency is only compatible with translucent launchers.</string>
-    <bool name="pref_transparent_default">false</bool>
-
-    <string name="pref_max_priority_title">High priority</string>
-    <string name="pref_max_priority_summary">* Enabling will keep the notification at the top and may show a status bar icon, while disabling could place the notification bellow a separator.</string>
-    <bool name="pref_max_priority_default">true</bool>
-
-    <string name="pref_private_visibility_title">Hidden from lock screen</string>
-    <string name="pref_private_visibility_summary">* To hide from lock screen when high priority is enabled, notification privacy should be enabled in your device settings.</string>
-    <bool name="pref_private_visibility_default">true</bool>
+    <string name="pref_translucent_title">Translucent background</string>
+    <string name="pref_translucent_summary">* Background transparency is only compatible with translucent launchers.</string>
+    <bool name="pref_translucent_default">false</bool>
 
     <string name="pref_boot_title">Start at boot</string>
     <string name="pref_boot_summary">Create notification when device starts</string>
     <bool name="pref_boot_default">true</bool>
 
-    <string name="pref_hide_status_icon_title">Hidden status bar icon</string>
-    <string name="pref_hide_status_icon_summary">* When high priority is enabled, it may show a blank space in place of the icon in status bar.</string>
-    <bool name="pref_hide_status_icon_default">true</bool>
+    <string name="pref_top_priority_title">High priority</string>
+    <string name="pref_top_priority_summary">* Enabling will keep the notification at the top but force a status bar icon.</string>
+    <bool name="pref_top_priority_default">true</bool>
+
+    <string name="pref_hide_locked_title">Hidden from lock screen</string>
+    <string name="pref_hide_locked_summary">* To hide from lock screen when high priority is enabled, notification privacy should be enabled in your device settings.</string>
+    <bool name="pref_hide_locked_default">true</bool>
+
+    <string name="pref_hide_status_title">Hidden status bar icon</string>
+    <string name="pref_hide_status_summary">* When high priority is enabled, this will show a blank space in status bar.</string>
+    <bool name="pref_hide_status_default">true</bool>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
     <string name="pref_toggle_mute_summary">Media volume button to toggle mute</string>

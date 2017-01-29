@@ -33,14 +33,20 @@ import java.util.List;
 
 class NotificationFactory {
 
+    static int button_limit = 6;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
     private NotificationPreferences preferences;
-    private RemoteViews view;
-
-    private int theme_color_background;
-    private int theme_color_foreground;
+    private int[] stream_types = {
+            AudioManager.USE_DEFAULT_STREAM_TYPE,
+            AudioManager.STREAM_MUSIC,
+            AudioManager.STREAM_VOICE_CALL,
+            AudioManager.STREAM_NOTIFICATION,
+            AudioManager.STREAM_RING,
+            AudioManager.STREAM_SYSTEM,
+            AudioManager.STREAM_ALARM
+    };
 
     private NotificationFactory(Context context) {
         this.context = context;
@@ -67,99 +73,95 @@ class NotificationFactory {
 
     private void create() {
 
-        view = new RemoteViews(context.getPackageName(), R.layout.view_layout_background);
-
-        parseLayout();
-        parseVolButtons();
-
         NotificationCompat.Builder notification_builder = new NotificationCompat.Builder(context)
                 .setOngoing(true)
-                .setVisibility(preferences.getVisibility())
-                .setPriority(preferences.getPriority())
-                .setContent(view);
+                .setPriority(getPriority())
+                .setVisibility(getVisibility())
+                .setCustomContentView(getCustomContentView());
 
-        if (preferences.getHideStatusIcon()) {
+        if (preferences.getHideStatus()) {
             notification_builder.setSmallIcon(android.R.color.transparent);
         } else {
             notification_builder.setSmallIcon(R.drawable.ic_launcher);
         }
+
         manager.cancelAll();
         manager.notify(1, notification_builder.build());
     }
 
-    private void parseLayout() {
-
-        String theme = preferences.getTheme();
-        if (!theme.equals("theme_custom")) {
-            int style_res = resources.getIdentifier("style_" + theme, "style", context.getPackageName());
-            TypedArray style_attrs = context.obtainStyledAttributes(style_res, R.styleable.styleable);
-            theme_color_background = style_attrs.getColor(R.styleable.styleable_color_background, Color.TRANSPARENT);
-            theme_color_foreground = style_attrs.getColor(R.styleable.styleable_color_foreground, Color.TRANSPARENT);
-            style_attrs.recycle();
-        } else {
-            theme_color_background = preferences.getThemeCustomBackgroundColor();
-            theme_color_foreground = preferences.getThemeCustomForegroundColor();
+    private int getPriority() {
+        if (preferences.getTopPriority()) {
+            return NotificationCompat.PRIORITY_MAX;
         }
+        return NotificationCompat.PRIORITY_MIN;
+    }
+
+    private int getVisibility() {
+        if (preferences.getHideLocked()) {
+            return NotificationCompat.VISIBILITY_SECRET;
+        }
+        return NotificationCompat.VISIBILITY_PUBLIC;
+    }
+
+    private RemoteViews getCustomContentView() {
+
+        RemoteViews view = new RemoteViews(context.getPackageName(), R.layout.view_layout_notification);
+        String theme = preferences.getTheme();
+        List<Integer> buttons = new ArrayList<>();
+        int background_color;
+        int icon_color;
+
+        if (!theme.equals("theme_custom")) {
+            int res = resources.getIdentifier("style_" + theme, "style", context.getPackageName());
+            TypedArray attrs = context.obtainStyledAttributes(res, R.styleable.styleable);
+            background_color = attrs.getColor(R.styleable.styleable_color_background, Color.TRANSPARENT);
+            icon_color = attrs.getColor(R.styleable.styleable_color_foreground, Color.TRANSPARENT);
+            attrs.recycle();
+        } else {
+            background_color = preferences.getCustomThemeBackgroundColor();
+            icon_color = preferences.getCustomThemeIconColor();
+        }
+
         if (!preferences.getTransparent()) {
-            view.setInt(R.id.layout_background, "setBackgroundColor", theme_color_background);
+            view.setInt(R.id.layout_background, "setBackgroundColor", background_color);
         } else {
             view.setInt(R.id.layout_background, "setBackgroundColor", android.R.color.transparent);
         }
-    }
 
-    private void parseVolButtons() {
+        view.removeAllViews(R.id.layout_buttons);
 
-        view.removeAllViews(R.layout.view_layout_background);
-
-        List<Integer> buttons = new ArrayList<>();
-
-        for (int pos = 1; pos <= 6; pos++) {
+        for (int pos = 1; pos <= button_limit; pos++) {
             if (preferences.getButtonChecked(pos)) {
-                int selection = preferences.getButtonSelection(pos);
-                if (selection > 0 && !buttons.contains(selection)) {
-                    buttons.add(selection);
+                int sel = preferences.getButtonSelection(pos);
+                if (sel > 0 && !buttons.contains(sel)) {
+                    buttons.add(sel);
 
-                    int res = resources.getIdentifier("view_btn_" + selection, "layout", context.getPackageName());
-                    int id = resources.getIdentifier("btn_" + selection, "id", context.getPackageName());
+                    int res = resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName());
+                    int id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
                     RemoteViews btn = new RemoteViews(context.getPackageName(), res);
 
-                    int stream_type = volStreamType(selection);
-                    int direction = volStreamDirection(stream_type);
                     Intent intent = new Intent(context, ReceiverAudioManager.class);
-                    intent.putExtra("stream_type", stream_type);
-                    intent.putExtra("direction", direction);
+                    intent.putExtra("str", getVolStreamType(sel));
+                    intent.putExtra("dir", getVolDirection(sel));
 
-                    btn.setOnClickPendingIntent(id, PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT));
-                    btn.setInt(id, "setColorFilter", theme_color_foreground);
+                    PendingIntent event = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    btn.setOnClickPendingIntent(id, event);
+                    btn.setInt(id, "setColorFilter", icon_color);
 
-                    view.addView(R.id.layout_background, btn);
+                    view.addView(R.id.layout_buttons, btn);
                 }
             }
         }
+        return view;
     }
 
-    private int volStreamType(int button) {
-        switch (button) {
-            case 1:
-                return AudioManager.STREAM_MUSIC;
-            case 2:
-                return AudioManager.STREAM_VOICE_CALL;
-            case 3:
-                return AudioManager.STREAM_NOTIFICATION;
-            case 4:
-                return AudioManager.STREAM_RING;
-            case 5:
-                return AudioManager.STREAM_SYSTEM;
-            case 6:
-                return AudioManager.STREAM_ALARM;
-            default:
-                return AudioManager.USE_DEFAULT_STREAM_TYPE;
-        }
+    private int getVolStreamType(int selection) {
+        return stream_types[selection];
     }
 
-    private int volStreamDirection(int stream_type) {
-        if (preferences.getToggleMute() && stream_type == AudioManager.STREAM_MUSIC) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    private int getVolDirection(int selection) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (preferences.getToggleMute() && getVolStreamType(selection) == AudioManager.STREAM_MUSIC) {
                 return AudioManager.ADJUST_TOGGLE_MUTE;
             }
         }

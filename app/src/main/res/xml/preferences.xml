@@ -19,7 +19,6 @@
     <PreferenceCategory
         android:key="pref_cat_style"
         android:title="@string/pref_cat_style_title">
-
         <ListPreference
             android:defaultValue="@string/pref_theme_default"
             android:dialogTitle="@string/pref_theme_title"
@@ -28,7 +27,6 @@
             android:key="pref_theme"
             android:summary="@string/pref_theme_summary"
             android:title="@string/pref_theme_title" />
-
         <net.hyx.app.volumenotification.DialogPrefButtons
             android:dialogTitle="@string/pref_buttons_title"
             android:key="pref_buttons_dialog"
@@ -36,66 +34,56 @@
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/pref_buttons_summary"
             android:title="@string/pref_buttons_title" />
-
         <CheckBoxPreference
-            android:defaultValue="@bool/pref_transparent_default"
-            android:key="pref_transparent"
-            android:summary="@string/pref_transparent_summary"
-            android:title="@string/pref_transparent_title" />
-
+            android:defaultValue="@bool/pref_translucent_default"
+            android:key="pref_translucent"
+            android:summary="@string/pref_translucent_summary"
+            android:title="@string/pref_translucent_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="pref_cat_theme_custom"
-        android:title="@string/pref_cat_theme_custom_title">
-
+        android:key="pref_cat_custom_theme"
+        android:title="@string/pref_cat_custom_theme_title">
         <EditTextPreference
-            android:defaultValue="@string/pref_theme_custom_background_default"
-            android:key="pref_theme_custom_background"
-            android:summary="@string/pref_theme_custom_background_summary"
-            android:title="@string/pref_theme_custom_background_title" />
+            android:defaultValue="@string/pref_custom_theme_background_color_default"
+            android:key="pref_custom_theme_background_color"
+            android:summary="@string/pref_custom_theme_background_color_summary"
+            android:title="@string/pref_custom_theme_background_color_title" />
         <EditTextPreference
-            android:defaultValue="@string/pref_theme_custom_foreground_default"
-            android:key="pref_theme_custom_foreground"
-            android:summary="@string/pref_theme_custom_foreground_summary"
-            android:title="@string/pref_theme_custom_foreground_title" />
-
+            android:defaultValue="@string/pref_custom_theme_icon_color_default"
+            android:key="pref_custom_theme_icon_color"
+            android:summary="@string/pref_custom_theme_icon_color_summary"
+            android:title="@string/pref_custom_theme_icon_color_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="pref_cat_config"
         android:title="@string/pref_cat_config_title">
-
         <CheckBoxPreference
             android:defaultValue="@bool/pref_boot_default"
             android:key="pref_boot"
             android:summary="@string/pref_boot_summary"
             android:title="@string/pref_boot_title" />
-
         <CheckBoxPreference
-            android:defaultValue="@bool/pref_max_priority_default"
-            android:key="pref_max_priority"
-            android:summary="@string/pref_max_priority_summary"
-            android:title="@string/pref_max_priority_title" />
-
+            android:defaultValue="@bool/pref_top_priority_default"
+            android:key="pref_top_priority"
+            android:summary="@string/pref_top_priority_summary"
+            android:title="@string/pref_top_priority_title" />
         <CheckBoxPreference
-            android:defaultValue="@bool/pref_private_visibility_default"
-            android:key="pref_private_visibility"
-            android:summary="@string/pref_private_visibility_summary"
-            android:title="@string/pref_private_visibility_title" />
-
+            android:defaultValue="@bool/pref_hide_locked_default"
+            android:key="pref_hide_locked"
+            android:summary="@string/pref_hide_locked_summary"
+            android:title="@string/pref_hide_locked_title" />
         <CheckBoxPreference
-            android:defaultValue="@bool/pref_hide_status_icon_default"
-            android:key="pref_hide_status_icon"
-            android:summary="@string/pref_hide_status_icon_summary"
-            android:title="@string/pref_hide_status_icon_title" />
-
+            android:defaultValue="@bool/pref_hide_status_default"
+            android:key="pref_hide_status"
+            android:summary="@string/pref_hide_status_summary"
+            android:title="@string/pref_hide_status_title" />
         <CheckBoxPreference
             android:defaultValue="@bool/pref_toggle_mute_default"
             android:key="pref_toggle_mute"
             android:summary="@string/pref_toggle_mute_summary"
             android:title="@string/pref_toggle_mute_title" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

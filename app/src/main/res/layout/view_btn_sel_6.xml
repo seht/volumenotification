@@ -15,11 +15,11 @@
   -->
 
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/btn_6"
-    android:layout_width="match_parent"
+    android:id="@+id/btn_sel_6"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:background="?android:attr/selectableItemBackground"
-    android:contentDescription="@string/btn_6_label"
+    android:contentDescription="@string/btn_sel_6_label"
     android:scaleType="centerInside"
-    android:src="@drawable/ic_btn_6" />
+    android:src="@drawable/ic_btn_sel_6" />

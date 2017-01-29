@@ -14,12 +14,18 @@
   ~ limitations under the License.
   -->
 
-<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/btn_1"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:background="?android:attr/selectableItemBackground"
-    android:contentDescription="@string/btn_1_label"
-    android:scaleType="centerInside"
-    android:src="@drawable/ic_btn_1" />
+    android:gravity="fill">
+
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+</RelativeLayout>

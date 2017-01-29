@@ -14,118 +14,119 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="?dialogPreferredPadding"
-    android:theme="@style/Theme.AppCompat.Dialog">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="fill"
+    android:padding="?dialogPreferredPadding">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/pref_buttons_btn_1_checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/pref_buttons_btn_1_selection"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/pref_buttons_entries" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/pref_buttons_checked_btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/pref_buttons_btn_2_checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/pref_buttons_selection_btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pref_buttons_entries" />
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/pref_buttons_btn_2_selection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/pref_buttons_entries" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/pref_buttons_btn_3_checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/pref_buttons_btn_3_selection"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/pref_buttons_entries" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/pref_buttons_checked_btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/pref_buttons_btn_4_checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/pref_buttons_selection_btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pref_buttons_entries" />
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/pref_buttons_btn_4_selection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/pref_buttons_entries" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/pref_buttons_btn_5_checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/pref_buttons_btn_5_selection"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/pref_buttons_entries" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/pref_buttons_checked_btn_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/pref_buttons_btn_6_checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/pref_buttons_selection_btn_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pref_buttons_entries" />
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/pref_buttons_btn_6_selection"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/pref_buttons_entries" />
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/pref_buttons_checked_btn_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/pref_buttons_selection_btn_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pref_buttons_entries" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/pref_buttons_checked_btn_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/pref_buttons_selection_btn_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pref_buttons_entries" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/pref_buttons_checked_btn_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/pref_buttons_selection_btn_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/pref_buttons_entries" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

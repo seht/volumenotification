@@ -31,8 +31,8 @@ public class DialogPrefButtons extends DialogPreference {
     private Resources resources;
     private NotificationPreferences preferences;
 
-    private SparseArray<CheckBox> checkboxes = new SparseArray<>(6);
-    private SparseArray<Spinner> spinners = new SparseArray<>(6);
+    private SparseArray<CheckBox> checkboxes = new SparseArray<>(NotificationFactory.button_limit);
+    private SparseArray<Spinner> spinners = new SparseArray<>(NotificationFactory.button_limit);
 
     public DialogPrefButtons(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,9 +49,9 @@ public class DialogPrefButtons extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        for (int pos = 1; pos <= 6; pos++) {
-            int checkbox_id = resources.getIdentifier("pref_buttons_btn_" + pos + "_checked", "id", context.getPackageName());
-            int spinner_id = resources.getIdentifier("pref_buttons_btn_" + pos + "_selection", "id", context.getPackageName());
+        for (int pos = 1; pos <= checkboxes.size(); pos++) {
+            int checkbox_id = resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", context.getPackageName());
+            int spinner_id = resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", context.getPackageName());
 
             CheckBox checkbox = (CheckBox) view.findViewById(checkbox_id);
             Spinner spinner = (Spinner) view.findViewById(spinner_id);
@@ -68,9 +68,9 @@ public class DialogPrefButtons extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            for (int pos = 1; pos <= 6; pos++) {
-                preferences.edit().putBoolean("pref_buttons_btn_" + pos + "_checked", checkboxes.get(pos).isChecked()).commit();
-                preferences.edit().putInt("pref_buttons_btn_" + pos + "_selection", spinners.get(pos).getSelectedItemPosition()).commit();
+            for (int pos = 1; pos <= checkboxes.size(); pos++) {
+                preferences.edit().putBoolean("pref_buttons_checked_btn_" + pos, checkboxes.get(pos).isChecked()).commit();
+                preferences.edit().putInt("pref_buttons_selection_btn_" + pos, spinners.get(pos).getSelectedItemPosition()).commit();
             }
         }
     }
