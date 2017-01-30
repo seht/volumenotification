@@ -43,8 +43,8 @@ class NotificationFactory {
             AudioManager.STREAM_MUSIC,
             AudioManager.STREAM_VOICE_CALL,
             AudioManager.STREAM_RING,
-            AudioManager.STREAM_SYSTEM,
-            AudioManager.STREAM_ALARM
+            AudioManager.STREAM_ALARM,
+            AudioManager.STREAM_SYSTEM
     };
 
     private NotificationFactory(Context context) {

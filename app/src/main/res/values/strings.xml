@@ -64,8 +64,8 @@
     <string name="btn_sel_1_label">Media volume</string>
     <string name="btn_sel_2_label">Call volume</string>
     <string name="btn_sel_3_label">Ring volume</string>
-    <string name="btn_sel_4_label">System volume</string>
-    <string name="btn_sel_5_label">Alarm volume</string>
+    <string name="btn_sel_4_label">Alarm volume</string>
+    <string name="btn_sel_5_label">System volume</string>
 
     <bool name="pref_buttons_checked_btn_1_default">true</bool>
     <bool name="pref_buttons_checked_btn_2_default">true</bool>
