@@ -82,9 +82,7 @@ class NotificationPreferences {
 
     int getButtonSelection(int pos) {
         String pref_key = "pref_buttons_selection_btn_" + pos;
-        int default_res = resources.getIdentifier(pref_key + "_default", "integer", context.getPackageName());
-        int default_value = resources.getInteger(default_res);
-        return preferences.getInt(pref_key, default_value);
+        return preferences.getInt(pref_key, pos);
     }
 
     String getTheme() {
