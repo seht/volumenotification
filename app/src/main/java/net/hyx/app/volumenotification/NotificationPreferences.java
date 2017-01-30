@@ -115,7 +115,7 @@ class NotificationPreferences {
                 color = Color.parseColor(pref_value);
             }
         } catch (IllegalArgumentException e) {
-            // Toast.makeText(context, resources.getString(R.string.pref_theme_custom_color_error_message), Toast.LENGTH_SHORT).show();
+            RunnableToast.shortToast(context, resources.getString(R.string.pref_custom_theme_color_error_message));
         }
         if (color == 0) {
             color = Color.parseColor(default_value);
