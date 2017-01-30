@@ -22,8 +22,8 @@
     <string name="menu_toggle_title">Notification enabled</string>
     <string name="menu_pref_title">Notification settings</string>
     <string name="menu_dark_app_theme_title">Dark app theme</string>
-    <string name="menu_about_title">About Notification Volume</string>
-    <string name="menu_about_url">https://github.com/seht/volumenotification</string>
+    <string name="menu_about_title">Report an issue</string>
+    <string name="menu_about_url">https://github.com/seht/volumenotification/issues</string>
 
     <bool name="pref_dark_app_theme_default">false</bool>
 
