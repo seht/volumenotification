@@ -36,6 +36,7 @@ public class ActivityPref extends AppCompatActivity implements OnSharedPreferenc
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
+        setTheme((new NotificationPreferences(this)).getAppTheme());
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new NotificationSettingsFragment())
                 .commit();

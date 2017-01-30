@@ -38,6 +38,13 @@ class NotificationPreferences {
         return preferences.edit();
     }
 
+    int getAppTheme() {
+        if (getAppThemeDark()) {
+            return R.style.style_app_theme_dark;
+        }
+        return R.style.style_app_theme_light;
+    }
+
     boolean getAppThemeDark() {
         boolean default_value = resources.getBoolean(R.bool.pref_dark_app_theme_default);
         return preferences.getBoolean("pref_dark_app_theme", default_value);
