@@ -25,7 +25,14 @@
     <item
         android:id="@+id/menu_pref"
         android:title="@string/menu_pref_title"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_dark_app_theme"
+        android:checkable="true"
+        android:checked="@bool/pref_dark_app_theme_default"
+        android:title="@string/menu_dark_app_theme_title"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_about"

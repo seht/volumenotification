@@ -16,19 +16,19 @@
 
 <resources>
 
-    <item name="theme_material_background" type="color">#212121</item>
-    <item name="theme_material_foreground" type="color">#ffffff</item>
+    <item name="theme_material_background_color" type="color">#212121</item>
+    <item name="theme_material_icon_color" type="color">#ffffff</item>
 
-    <item name="theme_material_light_background" type="color">#fafafa</item>
-    <item name="theme_material_light_foreground" type="color">#000000</item>
+    <item name="theme_material_light_background_color" type="color">#fafafa</item>
+    <item name="theme_material_light_icon_color" type="color">#000000</item>
 
-    <item name="theme_material_blue_grey_background" type="color">#263238</item>
-    <item name="theme_material_blue_grey_foreground" type="color">#ffffff</item>
+    <item name="theme_material_blue_grey_background_color" type="color">#263238</item>
+    <item name="theme_material_blue_grey_icon_color" type="color">#ffffff</item>
 
-    <item name="theme_holo_background" type="color">#000000</item>
-    <item name="theme_holo_foreground" type="color">#ffffff</item>
+    <item name="theme_holo_background_color" type="color">#000000</item>
+    <item name="theme_holo_icon_color" type="color">#ffffff</item>
 
-    <item name="theme_holo_light_background" type="color">#ffffff</item>
-    <item name="theme_holo_light_foreground" type="color">#000000</item>
+    <item name="theme_holo_light_background_color" type="color">#ffffff</item>
+    <item name="theme_holo_light_icon_color" type="color">#000000</item>
 
 </resources>

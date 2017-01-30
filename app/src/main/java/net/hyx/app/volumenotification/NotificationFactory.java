@@ -33,7 +33,7 @@ import java.util.List;
 
 class NotificationFactory {
 
-    static int buttons_selection_size = 5;
+    static int buttons_selection_size = 6;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
@@ -43,6 +43,7 @@ class NotificationFactory {
             AudioManager.STREAM_MUSIC,
             AudioManager.STREAM_VOICE_CALL,
             AudioManager.STREAM_RING,
+            AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_ALARM,
             AudioManager.STREAM_SYSTEM
     };
@@ -118,8 +119,8 @@ class NotificationFactory {
         int icon_color;
 
         if (!theme.equals("theme_custom")) {
-            int res = resources.getIdentifier("style_" + theme, "style", context.getPackageName());
-            TypedArray attrs = context.obtainStyledAttributes(res, R.styleable.styleable);
+            int theme_res = resources.getIdentifier("style_" + theme, "style", context.getPackageName());
+            TypedArray attrs = context.obtainStyledAttributes(theme_res, R.styleable.styleable);
             background_color = attrs.getColor(R.styleable.styleable_background_color, Color.TRANSPARENT);
             icon_color = attrs.getColor(R.styleable.styleable_icon_color, Color.TRANSPARENT);
             attrs.recycle();
@@ -142,16 +143,16 @@ class NotificationFactory {
                 if (sel > 0 && !buttons.contains(sel)) {
                     buttons.add(sel);
 
-                    int res = resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName());
-                    int id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
-                    RemoteViews btn = new RemoteViews(context.getPackageName(), res);
+                    int btn_res = resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName());
+                    int btn_id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
+                    RemoteViews btn = new RemoteViews(context.getPackageName(), btn_res);
 
                     Intent intent = new Intent(context, ReceiverSetVolume.class);
                     intent.putExtra("selection", sel);
 
-                    PendingIntent event = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    btn.setOnClickPendingIntent(id, event);
-                    btn.setInt(id, "setColorFilter", icon_color);
+                    PendingIntent event = PendingIntent.getBroadcast(context, btn_id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    btn.setOnClickPendingIntent(btn_id, event);
+                    btn.setInt(btn_id, "setColorFilter", icon_color);
 
                     view.addView(R.id.layout_buttons, btn);
                 }

@@ -19,10 +19,13 @@
     <string name="app_name">Volume Notification</string>
     <string name="app_name_short">Vol Notification</string>
 
-    <string name="menu_toggle_title">Enabled</string>
-    <string name="menu_pref_title">Settings</string>
-    <string name="menu_about_title">About</string>
+    <string name="menu_toggle_title">Notification enabled</string>
+    <string name="menu_pref_title">Notification settings</string>
+    <string name="menu_dark_app_theme_title">Dark app theme</string>
+    <string name="menu_about_title">About Notification Volume</string>
     <string name="menu_about_url">https://github.com/seht/volumenotification</string>
+
+    <bool name="pref_dark_app_theme_default">false</bool>
 
     <string name="text_home_1">Please use the action bar menu to navigate the app.</string>
     <string name="text_home_2">Made with all the love in the world.</string>
@@ -59,25 +62,29 @@
         <item>@string/btn_sel_3_label</item>
         <item>@string/btn_sel_4_label</item>
         <item>@string/btn_sel_5_label</item>
+        <item>@string/btn_sel_6_label</item>
     </string-array>
 
     <string name="btn_sel_1_label">Media volume</string>
     <string name="btn_sel_2_label">Call volume</string>
     <string name="btn_sel_3_label">Ring volume</string>
-    <string name="btn_sel_4_label">Alarm volume</string>
-    <string name="btn_sel_5_label">System volume</string>
+    <string name="btn_sel_4_label">Notification volume</string>
+    <string name="btn_sel_5_label">Alarm volume</string>
+    <string name="btn_sel_6_label">System volume</string>
 
     <bool name="pref_buttons_checked_btn_1_default">true</bool>
     <bool name="pref_buttons_checked_btn_2_default">true</bool>
     <bool name="pref_buttons_checked_btn_3_default">true</bool>
     <bool name="pref_buttons_checked_btn_4_default">false</bool>
     <bool name="pref_buttons_checked_btn_5_default">false</bool>
+    <bool name="pref_buttons_checked_btn_6_default">false</bool>
 
     <integer name="pref_buttons_selection_btn_1_default">1</integer>
     <integer name="pref_buttons_selection_btn_2_default">2</integer>
     <integer name="pref_buttons_selection_btn_3_default">3</integer>
     <integer name="pref_buttons_selection_btn_4_default">4</integer>
     <integer name="pref_buttons_selection_btn_5_default">5</integer>
+    <integer name="pref_buttons_selection_btn_6_default">5</integer>
 
     <string name="pref_cat_style_title">Appearance</string>
     <string name="pref_cat_custom_theme_title">Custom theme</string>

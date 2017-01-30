@@ -16,29 +16,37 @@
 
 <resources>
 
+    <style name="style_app_theme_light" parent="Theme.AppCompat.Light">
+
+    </style>
+
+    <style name="style_app_theme_dark" parent="Theme.AppCompat">
+
+    </style>
+
     <style name="style_theme_material">
-        <item name="background_color">@color/theme_material_background</item>
-        <item name="icon_color">@color/theme_material_foreground</item>
+        <item name="background_color">@color/theme_material_background_color</item>
+        <item name="icon_color">@color/theme_material_icon_color</item>
     </style>
 
     <style name="style_theme_material_light">
-        <item name="background_color">@color/theme_material_light_background</item>
-        <item name="icon_color">@color/theme_material_light_foreground</item>
+        <item name="background_color">@color/theme_material_light_background_color</item>
+        <item name="icon_color">@color/theme_material_light_icon_color</item>
     </style>
 
     <style name="style_theme_material_blue_grey">
-        <item name="background_color">@color/theme_material_blue_grey_background</item>
-        <item name="icon_color">@color/theme_material_blue_grey_foreground</item>
+        <item name="background_color">@color/theme_material_blue_grey_background_color</item>
+        <item name="icon_color">@color/theme_material_blue_grey_icon_color</item>
     </style>
 
     <style name="style_theme_holo">
-        <item name="background_color">@color/theme_holo_background</item>
-        <item name="icon_color">@color/theme_holo_foreground</item>
+        <item name="background_color">@color/theme_holo_background_color</item>
+        <item name="icon_color">@color/theme_holo_icon_color</item>
     </style>
 
     <style name="style_theme_holo_light">
-        <item name="background_color">@color/theme_holo_light_background</item>
-        <item name="icon_color">@color/theme_holo_light_foreground</item>
+        <item name="background_color">@color/theme_holo_light_background_color</item>
+        <item name="icon_color">@color/theme_holo_light_icon_color</item>
     </style>
 
     <style name="style_image_button">

@@ -29,11 +29,28 @@ public class ActivityMain extends AppCompatActivity {
 
     protected NotificationPreferences preferences;
 
+    private int getAppTheme() {
+        if (preferences.getAppThemeDark()) {
+            return R.style.style_app_theme_dark;
+        }
+        return R.style.style_app_theme_light;
+    }
+
+    private void setAppTheme(int style_res) {
+        setTheme(style_res);
+    }
+
+    private void setAppTheme() {
+        setAppTheme(getAppTheme());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         preferences = new NotificationPreferences(this);
+
+        setAppTheme();
 
         NotificationFactory.startService(this);
 
@@ -60,6 +77,7 @@ public class ActivityMain extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.menu_toggle).setChecked(preferences.getEnabled());
+        menu.findItem(R.id.menu_dark_app_theme).setChecked(preferences.getAppThemeDark());
         return true;
     }
 
@@ -70,10 +88,10 @@ public class ActivityMain extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.menu_toggle:
-                boolean checked = !item.isChecked();
-                preferences.edit().putBoolean("pref_enabled", checked).commit();
-                item.setChecked(checked);
-                if (checked) {
+                boolean enabled = !item.isChecked();
+                preferences.edit().putBoolean("pref_enabled", enabled).commit();
+                item.setChecked(enabled);
+                if (enabled) {
                     NotificationFactory.startService(this);
                 } else {
                     NotificationFactory.cancel(this);
@@ -81,6 +99,13 @@ public class ActivityMain extends AppCompatActivity {
                 return true;
             case R.id.menu_pref:
                 startActivity(new Intent(this, ActivityPref.class));
+                return true;
+            case R.id.menu_dark_app_theme:
+                boolean dark_theme = !item.isChecked();
+                preferences.edit().putBoolean("pref_dark_app_theme", dark_theme).commit();
+                item.setChecked(dark_theme);
+                setAppTheme();
+                recreate();
                 return true;
             case R.id.menu_about:
                 Uri url = Uri.parse(getResources().getString(R.string.menu_about_url));
