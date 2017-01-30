@@ -59,29 +59,25 @@
         <item>@string/btn_sel_3_label</item>
         <item>@string/btn_sel_4_label</item>
         <item>@string/btn_sel_5_label</item>
-        <item>@string/btn_sel_6_label</item>
     </string-array>
 
     <string name="btn_sel_1_label">Media volume</string>
     <string name="btn_sel_2_label">Call volume</string>
-    <string name="btn_sel_3_label">Notification volume</string>
-    <string name="btn_sel_4_label">Ring volume</string>
-    <string name="btn_sel_5_label">System volume</string>
-    <string name="btn_sel_6_label">Alarm volume</string>
+    <string name="btn_sel_3_label">Ring volume</string>
+    <string name="btn_sel_4_label">System volume</string>
+    <string name="btn_sel_5_label">Alarm volume</string>
 
     <bool name="pref_buttons_checked_btn_1_default">true</bool>
     <bool name="pref_buttons_checked_btn_2_default">true</bool>
     <bool name="pref_buttons_checked_btn_3_default">true</bool>
     <bool name="pref_buttons_checked_btn_4_default">false</bool>
     <bool name="pref_buttons_checked_btn_5_default">false</bool>
-    <bool name="pref_buttons_checked_btn_6_default">false</bool>
 
     <integer name="pref_buttons_selection_btn_1_default">1</integer>
     <integer name="pref_buttons_selection_btn_2_default">2</integer>
     <integer name="pref_buttons_selection_btn_3_default">3</integer>
     <integer name="pref_buttons_selection_btn_4_default">4</integer>
     <integer name="pref_buttons_selection_btn_5_default">5</integer>
-    <integer name="pref_buttons_selection_btn_6_default">6</integer>
 
     <string name="pref_cat_style_title">Appearance</string>
     <string name="pref_cat_custom_theme_title">Custom theme</string>

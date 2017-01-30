@@ -33,7 +33,7 @@ import java.util.List;
 
 class NotificationFactory {
 
-    static int buttons_selection_size = 6;
+    static int buttons_selection_size = 5;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
@@ -42,7 +42,6 @@ class NotificationFactory {
             AudioManager.USE_DEFAULT_STREAM_TYPE,
             AudioManager.STREAM_MUSIC,
             AudioManager.STREAM_VOICE_CALL,
-            AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_RING,
             AudioManager.STREAM_SYSTEM,
             AudioManager.STREAM_ALARM

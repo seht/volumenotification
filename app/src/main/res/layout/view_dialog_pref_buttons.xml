@@ -83,16 +83,4 @@
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 
-    <LinearLayout style="@style/style_dialog_row">
-
-        <CheckBox
-            android:id="@+id/pref_buttons_checked_btn_6"
-            style="@style/style_widget_layout" />
-
-        <Spinner
-            android:id="@+id/pref_buttons_selection_btn_6"
-            style="@style/style_widget_layout"
-            android:entries="@array/pref_buttons_entries" />
-    </LinearLayout>
-
 </LinearLayout>
