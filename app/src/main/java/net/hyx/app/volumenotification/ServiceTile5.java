@@ -25,6 +25,6 @@ public class ServiceTile5 extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        NotificationFactory.setVolume(getApplicationContext(), 5);
+        NotificationFactory.setVolume(this, 5);
     }
 }
