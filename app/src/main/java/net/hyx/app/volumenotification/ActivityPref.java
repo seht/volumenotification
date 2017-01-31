@@ -25,18 +25,14 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
-public class ActivityPref extends AppCompatActivity implements OnSharedPreferenceChangeListener {
+public class ActivityPref extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(this);
-
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
-
         setTheme((new NotificationPreferences(this)).getAppTheme());
+
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new NotificationSettingsFragment())
                 .commit();
@@ -46,25 +42,30 @@ public class ActivityPref extends AppCompatActivity implements OnSharedPreferenc
         }
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
-        NotificationFactory.startService(this);
-    }
-
-    public static class NotificationSettingsFragment extends PreferenceFragment
+    public static class NotificationSettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener
     {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            addPreferencesFromResource(R.xml.preferences);
+            getPreferenceManager().getSharedPreferences()
+                    .registerOnSharedPreferenceChangeListener(this);
+
+            PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences_notification, true);
+
+            addPreferencesFromResource(R.xml.preferences_notification);
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 ((PreferenceCategory) findPreference("pref_cat_config"))
                         .removePreference(findPreference("pref_toggle_mute"));
             }
         }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            NotificationFactory.startService(getActivity());
+        }
+
     }
 
 }

@@ -25,24 +25,23 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
-public class DialogPrefButtons extends DialogPreference {
+class DialogPrefButtons extends DialogPreference {
 
-    private Context context;
     private Resources resources;
     private NotificationPreferences preferences;
+
     private SparseArray<CheckBox> checkboxes;
     private SparseArray<Spinner> spinners;
 
-    public DialogPrefButtons(Context context, AttributeSet attrs) {
+    DialogPrefButtons(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        this.context = context;
         resources = context.getResources();
-        preferences = new NotificationPreferences(getContext());
+        preferences = new NotificationPreferences(context);
+
         checkboxes = new SparseArray<>(NotificationFactory.buttons_selection_size);
         spinners = new SparseArray<>(NotificationFactory.buttons_selection_size);
 
-        setPersistent(false);
         setDialogLayoutResource(R.layout.view_dialog_pref_buttons);
     }
 
@@ -51,8 +50,8 @@ public class DialogPrefButtons extends DialogPreference {
         super.onBindDialogView(view);
 
         for (int pos = 1; pos <= NotificationFactory.buttons_selection_size; pos++) {
-            int checkbox_id = resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", context.getPackageName());
-            int spinner_id = resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", context.getPackageName());
+            int checkbox_id = resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", getContext().getPackageName());
+            int spinner_id = resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", getContext().getPackageName());
 
             CheckBox checkbox = (CheckBox) view.findViewById(checkbox_id);
             Spinner spinner = (Spinner) view.findViewById(spinner_id);

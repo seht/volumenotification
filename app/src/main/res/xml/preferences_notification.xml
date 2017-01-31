@@ -34,26 +34,18 @@
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/pref_buttons_summary"
             android:title="@string/pref_buttons_title" />
+        <net.hyx.app.volumenotification.DialogPrefCustomTheme
+            android:dialogTitle="@string/pref_custom_theme_title"
+            android:key="pref_custom_theme_dialog"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/pref_custom_theme_summary"
+            android:title="@string/pref_custom_theme_title" />
         <CheckBoxPreference
             android:defaultValue="@bool/pref_translucent_default"
             android:key="pref_translucent"
             android:summary="@string/pref_translucent_summary"
             android:title="@string/pref_translucent_title" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="pref_cat_custom_theme"
-        android:title="@string/pref_cat_custom_theme_title">
-        <EditTextPreference
-            android:defaultValue="@string/pref_custom_theme_background_color_default"
-            android:key="pref_custom_theme_background_color"
-            android:summary="@string/pref_custom_theme_background_color_summary"
-            android:title="@string/pref_custom_theme_background_color_title" />
-        <EditTextPreference
-            android:defaultValue="@string/pref_custom_theme_icon_color_default"
-            android:key="pref_custom_theme_icon_color"
-            android:summary="@string/pref_custom_theme_icon_color_summary"
-            android:title="@string/pref_custom_theme_icon_color_title" />
     </PreferenceCategory>
 
     <PreferenceCategory

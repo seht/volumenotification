@@ -22,10 +22,12 @@
     <string name="menu_toggle_title">Notification enabled</string>
     <string name="menu_pref_title">Notification settings</string>
     <string name="menu_dark_app_theme_title">Dark theme</string>
-    <string name="menu_about_title">Report an issue</string>
+    <string name="menu_about_title">Show your love :)</string>
     <string name="menu_about_url">https://github.com/seht/volumenotification/issues</string>
 
-    <string name="target_api_welcome_message_N">Device is running Android N.\nTry the tiles in Quick Settings and disable the notification.</string>
+    <string name="target_api_welcome_message_N">Nice! Your device is running Android N.\n\nYou should give tiles a try. You can find them in your quick settings, by pulling the notification drawer, where you can edit them, at the top. Just drag them in and that\'s it.\n\nThen you can just disable the notification using the menu above.</string>
+
+    <string name="pref_dialog_alert_nonce_checked_label">Sweet! But don\'t remind me again.</string>
 
     <bool name="pref_dark_app_theme_default">false</bool>
 
@@ -82,19 +84,18 @@
     <bool name="pref_buttons_checked_btn_6_default">false</bool>
 
     <string name="pref_cat_style_title">Appearance</string>
-    <string name="pref_cat_custom_theme_title">Custom theme</string>
     <string name="pref_cat_config_title">Configuration</string>
 
     <string name="pref_custom_theme_title">Custom theme</string>
-    <string name="pref_custom_theme_summary">Configure custom theme colors</string>
+    <string name="pref_custom_theme_summary">Change the custom theme colors</string>
 
     <string name="pref_custom_theme_background_color_title">Background color</string>
-    <string name="pref_custom_theme_background_color_summary">Supported formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
     <string name="pref_custom_theme_background_color_default">darkgrey</string>
 
     <string name="pref_custom_theme_icon_color_title">Icon color</string>
-    <string name="pref_custom_theme_icon_color_summary">* Supporting the same formats as background color.</string>
-    <string name="pref_custom_theme_icon_color_default">#00BFA5</string>
+    <string name="pref_custom_theme_icon_color_default">teal</string>
+
+    <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
 
     <string name="pref_custom_theme_color_error_message">Invalid color name or format</string>
 
