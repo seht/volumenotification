@@ -37,6 +37,8 @@ public class ActivityPref extends AppCompatActivity {
 
         setTheme(preferences.getAppTheme());
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferences_notification, true);
+
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new NotificationSettingsFragment())
                 .commit();
@@ -46,16 +48,16 @@ public class ActivityPref extends AppCompatActivity {
         }
     }
 
-    public static class NotificationSettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener
-    {
+    public static class NotificationSettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            NotificationFactory.startService(getActivity());
+        }
+
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
-            getPreferenceManager().getSharedPreferences()
-                    .registerOnSharedPreferenceChangeListener(this);
-
-            PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences_notification, true);
 
             addPreferencesFromResource(R.xml.preferences_notification);
 
@@ -66,8 +68,17 @@ public class ActivityPref extends AppCompatActivity {
         }
 
         @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationFactory.startService(getActivity());
+        public void onResume() {
+            super.onResume();
+            getPreferenceManager().getSharedPreferences()
+                    .registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            getPreferenceManager().getSharedPreferences()
+                    .unregisterOnSharedPreferenceChangeListener(this);
         }
 
     }
