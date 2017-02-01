@@ -93,7 +93,7 @@
     <string name="pref_custom_theme_background_color_default">darkgrey</string>
 
     <string name="pref_custom_theme_icon_color_title">Icon color</string>
-    <string name="pref_custom_theme_icon_color_default">teal</string>
+    <string name="pref_custom_theme_icon_color_default">#00BFA5</string>
 
     <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
 

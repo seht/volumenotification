@@ -19,6 +19,7 @@ package net.hyx.app.volumenotification;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ public class DialogAlertNonce extends DialogFragment {
         message = getArguments().getString("message");
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -76,7 +78,7 @@ public class DialogAlertNonce extends DialogFragment {
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //preferences.edit().putBoolean("pref_dialog_alert_nonce_checked_" + pref_key, isChecked).apply();
+
             }
         });
 
