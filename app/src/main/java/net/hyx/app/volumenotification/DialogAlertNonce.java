@@ -38,7 +38,7 @@ public class DialogAlertNonce extends DialogFragment {
         return newInstance(0, message);
     }*/
 
-    static DialogAlertNonce newInstance(int pref_key, String message) {
+    public static DialogAlertNonce newInstance(int pref_key, String message) {
 
         DialogAlertNonce frag = new DialogAlertNonce();
         Bundle args = new Bundle();

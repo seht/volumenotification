@@ -23,14 +23,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-class DialogPrefCustomTheme extends DialogPreference {
+public class DialogPrefCustomTheme extends DialogPreference {
 
     private NotificationPreferences preferences;
 
     private EditText background_color_edit;
     private EditText icon_color_edit;
 
-    DialogPrefCustomTheme(Context context, AttributeSet attrs) {
+    public DialogPrefCustomTheme(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         preferences = new NotificationPreferences(context);

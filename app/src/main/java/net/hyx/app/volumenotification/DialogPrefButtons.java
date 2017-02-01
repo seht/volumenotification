@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
-class DialogPrefButtons extends DialogPreference {
+public class DialogPrefButtons extends DialogPreference {
 
     private Resources resources;
     private NotificationPreferences preferences;
@@ -33,7 +33,7 @@ class DialogPrefButtons extends DialogPreference {
     private SparseArray<CheckBox> checkboxes;
     private SparseArray<Spinner> spinners;
 
-    DialogPrefButtons(Context context, AttributeSet attrs) {
+    public DialogPrefButtons(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         resources = context.getResources();
