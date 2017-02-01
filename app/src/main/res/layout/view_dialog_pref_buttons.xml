@@ -15,83 +15,77 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@drawable/dialog_row_divider"
-    android:gravity="fill"
-    android:orientation="vertical"
-    android:padding="?dialogPreferredPadding"
-    android:showDividers="middle">
+    style="@style/style_dialog">
 
-    <LinearLayout style="@style/style_dialog_row">
+    <LinearLayout style="@style/style_dialog_row_horizontal">
 
         <CheckBox
             android:id="@+id/pref_buttons_checked_btn_1"
-            style="@style/style_widget_layout" />
+            style="@style/style_dialog_widget_horizontal" />
 
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_1"
-            style="@style/style_widget_layout"
+            style="@style/style_dialog_widget_horizontal"
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 
-    <LinearLayout style="@style/style_dialog_row">
+    <LinearLayout style="@style/style_dialog_row_horizontal">
 
         <CheckBox
             android:id="@+id/pref_buttons_checked_btn_2"
-            style="@style/style_widget_layout" />
+            style="@style/style_dialog_widget_horizontal" />
 
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_2"
-            style="@style/style_widget_layout"
+            style="@style/style_dialog_widget_horizontal"
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 
-    <LinearLayout style="@style/style_dialog_row">
+    <LinearLayout style="@style/style_dialog_row_horizontal">
 
         <CheckBox
             android:id="@+id/pref_buttons_checked_btn_3"
-            style="@style/style_widget_layout" />
+            style="@style/style_dialog_widget_horizontal" />
 
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_3"
-            style="@style/style_widget_layout"
+            style="@style/style_dialog_widget_horizontal"
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 
-    <LinearLayout style="@style/style_dialog_row">
+    <LinearLayout style="@style/style_dialog_row_horizontal">
 
         <CheckBox
             android:id="@+id/pref_buttons_checked_btn_4"
-            style="@style/style_widget_layout" />
+            style="@style/style_dialog_widget_horizontal" />
 
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_4"
-            style="@style/style_widget_layout"
+            style="@style/style_dialog_widget_horizontal"
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 
-    <LinearLayout style="@style/style_dialog_row">
+    <LinearLayout style="@style/style_dialog_row_horizontal">
 
         <CheckBox
             android:id="@+id/pref_buttons_checked_btn_5"
-            style="@style/style_widget_layout" />
+            style="@style/style_dialog_widget_horizontal" />
 
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_5"
-            style="@style/style_widget_layout"
+            style="@style/style_dialog_widget_horizontal"
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 
-    <LinearLayout style="@style/style_dialog_row">
+    <LinearLayout style="@style/style_dialog_row_horizontal">
 
         <CheckBox
             android:id="@+id/pref_buttons_checked_btn_6"
-            style="@style/style_widget_layout" />
+            style="@style/style_dialog_widget_horizontal" />
 
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_6"
-            style="@style/style_widget_layout"
+            style="@style/style_dialog_widget_horizontal"
             android:entries="@array/pref_buttons_entries" />
     </LinearLayout>
 

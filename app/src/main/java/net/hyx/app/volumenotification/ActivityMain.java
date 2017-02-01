@@ -18,7 +18,9 @@ package net.hyx.app.volumenotification;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,31 +31,15 @@ public class ActivityMain extends AppCompatActivity {
 
     protected NotificationPreferences preferences;
 
-    private int getAppTheme() {
-        if (preferences.getAppThemeDark()) {
-            return R.style.style_app_theme_dark;
-        }
-        return R.style.style_app_theme_light;
-    }
-
-    private void setAppTheme(int style_res) {
-        setTheme(style_res);
-    }
-
-    private void setAppTheme() {
-        setAppTheme(getAppTheme());
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         preferences = new NotificationPreferences(this);
 
-        setAppTheme();
-
         NotificationFactory.startService(this);
 
+        setTheme(preferences.getAppTheme());
         setContentView(R.layout.activity_main);
 
         if (getSupportActionBar() != null) {
@@ -64,7 +50,13 @@ public class ActivityMain extends AppCompatActivity {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        //openOptionsMenu();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (!preferences.getDialogAlertNonceChecked(1)) {
+                DialogFragment newFragment = DialogAlertNonce.newInstance(1, getResources().getString(R.string.target_api_welcome_message_N));
+                newFragment.show(getSupportFragmentManager(), null);
+            }
+        }
     }
 
     @Override
@@ -89,7 +81,7 @@ public class ActivityMain extends AppCompatActivity {
                 return true;
             case R.id.menu_toggle:
                 boolean enabled = !item.isChecked();
-                preferences.edit().putBoolean("pref_enabled", enabled).commit();
+                preferences.edit().putBoolean("pref_enabled", enabled).apply();
                 item.setChecked(enabled);
                 if (enabled) {
                     NotificationFactory.startService(this);
@@ -102,9 +94,9 @@ public class ActivityMain extends AppCompatActivity {
                 return true;
             case R.id.menu_dark_app_theme:
                 boolean dark_theme = !item.isChecked();
-                preferences.edit().putBoolean("pref_dark_app_theme", dark_theme).commit();
+                preferences.edit().putBoolean("pref_dark_app_theme", dark_theme).apply();
                 item.setChecked(dark_theme);
-                setAppTheme();
+                setTheme(preferences.getAppTheme());
                 recreate();
                 return true;
             case R.id.menu_about:

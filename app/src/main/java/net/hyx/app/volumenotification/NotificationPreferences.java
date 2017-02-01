@@ -24,18 +24,23 @@ import android.preference.PreferenceManager;
 
 class NotificationPreferences {
 
-    private Context context;
     private Resources resources;
     private SharedPreferences preferences;
 
     NotificationPreferences(Context context) {
-        this.context = context;
         resources = context.getResources();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     SharedPreferences.Editor edit() {
         return preferences.edit();
+    }
+
+    int getAppTheme() {
+        if (getAppThemeDark()) {
+            return R.style.style_app_theme_dark;
+        }
+        return R.style.style_app_theme_light;
     }
 
     boolean getAppThemeDark() {
@@ -75,14 +80,13 @@ class NotificationPreferences {
 
     boolean getButtonChecked(int pos) {
         String pref_key = "pref_buttons_checked_btn_" + pos;
-        int default_res = resources.getIdentifier(pref_key + "_default", "bool", context.getPackageName());
+        int default_res = resources.getIdentifier(pref_key + "_default", "bool", getClass().getPackage().getName());
         boolean default_value = resources.getBoolean(default_res);
         return preferences.getBoolean(pref_key, default_value);
     }
 
     int getButtonSelection(int pos) {
-        String pref_key = "pref_buttons_selection_btn_" + pos;
-        return preferences.getInt(pref_key, pos);
+        return preferences.getInt("pref_buttons_selection_btn_" + pos, pos);
     }
 
     String getTheme() {
@@ -90,31 +94,30 @@ class NotificationPreferences {
         return preferences.getString("pref_theme", default_value);
     }
 
-    int getCustomThemeBackgroundColor() {
+    String getCustomThemeBackgroundColor() {
         String default_value = resources.getString(R.string.pref_custom_theme_background_color_default);
-        return getColor("pref_custom_theme_background_color", default_value);
+        return preferences.getString("pref_custom_theme_background_color", default_value);
     }
 
-    int getCustomThemeIconColor() {
+    String getCustomThemeIconColor() {
         String default_value = resources.getString(R.string.pref_custom_theme_icon_color_default);
-        return getColor("pref_custom_theme_icon_color", default_value);
+        return preferences.getString("pref_custom_theme_icon_color", default_value);
     }
 
-    private int getColor(String pref_key, String default_value) {
+    int getColor(String pref_value) {
         int color = 0;
-        String pref_value = preferences.getString(pref_key, default_value);
         try {
             if (!pref_value.isEmpty()) {
                 color = Color.parseColor(pref_value);
             }
         } catch (IllegalArgumentException e) {
-            // Toast.makeText(context, resources.getString(R.string.pref_theme_custom_color_error_message), Toast.LENGTH_SHORT).show();
-        }
-        if (color == 0) {
-            color = Color.parseColor(default_value);
-            edit().putString(pref_key, default_value).commit();
+            //
         }
         return color;
+    }
+
+    boolean getDialogAlertNonceChecked(int pref_key) {
+        return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + pref_key, false);
     }
 
 }

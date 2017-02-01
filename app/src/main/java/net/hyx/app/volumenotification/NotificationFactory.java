@@ -33,23 +33,12 @@ import java.util.List;
 
 class NotificationFactory {
 
-    static int buttons_selection_size = 6;
-    private Context context;
+    static final int buttons_selection_size = 6;
     private Resources resources;
     private NotificationManager manager;
     private NotificationPreferences preferences;
-    private int[] stream_types = {
-            AudioManager.USE_DEFAULT_STREAM_TYPE,
-            AudioManager.STREAM_MUSIC,
-            AudioManager.STREAM_VOICE_CALL,
-            AudioManager.STREAM_RING,
-            AudioManager.STREAM_NOTIFICATION,
-            AudioManager.STREAM_ALARM,
-            AudioManager.STREAM_SYSTEM
-    };
 
     private NotificationFactory(Context context) {
-        this.context = context;
         resources = context.getResources();
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         preferences = new NotificationPreferences(context);
@@ -58,7 +47,7 @@ class NotificationFactory {
     static void notify(Context context) {
         NotificationFactory self = new NotificationFactory(context);
         if (self.preferences.getEnabled()) {
-            self.create();
+            self.create(context);
         }
     }
 
@@ -78,13 +67,13 @@ class NotificationFactory {
                         AudioManager.FLAG_SHOW_UI);
     }
 
-    private void create() {
+    private void create(Context context) {
 
         NotificationCompat.Builder notification_builder = new NotificationCompat.Builder(context)
                 .setOngoing(true)
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
-                .setCustomContentView(getCustomContentView());
+                .setCustomContentView(getCustomContentView(context));
 
         if (preferences.getHideStatus()) {
             notification_builder.setSmallIcon(android.R.color.transparent);
@@ -110,7 +99,7 @@ class NotificationFactory {
         return NotificationCompat.VISIBILITY_PUBLIC;
     }
 
-    private RemoteViews getCustomContentView() {
+    private RemoteViews getCustomContentView(Context context) {
 
         RemoteViews view = new RemoteViews(context.getPackageName(), R.layout.view_layout_notification);
         String theme = preferences.getTheme();
@@ -125,8 +114,8 @@ class NotificationFactory {
             icon_color = attrs.getColor(R.styleable.styleable_icon_color, Color.TRANSPARENT);
             attrs.recycle();
         } else {
-            background_color = preferences.getCustomThemeBackgroundColor();
-            icon_color = preferences.getCustomThemeIconColor();
+            background_color = preferences.getColor(preferences.getCustomThemeBackgroundColor());
+            icon_color = preferences.getColor(preferences.getCustomThemeIconColor());
         }
 
         if (!preferences.getTransparent()) {
@@ -162,7 +151,22 @@ class NotificationFactory {
     }
 
     private int getVolStreamType(int selection) {
-        return stream_types[selection];
+        switch (selection) {
+            case 1:
+                return AudioManager.STREAM_MUSIC;
+            case 2:
+                return AudioManager.STREAM_VOICE_CALL;
+            case 3:
+                return AudioManager.STREAM_RING;
+            case 4:
+                return AudioManager.STREAM_NOTIFICATION;
+            case 5:
+                return AudioManager.STREAM_ALARM;
+            case 6:
+                return AudioManager.STREAM_SYSTEM;
+            default:
+                return AudioManager.USE_DEFAULT_STREAM_TYPE;
+        }
     }
 
     private int getVolDirection(int selection) {
