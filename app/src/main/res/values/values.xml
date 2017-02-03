@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2017 Seht (R) Hyx Ltd.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <bool name="pref_enabled_default">true</bool>
+    <bool name="pref_dark_app_theme_default">false</bool>
+
+    <string name="pref_theme_default" translatable="false">theme_material_light</string>
+
+    <bool name="pref_buttons_checked_btn_1_default">true</bool>
+    <bool name="pref_buttons_checked_btn_2_default">true</bool>
+    <bool name="pref_buttons_checked_btn_3_default">true</bool>
+    <bool name="pref_buttons_checked_btn_4_default">false</bool>
+    <bool name="pref_buttons_checked_btn_5_default">false</bool>
+    <bool name="pref_buttons_checked_btn_6_default">false</bool>
+
+    <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
+    <string name="pref_custom_theme_background_color_default" translatable="false">darkgrey</string>
+
+    <bool name="pref_translucent_default">false</bool>
+    <bool name="pref_boot_default">true</bool>
+    <bool name="pref_top_priority_default">true</bool>
+    <bool name="pref_hide_locked_default">true</bool>
+    <bool name="pref_hide_status_default">true</bool>
+    <bool name="pref_toggle_mute_default">false</bool>
+    <bool name="pref_toggle_silent_default">false</bool>
+
+    <string-array name="pref_theme_entries">
+        <item>Material: Dark</item>
+        <item>Material: Light</item>
+        <item>Material: Blue Grey</item>
+        <item>Holo: Dark</item>
+        <item>Holo: Light</item>
+        <item>Custom theme</item>
+    </string-array>
+    <string-array name="pref_theme_values">
+        <item>theme_material</item>
+        <item>theme_material_light</item>
+        <item>theme_material_blue_grey</item>
+        <item>theme_holo</item>
+        <item>theme_holo_light</item>
+        <item>theme_custom</item>
+    </string-array>
+
+    <string-array name="pref_buttons_entries">
+        <item>@string/btn_sel_0_label</item>
+        <item>@string/btn_sel_1_label</item>
+        <item>@string/btn_sel_2_label</item>
+        <item>@string/btn_sel_3_label</item>
+        <item>@string/btn_sel_4_label</item>
+        <item>@string/btn_sel_5_label</item>
+        <item>@string/btn_sel_6_label</item>
+    </string-array>
+
+</resources>
