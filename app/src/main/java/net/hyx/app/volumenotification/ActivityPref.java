@@ -50,7 +50,7 @@ public class ActivityPref extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationFactory.startService(getActivity());
+            NotificationFactory.newInstance(getActivity()).startService();
         }
 
         @Override

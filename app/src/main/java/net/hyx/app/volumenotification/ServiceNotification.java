@@ -28,7 +28,7 @@ public class ServiceNotification extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        NotificationFactory.notify(this);
+        NotificationFactory.newInstance(this).create();
         stopSelf();
     }
 

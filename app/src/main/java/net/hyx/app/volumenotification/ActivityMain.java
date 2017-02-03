@@ -37,7 +37,7 @@ public class ActivityMain extends AppCompatActivity {
 
         preferences = new NotificationPreferences(this);
 
-        NotificationFactory.startService(this);
+        NotificationFactory.newInstance(this).startService();
 
         setTheme(preferences.getAppTheme());
         setContentView(R.layout.activity_main);
@@ -84,9 +84,9 @@ public class ActivityMain extends AppCompatActivity {
                 preferences.edit().putBoolean("pref_enabled", enabled).apply();
                 item.setChecked(enabled);
                 if (enabled) {
-                    NotificationFactory.startService(this);
+                    NotificationFactory.newInstance(this).startService();
                 } else {
-                    NotificationFactory.cancel(this);
+                    NotificationFactory.newInstance(this).cancel();
                 }
                 return true;
             case R.id.menu_pref:

@@ -34,68 +34,60 @@ import java.util.List;
 class NotificationFactory {
 
     static final int buttons_selection_size = 6;
+    private Context context;
     private Resources resources;
     private NotificationManager manager;
     private NotificationPreferences preferences;
 
     private NotificationFactory(Context context) {
+        this.context = context;
         resources = context.getResources();
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         preferences = new NotificationPreferences(context);
     }
 
-    static void notify(Context context) {
-        NotificationFactory self = new NotificationFactory(context);
-        if (self.preferences.getEnabled()) {
-            self.create(context);
-        }
+    public static NotificationFactory newInstance(Context context) {
+        return new NotificationFactory(context);
     }
 
-    static void cancel(Context context) {
-        NotificationFactory self = new NotificationFactory(context);
-        self.manager.cancelAll();
-    }
-
-    static void startService(Context context) {
+    void startService() {
         context.startService(new Intent(context, ServiceNotification.class));
     }
 
-    static void setVolume(Context context, int selection) {
+    void setVolume(int selection) {
 
-        NotificationFactory self = new NotificationFactory(context);
         AudioManager audio_manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-
         int direction = AudioManager.ADJUST_SAME;
-        int stream_type = self.getVolStreamType(selection);
+        int stream_type = getStreamType(selection);
 
-        if (self.preferences.getToggleMute()) {
-            if (self.getVolStreamType(selection) == AudioManager.STREAM_MUSIC) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    direction = AudioManager.ADJUST_TOGGLE_MUTE;
-                } else {
-                    audio_manager.setStreamMute(stream_type, (audio_manager.getStreamVolume(stream_type) > 0));
-                }
-            }
-        }
-
-        if (self.preferences.getToggleSilent()) {
-            if (audio_manager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-                audio_manager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        if (preferences.getToggleMute() && getStreamType(selection) == AudioManager.STREAM_MUSIC) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                direction = AudioManager.ADJUST_TOGGLE_MUTE;
             } else {
-                audio_manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                audio_manager.setStreamMute(stream_type, (audio_manager.getStreamVolume(stream_type) > 0));
             }
         }
-
+        if (preferences.getToggleSilent()) {
+            if (audio_manager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+                audio_manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+            } else {
+                audio_manager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            }
+        }
         audio_manager.adjustStreamVolume(stream_type, direction, AudioManager.FLAG_SHOW_UI);
     }
 
-    private void create(Context context) {
+    void cancel() {
+        manager.cancelAll();
+    }
+
+    void create() {
 
         NotificationCompat.Builder notification_builder = new NotificationCompat.Builder(context)
                 .setOngoing(true)
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
-                .setCustomContentView(getCustomContentView(context));
+                .setCustomContentView(getCustomContentView());
 
         if (preferences.getHideStatus()) {
             notification_builder.setSmallIcon(android.R.color.transparent);
@@ -121,7 +113,7 @@ class NotificationFactory {
         return NotificationCompat.VISIBILITY_PUBLIC;
     }
 
-    private RemoteViews getCustomContentView(Context context) {
+    private RemoteViews getCustomContentView() {
 
         RemoteViews view = new RemoteViews(context.getPackageName(), R.layout.view_layout_notification);
         String theme = preferences.getTheme();
@@ -171,7 +163,7 @@ class NotificationFactory {
         return view;
     }
 
-    private int getVolStreamType(int selection) {
+    private int getStreamType(int selection) {
         switch (selection) {
             case 1:
                 return AudioManager.STREAM_MUSIC;
