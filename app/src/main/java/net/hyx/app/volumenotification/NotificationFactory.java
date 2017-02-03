@@ -34,7 +34,7 @@ import java.util.List;
 public class NotificationFactory {
 
     static final int BUTTONS_SELECTION_SIZE = 6;
-    private static boolean _muted = false;
+    private static boolean _mute = false;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
@@ -65,8 +65,8 @@ public class NotificationFactory {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 direction = AudioManager.ADJUST_TOGGLE_MUTE;
             } else {
-                audio_manager.setStreamMute(stream_type, _muted);
-                _muted = !_muted;
+                _mute = !_mute;
+                audio_manager.setStreamMute(stream_type, _mute);
             }
         }
         if (preferences.getToggleSilent() && stream_type == AudioManager.STREAM_RING) {
