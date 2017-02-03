@@ -50,11 +50,8 @@ public class DialogPrefButtons extends DialogPreference {
         super.onBindDialogView(view);
 
         for (int pos = 1; pos <= NotificationFactory.buttons_selection_size; pos++) {
-            int checkbox_id = resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", getContext().getPackageName());
-            int spinner_id = resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", getContext().getPackageName());
-
-            CheckBox checkbox = (CheckBox) view.findViewById(checkbox_id);
-            Spinner spinner = (Spinner) view.findViewById(spinner_id);
+            CheckBox checkbox = (CheckBox) view.findViewById(resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", getContext().getPackageName()));
+            Spinner spinner = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", getContext().getPackageName()));
             checkbox.setChecked(preferences.getButtonChecked(pos));
             spinner.setSelection(preferences.getButtonSelection(pos));
 
@@ -69,8 +66,8 @@ public class DialogPrefButtons extends DialogPreference {
 
         if (positiveResult) {
             for (int pos = 1; pos <= checkboxes.size(); pos++) {
-                preferences.edit().putBoolean("pref_buttons_checked_btn_" + pos, checkboxes.get(pos).isChecked()).commit();
-                preferences.edit().putInt("pref_buttons_selection_btn_" + pos, spinners.get(pos).getSelectedItemPosition()).commit();
+                preferences.edit().putBoolean("pref_buttons_checked_btn_" + pos, checkboxes.get(pos).isChecked()).apply();
+                preferences.edit().putInt("pref_buttons_selection_btn_" + pos, spinners.get(pos).getSelectedItemPosition()).apply();
             }
         }
     }

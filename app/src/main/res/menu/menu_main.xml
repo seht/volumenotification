@@ -20,7 +20,8 @@
         android:id="@+id/menu_toggle"
         android:checkable="true"
         android:checked="true"
-        android:title="@string/menu_toggle_title" />
+        android:title="@string/menu_toggle_title"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_pref"

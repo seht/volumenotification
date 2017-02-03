@@ -41,7 +41,7 @@
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/pref_custom_theme_summary"
             android:title="@string/pref_custom_theme_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="@bool/pref_translucent_default"
             android:key="pref_translucent"
             android:summary="@string/pref_translucent_summary"
@@ -51,27 +51,27 @@
     <PreferenceCategory
         android:key="pref_cat_config"
         android:title="@string/pref_cat_config_title">
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="@bool/pref_boot_default"
             android:key="pref_boot"
             android:summary="@string/pref_boot_summary"
             android:title="@string/pref_boot_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="@bool/pref_top_priority_default"
             android:key="pref_top_priority"
             android:summary="@string/pref_top_priority_summary"
             android:title="@string/pref_top_priority_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="@bool/pref_hide_locked_default"
             android:key="pref_hide_locked"
             android:summary="@string/pref_hide_locked_summary"
             android:title="@string/pref_hide_locked_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="@bool/pref_hide_status_default"
             android:key="pref_hide_status"
             android:summary="@string/pref_hide_status_summary"
             android:title="@string/pref_hide_status_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="@bool/pref_toggle_mute_default"
             android:key="pref_toggle_mute"
             android:summary="@string/pref_toggle_mute_summary"

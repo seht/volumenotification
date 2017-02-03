@@ -70,14 +70,14 @@ public class ActivityPref extends AppCompatActivity {
         @Override
         public void onResume() {
             super.onResume();
-            getPreferenceManager().getSharedPreferences()
+            getPreferenceScreen().getSharedPreferences()
                     .registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onPause() {
             super.onPause();
-            getPreferenceManager().getSharedPreferences()
+            getPreferenceScreen().getSharedPreferences()
                     .unregisterOnSharedPreferenceChangeListener(this);
         }
 
