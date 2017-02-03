@@ -16,10 +16,13 @@
 
 <resources>
 
+    <string name="menu_about_url" translatable="false">https://github.com/seht/volumenotification/issues</string>
+    <string name="pref_theme_default" translatable="false">theme_material_light</string>
+    <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
+    <string name="pref_custom_theme_background_color_default" translatable="false">darkgrey</string>
+
     <bool name="pref_enabled_default">true</bool>
     <bool name="pref_dark_app_theme_default">false</bool>
-
-    <string name="pref_theme_default" translatable="false">theme_material_light</string>
 
     <bool name="pref_buttons_checked_btn_1_default">true</bool>
     <bool name="pref_buttons_checked_btn_2_default">true</bool>
@@ -27,9 +30,6 @@
     <bool name="pref_buttons_checked_btn_4_default">false</bool>
     <bool name="pref_buttons_checked_btn_5_default">false</bool>
     <bool name="pref_buttons_checked_btn_6_default">false</bool>
-
-    <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
-    <string name="pref_custom_theme_background_color_default" translatable="false">darkgrey</string>
 
     <bool name="pref_translucent_default">false</bool>
     <bool name="pref_boot_default">true</bool>
