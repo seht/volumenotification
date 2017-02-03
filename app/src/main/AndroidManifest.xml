@@ -44,6 +44,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+                <category android:name="android.intent.category.ACTION_QS_TILE_PREFERENCES" />
             </intent-filter>
         </activity>
 
