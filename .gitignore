@@ -3,8 +3,8 @@
 *.iml
 .gradle
 .idea
-/gradle*
-/build*
-/local*
-/settings*
-/app/build*
+/local.properties
+/build
+/app/build
+/gradle
+/gradlew*
