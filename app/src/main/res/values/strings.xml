@@ -85,6 +85,7 @@
 
     <string name="pref_cat_style_title">Appearance</string>
     <string name="pref_cat_config_title">Configuration</string>
+    <string name="pref_cat_behavior_title">Behavior</string>
 
     <string name="pref_custom_theme_title">Custom theme</string>
     <string name="pref_custom_theme_summary">Change the custom theme colors</string>

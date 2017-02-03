@@ -63,7 +63,7 @@
     <style name="style_dialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:divider">@drawable/dialog_divider</item>
+        <item name="android:divider">@drawable/dialog_divider_vertical</item>
         <item name="android:gravity">fill</item>
         <item name="android:orientation">vertical</item>
         <item name="android:paddingLeft">?dialogPreferredPadding</item>
@@ -98,14 +98,10 @@
 
     <style name="style_dialog_row_vertical" parent="@style/style_dialog_row">
         <item name="android:orientation">vertical</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:divider">@drawable/dialog_row_divider_vertical</item>
     </style>
 
     <style name="style_dialog_row_horizontal" parent="@style/style_dialog_row">
         <item name="android:orientation">horizontal</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:divider">@drawable/dialog_row_divider_horizontal</item>
     </style>
 
 </resources>

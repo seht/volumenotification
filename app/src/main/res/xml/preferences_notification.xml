@@ -49,6 +49,21 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="pref_cat_behavior"
+        android:title="@string/pref_cat_behavior_title">
+        <SwitchPreference
+            android:defaultValue="@bool/pref_toggle_mute_default"
+            android:key="pref_toggle_mute"
+            android:summary="@string/pref_toggle_mute_summary"
+            android:title="@string/pref_toggle_mute_title" />
+        <SwitchPreference
+            android:defaultValue="@bool/pref_toggle_silent_default"
+            android:key="pref_toggle_silent"
+            android:summary="@string/pref_toggle_silent_summary"
+            android:title="@string/pref_toggle_silent_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="pref_cat_config"
         android:title="@string/pref_cat_config_title">
         <SwitchPreference
@@ -71,16 +86,6 @@
             android:key="pref_hide_status"
             android:summary="@string/pref_hide_status_summary"
             android:title="@string/pref_hide_status_title" />
-        <SwitchPreference
-            android:defaultValue="@bool/pref_toggle_mute_default"
-            android:key="pref_toggle_mute"
-            android:summary="@string/pref_toggle_mute_summary"
-            android:title="@string/pref_toggle_mute_title" />
-        <SwitchPreference
-            android:defaultValue="@bool/pref_toggle_silent_default"
-            android:key="pref_toggle_silent"
-            android:summary="@string/pref_toggle_silent_summary"
-            android:title="@string/pref_toggle_silent_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

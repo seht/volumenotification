@@ -65,7 +65,7 @@ public class DialogPrefCustomTheme extends DialogPreference {
                 preferences.edit().putString("pref_custom_theme_icon_color", icon_color_value).apply();
             }
             if (background_color == 0 || icon_color == 0) {
-                Toast.makeText(getContext(), getContext().getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();
             }
         }
     }

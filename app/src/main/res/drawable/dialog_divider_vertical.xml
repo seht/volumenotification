@@ -16,6 +16,7 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <size
-        android:width="8dp"
-        android:height="0dp" />
+        android:width="0dp"
+        android:height="16dp" />
+    <solid android:color="#00000000" />
 </shape>
