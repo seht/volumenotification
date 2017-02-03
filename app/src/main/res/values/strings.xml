@@ -121,11 +121,11 @@
     <bool name="pref_hide_status_default">true</bool>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
-    <string name="pref_toggle_mute_summary">Media volume button will toggle mute</string>
+    <string name="pref_toggle_mute_summary">Media volume button to toggle mute</string>
     <bool name="pref_toggle_mute_default">false</bool>
 
     <string name="pref_toggle_silent_title">Toggle silent</string>
-    <string name="pref_toggle_silent_summary">Ring volume button will toggle silent mode</string>
+    <string name="pref_toggle_silent_summary">Ring volume button to toggle silent mode</string>
     <bool name="pref_toggle_silent_default">false</bool>
 
 </resources>

@@ -33,7 +33,8 @@ import java.util.List;
 
 public class NotificationFactory {
 
-    static final int buttons_selection_size = 6;
+    static final int BUTTONS_SELECTION_SIZE = 6;
+    private static boolean _muted = false;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
@@ -60,18 +61,19 @@ public class NotificationFactory {
         int direction = AudioManager.ADJUST_SAME;
         int stream_type = getStreamType(selection);
 
-        if (preferences.getToggleMute() && getStreamType(selection) == AudioManager.STREAM_MUSIC) {
+        if (preferences.getToggleMute() && stream_type == AudioManager.STREAM_MUSIC) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 direction = AudioManager.ADJUST_TOGGLE_MUTE;
             } else {
-                audio_manager.setStreamMute(stream_type, (audio_manager.getStreamVolume(stream_type) > 0));
+                audio_manager.setStreamMute(stream_type, _muted);
+                _muted = !_muted;
             }
         }
-        if (preferences.getToggleSilent()) {
-            if (audio_manager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
-                audio_manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-            } else {
+        if (preferences.getToggleSilent() && stream_type == AudioManager.STREAM_RING) {
+            if (audio_manager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
                 audio_manager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            } else {
+                audio_manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             }
         }
         audio_manager.adjustStreamVolume(stream_type, direction, AudioManager.FLAG_SHOW_UI);
@@ -140,25 +142,23 @@ public class NotificationFactory {
 
         view.removeAllViews(R.id.layout_buttons);
 
-        for (int pos = 1; pos <= buttons_selection_size; pos++) {
-            if (preferences.getButtonChecked(pos)) {
-                int sel = preferences.getButtonSelection(pos);
-                if (sel > 0 && !buttons.contains(sel)) {
-                    buttons.add(sel);
-
-                    int btn_id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
-                    RemoteViews btn = new RemoteViews(context.getPackageName(), resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName()));
-
-                    Intent intent = new Intent(context, ReceiverSetVolume.class);
-                    intent.putExtra("selection", sel);
-
-                    PendingIntent event = PendingIntent.getBroadcast(context, btn_id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    btn.setOnClickPendingIntent(btn_id, event);
-                    btn.setInt(btn_id, "setColorFilter", icon_color);
-
-                    view.addView(R.id.layout_buttons, btn);
-                }
+        for (int pos = 1; pos <= BUTTONS_SELECTION_SIZE; pos++) {
+            int sel = preferences.getButtonSelection(pos);
+            if (!preferences.getButtonChecked(pos) || sel == 0 || buttons.contains(sel)) {
+                continue;
             }
+            buttons.add(sel);
+            int btn_id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
+            RemoteViews btn = new RemoteViews(context.getPackageName(), resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName()));
+
+            Intent intent = new Intent(context, ReceiverSetVolume.class);
+            intent.putExtra("selection", sel);
+
+            PendingIntent event = PendingIntent.getBroadcast(context, btn_id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            btn.setOnClickPendingIntent(btn_id, event);
+            btn.setInt(btn_id, "setColorFilter", icon_color);
+
+            view.addView(R.id.layout_buttons, btn);
         }
         return view;
     }
