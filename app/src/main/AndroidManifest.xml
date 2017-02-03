@@ -15,7 +15,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.hyx.app.volumenotification">
+    package="net.hyx.app.volumenotification"
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 

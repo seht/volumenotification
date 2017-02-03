@@ -76,6 +76,11 @@
             android:key="pref_toggle_mute"
             android:summary="@string/pref_toggle_mute_summary"
             android:title="@string/pref_toggle_mute_title" />
+        <SwitchPreference
+            android:defaultValue="@bool/pref_toggle_silent_default"
+            android:key="pref_toggle_silent"
+            android:summary="@string/pref_toggle_silent_summary"
+            android:title="@string/pref_toggle_silent_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

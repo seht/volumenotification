@@ -61,10 +61,32 @@ class NotificationFactory {
     }
 
     static void setVolume(Context context, int selection) {
+
         NotificationFactory self = new NotificationFactory(context);
-        ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE))
-                .adjustStreamVolume(self.getVolStreamType(selection), self.getVolDirection(selection),
-                        AudioManager.FLAG_SHOW_UI);
+        AudioManager audio_manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
+        int direction = AudioManager.ADJUST_SAME;
+        int stream_type = self.getVolStreamType(selection);
+
+        if (self.preferences.getToggleMute()) {
+            if (self.getVolStreamType(selection) == AudioManager.STREAM_MUSIC) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    direction = AudioManager.ADJUST_TOGGLE_MUTE;
+                } else {
+                    audio_manager.setStreamMute(stream_type, (audio_manager.getStreamVolume(stream_type) > 0));
+                }
+            }
+        }
+
+        if (self.preferences.getToggleSilent()) {
+            if (audio_manager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
+                audio_manager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            } else {
+                audio_manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+            }
+        }
+
+        audio_manager.adjustStreamVolume(stream_type, direction, AudioManager.FLAG_SHOW_UI);
     }
 
     private void create(Context context) {
@@ -132,9 +154,8 @@ class NotificationFactory {
                 if (sel > 0 && !buttons.contains(sel)) {
                     buttons.add(sel);
 
-                    int btn_res = resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName());
                     int btn_id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
-                    RemoteViews btn = new RemoteViews(context.getPackageName(), btn_res);
+                    RemoteViews btn = new RemoteViews(context.getPackageName(), resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName()));
 
                     Intent intent = new Intent(context, ReceiverSetVolume.class);
                     intent.putExtra("selection", sel);
@@ -167,15 +188,6 @@ class NotificationFactory {
             default:
                 return AudioManager.USE_DEFAULT_STREAM_TYPE;
         }
-    }
-
-    private int getVolDirection(int selection) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (preferences.getToggleMute() && getVolStreamType(selection) == AudioManager.STREAM_MUSIC) {
-                return AudioManager.ADJUST_TOGGLE_MUTE;
-            }
-        }
-        return AudioManager.ADJUST_SAME;
     }
 
 }

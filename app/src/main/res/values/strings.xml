@@ -107,20 +107,24 @@
     <string name="pref_boot_summary">Create notification when device starts</string>
     <bool name="pref_boot_default">true</bool>
 
-    <string name="pref_top_priority_title">High priority</string>
+    <string name="pref_top_priority_title">Top priority</string>
     <string name="pref_top_priority_summary">* Enabling will keep the notification at the top but force a status bar icon.</string>
     <bool name="pref_top_priority_default">true</bool>
 
     <string name="pref_hide_locked_title">Hidden from lock screen</string>
-    <string name="pref_hide_locked_summary">* To hide from lock screen when high priority is enabled, notification privacy should be enabled in your device settings.</string>
+    <string name="pref_hide_locked_summary">* To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
     <bool name="pref_hide_locked_default">true</bool>
 
     <string name="pref_hide_status_title">Hidden status bar icon</string>
-    <string name="pref_hide_status_summary">* When high priority is enabled, this will show a blank space in the status bar.</string>
+    <string name="pref_hide_status_summary">* When top priority is enabled, this will show a blank space in the status bar.</string>
     <bool name="pref_hide_status_default">true</bool>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
-    <string name="pref_toggle_mute_summary">Media volume button to toggle mute</string>
+    <string name="pref_toggle_mute_summary">Media volume button will toggle mute</string>
     <bool name="pref_toggle_mute_default">false</bool>
+
+    <string name="pref_toggle_silent_title">Toggle silent</string>
+    <string name="pref_toggle_silent_summary">Ring volume button will toggle silent mode</string>
+    <bool name="pref_toggle_silent_default">false</bool>
 
 </resources>

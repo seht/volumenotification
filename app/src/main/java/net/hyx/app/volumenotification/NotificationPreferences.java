@@ -68,6 +68,11 @@ class NotificationPreferences {
         return preferences.getBoolean("pref_toggle_mute", default_value);
     }
 
+    boolean getToggleSilent() {
+        boolean default_value = resources.getBoolean(R.bool.pref_toggle_silent_default);
+        return preferences.getBoolean("pref_toggle_silent", default_value);
+    }
+
     boolean getTopPriority() {
         boolean default_value = resources.getBoolean(R.bool.pref_top_priority_default);
         return preferences.getBoolean("pref_top_priority", default_value);

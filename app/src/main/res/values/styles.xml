@@ -16,11 +16,11 @@
 
 <resources>
 
-    <style name="style_app_theme_light" parent="Theme.AppCompat.Light">
+    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light">
 
     </style>
 
-    <style name="style_app_theme_dark" parent="Theme.AppCompat">
+    <style name="style_app_theme_dark" parent="@style/Theme.AppCompat">
 
     </style>
 

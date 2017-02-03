@@ -18,9 +18,7 @@ package net.hyx.app.volumenotification;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -60,11 +58,6 @@ public class ActivityPref extends AppCompatActivity {
             super.onCreate(savedInstanceState);
 
             addPreferencesFromResource(R.xml.preferences_notification);
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                ((PreferenceCategory) findPreference("pref_cat_config"))
-                        .removePreference(findPreference("pref_toggle_mute"));
-            }
         }
 
         @Override
