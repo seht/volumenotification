@@ -31,7 +31,7 @@ import android.widget.RemoteViews;
 import java.util.ArrayList;
 import java.util.List;
 
-class NotificationFactory {
+public class NotificationFactory {
 
     static final int buttons_selection_size = 6;
     private Context context;
