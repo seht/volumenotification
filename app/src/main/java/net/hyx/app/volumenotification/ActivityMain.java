@@ -29,17 +29,17 @@ import android.view.MenuItem;
 
 public class ActivityMain extends AppCompatActivity {
 
-    protected NotificationPreferences preferences;
+    protected PrefSettings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        preferences = new NotificationPreferences(this);
+        settings = new PrefSettings(this);
 
         NotificationFactory.newInstance(this).startService();
 
-        setTheme(preferences.getAppTheme());
+        setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
 
         if (getSupportActionBar() != null) {
@@ -52,7 +52,7 @@ public class ActivityMain extends AppCompatActivity {
         super.onAttachedToWindow();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (!preferences.getDialogAlertNonceChecked(1)) {
+            if (!settings.getDialogAlertNonceChecked(1)) {
                 DialogFragment newFragment = DialogAlertNonce.newInstance(1, getResources().getString(R.string.target_api_welcome_message_N));
                 newFragment.show(getSupportFragmentManager(), null);
             }
@@ -68,8 +68,7 @@ public class ActivityMain extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_toggle).setChecked(preferences.getEnabled());
-        menu.findItem(R.id.menu_dark_app_theme).setChecked(preferences.getAppThemeDark());
+        menu.findItem(R.id.menu_dark_app_theme).setChecked(settings.getAppThemeDark());
         return true;
     }
 
@@ -79,24 +78,14 @@ public class ActivityMain extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.menu_toggle:
-                boolean enabled = !item.isChecked();
-                preferences.edit().putBoolean("pref_enabled", enabled).apply();
-                item.setChecked(enabled);
-                if (enabled) {
-                    NotificationFactory.newInstance(this).startService();
-                } else {
-                    NotificationFactory.newInstance(this).cancel();
-                }
-                return true;
             case R.id.menu_pref:
                 startActivity(new Intent(this, ActivityPref.class));
                 return true;
             case R.id.menu_dark_app_theme:
                 boolean dark_theme = !item.isChecked();
-                preferences.edit().putBoolean("pref_dark_app_theme", dark_theme).apply();
+                settings.edit().putBoolean("pref_dark_app_theme", dark_theme).apply();
                 item.setChecked(dark_theme);
-                setTheme(preferences.getAppTheme());
+                setTheme(settings.getAppTheme());
                 recreate();
                 return true;
             case R.id.menu_about:

@@ -17,6 +17,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+        android:key="pref_cat_behavior"
+        android:title="@string/pref_cat_behavior_title">
+        <net.hyx.app.volumenotification.DialogPrefButtons
+            android:dialogTitle="@string/pref_buttons_title"
+            android:key="pref_buttons_dialog"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/pref_buttons_summary"
+            android:title="@string/pref_buttons_title" />
+        <SwitchPreference
+            android:defaultValue="@bool/pref_toggle_mute_default"
+            android:key="pref_toggle_mute"
+            android:summary="@string/pref_toggle_mute_summary"
+            android:title="@string/pref_toggle_mute_title" />
+        <SwitchPreference
+            android:defaultValue="@bool/pref_toggle_silent_default"
+            android:key="pref_toggle_silent"
+            android:summary="@string/pref_toggle_silent_summary"
+            android:title="@string/pref_toggle_silent_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="pref_cat_style"
         android:title="@string/pref_cat_style_title">
         <ListPreference
@@ -27,13 +49,6 @@
             android:key="pref_theme"
             android:summary="@string/pref_theme_summary"
             android:title="@string/pref_theme_title" />
-        <net.hyx.app.volumenotification.DialogPrefButtons
-            android:dialogTitle="@string/pref_buttons_title"
-            android:key="pref_buttons_dialog"
-            android:negativeButtonText="@android:string/cancel"
-            android:positiveButtonText="@android:string/ok"
-            android:summary="@string/pref_buttons_summary"
-            android:title="@string/pref_buttons_title" />
         <net.hyx.app.volumenotification.DialogPrefCustomTheme
             android:dialogTitle="@string/pref_custom_theme_title"
             android:key="pref_custom_theme_dialog"
@@ -49,23 +64,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="pref_cat_behavior"
-        android:title="@string/pref_cat_behavior_title">
-        <SwitchPreference
-            android:defaultValue="@bool/pref_toggle_mute_default"
-            android:key="pref_toggle_mute"
-            android:summary="@string/pref_toggle_mute_summary"
-            android:title="@string/pref_toggle_mute_title" />
-        <SwitchPreference
-            android:defaultValue="@bool/pref_toggle_silent_default"
-            android:key="pref_toggle_silent"
-            android:summary="@string/pref_toggle_silent_summary"
-            android:title="@string/pref_toggle_silent_title" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="pref_cat_config"
         android:title="@string/pref_cat_config_title">
+        <SwitchPreference
+            android:defaultValue="@bool/pref_enabled_default"
+            android:key="pref_enabled"
+            android:summary="@string/pref_enabled_summary"
+            android:title="@string/pref_enabled_title" />
         <SwitchPreference
             android:defaultValue="@bool/pref_boot_default"
             android:key="pref_boot"

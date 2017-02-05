@@ -28,19 +28,21 @@ import android.widget.Spinner;
 public class DialogPrefButtons extends DialogPreference {
 
     private Resources resources;
-    private NotificationPreferences preferences;
+    private PrefSettings settings;
 
-    private SparseArray<CheckBox> checkboxes;
-    private SparseArray<Spinner> spinners;
+    private SparseArray<CheckBox> checked;
+    private SparseArray<Spinner> selection;
+    private SparseArray<Spinner> icons;
 
     public DialogPrefButtons(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         resources = context.getResources();
-        preferences = new NotificationPreferences(context);
+        settings = new PrefSettings(context);
 
-        checkboxes = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
-        spinners = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
+        checked = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
+        selection = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
+        icons = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
 
         setDialogLayoutResource(R.layout.view_dialog_pref_buttons);
     }
@@ -49,14 +51,25 @@ public class DialogPrefButtons extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        for (int pos = 1; pos <= NotificationFactory.BUTTONS_SELECTION_SIZE; pos++) {
-            CheckBox checkbox = (CheckBox) view.findViewById(resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", getContext().getPackageName()));
-            Spinner spinner = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", getContext().getPackageName()));
-            checkbox.setChecked(preferences.getButtonChecked(pos));
-            spinner.setSelection(preferences.getButtonSelection(pos));
+        String _package = getContext().getPackageName();
+        String[] _icons = resources.getStringArray(R.array.pref_buttons_icons_entries);
 
-            checkboxes.append(pos, checkbox);
-            spinners.append(pos, spinner);
+        for (int pos = 1; pos <= NotificationFactory.BUTTONS_SELECTION_SIZE; pos++) {
+            CheckBox _checked = (CheckBox) view.findViewById(resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", _package));
+            Spinner _selection = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", _package));
+            Spinner _icon = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_icon_btn_" + pos, "id", _package));
+            _icon.setAdapter(new AdapterIconSpinner(getContext(), R.array.pref_buttons_icons_entries, _icons));
+
+            _checked.setChecked(settings.getButtonChecked(pos));
+            if (settings.getButtonSelection(pos) < _selection.getAdapter().getCount()) {
+                _selection.setSelection(settings.getButtonSelection(pos));
+            }
+            if (settings.getButtonIcon(pos) < _icon.getAdapter().getCount()) {
+                _icon.setSelection(settings.getButtonIcon(pos));
+            }
+            checked.append(pos, _checked);
+            selection.append(pos, _selection);
+            icons.append(pos, _icon);
         }
     }
 
@@ -65,9 +78,10 @@ public class DialogPrefButtons extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            for (int pos = 1; pos <= checkboxes.size(); pos++) {
-                preferences.edit().putBoolean("pref_buttons_checked_btn_" + pos, checkboxes.get(pos).isChecked()).apply();
-                preferences.edit().putInt("pref_buttons_selection_btn_" + pos, spinners.get(pos).getSelectedItemPosition()).apply();
+            for (int pos = 1; pos <= checked.size(); pos++) {
+                settings.edit().putBoolean("pref_buttons_checked_btn_" + pos, checked.get(pos).isChecked()).apply();
+                settings.edit().putInt("pref_buttons_selection_btn_" + pos, selection.get(pos).getSelectedItemPosition()).apply();
+                settings.edit().putInt("pref_buttons_icon_btn_" + pos, icons.get(pos).getSelectedItemPosition()).apply();
             }
         }
     }

@@ -14,23 +14,11 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/style_dialog_row_vertical">
 
-    <item
-        android:id="@+id/menu_pref"
-        android:title="@string/menu_pref_title"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_dark_app_theme"
-        android:checkable="true"
-        android:checked="@bool/pref_dark_app_theme_default"
-        android:title="@string/menu_dark_app_theme_title"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_about"
-        android:title="@string/menu_about_title"
-        app:showAsAction="never" />
-
-</menu>
+    <ImageView
+        android:id="@+id/pref_buttons_icon_image"
+        style="@style/style_dialog_widget_vertical"
+        android:tint="?android:colorForeground" />
+</LinearLayout>

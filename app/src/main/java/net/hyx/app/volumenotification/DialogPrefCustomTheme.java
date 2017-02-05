@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class DialogPrefCustomTheme extends DialogPreference {
 
-    private NotificationPreferences preferences;
+    private PrefSettings settings;
 
     private EditText background_color_edit;
     private EditText icon_color_edit;
@@ -33,7 +33,7 @@ public class DialogPrefCustomTheme extends DialogPreference {
     public DialogPrefCustomTheme(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        preferences = new NotificationPreferences(context);
+        settings = new PrefSettings(context);
 
         setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
     }
@@ -44,8 +44,8 @@ public class DialogPrefCustomTheme extends DialogPreference {
 
         background_color_edit = (EditText) view.findViewById(R.id.pref_custom_theme_background_color);
         icon_color_edit = (EditText) view.findViewById(R.id.pref_custom_theme_icon_color);
-        background_color_edit.setText(preferences.getCustomThemeBackgroundColor());
-        icon_color_edit.setText(preferences.getCustomThemeIconColor());
+        background_color_edit.setText(settings.getCustomThemeBackgroundColor());
+        icon_color_edit.setText(settings.getCustomThemeIconColor());
     }
 
     @Override
@@ -55,14 +55,14 @@ public class DialogPrefCustomTheme extends DialogPreference {
         if (positiveResult) {
             String background_color_value = background_color_edit.getText().toString();
             String icon_color_value = icon_color_edit.getText().toString();
-            int background_color = preferences.getColor(background_color_value);
-            int icon_color = preferences.getColor(icon_color_value);
+            int background_color = settings.getColor(background_color_value);
+            int icon_color = settings.getColor(icon_color_value);
 
             if (background_color != 0) {
-                preferences.edit().putString("pref_custom_theme_background_color", background_color_value).apply();
+                settings.edit().putString("pref_custom_theme_background_color", background_color_value).apply();
             }
             if (icon_color != 0) {
-                preferences.edit().putString("pref_custom_theme_icon_color", icon_color_value).apply();
+                settings.edit().putString("pref_custom_theme_icon_color", icon_color_value).apply();
             }
             if (background_color == 0 || icon_color == 0) {
                 Toast.makeText(getContext(), getContext().getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();

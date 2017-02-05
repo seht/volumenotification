@@ -25,17 +25,16 @@ import android.support.v7.app.AppCompatActivity;
 
 public class ActivityPref extends AppCompatActivity {
 
-    protected NotificationPreferences preferences;
+    protected PrefSettings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        preferences = new NotificationPreferences(this);
+        settings = new PrefSettings(this);
 
-        setTheme(preferences.getAppTheme());
-
-        PreferenceManager.setDefaultValues(this, R.xml.preferences_notification, true);
+        setTheme(settings.getAppTheme());
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new NotificationSettingsFragment())
@@ -57,7 +56,7 @@ public class ActivityPref extends AppCompatActivity {
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            addPreferencesFromResource(R.xml.preferences_notification);
+            addPreferencesFromResource(R.xml.preferences);
         }
 
         @Override

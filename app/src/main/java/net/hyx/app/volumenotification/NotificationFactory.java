@@ -16,15 +16,19 @@
 
 package net.hyx.app.volumenotification;
 
+import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.os.Build;
+import android.service.quicksettings.Tile;
+import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -34,17 +38,30 @@ import java.util.List;
 public class NotificationFactory {
 
     static final int BUTTONS_SELECTION_SIZE = 6;
+    private static final int[] STREAM_TYPES = {
+            AudioManager.STREAM_MUSIC,
+            AudioManager.STREAM_VOICE_CALL,
+            AudioManager.STREAM_RING,
+            AudioManager.STREAM_NOTIFICATION,
+            AudioManager.STREAM_ALARM,
+            AudioManager.STREAM_SYSTEM
+    };
     private static boolean _mute = false;
+    private static boolean _silent = false;
+    private static String _package;
     private Context context;
     private Resources resources;
     private NotificationManager manager;
-    private NotificationPreferences preferences;
+    private AudioManager audio;
+    private PrefSettings settings;
 
     private NotificationFactory(Context context) {
         this.context = context;
         resources = context.getResources();
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        preferences = new NotificationPreferences(context);
+        audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        settings = new PrefSettings(context);
+        _package = context.getPackageName();
     }
 
     public static NotificationFactory newInstance(Context context) {
@@ -55,61 +72,73 @@ public class NotificationFactory {
         context.startService(new Intent(context, ServiceNotification.class));
     }
 
-    void setVolume(int selection) {
-
-        AudioManager audio_manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+    void setVolume(int position) {
+        int selection = settings.getButtonSelection(position);
         int direction = AudioManager.ADJUST_SAME;
-        int stream_type = getStreamType(selection);
+        System.out.println(selection);
+        int type = STREAM_TYPES[selection];
 
-        if (preferences.getToggleMute() && stream_type == AudioManager.STREAM_MUSIC) {
+        if (type == AudioManager.STREAM_MUSIC && settings.getToggleMute()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 direction = AudioManager.ADJUST_TOGGLE_MUTE;
             } else {
                 _mute = !_mute;
-                audio_manager.setStreamMute(stream_type, _mute);
+                audio.setStreamMute(type, _mute);
             }
-        }
-        if (preferences.getToggleSilent() && stream_type == AudioManager.STREAM_RING) {
-            if (audio_manager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-                audio_manager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        } else if (type == AudioManager.STREAM_RING && settings.getToggleSilent()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                direction = AudioManager.ADJUST_TOGGLE_MUTE;
             } else {
-                audio_manager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                _silent = !_silent;
+                audio.setStreamMute(type, _silent);
             }
         }
-        audio_manager.adjustStreamVolume(stream_type, direction, AudioManager.FLAG_SHOW_UI);
+        audio.adjustStreamVolume(type, direction, AudioManager.FLAG_SHOW_UI);
+    }
+
+    void create() {
+        cancel();
+        if (settings.getEnabled()) {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                    .setOngoing(true)
+                    .setPriority(getPriority())
+                    .setVisibility(getVisibility())
+                    .setCustomContentView(getCustomContentView())
+                    .setSmallIcon((settings.getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher);
+            manager.notify(1, builder.build());
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            for (int pos = 1; pos <= BUTTONS_SELECTION_SIZE; pos++) {
+                TileService.requestListeningState(context, new ComponentName(_package, _package + ".ServiceTile" + pos));
+            }
+        }
     }
 
     void cancel() {
         manager.cancelAll();
     }
 
-    void create() {
-
-        NotificationCompat.Builder notification_builder = new NotificationCompat.Builder(context)
-                .setOngoing(true)
-                .setPriority(getPriority())
-                .setVisibility(getVisibility())
-                .setCustomContentView(getCustomContentView());
-
-        if (preferences.getHideStatus()) {
-            notification_builder.setSmallIcon(android.R.color.transparent);
+    @TargetApi(Build.VERSION_CODES.N)
+    void updateTile(Tile tile, int position) {
+        tile.setIcon(Icon.createWithResource(context, settings.getDrawable(context, R.array.pref_buttons_icons_entries, settings.getButtonIcon(position))));
+        tile.setLabel(settings.getButtonLabel(position));
+        if (settings.getButtonChecked(position)) {
+            tile.setState(Tile.STATE_ACTIVE);
         } else {
-            notification_builder.setSmallIcon(R.drawable.ic_launcher);
+            tile.setState(Tile.STATE_INACTIVE);
         }
-
-        manager.cancelAll();
-        manager.notify(1, notification_builder.build());
+        tile.updateTile();
     }
 
     private int getPriority() {
-        if (preferences.getTopPriority()) {
+        if (settings.getTopPriority()) {
             return NotificationCompat.PRIORITY_MAX;
         }
         return NotificationCompat.PRIORITY_MIN;
     }
 
     private int getVisibility() {
-        if (preferences.getHideLocked()) {
+        if (settings.getHideLocked()) {
             return NotificationCompat.VISIBILITY_SECRET;
         }
         return NotificationCompat.VISIBILITY_PUBLIC;
@@ -117,69 +146,45 @@ public class NotificationFactory {
 
     private RemoteViews getCustomContentView() {
 
-        RemoteViews view = new RemoteViews(context.getPackageName(), R.layout.view_layout_notification);
-        String theme = preferences.getTheme();
+        RemoteViews view = new RemoteViews(_package, R.layout.view_layout_notification);
         List<Integer> buttons = new ArrayList<>();
+        int theme = resources.getIdentifier("style_" + settings.getTheme(), "style", _package);
         int background_color;
         int icon_color;
 
-        if (!theme.equals("theme_custom")) {
-            int theme_res = resources.getIdentifier("style_" + theme, "style", context.getPackageName());
-            TypedArray attrs = context.obtainStyledAttributes(theme_res, R.styleable.styleable);
-            background_color = attrs.getColor(R.styleable.styleable_background_color, Color.TRANSPARENT);
-            icon_color = attrs.getColor(R.styleable.styleable_icon_color, Color.TRANSPARENT);
+        if (theme != 0) {
+            TypedArray attrs = context.obtainStyledAttributes(theme, R.styleable.styleable);
+            background_color = attrs.getColor(R.styleable.styleable_background_color, 0);
+            icon_color = attrs.getColor(R.styleable.styleable_icon_color, 0);
             attrs.recycle();
         } else {
-            background_color = preferences.getColor(preferences.getCustomThemeBackgroundColor());
-            icon_color = preferences.getColor(preferences.getCustomThemeIconColor());
+            background_color = settings.getColor(settings.getCustomThemeBackgroundColor());
+            icon_color = settings.getColor(settings.getCustomThemeIconColor());
         }
-
-        if (!preferences.getTransparent()) {
-            view.setInt(R.id.layout_background, "setBackgroundColor", background_color);
-        } else {
-            view.setInt(R.id.layout_background, "setBackgroundColor", android.R.color.transparent);
+        if (settings.getTransparent()) {
+            background_color = android.R.color.transparent;
         }
-
+        view.setInt(R.id.layout_background, "setBackgroundColor", background_color);
         view.removeAllViews(R.id.layout_buttons);
 
         for (int pos = 1; pos <= BUTTONS_SELECTION_SIZE; pos++) {
-            int sel = preferences.getButtonSelection(pos);
-            if (!preferences.getButtonChecked(pos) || sel == 0 || buttons.contains(sel)) {
+            int sel = settings.getButtonSelection(pos);
+            if (!settings.getButtonChecked(pos) || buttons.contains(sel) || sel >= BUTTONS_SELECTION_SIZE) {
                 continue;
             }
             buttons.add(sel);
-            int btn_id = resources.getIdentifier("btn_sel_" + sel, "id", context.getPackageName());
-            RemoteViews btn = new RemoteViews(context.getPackageName(), resources.getIdentifier("view_btn_sel_" + sel, "layout", context.getPackageName()));
-
-            Intent intent = new Intent(context, ReceiverSetVolume.class);
-            intent.putExtra("selection", sel);
-
+            int btn_sel = sel + 1;
+            int btn_id = resources.getIdentifier("btn_sel_" + btn_sel, "id", _package);
+            RemoteViews btn = new RemoteViews(_package, resources.getIdentifier("view_btn_sel_" + btn_sel, "layout", _package));
+            Intent intent = new Intent(context, ReceiverSetVolume.class).putExtra("position", pos);
             PendingIntent event = PendingIntent.getBroadcast(context, btn_id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            btn.setOnClickPendingIntent(btn_id, event);
-            btn.setInt(btn_id, "setColorFilter", icon_color);
 
+            btn.setOnClickPendingIntent(btn_id, event);
+            btn.setInt(btn_id, "setImageResource", settings.getDrawable(context, R.array.pref_buttons_icons_entries, settings.getButtonIcon(pos)));
+            btn.setInt(btn_id, "setColorFilter", icon_color);
             view.addView(R.id.layout_buttons, btn);
         }
         return view;
-    }
-
-    private int getStreamType(int selection) {
-        switch (selection) {
-            case 1:
-                return AudioManager.STREAM_MUSIC;
-            case 2:
-                return AudioManager.STREAM_VOICE_CALL;
-            case 3:
-                return AudioManager.STREAM_RING;
-            case 4:
-                return AudioManager.STREAM_NOTIFICATION;
-            case 5:
-                return AudioManager.STREAM_ALARM;
-            case 6:
-                return AudioManager.STREAM_SYSTEM;
-            default:
-                return AudioManager.USE_DEFAULT_STREAM_TYPE;
-        }
     }
 
 }

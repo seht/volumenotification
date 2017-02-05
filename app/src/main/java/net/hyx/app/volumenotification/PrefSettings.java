@@ -19,15 +19,16 @@ package net.hyx.app.volumenotification;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 
-class NotificationPreferences {
+class PrefSettings {
 
     private Resources resources;
     private SharedPreferences preferences;
 
-    NotificationPreferences(Context context) {
+    PrefSettings(Context context) {
         resources = context.getResources();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -41,6 +42,10 @@ class NotificationPreferences {
             return R.style.style_app_theme_dark;
         }
         return R.style.style_app_theme_light;
+    }
+
+    boolean getDialogAlertNonceChecked(int pref_key) {
+        return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + pref_key, false);
     }
 
     boolean getAppThemeDark() {
@@ -94,6 +99,16 @@ class NotificationPreferences {
         return preferences.getInt("pref_buttons_selection_btn_" + pos, pos);
     }
 
+    int getButtonIcon(int pos) {
+        return preferences.getInt("pref_buttons_icon_btn_" + pos, pos);
+    }
+
+    String getButtonLabel(int pos) {
+        int btn_sel = getButtonSelection(pos) + 1;
+        int resource = resources.getIdentifier("btn_sel_" + btn_sel + "_label", "string", getClass().getPackage().getName());
+        return resources.getString(resource);
+    }
+
     String getTheme() {
         String default_value = resources.getString(R.string.pref_theme_default);
         return preferences.getString("pref_theme", default_value);
@@ -121,8 +136,12 @@ class NotificationPreferences {
         return color;
     }
 
-    boolean getDialogAlertNonceChecked(int pref_key) {
-        return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + pref_key, false);
+    int getDrawable(Context context, int resource, int pos) {
+        int drawable;
+        TypedArray drawables = context.getResources().obtainTypedArray(resource);
+        drawable = drawables.getResourceId(pos, 0);
+        drawables.recycle();
+        return drawable;
     }
 
 }

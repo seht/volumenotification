@@ -18,13 +18,30 @@ package net.hyx.app.volumenotification;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTile5 extends TileService {
+
+    @Override
+    public void onTileAdded() {
+        super.onTileAdded();
+        NotificationFactory.newInstance(this).updateTile(getQsTile(), 5);
+    }
+
+    @Override
+    public void onStartListening() {
+        super.onStartListening();
+        NotificationFactory.newInstance(this).updateTile(getQsTile(), 5);
+    }
+
     @Override
     public void onClick() {
         super.onClick();
-        NotificationFactory.newInstance(this).setVolume(5);
+        if (getQsTile().getState() == Tile.STATE_ACTIVE) {
+            NotificationFactory.newInstance(this).setVolume(5);
+        }
     }
+
 }

@@ -21,9 +21,6 @@
     <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
     <string name="pref_custom_theme_background_color_default" translatable="false">darkgrey</string>
 
-    <bool name="pref_enabled_default">true</bool>
-    <bool name="pref_dark_app_theme_default">false</bool>
-
     <bool name="pref_buttons_checked_btn_1_default">true</bool>
     <bool name="pref_buttons_checked_btn_2_default">true</bool>
     <bool name="pref_buttons_checked_btn_3_default">true</bool>
@@ -31,13 +28,15 @@
     <bool name="pref_buttons_checked_btn_5_default">false</bool>
     <bool name="pref_buttons_checked_btn_6_default">false</bool>
 
-    <bool name="pref_translucent_default">false</bool>
+    <bool name="pref_enabled_default">true</bool>
+    <bool name="pref_dark_app_theme_default">false</bool>
     <bool name="pref_boot_default">true</bool>
     <bool name="pref_top_priority_default">true</bool>
     <bool name="pref_hide_locked_default">true</bool>
     <bool name="pref_hide_status_default">true</bool>
     <bool name="pref_toggle_mute_default">false</bool>
     <bool name="pref_toggle_silent_default">false</bool>
+    <bool name="pref_translucent_default">false</bool>
 
     <string-array name="pref_theme_entries">
         <item>Material: Dark</item>
@@ -56,14 +55,35 @@
         <item>theme_custom</item>
     </string-array>
 
-    <string-array name="pref_buttons_entries">
-        <item>@string/btn_sel_0_label</item>
+    <string-array name="pref_buttons_selection_entries">
         <item>@string/btn_sel_1_label</item>
         <item>@string/btn_sel_2_label</item>
         <item>@string/btn_sel_3_label</item>
         <item>@string/btn_sel_4_label</item>
         <item>@string/btn_sel_5_label</item>
         <item>@string/btn_sel_6_label</item>
+    </string-array>
+
+    <string-array name="pref_buttons_icons_entries">
+        <item>@drawable/ic_btn_sel_1</item>
+        <item>@drawable/ic_btn_sel_2</item>
+        <item>@drawable/ic_btn_sel_3</item>
+        <item>@drawable/ic_btn_sel_4</item>
+        <item>@drawable/ic_btn_sel_5</item>
+        <item>@drawable/ic_btn_sel_6</item>
+        <item>@drawable/ic_alt_volume_up</item>
+        <item>@drawable/ic_alt_volume_off</item>
+        <item>@drawable/ic_alt_notifications_active</item>
+        <item>@drawable/ic_alt_notifications_off</item>
+        <item>@drawable/ic_alt_ring_volume</item>
+        <item>@drawable/ic_alt_phone_in_talk</item>
+        <item>@drawable/ic_alt_phonelink_ring</item>
+        <item>@drawable/ic_alt_phone_android</item>
+        <item>@drawable/ic_alt_phone_iphone</item>
+        <item>@drawable/ic_alt_speaker</item>
+        <item>@drawable/ic_alt_headset</item>
+        <item>@drawable/ic_alt_tune</item>
+        <item>@drawable/ic_alt_cast</item>
     </string-array>
 
 </resources>

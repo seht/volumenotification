@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 public class DialogAlertNonce extends DialogFragment {
 
-    private NotificationPreferences preferences;
+    private PrefSettings settings;
     private int pref_key;
     private String message;
 
@@ -39,13 +39,11 @@ public class DialogAlertNonce extends DialogFragment {
     }*/
 
     public static DialogAlertNonce newInstance(int pref_key, String message) {
-
         DialogAlertNonce frag = new DialogAlertNonce();
         Bundle args = new Bundle();
         args.putInt("pref_key", pref_key);
         args.putString("message", message);
         frag.setArguments(args);
-
         return frag;
     }
 
@@ -53,7 +51,7 @@ public class DialogAlertNonce extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        preferences = new NotificationPreferences(getContext());
+        settings = new PrefSettings(getContext());
         pref_key = getArguments().getInt("pref_key");
         message = getArguments().getString("message");
     }
@@ -68,11 +66,11 @@ public class DialogAlertNonce extends DialogFragment {
 
         if (pref_key != 0) {
             CheckBox nonce_checked = (CheckBox) view.findViewById(R.id.pref_dialog_alert_nonce_checked);
-            nonce_checked.setChecked(preferences.getDialogAlertNonceChecked(pref_key));
+            nonce_checked.setChecked(settings.getDialogAlertNonceChecked(pref_key));
             nonce_checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    preferences.edit().putBoolean("pref_dialog_alert_nonce_checked_" + pref_key, isChecked).apply();
+                    settings.edit().putBoolean("pref_dialog_alert_nonce_checked_" + pref_key, isChecked).apply();
                 }
             });
         } else {
