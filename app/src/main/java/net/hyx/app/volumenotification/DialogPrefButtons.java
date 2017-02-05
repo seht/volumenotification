@@ -32,7 +32,7 @@ public class DialogPrefButtons extends DialogPreference {
 
     private SparseArray<CheckBox> checked;
     private SparseArray<Spinner> selection;
-    private SparseArray<Spinner> icons;
+    //private SparseArray<Spinner> icons;
 
     public DialogPrefButtons(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,7 +42,7 @@ public class DialogPrefButtons extends DialogPreference {
 
         checked = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
         selection = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
-        icons = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
+        //icons = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
 
         setDialogLayoutResource(R.layout.view_dialog_pref_buttons);
     }
@@ -52,24 +52,24 @@ public class DialogPrefButtons extends DialogPreference {
         super.onBindDialogView(view);
 
         String _package = getContext().getPackageName();
-        String[] _icons = resources.getStringArray(R.array.pref_buttons_icons_entries);
+        //String[] _icons = resources.getStringArray(R.array.pref_buttons_icons_entries);
 
         for (int pos = 1; pos <= NotificationFactory.BUTTONS_SELECTION_SIZE; pos++) {
             CheckBox _checked = (CheckBox) view.findViewById(resources.getIdentifier("pref_buttons_checked_btn_" + pos, "id", _package));
             Spinner _selection = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_selection_btn_" + pos, "id", _package));
-            Spinner _icon = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_icon_btn_" + pos, "id", _package));
-            _icon.setAdapter(new AdapterIconSpinner(getContext(), R.array.pref_buttons_icons_entries, _icons));
+            //Spinner _icon = (Spinner) view.findViewById(resources.getIdentifier("pref_buttons_icon_btn_" + pos, "id", _package));
+            //_icon.setAdapter(new AdapterIconSpinner(getContext(), R.array.pref_buttons_icons_entries, _icons));
 
             _checked.setChecked(settings.getButtonChecked(pos));
             if (settings.getButtonSelection(pos) < _selection.getAdapter().getCount()) {
                 _selection.setSelection(settings.getButtonSelection(pos));
             }
-            if (settings.getButtonIcon(pos) < _icon.getAdapter().getCount()) {
+            /*if (settings.getButtonIcon(pos) < _icon.getAdapter().getCount()) {
                 _icon.setSelection(settings.getButtonIcon(pos));
-            }
+            }*/
             checked.append(pos, _checked);
             selection.append(pos, _selection);
-            icons.append(pos, _icon);
+            //icons.append(pos, _icon);
         }
     }
 
@@ -81,7 +81,7 @@ public class DialogPrefButtons extends DialogPreference {
             for (int pos = 1; pos <= checked.size(); pos++) {
                 settings.edit().putBoolean("pref_buttons_checked_btn_" + pos, checked.get(pos).isChecked()).apply();
                 settings.edit().putInt("pref_buttons_selection_btn_" + pos, selection.get(pos).getSelectedItemPosition()).apply();
-                settings.edit().putInt("pref_buttons_icon_btn_" + pos, icons.get(pos).getSelectedItemPosition()).apply();
+                //settings.edit().putInt("pref_buttons_icon_btn_" + pos, icons.get(pos).getSelectedItemPosition()).apply();
             }
         }
     }

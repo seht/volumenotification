@@ -77,8 +77,8 @@
         <item>@drawable/ic_btn_sel_1</item>
         <item>@drawable/ic_btn_sel_2</item>
         <item>@drawable/ic_btn_sel_3</item>
-        <item>@drawable/ic_btn_sel_4</item>
         <item>@drawable/ic_btn_sel_5</item>
+        <item>@drawable/ic_btn_sel_4</item>
         <item>@drawable/ic_btn_sel_6</item>
         <item>@drawable/ic_alt_volume_up</item>
         <item>@drawable/ic_alt_volume_off</item>

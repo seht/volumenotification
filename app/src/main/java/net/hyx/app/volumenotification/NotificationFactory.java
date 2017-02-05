@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.os.Build;
 import android.service.quicksettings.Tile;
@@ -42,8 +41,8 @@ public class NotificationFactory {
             AudioManager.STREAM_MUSIC,
             AudioManager.STREAM_VOICE_CALL,
             AudioManager.STREAM_RING,
-            AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_ALARM,
+            AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_SYSTEM
     };
     private static boolean _mute = false;
@@ -75,7 +74,6 @@ public class NotificationFactory {
     void setVolume(int position) {
         int selection = settings.getButtonSelection(position);
         int direction = AudioManager.ADJUST_SAME;
-        System.out.println(selection);
         int type = STREAM_TYPES[selection];
 
         if (type == AudioManager.STREAM_MUSIC && settings.getToggleMute()) {
@@ -120,8 +118,8 @@ public class NotificationFactory {
 
     @TargetApi(Build.VERSION_CODES.N)
     void updateTile(Tile tile, int position) {
-        tile.setIcon(Icon.createWithResource(context, settings.getDrawable(context, R.array.pref_buttons_icons_entries, settings.getButtonIcon(position))));
-        tile.setLabel(settings.getButtonLabel(position));
+        //tile.setIcon(Icon.createWithResource(context, settings.getDrawable(context, R.array.pref_buttons_icons_entries, settings.getButtonIcon(position))));
+        //tile.setLabel(settings.getButtonLabel(position));
         if (settings.getButtonChecked(position)) {
             tile.setState(Tile.STATE_ACTIVE);
         } else {
@@ -180,7 +178,7 @@ public class NotificationFactory {
             PendingIntent event = PendingIntent.getBroadcast(context, btn_id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(btn_id, event);
-            btn.setInt(btn_id, "setImageResource", settings.getDrawable(context, R.array.pref_buttons_icons_entries, settings.getButtonIcon(pos)));
+            //btn.setInt(btn_id, "setImageResource", settings.getDrawable(context, R.array.pref_buttons_icons_entries, settings.getButtonIcon(pos)));
             btn.setInt(btn_id, "setColorFilter", icon_color);
             view.addView(R.id.layout_buttons, btn);
         }

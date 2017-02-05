@@ -28,12 +28,13 @@
             <Spinner
                 android:id="@+id/pref_buttons_selection_btn_1"
                 style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_dialog_buttons_selection_entries" />
-
-            <Spinner
-                android:id="@+id/pref_buttons_icon_btn_1"
-                style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_buttons_icons_entries" />
+                android:entries="@array/pref_buttons_selection_entries" />
+            <!--
+                        <Spinner
+                            android:id="@+id/pref_buttons_icon_btn_1"
+                            style="@style/style_dialog_widget_horizontal"
+                            android:entries="@array/pref_buttons_icons_entries" />
+                            -->
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_horizontal">
@@ -45,12 +46,13 @@
             <Spinner
                 android:id="@+id/pref_buttons_selection_btn_2"
                 style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_dialog_buttons_selection_entries" />
-
-            <Spinner
-                android:id="@+id/pref_buttons_icon_btn_2"
-                style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_buttons_icons_entries" />
+                android:entries="@array/pref_buttons_selection_entries" />
+            <!--
+                        <Spinner
+                            android:id="@+id/pref_buttons_icon_btn_2"
+                            style="@style/style_dialog_widget_horizontal"
+                            android:entries="@array/pref_buttons_icons_entries" />
+                            -->
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_horizontal">
@@ -62,12 +64,13 @@
             <Spinner
                 android:id="@+id/pref_buttons_selection_btn_3"
                 style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_dialog_buttons_selection_entries" />
-
-            <Spinner
-                android:id="@+id/pref_buttons_icon_btn_3"
-                style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_buttons_icons_entries" />
+                android:entries="@array/pref_buttons_selection_entries" />
+            <!--
+                        <Spinner
+                            android:id="@+id/pref_buttons_icon_btn_3"
+                            style="@style/style_dialog_widget_horizontal"
+                            android:entries="@array/pref_buttons_icons_entries" />
+                            -->
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_horizontal">
@@ -79,12 +82,13 @@
             <Spinner
                 android:id="@+id/pref_buttons_selection_btn_4"
                 style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_dialog_buttons_selection_entries" />
-
-            <Spinner
-                android:id="@+id/pref_buttons_icon_btn_4"
-                style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_buttons_icons_entries" />
+                android:entries="@array/pref_buttons_selection_entries" />
+            <!--
+                        <Spinner
+                            android:id="@+id/pref_buttons_icon_btn_4"
+                            style="@style/style_dialog_widget_horizontal"
+                            android:entries="@array/pref_buttons_icons_entries" />
+                            -->
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_horizontal">
@@ -96,12 +100,13 @@
             <Spinner
                 android:id="@+id/pref_buttons_selection_btn_5"
                 style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_dialog_buttons_selection_entries" />
-
-            <Spinner
-                android:id="@+id/pref_buttons_icon_btn_5"
-                style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_buttons_icons_entries" />
+                android:entries="@array/pref_buttons_selection_entries" />
+            <!--
+                        <Spinner
+                            android:id="@+id/pref_buttons_icon_btn_5"
+                            style="@style/style_dialog_widget_horizontal"
+                            android:entries="@array/pref_buttons_icons_entries" />
+                            -->
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_horizontal">
@@ -113,12 +118,13 @@
             <Spinner
                 android:id="@+id/pref_buttons_selection_btn_6"
                 style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_dialog_buttons_selection_entries" />
-
-            <Spinner
-                android:id="@+id/pref_buttons_icon_btn_6"
-                style="@style/style_dialog_widget_horizontal"
-                android:entries="@array/pref_buttons_icons_entries" />
+                android:entries="@array/pref_buttons_selection_entries" />
+            <!--
+                        <Spinner
+                            android:id="@+id/pref_buttons_icon_btn_6"
+                            style="@style/style_dialog_widget_horizontal"
+                            android:entries="@array/pref_buttons_icons_entries" />
+                            -->
         </LinearLayout>
 
     </LinearLayout>

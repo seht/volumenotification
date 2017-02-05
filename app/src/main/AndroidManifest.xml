@@ -103,7 +103,7 @@
         </service>
         <service
             android:name=".ServiceTile4"
-            android:icon="@drawable/ic_btn_sel_4"
+            android:icon="@drawable/ic_btn_sel_5"
             android:label="@string/btn_sel_4_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
@@ -115,7 +115,7 @@
         </service>
         <service
             android:name=".ServiceTile5"
-            android:icon="@drawable/ic_btn_sel_5"
+            android:icon="@drawable/ic_btn_sel_4"
             android:label="@string/btn_sel_5_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
