@@ -26,7 +26,7 @@
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_1"
             style="@style/style_dialog_widget_horizontal"
-            android:entries="@array/pref_buttons_selection_entries" />
+            android:entries="@array/pref_dialog_buttons_selection_entries" />
 
         <Spinner
             android:id="@+id/pref_buttons_icon_btn_1"
@@ -43,7 +43,7 @@
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_2"
             style="@style/style_dialog_widget_horizontal"
-            android:entries="@array/pref_buttons_selection_entries" />
+            android:entries="@array/pref_dialog_buttons_selection_entries" />
 
         <Spinner
             android:id="@+id/pref_buttons_icon_btn_2"
@@ -60,7 +60,7 @@
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_3"
             style="@style/style_dialog_widget_horizontal"
-            android:entries="@array/pref_buttons_selection_entries" />
+            android:entries="@array/pref_dialog_buttons_selection_entries" />
 
         <Spinner
             android:id="@+id/pref_buttons_icon_btn_3"
@@ -77,7 +77,7 @@
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_4"
             style="@style/style_dialog_widget_horizontal"
-            android:entries="@array/pref_buttons_selection_entries" />
+            android:entries="@array/pref_dialog_buttons_selection_entries" />
 
         <Spinner
             android:id="@+id/pref_buttons_icon_btn_4"
@@ -94,7 +94,7 @@
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_5"
             style="@style/style_dialog_widget_horizontal"
-            android:entries="@array/pref_buttons_selection_entries" />
+            android:entries="@array/pref_dialog_buttons_selection_entries" />
 
         <Spinner
             android:id="@+id/pref_buttons_icon_btn_5"
@@ -111,7 +111,7 @@
         <Spinner
             android:id="@+id/pref_buttons_selection_btn_6"
             style="@style/style_dialog_widget_horizontal"
-            android:entries="@array/pref_buttons_selection_entries" />
+            android:entries="@array/pref_dialog_buttons_selection_entries" />
 
         <Spinner
             android:id="@+id/pref_buttons_icon_btn_6"
