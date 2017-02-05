@@ -60,6 +60,11 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="style_dialog_viewport">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <style name="style_dialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -71,6 +76,9 @@
         <item name="android:paddingTop">?dialogPreferredPadding</item>
         <item name="android:paddingBottom">?dialogPreferredPadding</item>
         <item name="android:showDividers">middle</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
     </style>
 
     <style name="style_dialog_with_footer" parent="@style/style_dialog">

@@ -19,6 +19,8 @@
     <PreferenceCategory
         android:key="pref_cat_behavior"
         android:title="@string/pref_cat_behavior_title">
+
+
         <net.hyx.app.volumenotification.DialogPrefButtons
             android:dialogTitle="@string/pref_buttons_title"
             android:key="pref_buttons_dialog"
@@ -26,6 +28,8 @@
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/pref_buttons_summary"
             android:title="@string/pref_buttons_title" />
+
+
         <SwitchPreference
             android:defaultValue="@bool/pref_toggle_mute_default"
             android:key="pref_toggle_mute"

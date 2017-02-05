@@ -96,11 +96,13 @@ class PrefSettings {
     }
 
     int getButtonSelection(int pos) {
-        return preferences.getInt("pref_buttons_selection_btn_" + pos, pos);
+        int default_value = pos - 1;
+        return preferences.getInt("pref_buttons_selection_btn_" + pos, default_value);
     }
 
     int getButtonIcon(int pos) {
-        return preferences.getInt("pref_buttons_icon_btn_" + pos, pos);
+        int default_value = pos - 1;
+        return preferences.getInt("pref_buttons_icon_btn_" + pos, default_value);
     }
 
     String getButtonLabel(int pos) {
