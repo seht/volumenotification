@@ -19,70 +19,70 @@
     <string name="app_name">Volume Notification</string>
     <string name="app_name_short">Vol Notification</string>
 
-    <string name="menu_pref_title">Settings</string>
-    <string name="menu_dark_app_theme_title">Dark theme</string>
-    <string name="menu_about_title">Show your love :)</string>
+    <string name="menu_pref_title">Nastavení</string>
+    <string name="menu_dark_app_theme_title">Tmavé téma</string>
+    <string name="menu_about_title">Ukažte vaší lásku :)</string>
 
-    <string name="target_api_welcome_message_N">Nice! Your device is running Android N.\n\nYou should give tiles a try. You can edit them at the top from your quick settings, by pulling the notification drawer and dragging them in.\n\nThen you can just disable the notification from settings.</string>
-    <string name="pref_dialog_alert_nonce_checked_label">Sweet! But don\'t remind me again.</string>
+    <string name="target_api_welcome_message_N">Pěkně! Na vašem zařízení běží Android N.\n\nMěl bys zkusit dlaždice. Můžete je upravit nahoře v Quick Settings tažením notifikační lišty a přesunutím. Pak můžete vypnout notifikaci v nastavení.</string>
+    <string name="pref_dialog_alert_nonce_checked_label">Super! Ale už mi to znovu nepřipomínej.</string>
 
-    <string name="text_home_1">Please use the action bar menu to navigate the app.</string>
-    <string name="text_home_2">Made with all the love in the world.</string>
+    <string name="text_home_1">Použijte prosím menu v pravém horním rohu pro navigaci v aplikaci.</string>
+    <string name="text_home_2">Vytvořeno s všechnou láskou na světě.</string>
     <string name="text_home_3" translatable="false">&lt;3</string>
 
-    <string name="pref_theme_title">Theme</string>
-    <string name="pref_theme_summary">Choose the notification theme</string>
+    <string name="pref_theme_title">Téma</string>
+    <string name="pref_theme_summary">Zvol téma notifikace</string>
 
-    <string name="pref_buttons_title">Volume buttons</string>
-    <string name="pref_buttons_summary">Customize the notification and quick settings</string>
+    <string name="pref_buttons_title">Tlačítka </string>
+    <string name="pref_buttons_summary">Přizpůsobení notifikace a Quick Settings</string>
 
-    <string name="btn_sel_1_label">Media volume</string>
-    <string name="btn_sel_2_label">Call volume</string>
-    <string name="btn_sel_3_label">Ring volume</string>
-    <string name="btn_sel_4_label">Alarm volume</string>
-    <string name="btn_sel_5_label">Notification volume</string>
-    <string name="btn_sel_6_label">System volume</string>
+    <string name="btn_sel_1_label">Hlasitost médií</string>
+    <string name="btn_sel_2_label">Hlasitost hovorů</string>
+    <string name="btn_sel_3_label">Hlasitost vyzvánění</string>
+    <string name="btn_sel_4_label">Hlasitost budíku</string>
+    <string name="btn_sel_5_label">Hlasitost notifikací</string>
+    <string name="btn_sel_6_label">Hlastiost systémových zvuků</string>
 
-    <string name="dialog_btn_sel_1_label">Media</string>
-    <string name="dialog_btn_sel_2_label">Call</string>
-    <string name="dialog_btn_sel_3_label">Ring</string>
-    <string name="dialog_btn_sel_4_label">Alarm</string>
-    <string name="dialog_btn_sel_5_label">Notification</string>
-    <string name="dialog_btn_sel_6_label">System</string>
+    <string name="dialog_btn_sel_1_label">Média</string>
+    <string name="dialog_btn_sel_2_label">Hovory</string>
+    <string name="dialog_btn_sel_3_label">Vyzvánění</string>
+    <string name="dialog_btn_sel_4_label">Budíky</string>
+    <string name="dialog_btn_sel_5_label">Notifikace</string>
+    <string name="dialog_btn_sel_6_label">Systém</string>
 
-    <string name="pref_cat_style_title">Notification appearance</string>
-    <string name="pref_cat_config_title">Notification settings</string>
-    <string name="pref_cat_behavior_title">Behaviour</string>
+    <string name="pref_cat_style_title">Vzhled notifikace</string>
+    <string name="pref_cat_config_title">Nastavení notifikace</string>
+    <string name="pref_cat_behavior_title">Vlastnosti</string>
 
-    <string name="pref_custom_theme_title">Custom theme</string>
-    <string name="pref_custom_theme_summary">Personalize the custom theme colors</string>
-    <string name="pref_custom_theme_background_color_title">Background color</string>
-    <string name="pref_custom_theme_icon_color_title">Icon color</string>
-    <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
-    <string name="pref_custom_theme_color_error_message">Invalid color name or format</string>
+    <string name="pref_custom_theme_title">Vlastní téma</string>
+    <string name="pref_custom_theme_summary">Přizpůsobení tématu</string>
+    <string name="pref_custom_theme_background_color_title">Barva pozadí</string>
+    <string name="pref_custom_theme_icon_color_title">Barva ikony</string>
+    <string name="pref_custom_theme_color_help">Formáty: #RRGGBB, #AARRGGBB, \"název barvy\"</string>
+    <string name="pref_custom_theme_color_error_message">Chybný název barvy nebo formát</string>
 
-    <string name="pref_translucent_title">Translucent background</string>
-    <string name="pref_translucent_summary">* Background transparency is only compatible with translucent launchers.</string>
+    <string name="pref_translucent_title">Průhledné pozadí</string>
+    <string name="pref_translucent_summary">* Průhledné pozadí je kompatibilní jen s průhlednými launchery.</string>
 
-    <string name="pref_enabled_title">Enabled</string>
-    <string name="pref_enabled_summary">Enable or disable showing the notification</string>
+    <string name="pref_enabled_title">Zapnuto</string>
+    <string name="pref_enabled_summary">Zapnutí nebo nebo vyupnutí zobrazování notifikace</string>
 
-    <string name="pref_boot_title">Start at boot</string>
-    <string name="pref_boot_summary">Create notification when device starts</string>
+    <string name="pref_boot_title">Zapnout při spuštění</string>
+    <string name="pref_boot_summary">Vytvoří notifikaci, když se zařízení zapne</string>
 
-    <string name="pref_top_priority_title">Top priority</string>
-    <string name="pref_top_priority_summary">* Enabling will keep the notification at the top but force a status bar icon.</string>
+    <string name="pref_top_priority_title">Nejvyšší priorita</string>
+    <string name="pref_top_priority_summary">* Povolením zůstane notifikace v notifikační liště nad všemi ostatními, ale zobrazí ikonu ve stavové liště.</string>
 
-    <string name="pref_hide_locked_title">Hidden from lock screen</string>
-    <string name="pref_hide_locked_summary">* To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
+    <string name="pref_hide_locked_title">Skryto na zamčené obrazovce</string>
+    <string name="pref_hide_locked_summary">* Ke skrytí notifikace při zapnuté nejvyšší prioritě by mělo být zapnuto i soukromí notifikací v nastavení vašeho zařízení.</string>
 
-    <string name="pref_hide_status_title">Hidden status bar icon</string>
-    <string name="pref_hide_status_summary">* When top priority is enabled, this will show a blank space in the status bar.</string>
+    <string name="pref_hide_status_title">Skrytá ikona ve stavové liště</string>
+    <string name="pref_hide_status_summary">* Pokud je zapnuta nejvyšší priorita, tohle ukáže prázdné místo ve stavové liště.</string>
 
-    <string name="pref_toggle_mute_title">Toggle mute</string>
-    <string name="pref_toggle_mute_summary">Media volume to toggle mute</string>
+    <string name="pref_toggle_mute_title">Přepínač ticha</string>
+    <string name="pref_toggle_mute_summary">Stisknutím tlačítka "Hlasitost médií" se hlasitost médií ztiší</string>
 
-    <string name="pref_toggle_silent_title">Toggle silent</string>
-    <string name="pref_toggle_silent_summary">Ring volume to toggle mute</string>
+    <string name="pref_toggle_silent_title">Přepínač ticha</string>
+    <string name="pref_toggle_silent_summary">Stisknutím tlačítka "Hlasitost vyzvánění" se hlasitost vyzvánění ztiší</string>
 
 </resources>
