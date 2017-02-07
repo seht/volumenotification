@@ -38,30 +38,27 @@ import android.widget.Switch;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsIconSpinnerAdapter;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
-import net.hyx.app.volumenotification.model.Buttons;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.ButtonsModel;
+import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.object.ButtonsItem;
 
 import java.io.Serializable;
 
 public class ButtonsItemActivity extends AppCompatActivity {
 
-    private FragmentButtonsItem frag;
+    private ButtonsItemFragment frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //NotificationFactory.newInstance(this).startService();
-
-        Settings settings = new Settings(this);
-        Buttons model = new Buttons(this);
+        SettingsModel settings = new SettingsModel(this);
+        ButtonsModel model = new ButtonsModel(this);
         ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("item");
-        frag = FragmentButtonsItem.newInstance(item);
+        frag = ButtonsItemFragment.newInstance(item);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
-        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         setTitle(model.getDefaultButtonLabel(item.id));
 
         getSupportFragmentManager().beginTransaction()
@@ -95,13 +92,13 @@ public class ButtonsItemActivity extends AppCompatActivity {
         }
     }
 
-    public static class FragmentButtonsItem extends Fragment {
+    public static class ButtonsItemFragment extends Fragment {
 
         private ButtonsItem item;
-        private Buttons model;
+        private ButtonsModel model;
 
-        public static FragmentButtonsItem newInstance(Serializable item) {
-            FragmentButtonsItem frag = new FragmentButtonsItem();
+        public static ButtonsItemFragment newInstance(Serializable item) {
+            ButtonsItemFragment frag = new ButtonsItemFragment();
             Bundle args = new Bundle();
             args.putSerializable("item", item);
             frag.setArguments(args);
@@ -123,8 +120,8 @@ public class ButtonsItemActivity extends AppCompatActivity {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            Settings settings = new Settings(getActivity());
-            model = new Buttons(getActivity());
+            SettingsModel settings = new SettingsModel(getActivity());
+            model = new ButtonsModel(getActivity());
 
             Switch checked = (Switch) view.findViewById(R.id.item_btn_checked);
             EditText label = (EditText) view.findViewById(R.id.item_btn_label);

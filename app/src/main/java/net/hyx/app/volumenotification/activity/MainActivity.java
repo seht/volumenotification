@@ -34,11 +34,11 @@ import android.view.ViewGroup;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Settings settings;
+    private SettingsModel settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationFactory.newInstance(this).startService();
 
-        settings = new Settings(this);
+        settings = new SettingsModel(this);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
-        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new FragmentMain())
+                .replace(R.id.content, new MainFragment())
                 .commit();
 
         if (getSupportActionBar() != null) {
@@ -91,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
-                //finish();
                 return true;
             case R.id.menu_buttons:
                 startActivity(new Intent(this, ButtonsListActivity.class));
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static class FragmentMain extends Fragment {
+    public static class MainFragment extends Fragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

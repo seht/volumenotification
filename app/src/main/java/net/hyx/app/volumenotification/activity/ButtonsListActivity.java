@@ -29,29 +29,25 @@ import android.view.ViewGroup;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsListViewAdapter;
-import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
 import net.hyx.app.volumenotification.helper.SimpleItemTouchHelperCallback;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class ButtonsListActivity extends AppCompatActivity {
 
-    private Settings settings;
+    private SettingsModel settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NotificationFactory.newInstance(this).startService();
-
-        settings = new Settings(this);
+        settings = new SettingsModel(this);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
-        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new FragmentButtonsList())
+                .replace(R.id.content, new ButtonsListFragment())
                 .commit();
 
         if (getSupportActionBar() != null) {
@@ -59,7 +55,7 @@ public class ButtonsListActivity extends AppCompatActivity {
         }
     }
 
-    public static class FragmentButtonsList extends Fragment implements OnStartDragListener {
+    public static class ButtonsListFragment extends Fragment implements OnStartDragListener {
 
         private ItemTouchHelper mItemTouchHelper;
 

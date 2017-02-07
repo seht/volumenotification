@@ -25,13 +25,13 @@ import android.preference.PreferenceManager;
 
 import net.hyx.app.volumenotification.R;
 
-public class Settings {
+public class SettingsModel {
 
     public final Resources resources;
     public final SharedPreferences preferences;
     private final Context context;
 
-    public Settings(Context context) {
+    public SettingsModel(Context context) {
         this.context = context;
         resources = context.getResources();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);

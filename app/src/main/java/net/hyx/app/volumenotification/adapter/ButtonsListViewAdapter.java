@@ -33,7 +33,7 @@ import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
-import net.hyx.app.volumenotification.model.Buttons;
+import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.object.ButtonsItem;
 
 import java.util.Collections;
@@ -49,7 +49,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     public ButtonsListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.context = context;
         this.dragStartListener = dragStartListener;
-        items = (new Buttons(context)).getButtonList();
+        items = (new ButtonsModel(context)).getButtonList();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
-        Buttons model = new Buttons(context);
+        ButtonsModel model = new ButtonsModel(context);
         ButtonsItem item = model.getParseButtonItem(items.get(position));
 
         String default_label = model.getDefaultButtonLabel(item.id);
@@ -90,7 +90,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(items, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        (new Buttons(context)).saveButtonList(items);
+        (new ButtonsModel(context)).saveButtonList(items);
         NotificationFactory.newInstance(context).startService();
         return true;
     }

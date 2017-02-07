@@ -24,11 +24,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class PrefCustomThemeDialog extends DialogPreference {
 
-    private Settings settings;
+    private SettingsModel settings;
 
     private EditText background_color_edit;
     private EditText icon_color_edit;
@@ -36,7 +36,7 @@ public class PrefCustomThemeDialog extends DialogPreference {
     public PrefCustomThemeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        settings = new Settings(context);
+        settings = new SettingsModel(context);
 
         setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
     }

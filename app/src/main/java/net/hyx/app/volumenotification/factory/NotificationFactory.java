@@ -32,8 +32,8 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.model.Buttons;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.ButtonsModel;
+import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.object.ButtonsItem;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
 import net.hyx.app.volumenotification.service.NotificationService;
@@ -56,16 +56,16 @@ public class NotificationFactory {
     private final Context context;
     private final NotificationManager manager;
     private final AudioManager audio;
-    private final Settings settings;
-    private final Buttons model;
+    private final SettingsModel settings;
+    private final ButtonsModel model;
     private List<ButtonsItem> items;
 
     private NotificationFactory(Context context) {
         this.context = context;
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        settings = new Settings(context);
-        model = new Buttons(context);
+        settings = new SettingsModel(context);
+        model = new ButtonsModel(context);
         items = model.getButtonList();
         _package = context.getPackageName();
     }

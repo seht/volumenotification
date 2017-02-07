@@ -24,17 +24,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class ButtonsIconSpinnerAdapter extends ArrayAdapter<String> {
 
     private int resource;
-    private Settings settings;
+    private SettingsModel settings;
 
     public ButtonsIconSpinnerAdapter(Context context, int resource, String[] objects) {
         super(context, android.R.layout.simple_spinner_item, objects);
         this.resource = resource;
-        settings = new Settings(context);
+        settings = new SettingsModel(context);
     }
 
     @Override

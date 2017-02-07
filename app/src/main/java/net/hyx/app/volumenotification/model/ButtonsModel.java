@@ -26,12 +26,12 @@ import net.hyx.app.volumenotification.object.ButtonsItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buttons {
+public class ButtonsModel {
 
-    private final Settings settings;
+    private final SettingsModel settings;
 
-    public Buttons(Context context) {
-        settings = new Settings(context);
+    public ButtonsModel(Context context) {
+        settings = new SettingsModel(context);
     }
 
     public String[] getButtonEntries() {

@@ -29,11 +29,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class NonceAlertDialog extends DialogFragment {
 
-    private Settings settings;
+    private SettingsModel settings;
     private int pref_key;
     private String message;
 
@@ -54,7 +54,7 @@ public class NonceAlertDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings = new Settings(getContext());
+        settings = new SettingsModel(getContext());
         pref_key = getArguments().getInt("pref_key");
         message = getArguments().getString("message");
     }

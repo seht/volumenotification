@@ -24,23 +24,18 @@ import android.support.v7.app.AppCompatActivity;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
-import net.hyx.app.volumenotification.model.Settings;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class PrefActivity extends AppCompatActivity {
-
-    private Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NotificationFactory.newInstance(this).startService();
-
-        settings = new Settings(this);
+        SettingsModel settings = new SettingsModel(this);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
-        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PrefFragment())
