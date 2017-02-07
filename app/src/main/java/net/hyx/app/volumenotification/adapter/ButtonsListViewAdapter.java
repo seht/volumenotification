@@ -41,46 +41,40 @@ import java.util.List;
 
 public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
-    private static Buttons mItemFactory;
     private static List<ButtonsItem> mItems;
     private final OnStartDragListener mDragStartListener;
-    private Context context;
-    //private final OnListChangedListener mListChangedListener;
-
-    //private final Context context;
+    private final Context context;
 
     public ButtonsListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.context = context;
-        mItemFactory = new Buttons(context);
-        mItems = mItemFactory.getButtonList();
-
+        mItems = (new Buttons(context)).getButtonList();
         mDragStartListener = dragStartListener;
-        //mListChangedListener = listChangedListener;
     }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_list_item_buttons, parent, false);
-        ItemViewHolder itemViewHolder = new ItemViewHolder(context, view);
-        return itemViewHolder;
+        return new ItemViewHolder(context, view);
     }
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
         ButtonsItem mItem = mItems.get(position);
+        Buttons model = new Buttons(context);
 
-        String default_label = mItemFactory.getDefaultButtonLabel(mItem.id);
+        String default_label = model.getDefaultButtonLabel(mItem.id);
         holder.btn_label_default.setText(default_label);
         if (mItem.label.isEmpty()) {
             holder.btn_label.setText(default_label);
+        } else {
+            holder.btn_label.setText(mItem.label);
         }
         if (mItem.icon == 0) {
-            mItem.icon = mItemFactory.getDefaultButtonIcon(mItem.id);
+            mItem.icon = model.getDefaultButtonIcon(mItem.id);
         }
-        holder.btn_icon.setImageResource(mItemFactory.getButtonIconDrawable(mItem.icon));
+        holder.btn_icon.setImageResource(model.getButtonIconDrawable(mItem.icon));
 
-        // Start a drag whenever the handle view it touched
         holder.btn_handle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -102,8 +96,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(mItems, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        //mListChangedListener.onListChanged(mItems);
-        mItemFactory.saveButtonList(mItems);
+        (new Buttons(context)).saveButtonList(mItems);
         return true;
     }
 
@@ -119,7 +112,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder, View.OnClickListener {
 
-        public final View item_view;
+        //public final View item_view;
 
         public final ImageView btn_handle;
         public final ImageView btn_icon;
@@ -133,15 +126,12 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
             super(itemView);
 
             this.context = context;
-            item_view = itemView;
-
             btn_handle = (ImageView) itemView.findViewById(R.id.handle);
             btn_icon = (ImageView) itemView.findViewById(R.id.list_btn_icon);
-
             btn_label = (TextView) itemView.findViewById(R.id.list_btn_label);
             btn_label_default = (TextView) itemView.findViewById(R.id.list_btn_label_default);
 
-            item_view.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -156,9 +146,12 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
         @Override
         public void onClick(View v) {
-            Intent button_item = new Intent(context, ButtonsItemActivity.class);
-            button_item.putExtra("item", mItems.get(getAdapterPosition()));
-            context.startActivity(button_item);
+            int position = getAdapterPosition();
+            Intent intent = new Intent(context, ButtonsItemActivity.class);
+            ButtonsItem item = mItems.get(position);
+            item.position = position;
+            intent.putExtra("item", item);
+            context.startActivity(intent);
         }
 
     }

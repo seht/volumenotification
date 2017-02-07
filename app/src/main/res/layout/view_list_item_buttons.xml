@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:scaleType="center"
-            android:src="@drawable/ic_drag_handle"
+            android:src="@drawable/ic_edit_drag_handle"
             android:tint="?android:textColorPrimary" />
 
     </LinearLayout>

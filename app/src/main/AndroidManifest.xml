@@ -52,7 +52,6 @@
         </activity>
         <activity
             android:name=".activity.ButtonsListActivity"
-            android:label="Buttons"
             android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

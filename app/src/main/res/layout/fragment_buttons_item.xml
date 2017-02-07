@@ -25,10 +25,28 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/item_btn_checked_label"
+            style="@style/style_dialog_widget_horizontal"
+            android:layout_gravity="center_vertical|start"
+            android:text="@string/item_btn_checked_label" />
+
+        <Switch
+            android:id="@+id/item_btn_checked"
+            style="@style/style_dialog_widget_horizontal"
+            android:layout_gravity="center_vertical|end" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
             android:id="@+id/item_btn_icon_label"
             style="@style/style_dialog_widget_horizontal"
             android:layout_gravity="center_vertical|start"
-            android:text="Icon" />
+            android:text="@string/item_btn_icon_label" />
 
         <Spinner
             android:id="@+id/item_btn_icon"
@@ -47,13 +65,13 @@
             android:id="@+id/item_btn_label_label"
             style="@style/style_dialog_widget_horizontal"
             android:layout_gravity="center_vertical|start"
-            android:text="Label" />
+            android:text="@string/item_btn_label_label" />
 
         <EditText
             android:id="@+id/item_btn_label"
             style="@style/style_dialog_widget_horizontal"
             android:layout_gravity="center_vertical|end"
-            android:hint="example"
+            android:hint=""
             android:inputType="text" />
 
     </LinearLayout>

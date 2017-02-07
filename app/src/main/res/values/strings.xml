@@ -45,12 +45,9 @@
     <string name="btn_sel_5_label">Notification volume</string>
     <string name="btn_sel_6_label">System volume</string>
 
-    <string name="dialog_btn_sel_1_label">Media</string>
-    <string name="dialog_btn_sel_2_label">Call</string>
-    <string name="dialog_btn_sel_3_label">Ring</string>
-    <string name="dialog_btn_sel_4_label">Alarm</string>
-    <string name="dialog_btn_sel_5_label">Notification</string>
-    <string name="dialog_btn_sel_6_label">System</string>
+    <string name="item_btn_label_label">Label</string>
+    <string name="item_btn_icon_label">Icon</string>
+    <string name="item_btn_checked_label">Enabled</string>
 
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>

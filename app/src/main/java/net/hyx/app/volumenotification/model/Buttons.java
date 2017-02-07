@@ -40,7 +40,7 @@ public class Buttons {
 
     public List<ButtonsItem> getButtonList() {
         List<ButtonsItem> list = new ArrayList<>();
-        for (int pos = 1; pos <= getButtonEntries().length; pos++) {
+        for (int pos = 0; pos < getButtonEntries().length; pos++) {
             ButtonsItem item = getButtonItem(pos);
             if (item != null) {
                 list.add(item);
@@ -61,7 +61,8 @@ public class Buttons {
     }
 
     public ButtonsItem getDefaultButtonItem(int position) {
-        return new ButtonsItem(position, position);
+        int id = position + 1;
+        return new ButtonsItem(id, position);
     }
 
     public String getDefaultButtonLabel(int id) {
@@ -71,8 +72,7 @@ public class Buttons {
     }
 
     public int getDefaultButtonIcon(int id) {
-        int index = id - 1;
-        return index;
+        return id - 1;
     }
 
     public int getButtonIconDrawable(int index) {
@@ -85,8 +85,8 @@ public class Buttons {
     }
 
     public void saveButtonList(List<ButtonsItem> list) {
-        for (int pos = 1; pos <= list.size(); pos++) {
-            saveButtonItem(pos, list.get(pos - 1));
+        for (int pos = 0; pos < list.size(); pos++) {
+            saveButtonItem(pos, list.get(pos));
         }
     }
 
