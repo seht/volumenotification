@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright (C) 2017 Seht (R) Hyx Ltd.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +14,12 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/style_dialog_row_vertical"
-    android:padding="8dp">
-
-    <ImageView
-        android:id="@+id/pref_buttons_icon_image"
-        style="@style/style_dialog_widget_vertical"
-        android:tint="?android:textColorPrimary" />
-</LinearLayout>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M20,9H4v2h16V9zM4,15h16v-2H4v2z" />
+</vector>

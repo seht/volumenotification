@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-public class ReceiverSetVolume extends BroadcastReceiver {
+import net.hyx.app.volumenotification.factory.NotificationFactory;
+
+public class RebootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationFactory.newInstance(context).setVolume(intent.getExtras().getInt("position"));
+        NotificationFactory.newInstance(context).startService();
     }
 
 }

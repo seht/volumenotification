@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.dialog;
 
 import android.content.Context;
 import android.preference.DialogPreference;
@@ -23,17 +23,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class DialogPrefCustomTheme extends DialogPreference {
+import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.model.Settings;
 
-    private PrefSettings settings;
+public class PrefCustomThemeDialog extends DialogPreference {
+
+    private Settings settings;
 
     private EditText background_color_edit;
     private EditText icon_color_edit;
 
-    public DialogPrefCustomTheme(Context context, AttributeSet attrs) {
+    public PrefCustomThemeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        settings = new PrefSettings(context);
+        settings = new Settings(context);
 
         setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
     }

@@ -33,8 +33,10 @@
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_summary">Choose the notification theme</string>
 
-    <string name="pref_buttons_title">Volume buttons</string>
+    <string name="pref_buttons_title">Volume buttons and tiles</string>
     <string name="pref_buttons_summary">Customize the notification and quick settings</string>
+
+    <string name="pref_buttons_position_empty_label">Off</string>
 
     <string name="btn_sel_1_label">Media volume</string>
     <string name="btn_sel_2_label">Call volume</string>

@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.service;
 
 import android.app.IntentService;
 import android.content.Intent;
 
+import net.hyx.app.volumenotification.factory.NotificationFactory;
 
-public class ServiceNotification extends IntentService {
 
-    public ServiceNotification() {
-        super("ServiceNotification");
+public class NotificationService extends IntentService {
+
+    public NotificationService() {
+        super("NotificationService");
     }
 
     @Override

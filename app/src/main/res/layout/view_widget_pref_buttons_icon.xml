@@ -20,5 +20,5 @@
     <ImageView
         android:id="@+id/pref_buttons_icon_image"
         style="@style/style_dialog_widget_vertical"
-        android:tint="?android:colorForeground" />
+        android:tint="?android:textColorPrimary" />
 </LinearLayout>

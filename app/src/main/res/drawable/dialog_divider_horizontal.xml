@@ -14,12 +14,9 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/style_dialog_row_vertical"
-    android:padding="8dp">
-
-    <ImageView
-        android:id="@+id/pref_buttons_icon_image"
-        style="@style/style_dialog_widget_vertical"
-        android:tint="?android:textColorPrimary" />
-</LinearLayout>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size
+        android:width="8dp"
+        android:height="0dp" />
+    <solid android:color="#00000000" />
+</shape>

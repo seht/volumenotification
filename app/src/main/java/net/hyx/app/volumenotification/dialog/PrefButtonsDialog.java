@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.dialog;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,20 +25,24 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 
-public class DialogPrefButtons extends DialogPreference {
+import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.model.Settings;
+
+public class PrefButtonsDialog extends DialogPreference {
 
     private Resources resources;
-    private PrefSettings settings;
+    private Settings settings;
 
     private SparseArray<CheckBox> checked;
     private SparseArray<Spinner> selection;
     //private SparseArray<Spinner> icons;
 
-    public DialogPrefButtons(Context context, AttributeSet attrs) {
+    public PrefButtonsDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         resources = context.getResources();
-        settings = new PrefSettings(context);
+        settings = new Settings(context);
 
         checked = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);
         selection = new SparseArray<>(NotificationFactory.BUTTONS_SELECTION_SIZE);

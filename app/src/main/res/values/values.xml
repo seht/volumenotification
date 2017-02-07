@@ -73,12 +73,12 @@
         <item>@string/dialog_btn_sel_6_label</item>
     </string-array>
 
-    <string-array name="pref_buttons_icons_entries">
+    <string-array name="pref_buttons_icon_entries">
         <item>@drawable/ic_btn_sel_1</item>
         <item>@drawable/ic_btn_sel_2</item>
         <item>@drawable/ic_btn_sel_3</item>
-        <item>@drawable/ic_btn_sel_5</item>
         <item>@drawable/ic_btn_sel_4</item>
+        <item>@drawable/ic_btn_sel_5</item>
         <item>@drawable/ic_btn_sel_6</item>
         <item>@drawable/ic_alt_volume_up</item>
         <item>@drawable/ic_alt_volume_off</item>

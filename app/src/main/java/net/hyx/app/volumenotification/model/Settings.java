@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,110 +23,109 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 
-class PrefSettings {
+import net.hyx.app.volumenotification.R;
 
-    private Resources resources;
-    private SharedPreferences preferences;
+public class Settings {
 
-    PrefSettings(Context context) {
+    public final Resources resources;
+    public final SharedPreferences preferences;
+    private final Context context;
+
+    public Settings(Context context) {
+        this.context = context;
         resources = context.getResources();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    SharedPreferences.Editor edit() {
+    public SharedPreferences.Editor edit() {
         return preferences.edit();
     }
 
-    int getAppTheme() {
+    public int getAppTheme() {
         if (getAppThemeDark()) {
             return R.style.style_app_theme_dark;
         }
         return R.style.style_app_theme_light;
     }
 
-    boolean getDialogAlertNonceChecked(int pref_key) {
+    public boolean getDialogAlertNonceChecked(int pref_key) {
         return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + pref_key, false);
     }
 
-    boolean getAppThemeDark() {
+    public boolean getAppThemeDark() {
         boolean default_value = resources.getBoolean(R.bool.pref_dark_app_theme_default);
         return preferences.getBoolean("pref_dark_app_theme", default_value);
     }
 
-    boolean getEnabled() {
+    public boolean getEnabled() {
         boolean default_value = resources.getBoolean(R.bool.pref_enabled_default);
         return preferences.getBoolean("pref_enabled", default_value);
     }
 
-    boolean getTransparent() {
+    public boolean getTransparent() {
         boolean default_value = resources.getBoolean(R.bool.pref_translucent_default);
         return preferences.getBoolean("pref_translucent", default_value);
     }
 
-    boolean getHideStatus() {
+    public boolean getHideStatus() {
         boolean default_value = resources.getBoolean(R.bool.pref_hide_status_default);
         return preferences.getBoolean("pref_hide_status", default_value);
     }
 
-    boolean getToggleMute() {
+    public boolean getToggleMute() {
         boolean default_value = resources.getBoolean(R.bool.pref_toggle_mute_default);
         return preferences.getBoolean("pref_toggle_mute", default_value);
     }
 
-    boolean getToggleSilent() {
+    public boolean getToggleSilent() {
         boolean default_value = resources.getBoolean(R.bool.pref_toggle_silent_default);
         return preferences.getBoolean("pref_toggle_silent", default_value);
     }
 
-    boolean getTopPriority() {
+    public boolean getTopPriority() {
         boolean default_value = resources.getBoolean(R.bool.pref_top_priority_default);
         return preferences.getBoolean("pref_top_priority", default_value);
     }
 
-    boolean getHideLocked() {
+    public boolean getHideLocked() {
         boolean default_value = resources.getBoolean(R.bool.pref_hide_locked_default);
         return preferences.getBoolean("pref_hide_locked", default_value);
     }
 
-    boolean getButtonChecked(int pos) {
-        String pref_key = "pref_buttons_checked_btn_" + pos;
+    public boolean getButtonChecked(int pos) {
+        int btn_sel = getButtonSelection(pos) + 1;
+        String pref_key = "pref_buttons_checked_btn_" + btn_sel;
         int default_res = resources.getIdentifier(pref_key + "_default", "bool", getClass().getPackage().getName());
         boolean default_value = resources.getBoolean(default_res);
         return preferences.getBoolean(pref_key, default_value);
     }
 
-    int getButtonSelection(int pos) {
+    public int getButtonSelection(int pos) {
         int default_value = pos - 1;
         return preferences.getInt("pref_buttons_selection_btn_" + pos, default_value);
     }
 
-    int getButtonIcon(int pos) {
-        int default_value = pos - 1;
-        return preferences.getInt("pref_buttons_icon_btn_" + pos, default_value);
+    public int getButtonIcon(int pos) {
+        //int default_value = pos - 1;
+        return preferences.getInt("pref_buttons_icon_btn_" + pos, getButtonSelection(pos));
     }
 
-    String getButtonLabel(int pos) {
-        int btn_sel = getButtonSelection(pos) + 1;
-        int resource = resources.getIdentifier("btn_sel_" + btn_sel + "_label", "string", getClass().getPackage().getName());
-        return resources.getString(resource);
-    }
-
-    String getTheme() {
+    public String getTheme() {
         String default_value = resources.getString(R.string.pref_theme_default);
         return preferences.getString("pref_theme", default_value);
     }
 
-    String getCustomThemeBackgroundColor() {
+    public String getCustomThemeBackgroundColor() {
         String default_value = resources.getString(R.string.pref_custom_theme_background_color_default);
         return preferences.getString("pref_custom_theme_background_color", default_value);
     }
 
-    String getCustomThemeIconColor() {
+    public String getCustomThemeIconColor() {
         String default_value = resources.getString(R.string.pref_custom_theme_icon_color_default);
         return preferences.getString("pref_custom_theme_icon_color", default_value);
     }
 
-    int getColor(String pref_value) {
+    public int getColor(String pref_value) {
         int color = 0;
         try {
             if (!pref_value.isEmpty()) {
@@ -138,10 +137,10 @@ class PrefSettings {
         return color;
     }
 
-    int getDrawable(Context context, int resource, int pos) {
+    public int getDrawable(int resource, int index) {
         int drawable;
         TypedArray drawables = context.getResources().obtainTypedArray(resource);
-        drawable = drawables.getResourceId(pos, 0);
+        drawable = drawables.getResourceId(index, 0);
         drawables.recycle();
         return drawable;
     }

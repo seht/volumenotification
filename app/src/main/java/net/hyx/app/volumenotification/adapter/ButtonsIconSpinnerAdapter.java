@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -23,15 +23,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-class AdapterIconSpinner extends ArrayAdapter<String> {
+import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.model.Settings;
+
+public class ButtonsIconSpinnerAdapter extends ArrayAdapter<String> {
 
     private int resource;
-    private PrefSettings settings;
+    private Settings settings;
 
-    AdapterIconSpinner(Context context, int resource, String[] objects) {
+    public ButtonsIconSpinnerAdapter(Context context, int resource, String[] objects) {
         super(context, android.R.layout.simple_spinner_item, objects);
         this.resource = resource;
-        settings = new PrefSettings(context);
+        settings = new Settings(context);
     }
 
     @Override
@@ -48,7 +51,7 @@ class AdapterIconSpinner extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, parent, false);
         ImageView image = (ImageView) view.findViewById(R.id.pref_buttons_icon_image);
-        image.setImageResource(settings.getDrawable(getContext(), resource, position));
+        image.setImageResource(settings.getDrawable(resource, position));
         return view;
     }
 

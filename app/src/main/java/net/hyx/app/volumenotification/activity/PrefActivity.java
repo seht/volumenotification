@@ -14,48 +14,49 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.activity;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
-public class ActivityPref extends AppCompatActivity {
+import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.model.Settings;
 
-    protected PrefSettings settings;
+public class PrefActivity extends AppCompatActivity {
+
+    private Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings = new PrefSettings(this);
+        NotificationFactory.newInstance(this).startService();
+
+        settings = new Settings(this);
 
         setTheme(settings.getAppTheme());
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+        setContentView(R.layout.activity_main);
+        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new NotificationSettingsFragment())
+                .replace(android.R.id.content, new FragmentPref())
                 .commit();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
     }
 
-    public static class NotificationSettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
-
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationFactory.newInstance(getActivity()).startService();
-        }
+    public static class FragmentPref extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
             addPreferencesFromResource(R.xml.preferences);
         }
 
@@ -71,6 +72,11 @@ public class ActivityPref extends AppCompatActivity {
             super.onPause();
             getPreferenceScreen().getSharedPreferences()
                     .unregisterOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            NotificationFactory.newInstance(getActivity()).startService();
         }
 
     }

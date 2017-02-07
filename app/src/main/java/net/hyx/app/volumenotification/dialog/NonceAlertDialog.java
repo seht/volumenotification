@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -28,9 +28,12 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class DialogAlertNonce extends DialogFragment {
+import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.model.Settings;
 
-    private PrefSettings settings;
+public class NonceAlertDialog extends DialogFragment {
+
+    private Settings settings;
     private int pref_key;
     private String message;
 
@@ -38,8 +41,8 @@ public class DialogAlertNonce extends DialogFragment {
         return newInstance(0, message);
     }*/
 
-    public static DialogAlertNonce newInstance(int pref_key, String message) {
-        DialogAlertNonce frag = new DialogAlertNonce();
+    public static NonceAlertDialog newInstance(int pref_key, String message) {
+        NonceAlertDialog frag = new NonceAlertDialog();
         Bundle args = new Bundle();
         args.putInt("pref_key", pref_key);
         args.putString("message", message);
@@ -51,7 +54,7 @@ public class DialogAlertNonce extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings = new PrefSettings(getContext());
+        settings = new Settings(getContext());
         pref_key = getArguments().getInt("pref_key");
         message = getArguments().getString("message");
     }

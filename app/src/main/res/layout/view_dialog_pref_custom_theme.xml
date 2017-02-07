@@ -43,7 +43,9 @@
 
             <TextView
                 style="@style/style_dialog_widget_vertical"
-                android:text="@string/pref_custom_theme_color_help" />
+                android:text="@string/pref_custom_theme_color_help"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="?android:textColorSecondary" />
         </LinearLayout>
 
     </LinearLayout>

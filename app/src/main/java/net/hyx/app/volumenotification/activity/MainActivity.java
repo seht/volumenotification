@@ -14,46 +14,60 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification;
+package net.hyx.app.volumenotification.activity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class ActivityMain extends AppCompatActivity {
+import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.model.Settings;
 
-    protected PrefSettings settings;
+public class MainActivity extends AppCompatActivity {
+
+    private Settings settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings = new PrefSettings(this);
-
         NotificationFactory.newInstance(this).startService();
+
+        settings = new Settings(this);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
+        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, new FragmentMain())
+                .commit();
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
     }
 
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (!settings.getDialogAlertNonceChecked(1)) {
-                DialogFragment newFragment = DialogAlertNonce.newInstance(1, getResources().getString(R.string.target_api_welcome_message_N));
+                DialogFragment newFragment = NonceAlertDialog.newInstance(1, getResources().getString(R.string.target_api_welcome_message_N));
                 newFragment.show(getSupportFragmentManager(), null);
             }
         }
@@ -77,9 +91,13 @@ public class ActivityMain extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
+                //finish();
+                return true;
+            case R.id.menu_buttons:
+                startActivity(new Intent(this, ButtonsListActivity.class));
                 return true;
             case R.id.menu_pref:
-                startActivity(new Intent(this, ActivityPref.class));
+                startActivity(new Intent(this, PrefActivity.class));
                 return true;
             case R.id.menu_dark_app_theme:
                 boolean dark_theme = !item.isChecked();
@@ -95,6 +113,15 @@ public class ActivityMain extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static class FragmentMain extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.fragment_main, container, false);
+        }
+
     }
 
 }

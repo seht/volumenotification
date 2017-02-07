@@ -20,8 +20,7 @@
         android:key="pref_cat_behavior"
         android:title="@string/pref_cat_behavior_title">
 
-
-        <net.hyx.app.volumenotification.DialogPrefButtons
+        <net.hyx.app.volumenotification.dialog.PrefButtonsDialog
             android:dialogTitle="@string/pref_buttons_title"
             android:key="pref_buttons_dialog"
             android:negativeButtonText="@android:string/cancel"
@@ -29,6 +28,13 @@
             android:summary="@string/pref_buttons_summary"
             android:title="@string/pref_buttons_title" />
 
+        <net.hyx.app.volumenotification.dialog.PrefIconsDialog
+            android:dialogTitle="@string/pref_buttons_title"
+            android:key="pref_buttons_icon_dialog"
+            android:negativeButtonText="@android:string/cancel"
+            android:positiveButtonText="@android:string/ok"
+            android:summary="@string/pref_buttons_summary"
+            android:title="@string/pref_buttons_title" />
 
         <SwitchPreference
             android:defaultValue="@bool/pref_toggle_mute_default"
@@ -53,7 +59,7 @@
             android:key="pref_theme"
             android:summary="@string/pref_theme_summary"
             android:title="@string/pref_theme_title" />
-        <net.hyx.app.volumenotification.DialogPrefCustomTheme
+        <net.hyx.app.volumenotification.dialog.PrefCustomThemeDialog
             android:dialogTitle="@string/pref_custom_theme_title"
             android:key="pref_custom_theme_dialog"
             android:negativeButtonText="@android:string/cancel"
