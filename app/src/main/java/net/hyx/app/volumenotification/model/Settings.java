@@ -62,7 +62,7 @@ public class Settings {
         return preferences.getBoolean("pref_enabled", default_value);
     }
 
-    public boolean getTransparent() {
+    public boolean getTranslucent() {
         boolean default_value = resources.getBoolean(R.bool.pref_translucent_default);
         return preferences.getBoolean("pref_translucent", default_value);
     }
@@ -90,24 +90,6 @@ public class Settings {
     public boolean getHideLocked() {
         boolean default_value = resources.getBoolean(R.bool.pref_hide_locked_default);
         return preferences.getBoolean("pref_hide_locked", default_value);
-    }
-
-    public boolean getButtonChecked(int pos) {
-        int btn_sel = getButtonSelection(pos) + 1;
-        String pref_key = "pref_buttons_checked_btn_" + btn_sel;
-        int default_res = resources.getIdentifier(pref_key + "_default", "bool", getClass().getPackage().getName());
-        boolean default_value = resources.getBoolean(default_res);
-        return preferences.getBoolean(pref_key, default_value);
-    }
-
-    public int getButtonSelection(int pos) {
-        int default_value = pos - 1;
-        return preferences.getInt("pref_buttons_selection_btn_" + pos, default_value);
-    }
-
-    public int getButtonIcon(int pos) {
-        //int default_value = pos - 1;
-        return preferences.getInt("pref_buttons_icon_btn_" + pos, getButtonSelection(pos));
     }
 
     public String getTheme() {

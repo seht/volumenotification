@@ -37,6 +37,7 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsIconSpinnerAdapter;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.model.Buttons;
 import net.hyx.app.volumenotification.model.Settings;
 import net.hyx.app.volumenotification.object.ButtonsItem;
@@ -86,6 +87,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
             case android.R.id.home:
             case R.id.menu_buttons_item_save:
                 frag.model.saveButtonItem(frag.item.position, frag.item);
+                NotificationFactory.newInstance(this).startService();
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             default:

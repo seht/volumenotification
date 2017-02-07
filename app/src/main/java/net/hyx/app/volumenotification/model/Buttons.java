@@ -49,6 +49,35 @@ public class Buttons {
         return list;
     }
 
+    public ButtonsItem getButtonItemById(int id) {
+        List<ButtonsItem> items = getButtonList();
+        for (int pos = 0; pos < items.size(); pos++) {
+            ButtonsItem item = items.get(pos);
+            if (item.id == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public ButtonsItem getParseButtonItem(int id) {
+        ButtonsItem item = getButtonItemById(id);
+        if (item != null) {
+            return getParseButtonItem(item);
+        }
+        return null;
+    }
+
+    public ButtonsItem getParseButtonItem(ButtonsItem item) {
+        if (item.icon == 0) {
+            item.icon = getDefaultButtonIcon(item.id);
+        }
+        if (item.label.isEmpty()) {
+            item.label = getDefaultButtonLabel(item.id);
+        }
+        return item;
+    }
+
     public ButtonsItem getButtonItem(int position) {
         String value = settings.preferences.getString("pref_buttons_list_item_" + position, "");
         if (!value.isEmpty()) {

@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ButtonsItemActivity;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
@@ -41,14 +42,14 @@ import java.util.List;
 
 public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
-    private static List<ButtonsItem> mItems;
-    private final OnStartDragListener mDragStartListener;
+    private static List<ButtonsItem> items;
+    private final OnStartDragListener dragStartListener;
     private final Context context;
 
     public ButtonsListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.context = context;
-        mItems = (new Buttons(context)).getButtonList();
-        mDragStartListener = dragStartListener;
+        this.dragStartListener = dragStartListener;
+        items = (new Buttons(context)).getButtonList();
     }
 
     @Override
@@ -60,26 +61,19 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
-        ButtonsItem mItem = mItems.get(position);
         Buttons model = new Buttons(context);
+        ButtonsItem item = model.getParseButtonItem(items.get(position));
 
-        String default_label = model.getDefaultButtonLabel(mItem.id);
+        String default_label = model.getDefaultButtonLabel(item.id);
         holder.btn_label_default.setText(default_label);
-        if (mItem.label.isEmpty()) {
-            holder.btn_label.setText(default_label);
-        } else {
-            holder.btn_label.setText(mItem.label);
-        }
-        if (mItem.icon == 0) {
-            mItem.icon = model.getDefaultButtonIcon(mItem.id);
-        }
-        holder.btn_icon.setImageResource(model.getButtonIconDrawable(mItem.icon));
+        holder.btn_label.setText(item.label);
+        holder.btn_icon.setImageResource(model.getButtonIconDrawable(item.icon));
 
         holder.btn_handle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
+                    dragStartListener.onStartDrag(holder);
                 }
                 return false;
             }
@@ -88,21 +82,22 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
     @Override
     public void onItemDismiss(int position) {
-        mItems.remove(position);
+        items.remove(position);
         notifyItemRemoved(position);
     }
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(mItems, fromPosition, toPosition);
+        Collections.swap(items, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        (new Buttons(context)).saveButtonList(mItems);
+        (new Buttons(context)).saveButtonList(items);
+        NotificationFactory.newInstance(context).startService();
         return true;
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return items.size();
     }
 
     /**
@@ -148,7 +143,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
         public void onClick(View v) {
             int position = getAdapterPosition();
             Intent intent = new Intent(context, ButtonsItemActivity.class);
-            ButtonsItem item = mItems.get(position);
+            ButtonsItem item = items.get(position);
             item.position = position;
             intent.putExtra("item", item);
             context.startActivity(intent);

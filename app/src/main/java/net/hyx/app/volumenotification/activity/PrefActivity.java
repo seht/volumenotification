@@ -43,7 +43,7 @@ public class PrefActivity extends AppCompatActivity {
         //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new FragmentPref())
+                .replace(android.R.id.content, new PrefFragment())
                 .commit();
 
         if (getSupportActionBar() != null) {
@@ -52,7 +52,7 @@ public class PrefActivity extends AppCompatActivity {
 
     }
 
-    public static class FragmentPref extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+    public static class PrefFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
         @Override
         public void onCreate(final Bundle savedInstanceState) {
