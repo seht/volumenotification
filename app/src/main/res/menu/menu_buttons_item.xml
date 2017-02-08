@@ -18,9 +18,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/item_btn_checked"
+        android:checkable="true"
+        android:title=""
+        app:actionViewClass="android.widget.Switch"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_buttons_item_save"
         android:icon="@drawable/ic_nav_check"
         android:title=""
         app:showAsAction="always" />
-
 </menu>

@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.menu_buttons:
+            /*case R.id.menu_buttons:
                 startActivity(new Intent(this, ButtonsListActivity.class));
-                return true;
+                return true;*/
             case R.id.menu_pref:
                 startActivity(new Intent(this, PrefActivity.class));
                 return true;

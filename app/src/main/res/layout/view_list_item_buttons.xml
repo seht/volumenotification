@@ -26,6 +26,7 @@
     android:showDividers="end">
 
     <LinearLayout
+        android:id="@+id/item_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="fill"
@@ -44,9 +45,11 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="fill_horizontal|fill_vertical"
+            android:layout_gravity="fill"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
             <TextView
                 android:id="@+id/list_btn_label"

@@ -19,6 +19,9 @@
 
     <ImageView
         android:id="@+id/pref_buttons_icon_image"
-        style="@style/style_dialog_widget_vertical"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
         android:tint="?android:textColorPrimary" />
+
 </LinearLayout>

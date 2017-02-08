@@ -17,64 +17,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/item_btn_icon"
+        style="@style/style_dialog_widget_horizontal"
+        android:layout_gravity="center"
+        android:entries="@array/pref_buttons_icon_entries" />
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="16dp" />
 
-        <TextView
-            android:id="@+id/item_btn_checked_label"
-            style="@style/style_dialog_widget_horizontal"
-            android:layout_gravity="center_vertical|start"
-            android:text="@string/item_btn_checked_label" />
-
-        <Switch
-            android:id="@+id/item_btn_checked"
-            style="@style/style_dialog_widget_horizontal"
-            android:layout_gravity="center_vertical|end" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/item_btn_icon_label"
-            style="@style/style_dialog_widget_horizontal"
-            android:layout_gravity="center_vertical|start"
-            android:text="@string/item_btn_icon_label" />
-
-        <Spinner
-            android:id="@+id/item_btn_icon"
-            style="@style/style_dialog_widget_horizontal"
-            android:layout_gravity="center_vertical|end"
-            android:entries="@array/pref_buttons_icon_entries" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/item_btn_label_label"
-            style="@style/style_dialog_widget_horizontal"
-            android:layout_gravity="center_vertical|start"
-            android:text="@string/item_btn_label_label" />
-
-        <EditText
-            android:id="@+id/item_btn_label"
-            style="@style/style_dialog_widget_horizontal"
-            android:layout_gravity="center_vertical|end"
-            android:hint=""
-            android:inputType="text" />
-
-    </LinearLayout>
+    <EditText
+        android:id="@+id/item_btn_label"
+        style="@style/style_dialog_widget_horizontal"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:hint=""
+        android:inputType="text" />
 
 
 </LinearLayout>

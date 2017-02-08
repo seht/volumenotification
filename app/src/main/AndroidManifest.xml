@@ -30,19 +30,14 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.PrefActivity"
             android:label="@string/menu_pref_title"
-            android:parentActivityName=".activity.MainActivity">
+            android:parentActivityName=".activity.ButtonsListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".activity.ButtonsListActivity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,12 +45,12 @@
                 <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.ButtonsListActivity"
-            android:parentActivityName=".activity.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+        <activity android:name=".activity.ButtonsListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.ButtonsItemActivity"

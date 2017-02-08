@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light">
+    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
     </style>
 

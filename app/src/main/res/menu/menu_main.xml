@@ -16,10 +16,12 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--
     <item
         android:id="@+id/menu_buttons"
         android:title="ze buttons"
         app:showAsAction="never" />
+        -->
 
     <item
         android:id="@+id/menu_pref"

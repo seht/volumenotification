@@ -45,10 +45,6 @@
     <string name="btn_sel_5_label">Notification volume</string>
     <string name="btn_sel_6_label">System volume</string>
 
-    <string name="item_btn_label_label">Label</string>
-    <string name="item_btn_icon_label">Icon</string>
-    <string name="item_btn_checked_label">Enabled</string>
-
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>
     <string name="pref_cat_behavior_title">Behaviour</string>
@@ -63,7 +59,7 @@
     <string name="pref_translucent_title">Translucent background</string>
     <string name="pref_translucent_summary">* Background transparency is only compatible with translucent launchers.</string>
 
-    <string name="pref_enabled_title">Enabled</string>
+    <string name="pref_enabled_title">Enable notification</string>
     <string name="pref_enabled_summary">Enable or disable showing the notification</string>
 
     <string name="pref_boot_title">Start at boot</string>
@@ -72,10 +68,10 @@
     <string name="pref_top_priority_title">Top priority</string>
     <string name="pref_top_priority_summary">* Enabling will keep the notification at the top but force a status bar icon.</string>
 
-    <string name="pref_hide_locked_title">Hidden from lock screen</string>
+    <string name="pref_hide_locked_title">Hide from lock screen</string>
     <string name="pref_hide_locked_summary">* To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
 
-    <string name="pref_hide_status_title">Hidden status bar icon</string>
+    <string name="pref_hide_status_title">Hide status bar icon</string>
     <string name="pref_hide_status_summary">* When top priority is enabled, this will show a blank space in the status bar.</string>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>

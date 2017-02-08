@@ -25,7 +25,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,19 +72,31 @@ public class ButtonsItemActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_buttons_item, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
+        Switch checked = (Switch) menu.findItem(R.id.item_btn_checked).getActionView();
+        checked.setChecked((frag.item.status > 0));
+        checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                frag.item.status = (isChecked) ? 1 : 0;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-            case R.id.menu_buttons_item_save:
                 frag.model.saveButtonItem(frag.item.position, frag.item);
                 NotificationFactory.newInstance(this).startService();
                 NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.menu_buttons_item_save:
+                frag.model.saveButtonItem(frag.item.position, frag.item);
+                NotificationFactory.newInstance(this).startService();
+                return true;
+            case R.id.item_btn_checked:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -123,7 +134,6 @@ public class ButtonsItemActivity extends AppCompatActivity {
             SettingsModel settings = new SettingsModel(getActivity());
             model = new ButtonsModel(getActivity());
 
-            Switch checked = (Switch) view.findViewById(R.id.item_btn_checked);
             EditText label = (EditText) view.findViewById(R.id.item_btn_label);
             Spinner icon = (Spinner) view.findViewById(R.id.item_btn_icon);
 
@@ -139,18 +149,9 @@ public class ButtonsItemActivity extends AppCompatActivity {
                     R.array.pref_buttons_icon_entries,
                     settings.resources.getStringArray(R.array.pref_buttons_icon_entries)));
 
-            checked.setChecked((item.status > 0));
             label.setText(item.label);
             label.setHint(model.getDefaultButtonLabel(item.id));
             icon.setSelection(item.icon);
-
-            checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    item.status = (isChecked) ? 1 : 0;
-                    //model.saveButtonItem(item.position, item);
-                }
-            });
 
             label.addTextChangedListener(new TextWatcher() {
                 @Override

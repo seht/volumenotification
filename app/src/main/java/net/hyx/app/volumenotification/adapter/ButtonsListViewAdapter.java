@@ -25,6 +25,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
@@ -78,6 +79,10 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
                 return false;
             }
         });
+
+        if (item.status < 1) {
+            holder.item_wrapper.setAlpha(.25f);
+        }
     }
 
     @Override
@@ -107,7 +112,8 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder, View.OnClickListener {
 
-        //public final View item_view;
+        public final View item_view;
+        public final LinearLayout item_wrapper;
 
         public final ImageView btn_handle;
         public final ImageView btn_icon;
@@ -121,6 +127,8 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
             super(itemView);
 
             this.context = context;
+            item_view = itemView;
+            item_wrapper = (LinearLayout) itemView.findViewById(R.id.item_wrapper);
             btn_handle = (ImageView) itemView.findViewById(R.id.handle);
             btn_icon = (ImageView) itemView.findViewById(R.id.list_btn_icon);
             btn_label = (TextView) itemView.findViewById(R.id.list_btn_label);
