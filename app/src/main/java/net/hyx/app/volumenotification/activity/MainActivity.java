@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         settings = new SettingsModel(this);
 
-        setTheme(settings.getAppTheme());
+        //setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
 
         getSupportFragmentManager().beginTransaction()

@@ -33,14 +33,14 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/list_btn_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:scaleType="center"
             android:src="@drawable/ic_btn_sel_1"
-            android:tint="?android:textColorPrimary" />
+            android:tint="@color/theme_material_icon_color" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -67,14 +67,14 @@
 
         </LinearLayout>
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/handle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:scaleType="center"
             android:src="@drawable/ic_edit_drag_handle"
-            android:tint="?android:textColorPrimary" />
+            android:tint="@color/theme_material_icon_color" />
 
     </LinearLayout>
 

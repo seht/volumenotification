@@ -56,7 +56,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
         ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("item");
         frag = ButtonsItemFragment.newInstance(item);
 
-        setTheme(settings.getAppTheme());
+        //setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_main);
         setTitle(model.getDefaultButtonLabel(item.id));
 

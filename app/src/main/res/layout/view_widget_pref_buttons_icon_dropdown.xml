@@ -18,10 +18,11 @@
     style="@style/style_dialog_row_vertical"
     android:padding="8dp">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/pref_buttons_icon_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
-        android:tint="?android:textColorPrimary" />
+        android:tint="@color/theme_material_icon_color" />
+
 </LinearLayout>

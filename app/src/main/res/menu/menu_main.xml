@@ -32,7 +32,9 @@
         android:id="@+id/menu_dark_app_theme"
         android:checkable="true"
         android:checked="@bool/pref_dark_app_theme_default"
+        android:enabled="false"
         android:title="@string/menu_dark_app_theme_title"
+        android:visible="false"
         app:showAsAction="never" />
 
     <item
