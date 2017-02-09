@@ -107,9 +107,7 @@ public class NotificationFactory {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setOngoing(true)
                     .setPriority(getPriority())
-                    .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setVisibility(getVisibility())
-                    .setVisibility(NotificationCompat.VISIBILITY_SECRET)
                     .setCustomContentView(getCustomContentView())
                     .setSmallIcon((settings.getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher);
             manager.notify(1, builder.build());
