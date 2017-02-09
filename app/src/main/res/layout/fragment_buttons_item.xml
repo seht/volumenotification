@@ -24,7 +24,9 @@
         android:id="@+id/item_btn_icon"
         style="@style/style_dialog_widget_horizontal"
         android:layout_gravity="center"
-        android:entries="@array/pref_buttons_icon_entries" />
+        android:background="@android:color/transparent"
+        android:entries="@array/pref_buttons_icon_entries"
+        android:padding="0dp" />
 
     <Space
         android:layout_width="match_parent"

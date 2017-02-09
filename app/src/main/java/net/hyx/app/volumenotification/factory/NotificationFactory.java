@@ -115,7 +115,7 @@ public class NotificationFactory {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             for (int pos = 0; pos < items.size(); pos++) {
                 ButtonsItem item = items.get(pos);
-                TileService.requestListeningState(context, new ComponentName(_package, _package + ".ServiceTile" + item.id));
+                TileService.requestListeningState(context, new ComponentName("net.hyx.app.volumenotification.service", "TileService" + item.id));
             }
         }
     }
