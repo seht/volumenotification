@@ -39,7 +39,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:scaleType="center"
-            android:src="@drawable/ic_btn_sel_1"
             android:tint="@color/theme_material_icon_color" />
 
         <LinearLayout
@@ -55,14 +54,14 @@
                 android:id="@+id/list_btn_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_sel_1_label"
+                android:text="@string/btn_def_label_1"
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/list_btn_label_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_sel_1_label"
+                android:text="@string/btn_def_label_1"
                 android:textAppearance="?android:textAppearanceSmall" />
 
         </LinearLayout>

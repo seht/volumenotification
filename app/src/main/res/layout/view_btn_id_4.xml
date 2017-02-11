@@ -14,13 +14,8 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/item_btn_checked_layout"
-        android:title=""
-        app:actionLayout="@layout/view_menu_item_switch"
-        app:showAsAction="always" />
-
-</menu>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_id_4"
+    style="@style/style_image_button_compat"
+    android:contentDescription="@string/btn_def_label_4"
+    android:src="@drawable/ic_btn_def_4" />

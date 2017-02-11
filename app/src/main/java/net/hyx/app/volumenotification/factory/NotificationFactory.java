@@ -42,13 +42,15 @@ import java.util.List;
 
 public class NotificationFactory {
 
+    private static final int STREAM_CAST = 6;
     private static final int[] STREAM_TYPES = {
             AudioManager.STREAM_MUSIC,
             AudioManager.STREAM_VOICE_CALL,
             AudioManager.STREAM_RING,
             AudioManager.STREAM_ALARM,
             AudioManager.STREAM_NOTIFICATION,
-            AudioManager.STREAM_SYSTEM
+            AudioManager.STREAM_SYSTEM,
+            STREAM_CAST
     };
     private static boolean _mute = false;
     private static boolean _silent = false;
@@ -181,8 +183,8 @@ public class NotificationFactory {
             if (item.status < 1) {
                 continue;
             }
-            int btn_id = settings.resources.getIdentifier("btn_sel_" + item.id, "id", _package);
-            RemoteViews btn = new RemoteViews(_package, settings.resources.getIdentifier("view_btn_sel_" + item.id, "layout", _package));
+            int btn_id = settings.resources.getIdentifier("btn_id_" + item.id, "id", _package);
+            RemoteViews btn = new RemoteViews(_package, settings.resources.getIdentifier("view_btn_id_" + item.id, "layout", _package));
             Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra("id", item.id);
             PendingIntent event = PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

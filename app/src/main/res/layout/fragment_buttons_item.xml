@@ -30,7 +30,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="16dp" />
+        android:layout_height="32dp" />
 
     <EditText
         android:id="@+id/item_btn_label"
@@ -38,7 +38,9 @@
         android:layout_gravity="center"
         android:gravity="center_horizontal"
         android:hint=""
-        android:inputType="text" />
+        android:inputType="text"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp" />
 
 
 </LinearLayout>

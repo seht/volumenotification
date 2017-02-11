@@ -74,8 +74,8 @@
         <service android:name=".service.NotificationService" />
         <service
             android:name=".service.TileService1"
-            android:icon="@drawable/ic_btn_sel_1"
-            android:label="@string/btn_sel_1_label"
+            android:icon="@drawable/ic_btn_def_1"
+            android:label="@string/btn_def_label_1"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -87,8 +87,8 @@
         </service>
         <service
             android:name=".service.TileService2"
-            android:icon="@drawable/ic_btn_sel_2"
-            android:label="@string/btn_sel_2_label"
+            android:icon="@drawable/ic_btn_def_2"
+            android:label="@string/btn_def_label_2"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -100,8 +100,8 @@
         </service>
         <service
             android:name=".service.TileService3"
-            android:icon="@drawable/ic_btn_sel_3"
-            android:label="@string/btn_sel_3_label"
+            android:icon="@drawable/ic_btn_def_3"
+            android:label="@string/btn_def_label_3"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -113,8 +113,8 @@
         </service>
         <service
             android:name=".service.TileService4"
-            android:icon="@drawable/ic_btn_sel_4"
-            android:label="@string/btn_sel_4_label"
+            android:icon="@drawable/ic_btn_def_4"
+            android:label="@string/btn_def_label_4"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -126,8 +126,8 @@
         </service>
         <service
             android:name=".service.TileService5"
-            android:icon="@drawable/ic_btn_sel_5"
-            android:label="@string/btn_sel_5_label"
+            android:icon="@drawable/ic_btn_def_5"
+            android:label="@string/btn_def_label_5"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -139,8 +139,21 @@
         </service>
         <service
             android:name=".service.TileService6"
-            android:icon="@drawable/ic_btn_sel_6"
-            android:label="@string/btn_sel_6_label"
+            android:icon="@drawable/ic_btn_def_6"
+            android:label="@string/btn_def_label_6"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+        </service>
+        <service
+            android:name=".service.TileService7"
+            android:icon="@drawable/ic_btn_def_7"
+            android:label="@string/btn_def_label_7"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

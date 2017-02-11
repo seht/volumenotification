@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -46,13 +47,13 @@ import java.io.Serializable;
 public class ButtonsItemActivity extends AppCompatActivity {
 
     private ButtonsItemFragment frag;
+    private ButtonsModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SettingsModel settings = new SettingsModel(this);
-        ButtonsModel model = new ButtonsModel(this);
+        model = new ButtonsModel(this);
         ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("item");
         frag = ButtonsItemFragment.newInstance(item);
 
@@ -73,12 +74,15 @@ public class ButtonsItemActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
-        Switch checked = (Switch) menu.findItem(R.id.item_btn_checked).getActionView();
+        LinearLayout checked_layout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
+        Switch checked = (Switch) checked_layout.findViewById(R.id.menu_item_switch);
         checked.setChecked((frag.item.status > 0));
         checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 frag.item.status = (isChecked) ? 1 : 0;
+                model.saveButtonItem(frag.item);
+
             }
         });
         return super.onCreateOptionsMenu(menu);
@@ -88,15 +92,15 @@ public class ButtonsItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                frag.model.saveButtonItem(frag.item.position, frag.item);
+                model.saveButtonItem(frag.item);
                 NotificationFactory.newInstance(this).startService();
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            case R.id.menu_buttons_item_save:
-                frag.model.saveButtonItem(frag.item.position, frag.item);
-                NotificationFactory.newInstance(this).startService();
-                return true;
-            case R.id.item_btn_checked:
+            /*case R.id.menu_buttons_item_save:
+                model.saveButtonItem(frag.item.position, frag.item);
+                //NotificationFactory.newInstance(this).startService();
+                return true;*/
+            case R.id.menu_item_switch:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -120,6 +124,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             item = (ButtonsItem) getArguments().getSerializable("item");
+            model = new ButtonsModel(getActivity());
         }
 
         @Override
@@ -132,7 +137,6 @@ public class ButtonsItemActivity extends AppCompatActivity {
             super.onViewCreated(view, savedInstanceState);
 
             SettingsModel settings = new SettingsModel(getActivity());
-            model = new ButtonsModel(getActivity());
 
             EditText label = (EditText) view.findViewById(R.id.item_btn_label);
             Spinner icon = (Spinner) view.findViewById(R.id.item_btn_icon);
@@ -144,6 +148,8 @@ public class ButtonsItemActivity extends AppCompatActivity {
             if (item.icon == 0) {
                 item.icon = model.getDefaultButtonIcon(item.id);
             }
+
+            //model.saveButtonItem(item.position, item);
 
             icon.setAdapter(new ButtonsIconSpinnerAdapter(getContext(),
                     R.array.pref_buttons_icon_entries,
@@ -167,7 +173,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
                     item.label = s.toString();
-                    //model.saveButtonItem(item.position, item);
+                    model.saveButtonItem(item);
                 }
             });
 
@@ -175,7 +181,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = position;
-                    //model.saveButtonItem(item.position, item);
+                    model.saveButtonItem(item);
                 }
 
                 @Override

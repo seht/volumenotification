@@ -17,13 +17,12 @@
 <resources>
 
     <string name="app_name">Volume Notification</string>
-    <string name="app_name_short">Vol Notification</string>
 
     <string name="menu_pref_title">Settings</string>
     <string name="menu_dark_app_theme_title">Dark theme</string>
     <string name="menu_about_title">Show your love :)</string>
 
-    <string name="target_api_welcome_message_N">Nice! Your device is running Android N.\n\nYou should give tiles a try. You can edit them at the top from your quick settings, by pulling the notification drawer and dragging them in.\n\nThen you can just disable the notification from settings.</string>
+    <string name="target_api_welcome_message_N">Nice! Your device is running Android N.\n\nYou should give tiles a try. You can edit them at the top from your quick settings, by pulling the notification drawer and just dragging them in.\n\nThen you can just disable the notification from settings.</string>
     <string name="pref_dialog_alert_nonce_checked_label">Sweet! But don\'t remind me again.</string>
 
     <string name="text_home_1">Please use the action bar menu to navigate the app.</string>
@@ -38,12 +37,13 @@
 
     <string name="pref_buttons_position_empty_label">Off</string>
 
-    <string name="btn_sel_1_label">Media volume</string>
-    <string name="btn_sel_2_label">Call volume</string>
-    <string name="btn_sel_3_label">Ring volume</string>
-    <string name="btn_sel_4_label">Alarm volume</string>
-    <string name="btn_sel_5_label">Notification volume</string>
-    <string name="btn_sel_6_label">System volume</string>
+    <string name="btn_def_label_1">Media volume</string>
+    <string name="btn_def_label_2">Call volume</string>
+    <string name="btn_def_label_3">Ring volume</string>
+    <string name="btn_def_label_4">Alarm volume</string>
+    <string name="btn_def_label_5">Notification volume</string>
+    <string name="btn_def_label_6">System volume</string>
+    <string name="btn_def_label_7">Bluetooth volume</string>
 
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>

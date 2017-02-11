@@ -62,16 +62,6 @@ public class SettingsModel {
         return preferences.getBoolean("pref_enabled", default_value);
     }
 
-    public boolean getTranslucent() {
-        boolean default_value = resources.getBoolean(R.bool.pref_translucent_default);
-        return preferences.getBoolean("pref_translucent", default_value);
-    }
-
-    public boolean getHideStatus() {
-        boolean default_value = resources.getBoolean(R.bool.pref_hide_status_default);
-        return preferences.getBoolean("pref_hide_status", default_value);
-    }
-
     public boolean getToggleMute() {
         boolean default_value = resources.getBoolean(R.bool.pref_toggle_mute_default);
         return preferences.getBoolean("pref_toggle_mute", default_value);
@@ -87,9 +77,19 @@ public class SettingsModel {
         return preferences.getBoolean("pref_top_priority", default_value);
     }
 
+    public boolean getHideStatus() {
+        boolean default_value = resources.getBoolean(R.bool.pref_hide_status_default);
+        return preferences.getBoolean("pref_hide_status", default_value);
+    }
+
     public boolean getHideLocked() {
         boolean default_value = resources.getBoolean(R.bool.pref_hide_locked_default);
         return preferences.getBoolean("pref_hide_locked", default_value);
+    }
+
+    public boolean getTranslucent() {
+        boolean default_value = resources.getBoolean(R.bool.pref_translucent_default);
+        return preferences.getBoolean("pref_translucent", default_value);
     }
 
     public String getTheme() {

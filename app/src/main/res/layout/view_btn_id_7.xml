@@ -15,7 +15,7 @@
   -->
 
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/btn_sel_1"
+    android:id="@+id/btn_id_7"
     style="@style/style_image_button_compat"
-    android:contentDescription="@string/btn_sel_1_label"
-    android:src="@drawable/ic_btn_sel_1" />
+    android:contentDescription="@string/btn_def_label_7"
+    android:src="@drawable/ic_btn_def_7" />

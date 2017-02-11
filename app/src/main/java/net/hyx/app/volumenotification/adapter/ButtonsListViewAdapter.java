@@ -55,7 +55,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_list_item_buttons, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_buttons_list_item, parent, false);
         return new ItemViewHolder(context, view);
     }
 

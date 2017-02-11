@@ -26,11 +26,6 @@ public class ButtonsItem implements Serializable {
     public int icon = 0;
     public String label = "";
 
-    public ButtonsItem(int id, int position) {
-        this.id = id;
-        this.position = position;
-    }
-
     public ButtonsItem(int id, int position, int status, int icon, String label) {
         this.id = id;
         this.position = position;

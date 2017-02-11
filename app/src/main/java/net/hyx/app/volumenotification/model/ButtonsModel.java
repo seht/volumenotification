@@ -21,6 +21,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.object.ButtonsItem;
 
 import java.util.ArrayList;
@@ -29,13 +30,15 @@ import java.util.List;
 public class ButtonsModel {
 
     private final SettingsModel settings;
+    private Context context;
 
     public ButtonsModel(Context context) {
+        this.context = context;
         settings = new SettingsModel(context);
     }
 
     public String[] getButtonEntries() {
-        return settings.resources.getStringArray(R.array.pref_buttons_selection_entries);
+        return settings.resources.getStringArray(R.array.pref_buttons_entries);
     }
 
     public List<ButtonsItem> getButtonList() {
@@ -91,13 +94,13 @@ public class ButtonsModel {
 
     public ButtonsItem getDefaultButtonItem(int position) {
         int id = position + 1;
-        return new ButtonsItem(id, position);
+        int status = (id > 3) ? 0 : 1;
+        return new ButtonsItem(id, position, status, getDefaultButtonIcon(id), getDefaultButtonLabel(id));
     }
 
     public String getDefaultButtonLabel(int id) {
         int index = id - 1;
-        String[] labels = getButtonEntries();
-        return labels[index];
+        return getButtonEntries()[index];
     }
 
     public int getDefaultButtonIcon(int id) {
@@ -108,14 +111,16 @@ public class ButtonsModel {
         return settings.getDrawable(R.array.pref_buttons_icon_entries, index);
     }
 
-    public void saveButtonItem(int position, ButtonsItem item) {
-        item.position = position;
-        settings.edit().putString("pref_buttons_list_item_" + position, (new Gson()).toJson(item)).commit();
+    public void saveButtonItem(ButtonsItem item) {
+        settings.edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
+        NotificationFactory.newInstance(context).startService();
     }
 
     public void saveButtonList(List<ButtonsItem> list) {
         for (int pos = 0; pos < list.size(); pos++) {
-            saveButtonItem(pos, list.get(pos));
+            ButtonsItem item = list.get(pos);
+            item.position = pos;
+            saveButtonItem(item);
         }
     }
 
