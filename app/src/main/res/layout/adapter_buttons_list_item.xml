@@ -33,7 +33,7 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/list_btn_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -66,8 +66,8 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/handle"
+        <ImageView
+            android:id="@+id/item_handle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"

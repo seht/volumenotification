@@ -26,7 +26,7 @@ public class RebootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationFactory.newInstance(context).startService();
+        NotificationFactory.newInstance(context).create();
     }
 
 }

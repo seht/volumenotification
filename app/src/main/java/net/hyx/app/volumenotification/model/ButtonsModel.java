@@ -72,7 +72,7 @@ public class ButtonsModel {
     }
 
     public ButtonsItem getParseButtonItem(ButtonsItem item) {
-        if (item.icon == 0) {
+        if (item.icon == 0 || item.icon >= getButtonEntries().length) {
             item.icon = getDefaultButtonIcon(item.id);
         }
         if (item.label.isEmpty()) {
@@ -112,16 +112,23 @@ public class ButtonsModel {
     }
 
     public void saveButtonItem(ButtonsItem item) {
+        saveButtonItem(item, true);
+    }
+
+    private void saveButtonItem(ButtonsItem item, boolean reinstate) {
         settings.edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
-        NotificationFactory.newInstance(context).startService();
+        if (reinstate) {
+            NotificationFactory.newInstance(context).create();
+        }
     }
 
     public void saveButtonList(List<ButtonsItem> list) {
         for (int pos = 0; pos < list.size(); pos++) {
             ButtonsItem item = list.get(pos);
             item.position = pos;
-            saveButtonItem(item);
+            saveButtonItem(item, false);
         }
+        NotificationFactory.newInstance(context).create();
     }
 
 }

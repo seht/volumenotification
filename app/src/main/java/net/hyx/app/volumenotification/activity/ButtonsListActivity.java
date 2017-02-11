@@ -38,17 +38,24 @@ import android.view.ViewGroup;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsListViewAdapter;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
+import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
 import net.hyx.app.volumenotification.helper.SimpleItemTouchHelperCallback;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class ButtonsListActivity extends AppCompatActivity {
 
+    private static boolean created = false;
     private SettingsModel settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!created) {
+            NotificationFactory.newInstance(this).create();
+            created = true;
+        }
 
         settings = new SettingsModel(this);
 
@@ -95,9 +102,6 @@ public class ButtonsListActivity extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            /*case R.id.menu_buttons:
-                startActivity(new Intent(this, ButtonsListActivity.class));
-                return true;*/
             case R.id.menu_pref:
                 startActivity(new Intent(this, PrefActivity.class));
                 return true;

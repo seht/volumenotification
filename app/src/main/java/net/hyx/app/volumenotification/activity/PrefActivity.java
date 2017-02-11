@@ -70,7 +70,7 @@ public class PrefActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationFactory.newInstance(getActivity()).startService();
+            NotificationFactory.newInstance(getActivity()).create();
         }
 
     }

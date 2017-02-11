@@ -30,7 +30,6 @@ import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ButtonsItemActivity;
-import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
@@ -42,6 +41,8 @@ import java.util.List;
 
 
 public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
+
+    private static final float INACTIVE_ALPHA = 0.25f;
 
     private static List<ButtonsItem> items;
     private final OnStartDragListener dragStartListener;
@@ -65,12 +66,12 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
         ButtonsModel model = new ButtonsModel(context);
         ButtonsItem item = model.getParseButtonItem(items.get(position));
 
-        String default_label = model.getDefaultButtonLabel(item.id);
-        holder.btn_label_default.setText(default_label);
+        String label = model.getDefaultButtonLabel(item.id);
+        holder.btn_label_default.setText(label);
         holder.btn_label.setText(item.label);
         holder.btn_icon.setImageResource(model.getButtonIconDrawable(item.icon));
 
-        holder.btn_handle.setOnTouchListener(new View.OnTouchListener() {
+        holder.item_handle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
@@ -81,7 +82,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
         });
 
         if (item.status < 1) {
-            holder.item_wrapper.setAlpha(.25f);
+            holder.item_wrapper.setAlpha(INACTIVE_ALPHA);
         }
     }
 
@@ -96,7 +97,6 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
         Collections.swap(items, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         (new ButtonsModel(context)).saveButtonList(items);
-        NotificationFactory.newInstance(context).startService();
         return true;
     }
 
@@ -112,24 +112,23 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder, View.OnClickListener {
 
-        public final View item_view;
+        public final View item_layout;
         public final LinearLayout item_wrapper;
-
-        public final ImageView btn_handle;
+        public final ImageView item_handle;
         public final ImageView btn_icon;
-
         public final TextView btn_label;
         public final TextView btn_label_default;
-
         private final Context context;
 
         public ItemViewHolder(Context context, View itemView) {
             super(itemView);
 
             this.context = context;
-            item_view = itemView;
+
+            item_layout = itemView;
             item_wrapper = (LinearLayout) itemView.findViewById(R.id.item_wrapper);
-            btn_handle = (ImageView) itemView.findViewById(R.id.handle);
+            item_handle = (ImageView) itemView.findViewById(R.id.item_handle);
+
             btn_icon = (ImageView) itemView.findViewById(R.id.list_btn_icon);
             btn_label = (TextView) itemView.findViewById(R.id.list_btn_label);
             btn_label_default = (TextView) itemView.findViewById(R.id.list_btn_label_default);

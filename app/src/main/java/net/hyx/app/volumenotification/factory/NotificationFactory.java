@@ -36,7 +36,6 @@ import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.object.ButtonsItem;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
-import net.hyx.app.volumenotification.service.NotificationService;
 
 import java.util.List;
 
@@ -74,10 +73,6 @@ public class NotificationFactory {
 
     public static NotificationFactory newInstance(Context context) {
         return new NotificationFactory(context);
-    }
-
-    public void startService() {
-        context.startService(new Intent(context, NotificationService.class));
     }
 
     public void setVolume(int id) {

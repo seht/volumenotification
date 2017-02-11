@@ -37,7 +37,6 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsIconSpinnerAdapter;
-import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.object.ButtonsItem;
@@ -53,13 +52,17 @@ public class ButtonsItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        model = new ButtonsModel(this);
         ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("item");
+        if (item == null) {
+            finish();
+            return;
+        }
+        model = new ButtonsModel(this);
         frag = ButtonsItemFragment.newInstance(item);
 
         //setTheme(settings.getAppTheme());
+        setTitle(item.label);
         setContentView(R.layout.activity_main);
-        setTitle(model.getDefaultButtonLabel(item.id));
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, frag)
@@ -74,8 +77,8 @@ public class ButtonsItemActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
-        LinearLayout checked_layout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
-        Switch checked = (Switch) checked_layout.findViewById(R.id.menu_item_switch);
+        LinearLayout wrapper = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
+        Switch checked = (Switch) wrapper.findViewById(R.id.menu_item_switch);
         checked.setChecked((frag.item.status > 0));
         checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -93,13 +96,8 @@ public class ButtonsItemActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 model.saveButtonItem(frag.item);
-                NotificationFactory.newInstance(this).startService();
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
-            /*case R.id.menu_buttons_item_save:
-                model.saveButtonItem(frag.item.position, frag.item);
-                //NotificationFactory.newInstance(this).startService();
-                return true;*/
             case R.id.menu_item_switch:
                 return true;
             default:
@@ -123,8 +121,8 @@ public class ButtonsItemActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            item = (ButtonsItem) getArguments().getSerializable("item");
             model = new ButtonsModel(getActivity());
+            item = model.getParseButtonItem((ButtonsItem) getArguments().getSerializable("item"));
         }
 
         @Override
@@ -140,16 +138,6 @@ public class ButtonsItemActivity extends AppCompatActivity {
 
             EditText label = (EditText) view.findViewById(R.id.item_btn_label);
             Spinner icon = (Spinner) view.findViewById(R.id.item_btn_icon);
-
-            if (item.icon >= icon.getAdapter().getCount()) {
-                // Defensive versioning icon list.
-                item.icon = 0;
-            }
-            if (item.icon == 0) {
-                item.icon = model.getDefaultButtonIcon(item.id);
-            }
-
-            //model.saveButtonItem(item.position, item);
 
             icon.setAdapter(new ButtonsIconSpinnerAdapter(getContext(),
                     R.array.pref_buttons_icon_entries,
