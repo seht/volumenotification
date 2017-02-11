@@ -41,7 +41,7 @@ import java.util.List;
 
 public class NotificationFactory {
 
-    private static final int STREAM_CAST = 6;
+    private static final int STREAM_BLUETOOTH = 6;
     private static final int[] STREAM_TYPES = {
             AudioManager.STREAM_MUSIC,
             AudioManager.STREAM_VOICE_CALL,
@@ -49,7 +49,7 @@ public class NotificationFactory {
             AudioManager.STREAM_ALARM,
             AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_SYSTEM,
-            STREAM_CAST
+            STREAM_BLUETOOTH
     };
     private static boolean _mute = false;
     private static boolean _silent = false;
