@@ -34,7 +34,7 @@ public class PrefActivity extends AppCompatActivity {
         //SettingsModel settings = new SettingsModel(this);
 
         //setTheme(settings.getAppTheme());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_frame_layout);
 
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PrefFragment())

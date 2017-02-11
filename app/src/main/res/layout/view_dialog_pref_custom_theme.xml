@@ -24,22 +24,26 @@
 
             <TextView
                 style="@style/style_dialog_widget_vertical"
-                android:text="@string/pref_custom_theme_background_color_title" />
+                android:text="@string/pref_custom_theme_background_color_title"
+                android:textAppearance="@android:style/TextAppearance.Small" />
 
             <EditText
                 android:id="@+id/pref_custom_theme_background_color"
-                style="@style/style_dialog_widget_vertical" />
+                style="@style/style_dialog_widget_vertical"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_vertical">
 
             <TextView
                 style="@style/style_dialog_widget_vertical"
-                android:text="@string/pref_custom_theme_icon_color_title" />
+                android:text="@string/pref_custom_theme_icon_color_title"
+                android:textAppearance="@android:style/TextAppearance.Small" />
 
             <EditText
                 android:id="@+id/pref_custom_theme_icon_color"
-                style="@style/style_dialog_widget_vertical" />
+                style="@style/style_dialog_widget_vertical"
+                android:inputType="text" />
 
             <TextView
                 style="@style/style_dialog_widget_vertical"

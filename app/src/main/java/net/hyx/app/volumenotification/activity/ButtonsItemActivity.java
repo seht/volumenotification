@@ -62,7 +62,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
 
         //setTheme(settings.getAppTheme());
         setTitle(item.label);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_frame_layout);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, frag)

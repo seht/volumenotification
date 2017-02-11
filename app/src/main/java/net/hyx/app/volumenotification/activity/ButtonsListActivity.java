@@ -60,7 +60,7 @@ public class ButtonsListActivity extends AppCompatActivity {
         settings = new SettingsModel(this);
 
         //setTheme(settings.getAppTheme());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_frame_layout);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new ButtonsListFragment())

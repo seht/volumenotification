@@ -54,14 +54,14 @@
                 android:id="@+id/list_btn_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_def_label_1"
+                android:text=""
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/list_btn_label_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_def_label_1"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall" />
 
         </LinearLayout>
