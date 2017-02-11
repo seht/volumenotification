@@ -72,7 +72,7 @@ public class ButtonsModel {
     }
 
     public ButtonsItem getParseButtonItem(ButtonsItem item) {
-        if (item.icon == 0 || item.icon >= getButtonEntries().length) {
+        if (item.icon == 0) {
             item.icon = getDefaultButtonIcon(item.id);
         }
         if (item.label.isEmpty()) {
