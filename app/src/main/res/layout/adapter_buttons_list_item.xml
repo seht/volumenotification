@@ -15,7 +15,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item"
+    android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -26,7 +26,7 @@
     android:showDividers="end">
 
     <LinearLayout
-        android:id="@+id/item_wrapper"
+        android:id="@+id/list_item_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="fill"
@@ -34,7 +34,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/list_btn_icon"
+            android:id="@+id/list_item_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
@@ -51,14 +51,14 @@
             android:paddingRight="16dp">
 
             <TextView
-                android:id="@+id/list_btn_label"
+                android:id="@+id/list_item_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/list_btn_label_default"
+                android:id="@+id/list_item_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -67,7 +67,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/item_handle"
+            android:id="@+id/list_item_handle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"

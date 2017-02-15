@@ -32,9 +32,9 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.entity.ButtonsItem;
 import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
-import net.hyx.app.volumenotification.object.ButtonsItem;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
 
 import java.util.List;
@@ -76,9 +76,9 @@ public class NotificationFactory {
     }
 
     public void setVolume(int id) {
-        int selection = id - 1;
+        int index = id - 1;
+        int type = STREAM_TYPES[index];
         int direction = AudioManager.ADJUST_SAME;
-        int type = STREAM_TYPES[selection];
 
         if (type == AudioManager.STREAM_MUSIC && settings.getToggleMute()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -180,7 +180,7 @@ public class NotificationFactory {
             }
             int btn_id = settings.resources.getIdentifier("btn_id_" + item.id, "id", _package);
             RemoteViews btn = new RemoteViews(_package, settings.resources.getIdentifier("view_btn_id_" + item.id, "layout", _package));
-            Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra("id", item.id);
+            Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra("_id", item.id);
             PendingIntent event = PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(btn_id, event);

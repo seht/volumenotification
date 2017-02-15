@@ -26,7 +26,7 @@ public class SetVolumeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationFactory.newInstance(context).setVolume(intent.getExtras().getInt("id"));
+        NotificationFactory.newInstance(context).setVolume(intent.getExtras().getInt("_id"));
     }
 
 }

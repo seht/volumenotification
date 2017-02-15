@@ -37,9 +37,8 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsIconSpinnerAdapter;
+import net.hyx.app.volumenotification.entity.ButtonsItem;
 import net.hyx.app.volumenotification.model.ButtonsModel;
-import net.hyx.app.volumenotification.model.SettingsModel;
-import net.hyx.app.volumenotification.object.ButtonsItem;
 
 import java.io.Serializable;
 
@@ -52,7 +51,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("item");
+        ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("_item");
         if (item == null) {
             finish();
             return;
@@ -134,21 +133,12 @@ public class ButtonsItemActivity extends AppCompatActivity {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            SettingsModel settings = new SettingsModel(getActivity());
-
             EditText label = (EditText) view.findViewById(R.id.item_btn_label);
             Spinner icon = (Spinner) view.findViewById(R.id.item_btn_icon);
 
-            if (item.icon >= icon.getAdapter().getCount()) {
-                item.icon = 0;
-            }
-            if (item.icon == 0) {
-                item.icon = model.getDefaultButtonIcon(item.id);
-            }
-
             icon.setAdapter(new ButtonsIconSpinnerAdapter(getContext(),
                     R.array.pref_buttons_icon_entries,
-                    settings.resources.getStringArray(R.array.pref_buttons_icon_entries)));
+                    model.getButtonIconEntries()));
 
             label.setText(item.label);
             label.setHint(model.getDefaultButtonLabel(item.id));

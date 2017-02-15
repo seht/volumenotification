@@ -17,9 +17,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/menu_about_title"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_pref"
+        android:icon="@drawable/ic_settings"
         android:title="@string/menu_pref_title"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_dark_app_theme"
@@ -28,11 +35,6 @@
         android:enabled="false"
         android:title="@string/menu_dark_app_theme_title"
         android:visible="false"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/menu_about"
-        android:title="@string/menu_about_title"
         app:showAsAction="never" />
 
 </menu>

@@ -21,8 +21,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.entity.ButtonsItem;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
-import net.hyx.app.volumenotification.object.ButtonsItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class ButtonsModel {
     }
 
     public ButtonsItem getParseButtonItem(ButtonsItem item) {
-        if (item.icon == 0) {
+        if (item.icon == 0 || item.icon >= getButtonIconEntries().length) {
             item.icon = getDefaultButtonIcon(item.id);
         }
         if (item.label.isEmpty()) {
@@ -111,13 +111,17 @@ public class ButtonsModel {
         return settings.getDrawable(R.array.pref_buttons_icon_entries, index);
     }
 
+    public String[] getButtonIconEntries() {
+        return settings.resources.getStringArray(R.array.pref_buttons_icon_entries);
+    }
+
     public void saveButtonItem(ButtonsItem item) {
         saveButtonItem(item, true);
     }
 
-    private void saveButtonItem(ButtonsItem item, boolean reinstate) {
+    private void saveButtonItem(ButtonsItem item, boolean create) {
         settings.edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
-        if (reinstate) {
+        if (create) {
             NotificationFactory.newInstance(context).create();
         }
     }

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,11 +31,11 @@ import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ButtonsItemActivity;
+import net.hyx.app.volumenotification.entity.ButtonsItem;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
 import net.hyx.app.volumenotification.model.ButtonsModel;
-import net.hyx.app.volumenotification.object.ButtonsItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,62 +43,89 @@ import java.util.List;
 
 public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
-    private static final float INACTIVE_ALPHA = 0.25f;
+    public static final float ALPHA_DISABLED = 0.25f;
 
     private static List<ButtonsItem> items;
     private final OnStartDragListener dragStartListener;
-    private final Context context;
+    private ButtonsModel model;
 
     public ButtonsListViewAdapter(Context context, OnStartDragListener dragStartListener) {
-        this.context = context;
         this.dragStartListener = dragStartListener;
-        items = (new ButtonsModel(context)).getButtonList();
+        model = new ButtonsModel(context);
+        items = model.getButtonList();
     }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_buttons_list_item, parent, false);
-        return new ItemViewHolder(context, view);
+        return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
-        ButtonsModel model = new ButtonsModel(context);
         ButtonsItem item = model.getParseButtonItem(items.get(position));
 
-        String label = model.getDefaultButtonLabel(item.id);
-        holder.btn_label_default.setText(label);
-        holder.btn_label.setText(item.label);
-        holder.btn_icon.setImageResource(model.getButtonIconDrawable(item.icon));
+        View item_view = holder.itemView;
+        LinearLayout item_wrapper = (LinearLayout) item_view.findViewById(R.id.list_item_wrapper);
+        ImageView item_handle = (ImageView) item_view.findViewById(R.id.list_item_handle);
 
-        holder.item_handle.setOnTouchListener(new View.OnTouchListener() {
+        ImageView item_icon = (ImageView) item_view.findViewById(R.id.list_item_icon);
+        TextView item_label = (TextView) item_view.findViewById(R.id.list_item_label);
+        TextView item_hint = (TextView) item_view.findViewById(R.id.list_item_hint);
+
+        item_icon.setImageResource(model.getButtonIconDrawable(item.icon));
+        item_label.setText(item.label);
+        item_hint.setText(model.getDefaultButtonLabel(item.id));
+
+        if (item.status < 1) {
+            item_wrapper.setAlpha(ALPHA_DISABLED);
+        }
+
+        item_handle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
                     dragStartListener.onStartDrag(holder);
                 }
-                return false;
+                return true;
             }
         });
 
-        if (item.status < 1) {
-            holder.item_wrapper.setAlpha(INACTIVE_ALPHA);
-        }
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-        items.remove(position);
-        notifyItemRemoved(position);
+        item_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                int position = holder.getAdapterPosition();
+                Intent intent = new Intent(context, ButtonsItemActivity.class);
+                ButtonsItem item = items.get(position);
+                item.position = position;
+                intent.putExtra("_item", item);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(items, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        (new ButtonsModel(context)).saveButtonList(items);
+        model.saveButtonList(items);
         return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position, int direction) {
+        ButtonsItem item = items.get(position);
+        if (direction == ItemTouchHelper.START) {
+            item.status = 1;
+        } else if (direction == ItemTouchHelper.END) {
+            item.status = 0;
+        }
+        model.saveButtonItem(item);
+        //items.set(position, item);
+        //notifyDataSetChanged();
+        notifyItemChanged(position);
     }
 
     @Override
@@ -109,31 +137,10 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
      * Simple example of a view holder that implements {@link ItemTouchHelperViewHolder} and has a
      * "handle" view that initiates a drag event when touched.
      */
-    public static class ItemViewHolder extends RecyclerView.ViewHolder implements
-            ItemTouchHelperViewHolder, View.OnClickListener {
+    public static class ItemViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        public final View item_layout;
-        public final LinearLayout item_wrapper;
-        public final ImageView item_handle;
-        public final ImageView btn_icon;
-        public final TextView btn_label;
-        public final TextView btn_label_default;
-        private final Context context;
-
-        public ItemViewHolder(Context context, View itemView) {
+        public ItemViewHolder(View itemView) {
             super(itemView);
-
-            this.context = context;
-
-            item_layout = itemView;
-            item_wrapper = (LinearLayout) itemView.findViewById(R.id.item_wrapper);
-            item_handle = (ImageView) itemView.findViewById(R.id.item_handle);
-
-            btn_icon = (ImageView) itemView.findViewById(R.id.list_btn_icon);
-            btn_label = (TextView) itemView.findViewById(R.id.list_btn_label);
-            btn_label_default = (TextView) itemView.findViewById(R.id.list_btn_label_default);
-
-            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -144,16 +151,6 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
         @Override
         public void onItemClear() {
             //System.out.println("clear");
-        }
-
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
-            Intent intent = new Intent(context, ButtonsItemActivity.class);
-            ButtonsItem item = items.get(position);
-            item.position = position;
-            intent.putExtra("item", item);
-            context.startActivity(intent);
         }
 
     }

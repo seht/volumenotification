@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.object;
+package net.hyx.app.volumenotification.entity;
 
 import java.io.Serializable;
 

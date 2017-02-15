@@ -39,23 +39,20 @@ import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsListViewAdapter;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.helper.ItemTouchHelperCallback;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
-import net.hyx.app.volumenotification.helper.SimpleItemTouchHelperCallback;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class ButtonsListActivity extends AppCompatActivity {
 
-    private static boolean created = false;
+    private static boolean _created = false;
     private SettingsModel settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!created) {
-            NotificationFactory.newInstance(this).create();
-            created = true;
-        }
+        NotificationFactory.newInstance(this).create();
 
         settings = new SettingsModel(this);
 
@@ -73,9 +70,15 @@ public class ButtonsListActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        _created = true;
+    }
+
+    @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (!_created && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (!settings.getDialogAlertNonceChecked(1)) {
                 DialogFragment newFragment = NonceAlertDialog.newInstance(1, getResources().getString(R.string.target_api_welcome_message_N));
                 newFragment.show(getSupportFragmentManager(), null);
@@ -87,13 +90,13 @@ public class ButtonsListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.menu_dark_app_theme).setChecked(settings.getAppThemeDark());
-        return true;
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -123,7 +126,7 @@ public class ButtonsListActivity extends AppCompatActivity {
 
     public static class ButtonsListFragment extends Fragment implements OnStartDragListener {
 
-        private ItemTouchHelper mItemTouchHelper;
+        private ItemTouchHelper itemTouchHelper;
 
         @Nullable
         @Override
@@ -135,21 +138,20 @@ public class ButtonsListActivity extends AppCompatActivity {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            ButtonsListViewAdapter adapter = new ButtonsListViewAdapter(getActivity(), this);
+            ButtonsListViewAdapter adapter = new ButtonsListViewAdapter(getContext(), this);
 
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            RecyclerView _view = (RecyclerView) view;
+            _view.setHasFixedSize(true);
+            _view.setAdapter(adapter);
+            _view.setLayoutManager(new LinearLayoutManager(getContext()));
 
-            ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
-            mItemTouchHelper = new ItemTouchHelper(callback);
-            mItemTouchHelper.attachToRecyclerView(recyclerView);
+            itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
+            itemTouchHelper.attachToRecyclerView(_view);
         }
 
         @Override
         public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-            mItemTouchHelper.startDrag(viewHolder);
+            itemTouchHelper.startDrag(viewHolder);
         }
 
     }
