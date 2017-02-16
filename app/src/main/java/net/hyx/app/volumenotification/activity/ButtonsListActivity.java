@@ -79,8 +79,9 @@ public class ButtonsListActivity extends AppCompatActivity {
         super.onAttachedToWindow();
         if (!_created && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (!settings.getDialogAlertNonceChecked(1)) {
-                DialogFragment newFragment = NonceAlertDialog.newInstance(1, settings.resources.getString(R.string.target_api_welcome_message_N));
-                newFragment.show(getSupportFragmentManager(), null);
+                DialogFragment dialogFragment = NonceAlertDialog.newInstance(1,
+                        settings.getResources().getString(R.string.target_api_welcome_message_N));
+                dialogFragment.show(getSupportFragmentManager(), null);
             }
         }
     }

@@ -27,14 +27,22 @@ import net.hyx.app.volumenotification.R;
 
 public class SettingsModel {
 
-    public final Resources resources;
-    public final SharedPreferences preferences;
-    private final Context context;
+    private Context context;
+    private Resources resources;
+    private SharedPreferences preferences;
 
     public SettingsModel(Context context) {
         this.context = context;
         resources = context.getResources();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public Resources getResources() {
+        return resources;
+    }
+
+    public SharedPreferences getPreferences() {
+        return preferences;
     }
 
     public SharedPreferences.Editor edit() {

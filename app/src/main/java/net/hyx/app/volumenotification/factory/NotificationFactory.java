@@ -156,7 +156,7 @@ public class NotificationFactory {
 
         RemoteViews view = new RemoteViews(_package, R.layout.view_layout_notification);
 
-        int theme = settings.resources.getIdentifier("style_" + settings.getTheme(), "style", _package);
+        int theme = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", _package);
         int backgroundColor;
         int iconColor;
 
@@ -180,8 +180,8 @@ public class NotificationFactory {
             if (item.status < 1) {
                 continue;
             }
-            int btnId = settings.resources.getIdentifier("btn_id_" + item.id, "id", _package);
-            RemoteViews btn = new RemoteViews(_package, settings.resources.getIdentifier("view_btn_id_" + item.id, "layout", _package));
+            int btnId = settings.getResources().getIdentifier("btn_id_" + item.id, "id", _package);
+            RemoteViews btn = new RemoteViews(_package, settings.getResources().getIdentifier("view_btn_id_" + item.id, "layout", _package));
             Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra(EXTRA_ITEM_ID, item.id);
             PendingIntent event = PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

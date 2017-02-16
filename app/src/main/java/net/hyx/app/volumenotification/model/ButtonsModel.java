@@ -38,7 +38,7 @@ public class ButtonsModel {
     }
 
     public String[] getButtonEntries() {
-        return settings.resources.getStringArray(R.array.pref_buttons_entries);
+        return settings.getResources().getStringArray(R.array.pref_buttons_entries);
     }
 
     public List<ButtonsItem> getButtonList() {
@@ -82,7 +82,7 @@ public class ButtonsModel {
     }
 
     public ButtonsItem getButtonItem(int position) {
-        String value = settings.preferences.getString("pref_buttons_list_item_" + position, "");
+        String value = settings.getPreferences().getString("pref_buttons_list_item_" + position, "");
         if (!value.isEmpty()) {
             return (new Gson()).fromJson(value, ButtonsItem.class);
         }
@@ -112,7 +112,7 @@ public class ButtonsModel {
     }
 
     public String[] getButtonIconEntries() {
-        return settings.resources.getStringArray(R.array.pref_buttons_icon_entries);
+        return settings.getResources().getStringArray(R.array.pref_buttons_icon_entries);
     }
 
     public void saveButtonItem(ButtonsItem item) {
