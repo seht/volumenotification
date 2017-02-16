@@ -43,6 +43,7 @@ import java.util.List;
 
 public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
+    public static final String EXTRA_ITEM = "item";
     public static final float ALPHA_DISABLED = 0.25f;
 
     private static List<ButtonsItem> items;
@@ -66,23 +67,23 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
         ButtonsItem item = model.getParseButtonItem(items.get(position));
 
-        View item_view = holder.itemView;
-        LinearLayout item_wrapper = (LinearLayout) item_view.findViewById(R.id.list_item_wrapper);
-        ImageView item_handle = (ImageView) item_view.findViewById(R.id.list_item_handle);
+        View itemView = holder.itemView;
+        LinearLayout itemWrapper = (LinearLayout) itemView.findViewById(R.id.list_item_wrapper);
+        ImageView itemHandle = (ImageView) itemView.findViewById(R.id.list_item_handle);
 
-        ImageView item_icon = (ImageView) item_view.findViewById(R.id.list_item_icon);
-        TextView item_label = (TextView) item_view.findViewById(R.id.list_item_label);
-        TextView item_hint = (TextView) item_view.findViewById(R.id.list_item_hint);
+        ImageView itemIcon = (ImageView) itemView.findViewById(R.id.list_item_icon);
+        TextView itemLabel = (TextView) itemView.findViewById(R.id.list_item_label);
+        TextView itemHint = (TextView) itemView.findViewById(R.id.list_item_hint);
 
-        item_icon.setImageResource(model.getButtonIconDrawable(item.icon));
-        item_label.setText(item.label);
-        item_hint.setText(model.getDefaultButtonLabel(item.id));
+        itemIcon.setImageResource(model.getButtonIconDrawable(item.icon));
+        itemLabel.setText(item.label);
+        itemHint.setText(model.getDefaultButtonLabel(item.id));
 
         if (item.status < 1) {
-            item_wrapper.setAlpha(ALPHA_DISABLED);
+            itemWrapper.setAlpha(ALPHA_DISABLED);
         }
 
-        item_handle.setOnTouchListener(new View.OnTouchListener() {
+        itemHandle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
@@ -92,7 +93,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
             }
         });
 
-        item_view.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
@@ -100,7 +101,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
                 Intent intent = new Intent(context, ButtonsItemActivity.class);
                 ButtonsItem item = items.get(position);
                 item.position = position;
-                intent.putExtra("_item", item);
+                intent.putExtra(EXTRA_ITEM, item);
                 context.startActivity(intent);
             }
         });

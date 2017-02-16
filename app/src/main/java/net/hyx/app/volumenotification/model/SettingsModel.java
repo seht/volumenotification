@@ -48,70 +48,70 @@ public class SettingsModel {
         return R.style.style_app_theme_light;
     }
 
-    public boolean getDialogAlertNonceChecked(int pref_key) {
-        return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + pref_key, false);
+    public boolean getDialogAlertNonceChecked(int id) {
+        return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + id, false);
     }
 
     public boolean getAppThemeDark() {
-        boolean default_value = resources.getBoolean(R.bool.pref_dark_app_theme_default);
-        return preferences.getBoolean("pref_dark_app_theme", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_dark_app_theme_default);
+        return preferences.getBoolean("pref_dark_app_theme", defValue);
     }
 
     public boolean getEnabled() {
-        boolean default_value = resources.getBoolean(R.bool.pref_enabled_default);
-        return preferences.getBoolean("pref_enabled", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_enabled_default);
+        return preferences.getBoolean("pref_enabled", defValue);
     }
 
     public boolean getToggleMute() {
-        boolean default_value = resources.getBoolean(R.bool.pref_toggle_mute_default);
-        return preferences.getBoolean("pref_toggle_mute", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_toggle_mute_default);
+        return preferences.getBoolean("pref_toggle_mute", defValue);
     }
 
     public boolean getToggleSilent() {
-        boolean default_value = resources.getBoolean(R.bool.pref_toggle_silent_default);
-        return preferences.getBoolean("pref_toggle_silent", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_toggle_silent_default);
+        return preferences.getBoolean("pref_toggle_silent", defValue);
     }
 
     public boolean getTopPriority() {
-        boolean default_value = resources.getBoolean(R.bool.pref_top_priority_default);
-        return preferences.getBoolean("pref_top_priority", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_top_priority_default);
+        return preferences.getBoolean("pref_top_priority", defValue);
     }
 
     public boolean getHideStatus() {
-        boolean default_value = resources.getBoolean(R.bool.pref_hide_status_default);
-        return preferences.getBoolean("pref_hide_status", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_hide_status_default);
+        return preferences.getBoolean("pref_hide_status", defValue);
     }
 
     public boolean getHideLocked() {
-        boolean default_value = resources.getBoolean(R.bool.pref_hide_locked_default);
-        return preferences.getBoolean("pref_hide_locked", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_hide_locked_default);
+        return preferences.getBoolean("pref_hide_locked", defValue);
     }
 
     public boolean getTranslucent() {
-        boolean default_value = resources.getBoolean(R.bool.pref_translucent_default);
-        return preferences.getBoolean("pref_translucent", default_value);
+        boolean defValue = resources.getBoolean(R.bool.pref_translucent_default);
+        return preferences.getBoolean("pref_translucent", defValue);
     }
 
     public String getTheme() {
-        String default_value = resources.getString(R.string.pref_theme_default);
-        return preferences.getString("pref_theme", default_value);
+        String defValue = resources.getString(R.string.pref_theme_default);
+        return preferences.getString("pref_theme", defValue);
     }
 
     public String getCustomThemeBackgroundColor() {
-        String default_value = resources.getString(R.string.pref_custom_theme_background_color_default);
-        return preferences.getString("pref_custom_theme_background_color", default_value);
+        String defValue = resources.getString(R.string.pref_custom_theme_background_color_default);
+        return preferences.getString("pref_custom_theme_background_color", defValue);
     }
 
     public String getCustomThemeIconColor() {
-        String default_value = resources.getString(R.string.pref_custom_theme_icon_color_default);
-        return preferences.getString("pref_custom_theme_icon_color", default_value);
+        String defValue = resources.getString(R.string.pref_custom_theme_icon_color_default);
+        return preferences.getString("pref_custom_theme_icon_color", defValue);
     }
 
-    public int getColor(String pref_value) {
+    public int getColor(String value) {
         int color = 0;
         try {
-            if (!pref_value.isEmpty()) {
-                color = Color.parseColor(pref_value);
+            if (!value.isEmpty()) {
+                color = Color.parseColor(value);
             }
         } catch (IllegalArgumentException e) {
             //

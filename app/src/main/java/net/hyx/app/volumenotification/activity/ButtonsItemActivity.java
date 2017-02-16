@@ -37,6 +37,7 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ButtonsIconSpinnerAdapter;
+import net.hyx.app.volumenotification.adapter.ButtonsListViewAdapter;
 import net.hyx.app.volumenotification.entity.ButtonsItem;
 import net.hyx.app.volumenotification.model.ButtonsModel;
 
@@ -45,18 +46,16 @@ import java.io.Serializable;
 public class ButtonsItemActivity extends AppCompatActivity {
 
     private ButtonsItemFragment frag;
-    private ButtonsModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable("_item");
+        ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable(ButtonsListViewAdapter.EXTRA_ITEM);
         if (item == null) {
             finish();
             return;
         }
-        model = new ButtonsModel(this);
         frag = ButtonsItemFragment.newInstance(item);
 
         //setTheme(settings.getAppTheme());
@@ -76,14 +75,14 @@ public class ButtonsItemActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
-        LinearLayout wrapper = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
-        Switch checked = (Switch) wrapper.findViewById(R.id.menu_item_switch);
-        checked.setChecked((frag.item.status > 0));
-        checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
+        Switch statusInput = (Switch) actionLayout.findViewById(R.id.menu_item_switch);
+        statusInput.setChecked((frag.item.status > 0));
+        statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 frag.item.status = (isChecked) ? 1 : 0;
-                model.saveButtonItem(frag.item);
+                frag.model.saveButtonItem(frag.item);
 
             }
         });
@@ -94,17 +93,16 @@ public class ButtonsItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                model.saveButtonItem(frag.item);
+                frag.model.saveButtonItem(frag.item, false);
                 NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.menu_item_switch:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public static class ButtonsItemFragment extends Fragment {
+
+        private static final String ARG_ITEM = "item";
 
         private ButtonsItem item;
         private ButtonsModel model;
@@ -112,7 +110,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
         public static ButtonsItemFragment newInstance(Serializable item) {
             ButtonsItemFragment frag = new ButtonsItemFragment();
             Bundle args = new Bundle();
-            args.putSerializable("item", item);
+            args.putSerializable(ARG_ITEM, item);
             frag.setArguments(args);
             return frag;
         }
@@ -121,7 +119,8 @@ public class ButtonsItemActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             model = new ButtonsModel(getActivity());
-            item = model.getParseButtonItem((ButtonsItem) getArguments().getSerializable("item"));
+            item = (ButtonsItem) getArguments().getSerializable(ARG_ITEM);
+            item = model.getParseButtonItem(item);
         }
 
         @Override

@@ -30,8 +30,8 @@ public class PrefCustomThemeDialog extends DialogPreference {
 
     private SettingsModel settings;
 
-    private EditText background_color_edit;
-    private EditText icon_color_edit;
+    private EditText backgroundColorInput;
+    private EditText iconColorInput;
 
     public PrefCustomThemeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,10 +45,10 @@ public class PrefCustomThemeDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        background_color_edit = (EditText) view.findViewById(R.id.pref_custom_theme_background_color);
-        icon_color_edit = (EditText) view.findViewById(R.id.pref_custom_theme_icon_color);
-        background_color_edit.setText(settings.getCustomThemeBackgroundColor());
-        icon_color_edit.setText(settings.getCustomThemeIconColor());
+        backgroundColorInput = (EditText) view.findViewById(R.id.pref_custom_theme_background_color);
+        iconColorInput = (EditText) view.findViewById(R.id.pref_custom_theme_icon_color);
+        backgroundColorInput.setText(settings.getCustomThemeBackgroundColor());
+        iconColorInput.setText(settings.getCustomThemeIconColor());
     }
 
     @Override
@@ -56,19 +56,19 @@ public class PrefCustomThemeDialog extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            String background_color_value = background_color_edit.getText().toString();
-            String icon_color_value = icon_color_edit.getText().toString();
-            int background_color = settings.getColor(background_color_value);
-            int icon_color = settings.getColor(icon_color_value);
+            String backgroundColorValue = backgroundColorInput.getText().toString();
+            String iconColorValue = iconColorInput.getText().toString();
+            int backgroundColor = settings.getColor(backgroundColorValue);
+            int iconColor = settings.getColor(iconColorValue);
 
-            if (background_color != 0) {
-                settings.edit().putString("pref_custom_theme_background_color", background_color_value).apply();
+            if (backgroundColor != 0) {
+                settings.edit().putString("pref_custom_theme_background_color", backgroundColorValue).commit();
             }
-            if (icon_color != 0) {
-                settings.edit().putString("pref_custom_theme_icon_color", icon_color_value).apply();
+            if (iconColor != 0) {
+                settings.edit().putString("pref_custom_theme_icon_color", iconColorValue).commit();
             }
-            if (background_color == 0 || icon_color == 0) {
-                Toast.makeText(getContext(), getContext().getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();
+            if (backgroundColor == 0 || iconColor == 0) {
+                Toast.makeText(getContext(), settings.resources.getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();
             }
         }
     }

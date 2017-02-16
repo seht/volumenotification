@@ -41,6 +41,8 @@ import java.util.List;
 
 public class NotificationFactory {
 
+    public static final String EXTRA_ITEM_ID = "item_id";
+
     private static final int STREAM_BLUETOOTH = 6;
     private static final int[] STREAM_TYPES = {
             AudioManager.STREAM_MUSIC,
@@ -155,22 +157,22 @@ public class NotificationFactory {
         RemoteViews view = new RemoteViews(_package, R.layout.view_layout_notification);
 
         int theme = settings.resources.getIdentifier("style_" + settings.getTheme(), "style", _package);
-        int background_color;
-        int icon_color;
+        int backgroundColor;
+        int iconColor;
 
         if (theme != 0) {
             TypedArray attrs = context.obtainStyledAttributes(theme, R.styleable.styleable);
-            background_color = attrs.getColor(R.styleable.styleable_background_color, 0);
-            icon_color = attrs.getColor(R.styleable.styleable_icon_color, 0);
+            backgroundColor = attrs.getColor(R.styleable.styleable_background_color, 0);
+            iconColor = attrs.getColor(R.styleable.styleable_icon_color, 0);
             attrs.recycle();
         } else {
-            background_color = settings.getColor(settings.getCustomThemeBackgroundColor());
-            icon_color = settings.getColor(settings.getCustomThemeIconColor());
+            backgroundColor = settings.getColor(settings.getCustomThemeBackgroundColor());
+            iconColor = settings.getColor(settings.getCustomThemeIconColor());
         }
         if (settings.getTranslucent()) {
-            background_color = android.R.color.transparent;
+            backgroundColor = android.R.color.transparent;
         }
-        view.setInt(R.id.layout_background, "setBackgroundColor", background_color);
+        view.setInt(R.id.layout_background, "setBackgroundColor", backgroundColor);
         view.removeAllViews(R.id.layout_buttons);
 
         for (int pos = 0; pos < items.size(); pos++) {
@@ -178,14 +180,14 @@ public class NotificationFactory {
             if (item.status < 1) {
                 continue;
             }
-            int btn_id = settings.resources.getIdentifier("btn_id_" + item.id, "id", _package);
+            int btnId = settings.resources.getIdentifier("btn_id_" + item.id, "id", _package);
             RemoteViews btn = new RemoteViews(_package, settings.resources.getIdentifier("view_btn_id_" + item.id, "layout", _package));
-            Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra("_id", item.id);
+            Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra(EXTRA_ITEM_ID, item.id);
             PendingIntent event = PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            btn.setOnClickPendingIntent(btn_id, event);
-            btn.setInt(btn_id, "setImageResource", model.getButtonIconDrawable(item.icon));
-            btn.setInt(btn_id, "setColorFilter", icon_color);
+            btn.setOnClickPendingIntent(btnId, event);
+            btn.setInt(btnId, "setImageResource", model.getButtonIconDrawable(item.icon));
+            btn.setInt(btnId, "setColorFilter", iconColor);
             view.addView(R.id.layout_buttons, btn);
         }
 

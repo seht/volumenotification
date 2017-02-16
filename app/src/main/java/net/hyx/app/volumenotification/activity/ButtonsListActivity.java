@@ -64,7 +64,6 @@ public class ButtonsListActivity extends AppCompatActivity {
                 .commit();
 
         if (getSupportActionBar() != null) {
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
@@ -80,7 +79,7 @@ public class ButtonsListActivity extends AppCompatActivity {
         super.onAttachedToWindow();
         if (!_created && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (!settings.getDialogAlertNonceChecked(1)) {
-                DialogFragment newFragment = NonceAlertDialog.newInstance(1, getResources().getString(R.string.target_api_welcome_message_N));
+                DialogFragment newFragment = NonceAlertDialog.newInstance(1, settings.resources.getString(R.string.target_api_welcome_message_N));
                 newFragment.show(getSupportFragmentManager(), null);
             }
         }
@@ -104,24 +103,23 @@ public class ButtonsListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
-                return true;
+                break;
             case R.id.menu_pref:
                 startActivity(new Intent(this, PrefActivity.class));
-                return true;
+                break;
             case R.id.menu_dark_app_theme:
-                boolean dark_theme = !item.isChecked();
-                settings.edit().putBoolean("pref_dark_app_theme", dark_theme).apply();
-                item.setChecked(dark_theme);
+                boolean darkTheme = !item.isChecked();
+                settings.edit().putBoolean("pref_dark_app_theme", darkTheme).commit();
+                item.setChecked(darkTheme);
                 setTheme(settings.getAppTheme());
                 recreate();
-                return true;
+                break;
             case R.id.menu_about:
                 Uri url = Uri.parse(getResources().getString(R.string.menu_about_url));
                 startActivity(new Intent(Intent.ACTION_VIEW, url));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public static class ButtonsListFragment extends Fragment implements OnStartDragListener {
