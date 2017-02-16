@@ -119,9 +119,9 @@ public class ButtonsModel {
         saveButtonItem(item, true);
     }
 
-    private void saveButtonItem(ButtonsItem item, boolean create) {
+    public void saveButtonItem(ButtonsItem item, boolean submit) {
         settings.edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
-        if (create) {
+        if (submit) {
             NotificationFactory.newInstance(context).create();
         }
     }
