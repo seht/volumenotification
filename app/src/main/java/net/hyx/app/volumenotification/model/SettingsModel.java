@@ -27,9 +27,9 @@ import net.hyx.app.volumenotification.R;
 
 public class SettingsModel {
 
-    private Context context;
-    private Resources resources;
-    private SharedPreferences preferences;
+    private final Context context;
+    private final Resources resources;
+    private final SharedPreferences preferences;
 
     public SettingsModel(Context context) {
         this.context = context;

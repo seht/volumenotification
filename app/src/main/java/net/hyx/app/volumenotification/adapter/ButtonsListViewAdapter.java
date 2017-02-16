@@ -48,7 +48,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
     private static List<ButtonsItem> items;
     private final OnStartDragListener dragStartListener;
-    private ButtonsModel model;
+    private final ButtonsModel model;
 
     public ButtonsListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.dragStartListener = dragStartListener;

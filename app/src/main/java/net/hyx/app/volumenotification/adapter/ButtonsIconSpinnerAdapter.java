@@ -28,8 +28,8 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class ButtonsIconSpinnerAdapter extends ArrayAdapter<String> {
 
-    private int resource;
-    private SettingsModel settings;
+    private final int resource;
+    private final SettingsModel settings;
 
     public ButtonsIconSpinnerAdapter(Context context, int resource, String[] objects) {
         super(context, android.R.layout.simple_spinner_item, objects);

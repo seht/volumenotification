@@ -28,7 +28,7 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class PrefCustomThemeDialog extends DialogPreference {
 
-    private SettingsModel settings;
+    private final SettingsModel settings;
 
     private EditText backgroundColorInput;
     private EditText iconColorInput;

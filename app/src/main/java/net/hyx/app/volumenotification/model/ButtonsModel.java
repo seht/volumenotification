@@ -29,8 +29,8 @@ import java.util.List;
 
 public class ButtonsModel {
 
+    private final Context context;
     private final SettingsModel settings;
-    private Context context;
 
     public ButtonsModel(Context context) {
         this.context = context;
