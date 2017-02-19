@@ -19,9 +19,11 @@ package net.hyx.app.volumenotification.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.TypedValue;
 
 import net.hyx.app.volumenotification.R;
 
@@ -127,12 +129,25 @@ public class SettingsModel {
         return color;
     }
 
-    public int getDrawable(int resource, int index) {
+    public int getResourceDrawable(int resource, int index) {
         int drawable;
-        TypedArray drawables = context.getResources().obtainTypedArray(resource);
+        TypedArray drawables = resources.obtainTypedArray(resource);
         drawable = drawables.getResourceId(index, 0);
         drawables.recycle();
         return drawable;
+    }
+
+    public int getStyleAttributeColor(int style, int attribute) {
+        TypedArray attrs = context.obtainStyledAttributes(style, new int[]{attribute});
+        int color = attrs.getColor(0, 0);
+        attrs.recycle();
+        return color;
+    }
+
+    public int getThemeAttributeColor(Theme theme, int attribute) {
+        TypedValue typedValue = new TypedValue();
+        theme.resolveAttribute(attribute, typedValue, false);
+        return getStyleAttributeColor(typedValue.data, attribute);
     }
 
 }

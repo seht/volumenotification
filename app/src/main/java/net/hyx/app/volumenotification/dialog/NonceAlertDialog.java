@@ -71,7 +71,7 @@ public class NonceAlertDialog extends DialogFragment {
         messageView.setText(message);
 
         if (id != 0) {
-            CheckBox nonceInput = (CheckBox) view.findViewById(R.id.pref_dialog_alert_nonce_checked);
+            CheckBox nonceInput = (CheckBox) view.findViewById(R.id.pref_nonce_input);
             nonceInput.setChecked(settings.getDialogAlertNonceChecked(id));
             nonceInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -80,7 +80,7 @@ public class NonceAlertDialog extends DialogFragment {
                 }
             });
         } else {
-            LinearLayout nonceLayer = (LinearLayout) view.findViewById(R.id.pref_dialog_alert_nonce);
+            LinearLayout nonceLayer = (LinearLayout) view.findViewById(R.id.pref_nonce_wrapper);
             nonceLayer.setVisibility(View.GONE);
         }
 

@@ -36,14 +36,15 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.adapter.ButtonsIconSpinnerAdapter;
-import net.hyx.app.volumenotification.adapter.ButtonsListViewAdapter;
-import net.hyx.app.volumenotification.entity.ButtonsItem;
+import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
+import net.hyx.app.volumenotification.adapter.ListViewAdapter;
+import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.ButtonsModel;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 import java.io.Serializable;
 
-public class ButtonsItemActivity extends AppCompatActivity {
+public class ItemViewActivity extends AppCompatActivity {
 
     private ButtonsItemFragment frag;
 
@@ -51,14 +52,15 @@ public class ButtonsItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ButtonsItem item = (ButtonsItem) getIntent().getExtras().getSerializable(ButtonsListViewAdapter.EXTRA_ITEM);
+        VolumeControl item = (VolumeControl) getIntent().getExtras().getSerializable(ListViewAdapter.EXTRA_ITEM);
         if (item == null) {
             finish();
             return;
         }
+        SettingsModel settings = new SettingsModel(this);
         frag = ButtonsItemFragment.newInstance(item);
 
-        //setTheme(settings.getAppTheme());
+        setTheme(settings.getAppTheme());
         setTitle(item.label);
         setContentView(R.layout.activity_frame_layout);
 
@@ -77,7 +79,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
         LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
         Switch statusInput = (Switch) actionLayout.findViewById(R.id.menu_item_switch);
-        statusInput.setChecked((frag.item.status > 0));
+        statusInput.setChecked((frag.item.status == 1));
         statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -104,7 +106,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
 
         private static final String ARG_ITEM = "item";
 
-        private ButtonsItem item;
+        private VolumeControl item;
         private ButtonsModel model;
 
         public static ButtonsItemFragment newInstance(Serializable item) {
@@ -119,31 +121,31 @@ public class ButtonsItemActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             model = new ButtonsModel(getActivity());
-            item = (ButtonsItem) getArguments().getSerializable(ARG_ITEM);
+            item = (VolumeControl) getArguments().getSerializable(ARG_ITEM);
             item = model.getParseButtonItem(item);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_buttons_item, container, false);
+            return inflater.inflate(R.layout.fragment_item_view, container, false);
         }
 
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            EditText label = (EditText) view.findViewById(R.id.item_btn_label);
-            Spinner icon = (Spinner) view.findViewById(R.id.item_btn_icon);
+            EditText labelInput = (EditText) view.findViewById(R.id.pref_label_input);
+            Spinner iconInput = (Spinner) view.findViewById(R.id.pref_icon_input);
 
-            icon.setAdapter(new ButtonsIconSpinnerAdapter(getContext(),
+            iconInput.setAdapter(new IconSpinnerAdapter(getContext(),
                     R.array.pref_buttons_icon_entries,
                     model.getButtonIconEntries()));
 
-            label.setText(item.label);
-            label.setHint(model.getDefaultButtonLabel(item.id));
-            icon.setSelection(item.icon);
+            labelInput.setText(item.label);
+            labelInput.setHint(model.getDefaultButtonLabel(item.id));
+            iconInput.setSelection(item.icon);
 
-            label.addTextChangedListener(new TextWatcher() {
+            labelInput.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -161,7 +163,7 @@ public class ButtonsItemActivity extends AppCompatActivity {
                 }
             });
 
-            icon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            iconInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = position;

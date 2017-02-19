@@ -20,21 +20,19 @@
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_favorite"
         android:title="@string/menu_about_title"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_pref"
         android:icon="@drawable/ic_settings"
         android:title="@string/menu_pref_title"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_dark_app_theme"
         android:checkable="true"
         android:checked="@bool/pref_dark_app_theme_default"
-        android:enabled="false"
         android:title="@string/menu_dark_app_theme_title"
-        android:visible="false"
         app:showAsAction="never" />
 
 </menu>

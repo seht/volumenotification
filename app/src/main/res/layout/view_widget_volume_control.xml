@@ -14,15 +14,6 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/style_dialog_row_vertical"
-    android:padding="8dp">
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/pref_buttons_icon_image"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:scaleType="centerCrop"
-        android:tint="@color/theme_material_icon_color" />
-
-</LinearLayout>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_volume_control"
+    style="@style/style_image_button_compat" />

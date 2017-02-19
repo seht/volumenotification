@@ -22,7 +22,7 @@
 
     <Switch
         android:id="@+id/menu_item_switch"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

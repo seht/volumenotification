@@ -26,12 +26,14 @@ import android.widget.ImageView;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
-public class ButtonsIconSpinnerAdapter extends ArrayAdapter<String> {
+import java.util.List;
+
+public class IconSpinnerAdapter extends ArrayAdapter<String> {
 
     private final int resource;
     private final SettingsModel settings;
 
-    public ButtonsIconSpinnerAdapter(Context context, int resource, String[] objects) {
+    public IconSpinnerAdapter(Context context, int resource, List<String> objects) {
         super(context, android.R.layout.simple_spinner_item, objects);
         this.resource = resource;
         settings = new SettingsModel(context);
@@ -39,19 +41,19 @@ public class ButtonsIconSpinnerAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, parent, R.layout.view_widget_pref_buttons_icon);
+        return getCustomView(position, parent, R.layout.view_widget_pref_icon);
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, parent, R.layout.view_widget_pref_buttons_icon_dropdown);
+        return getCustomView(position, parent, R.layout.view_widget_pref_icon_dropdown);
     }
 
     private View getCustomView(int position, ViewGroup parent, int layout) {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, parent, false);
-        ImageView image = (ImageView) view.findViewById(R.id.pref_buttons_icon_image);
-        image.setImageResource(settings.getDrawable(resource, position));
+        ImageView image = (ImageView) view.findViewById(R.id.pref_icon_image);
+        image.setImageResource(settings.getResourceDrawable(resource, position));
         return view;
     }
 

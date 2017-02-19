@@ -16,37 +16,33 @@
 
 <resources>
 
-    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light.DarkActionBar" />
 
-    </style>
-
-    <style name="style_app_theme_dark" parent="@style/Theme.AppCompat">
-
-    </style>
+    <style name="style_app_theme_dark" parent="@style/Theme.AppCompat" />
 
     <style name="style_theme_material">
-        <item name="background_color">@color/theme_material_background_color</item>
-        <item name="icon_color">@color/theme_material_icon_color</item>
+        <item name="android:colorBackground">@color/theme_material_background_color</item>
+        <item name="android:colorForeground">@color/theme_material_icon_color</item>
     </style>
 
     <style name="style_theme_material_light">
-        <item name="background_color">@color/theme_material_light_background_color</item>
-        <item name="icon_color">@color/theme_material_light_icon_color</item>
+        <item name="android:colorBackground">@color/theme_material_light_background_color</item>
+        <item name="android:colorForeground">@color/theme_material_light_icon_color</item>
     </style>
 
     <style name="style_theme_material_blue_grey">
-        <item name="background_color">@color/theme_material_blue_grey_background_color</item>
-        <item name="icon_color">@color/theme_material_blue_grey_icon_color</item>
+        <item name="android:colorBackground">@color/theme_material_blue_grey_background_color</item>
+        <item name="android:colorForeground">@color/theme_material_blue_grey_icon_color</item>
     </style>
 
     <style name="style_theme_holo">
-        <item name="background_color">@color/theme_holo_background_color</item>
-        <item name="icon_color">@color/theme_holo_icon_color</item>
+        <item name="android:colorBackground">@color/theme_holo_background_color</item>
+        <item name="android:colorForeground">@color/theme_holo_icon_color</item>
     </style>
 
     <style name="style_theme_holo_light">
-        <item name="background_color">@color/theme_holo_light_background_color</item>
-        <item name="icon_color">@color/theme_holo_light_icon_color</item>
+        <item name="android:colorBackground">@color/theme_holo_light_background_color</item>
+        <item name="android:colorForeground">@color/theme_holo_light_icon_color</item>
     </style>
 
     <style name="style_image_button">

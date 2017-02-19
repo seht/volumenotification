@@ -28,16 +28,28 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class PrefCustomThemeDialog extends DialogPreference {
 
-    private final SettingsModel settings;
+    private SettingsModel settings;
 
     private EditText backgroundColorInput;
     private EditText iconColorInput;
 
+    public PrefCustomThemeDialog(Context context) {
+        super(context, null);
+        _construct(context);
+    }
+
     public PrefCustomThemeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
+        _construct(context);
+    }
 
+    public PrefCustomThemeDialog(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        _construct(context);
+    }
+
+    private void _construct(final Context context) {
         settings = new SettingsModel(context);
-
         setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
     }
 
@@ -45,8 +57,8 @@ public class PrefCustomThemeDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        backgroundColorInput = (EditText) view.findViewById(R.id.pref_custom_theme_background_color);
-        iconColorInput = (EditText) view.findViewById(R.id.pref_custom_theme_icon_color);
+        backgroundColorInput = (EditText) view.findViewById(R.id.pref_background_color_input);
+        iconColorInput = (EditText) view.findViewById(R.id.pref_icon_color_input);
         backgroundColorInput.setText(settings.getCustomThemeBackgroundColor());
         iconColorInput.setText(settings.getCustomThemeIconColor());
     }

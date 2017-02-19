@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.entity;
+package net.hyx.app.volumenotification.receiver;
 
-import java.io.Serializable;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 
-public class ButtonsItem implements Serializable {
+import net.hyx.app.volumenotification.factory.NotificationFactory;
 
-    public final int id;
-    public int position;
-    public int status = 1;
-    public int icon = 0;
-    public String label = "";
+public class CreateNotificationReceiver extends BroadcastReceiver {
 
-    public ButtonsItem(int id, int position, int status, int icon, String label) {
-        this.id = id;
-        this.position = position;
-        this.status = status;
-        this.icon = icon;
-        this.label = label;
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        NotificationFactory.newInstance(context).create();
     }
 
 }

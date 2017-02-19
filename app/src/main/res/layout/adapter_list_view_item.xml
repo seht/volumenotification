@@ -15,7 +15,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_item"
+    android:id="@+id/list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -33,13 +33,12 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <ImageView
+        <net.hyx.app.volumenotification.widget.IconImageView
             android:id="@+id/list_item_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
-            android:scaleType="center"
-            android:tint="@color/theme_material_icon_color" />
+            android:scaleType="center" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -66,14 +65,13 @@
 
         </LinearLayout>
 
-        <ImageView
+        <net.hyx.app.volumenotification.widget.IconImageView
             android:id="@+id/list_item_handle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:scaleType="center"
-            android:src="@drawable/ic_edit_drag_handle"
-            android:tint="@color/theme_material_icon_color" />
+            android:src="@drawable/ic_drag_handle" />
 
     </LinearLayout>
 

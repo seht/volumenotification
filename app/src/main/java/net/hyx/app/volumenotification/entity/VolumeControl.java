@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.receiver;
+package net.hyx.app.volumenotification.entity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+import java.io.Serializable;
 
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+public class VolumeControl implements Serializable {
 
-public class RebootReceiver extends BroadcastReceiver {
+    public final int id;
+    public int position;
+    public int status = 1;
+    public int icon = 0;
+    public String label = "";
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        NotificationFactory.newInstance(context).create();
+    public VolumeControl(int id, int position, int status, int icon, String label) {
+        this.id = id;
+        this.position = position;
+        this.status = status;
+        this.icon = icon;
+        this.label = label;
     }
 
 }

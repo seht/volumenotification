@@ -22,7 +22,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.os.Build;
@@ -32,9 +32,10 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.entity.ButtonsItem;
+import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
+import net.hyx.app.volumenotification.receiver.CreateNotificationReceiver;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class NotificationFactory {
     private final AudioManager audio;
     private final SettingsModel settings;
     private final ButtonsModel model;
-    private List<ButtonsItem> items;
+    private List<VolumeControl> items;
 
     private NotificationFactory(Context context) {
         this.context = context;
@@ -102,18 +103,27 @@ public class NotificationFactory {
 
     public void create() {
         cancel();
+        int id = 1;
         if (settings.getEnabled()) {
+
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setOngoing(true)
                     .setPriority(getPriority())
                     .setVisibility(getVisibility())
                     .setCustomContentView(getCustomContentView())
-                    .setSmallIcon((settings.getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher);
-            manager.notify(1, builder.build());
+                    .setSmallIcon((settings.getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher)
+                    .setColor(Color.TRANSPARENT);
+
+            PendingIntent deleteIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0,
+                    new Intent(context, CreateNotificationReceiver.class),
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+
+            builder.setDeleteIntent(deleteIntent);
+            manager.notify(id, builder.build());
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             for (int pos = 0; pos < items.size(); pos++) {
-                ButtonsItem item = items.get(pos);
+                VolumeControl item = items.get(pos);
                 TileService.requestListeningState(context, new ComponentName("net.hyx.app.volumenotification.service", "TileService" + item.id));
             }
         }
@@ -125,11 +135,11 @@ public class NotificationFactory {
 
     @TargetApi(Build.VERSION_CODES.N)
     public void updateTile(Tile tile, int id) {
-        ButtonsItem item = model.getParseButtonItem(id);
+        VolumeControl item = model.getParseButtonItem(id);
         if (item != null) {
             tile.setIcon(Icon.createWithResource(context, model.getButtonIconDrawable(item.icon)));
             tile.setLabel(item.label);
-            if (item.status > 0) {
+            if (item.status == 1) {
                 tile.setState(Tile.STATE_ACTIVE);
             } else {
                 tile.setState(Tile.STATE_INACTIVE);
@@ -156,15 +166,13 @@ public class NotificationFactory {
 
         RemoteViews view = new RemoteViews(_package, R.layout.view_layout_notification);
 
-        int theme = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", _package);
+        int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", _package);
         int backgroundColor;
         int iconColor;
 
-        if (theme != 0) {
-            TypedArray attrs = context.obtainStyledAttributes(theme, R.styleable.styleable);
-            backgroundColor = attrs.getColor(R.styleable.styleable_background_color, 0);
-            iconColor = attrs.getColor(R.styleable.styleable_icon_color, 0);
-            attrs.recycle();
+        if (style != 0) {
+            backgroundColor = settings.getStyleAttributeColor(style, android.R.attr.colorBackground);
+            iconColor = settings.getStyleAttributeColor(style, android.R.attr.colorForeground);
         } else {
             backgroundColor = settings.getColor(settings.getCustomThemeBackgroundColor());
             iconColor = settings.getColor(settings.getCustomThemeIconColor());
@@ -172,23 +180,23 @@ public class NotificationFactory {
         if (settings.getTranslucent()) {
             backgroundColor = android.R.color.transparent;
         }
-        view.setInt(R.id.layout_background, "setBackgroundColor", backgroundColor);
-        view.removeAllViews(R.id.layout_buttons);
+        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
+        view.removeAllViews(R.id.volume_control_wrapper);
 
         for (int pos = 0; pos < items.size(); pos++) {
-            ButtonsItem item = model.getParseButtonItem(items.get(pos));
-            if (item.status < 1) {
+            VolumeControl item = model.getParseButtonItem(items.get(pos));
+            if (item.status == 0) {
                 continue;
             }
-            int btnId = settings.getResources().getIdentifier("btn_id_" + item.id, "id", _package);
-            RemoteViews btn = new RemoteViews(_package, settings.getResources().getIdentifier("view_btn_id_" + item.id, "layout", _package));
-            Intent intent = new Intent(context, SetVolumeReceiver.class).putExtra(EXTRA_ITEM_ID, item.id);
-            PendingIntent event = PendingIntent.getBroadcast(context, item.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            RemoteViews btn = new RemoteViews(_package, R.layout.view_widget_volume_control);
+            PendingIntent event = PendingIntent.getBroadcast(context.getApplicationContext(), item.id,
+                    new Intent(context, SetVolumeReceiver.class).putExtra(EXTRA_ITEM_ID, item.id),
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
-            btn.setOnClickPendingIntent(btnId, event);
-            btn.setInt(btnId, "setImageResource", model.getButtonIconDrawable(item.icon));
-            btn.setInt(btnId, "setColorFilter", iconColor);
-            view.addView(R.id.layout_buttons, btn);
+            btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
+            btn.setInt(R.id.btn_volume_control, "setImageResource", model.getButtonIconDrawable(item.icon));
+            btn.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
+            view.addView(R.id.volume_control_wrapper, btn);
         }
 
         return view;

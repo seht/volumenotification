@@ -14,8 +14,17 @@
   ~ limitations under the License.
   -->
 
-<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/btn_id_7"
-    style="@style/style_image_button_compat"
-    android:contentDescription="@string/btn_def_label_7"
-    android:src="@drawable/ic_btn_def_7" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="fill"
+    android:padding="8dp">
+
+    <net.hyx.app.volumenotification.widget.IconImageView
+        android:id="@+id/pref_icon_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop" />
+
+</LinearLayout>

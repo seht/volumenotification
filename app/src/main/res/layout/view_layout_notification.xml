@@ -15,13 +15,13 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_background"
+    android:id="@+id/notification_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="fill">
 
     <LinearLayout
-        android:id="@+id/layout_buttons"
+        android:id="@+id/volume_control_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

@@ -28,11 +28,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/pref_dialog_alert_nonce"
+            android:id="@+id/pref_nonce_wrapper"
             style="@style/style_dialog_row_horizontal">
 
             <CheckBox
-                android:id="@+id/pref_dialog_alert_nonce_checked"
+                android:id="@+id/pref_nonce_input"
                 style="@style/style_dialog_widget_horizontal" />
 
             <TextView

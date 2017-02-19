@@ -26,9 +26,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/style_app_theme_dark">
+        android:theme="@style/style_app_theme_light">
 
-        <activity android:name=".activity.ButtonsListActivity">
+        <activity android:name=".activity.ListViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
@@ -37,23 +37,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.PrefActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/menu_pref_title"
-            android:parentActivityName=".activity.ButtonsListActivity">
+            android:parentActivityName=".activity.ListViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ButtonsListActivity" />
+                android:value=".activity.ListViewActivity" />
         </activity>
         <activity
-            android:name=".activity.ButtonsItemActivity"
+            android:name=".activity.ItemViewActivity"
             android:label="Button"
-            android:parentActivityName=".activity.ButtonsListActivity">
+            android:parentActivityName=".activity.ListViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ButtonsListActivity" />
+                android:value=".activity.ListViewActivity" />
         </activity>
 
-        <receiver android:name=".receiver.RebootReceiver">
+        <receiver android:name=".receiver.CreateNotificationReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />

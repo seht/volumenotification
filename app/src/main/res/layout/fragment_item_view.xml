@@ -20,21 +20,26 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="@string/text_home_1"
-        android:textAlignment="center"
-        android:textStyle="bold" />
+    <Spinner
+        android:id="@+id/pref_icon_input"
+        style="@style/style_dialog_widget_horizontal"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:entries="@array/pref_buttons_icon_entries"
+        android:padding="0dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="serif"
-        android:text="@string/text_home_2"
-        android:textAlignment="center"
-        android:textStyle="italic" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp" />
+
+    <EditText
+        android:id="@+id/pref_label_input"
+        style="@style/style_dialog_widget_horizontal"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:hint=""
+        android:inputType="text"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp" />
 
 </LinearLayout>

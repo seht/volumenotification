@@ -16,6 +16,8 @@
 
 <resources>
 
+    <color name="app_green">#00BFA5</color>
+
     <item name="theme_material_background_color" type="color">#212121</item>
     <item name="theme_material_icon_color" type="color">#ffffff</item>
 

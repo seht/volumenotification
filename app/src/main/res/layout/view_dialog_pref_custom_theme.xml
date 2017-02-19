@@ -28,7 +28,7 @@
                 android:textAppearance="@android:style/TextAppearance.Small" />
 
             <EditText
-                android:id="@+id/pref_custom_theme_background_color"
+                android:id="@+id/pref_background_color_input"
                 style="@style/style_dialog_widget_vertical"
                 android:inputType="text" />
         </LinearLayout>
@@ -41,7 +41,7 @@
                 android:textAppearance="@android:style/TextAppearance.Small" />
 
             <EditText
-                android:id="@+id/pref_custom_theme_icon_color"
+                android:id="@+id/pref_icon_color_input"
                 style="@style/style_dialog_widget_vertical"
                 android:inputType="text" />
 

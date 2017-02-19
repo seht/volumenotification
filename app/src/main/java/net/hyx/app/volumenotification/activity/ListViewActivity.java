@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
@@ -36,14 +37,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.adapter.ButtonsListViewAdapter;
+import net.hyx.app.volumenotification.adapter.ListViewAdapter;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperCallback;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
-public class ButtonsListActivity extends AppCompatActivity {
+public class ListViewActivity extends AppCompatActivity {
 
     private static boolean _created = false;
     private SettingsModel settings;
@@ -56,11 +57,11 @@ public class ButtonsListActivity extends AppCompatActivity {
 
         settings = new SettingsModel(this);
 
-        //setTheme(settings.getAppTheme());
+        setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new ButtonsListFragment())
+                .replace(R.id.content, new ListViewFragment())
                 .commit();
 
         if (getSupportActionBar() != null) {
@@ -106,7 +107,7 @@ public class ButtonsListActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 break;
             case R.id.menu_pref:
-                startActivity(new Intent(this, PrefActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case R.id.menu_dark_app_theme:
                 boolean darkTheme = !item.isChecked();
@@ -116,14 +117,21 @@ public class ButtonsListActivity extends AppCompatActivity {
                 recreate();
                 break;
             case R.id.menu_about:
-                Uri url = Uri.parse(getResources().getString(R.string.menu_about_url));
-                startActivity(new Intent(Intent.ACTION_VIEW, url));
+                Snackbar.make(findViewById(android.R.id.content), R.string.hint_about_message, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.hint_about_action, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Uri url = Uri.parse(getResources().getString(R.string.menu_about_url));
+                                startActivity(new Intent(Intent.ACTION_VIEW, url));
+                            }
+                        })
+                        .show();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public static class ButtonsListFragment extends Fragment implements OnStartDragListener {
+    public static class ListViewFragment extends Fragment implements OnStartDragListener {
 
         private ItemTouchHelper itemTouchHelper;
 
@@ -137,7 +145,7 @@ public class ButtonsListActivity extends AppCompatActivity {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            ButtonsListViewAdapter adapter = new ButtonsListViewAdapter(getContext(), this);
+            ListViewAdapter adapter = new ListViewAdapter(getContext(), this);
 
             RecyclerView _view = (RecyclerView) view;
             _view.setHasFixedSize(true);

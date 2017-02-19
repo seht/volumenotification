@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,8 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.activity.ButtonsItemActivity;
-import net.hyx.app.volumenotification.entity.ButtonsItem;
+import net.hyx.app.volumenotification.activity.ItemViewActivity;
+import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
@@ -41,16 +40,16 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
+public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
     public static final String EXTRA_ITEM = "item";
     public static final float ALPHA_DISABLED = 0.25f;
 
-    private static List<ButtonsItem> items;
+    private static List<VolumeControl> items;
     private final OnStartDragListener dragStartListener;
     private final ButtonsModel model;
 
-    public ButtonsListViewAdapter(Context context, OnStartDragListener dragStartListener) {
+    public ListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.dragStartListener = dragStartListener;
         model = new ButtonsModel(context);
         items = model.getButtonList();
@@ -58,14 +57,14 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_buttons_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_view_item, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
-        ButtonsItem item = model.getParseButtonItem(items.get(position));
+        VolumeControl item = model.getParseButtonItem(items.get(position));
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = (LinearLayout) itemView.findViewById(R.id.list_item_wrapper);
@@ -79,7 +78,7 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
         itemLabel.setText(item.label);
         itemHint.setText(model.getDefaultButtonLabel(item.id));
 
-        if (item.status < 1) {
+        if (item.status == 0) {
             itemWrapper.setAlpha(ALPHA_DISABLED);
         }
 
@@ -98,8 +97,8 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
             public void onClick(View v) {
                 Context context = v.getContext();
                 int position = holder.getAdapterPosition();
-                Intent intent = new Intent(context, ButtonsItemActivity.class);
-                ButtonsItem item = items.get(position);
+                Intent intent = new Intent(context, ItemViewActivity.class);
+                VolumeControl item = items.get(position);
                 item.position = position;
                 intent.putExtra(EXTRA_ITEM, item);
                 context.startActivity(intent);
@@ -117,12 +116,8 @@ public class ButtonsListViewAdapter extends RecyclerView.Adapter<ButtonsListView
 
     @Override
     public void onItemDismiss(int position, int direction) {
-        ButtonsItem item = items.get(position);
-        if (direction == ItemTouchHelper.START) {
-            item.status = 1;
-        } else if (direction == ItemTouchHelper.END) {
-            item.status = 0;
-        }
+        VolumeControl item = items.get(position);
+        item.status = (item.status == 1) ? 0 : 1;
         model.saveButtonItem(item);
         //items.set(position, item);
         //notifyDataSetChanged();
