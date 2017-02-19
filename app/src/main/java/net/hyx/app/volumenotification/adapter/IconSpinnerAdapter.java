@@ -41,12 +41,12 @@ public class IconSpinnerAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, parent, R.layout.view_widget_pref_icon);
+        return getCustomView(position, parent, R.layout.adapter_icon_spinner_view);
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, parent, R.layout.view_widget_pref_icon_dropdown);
+        return getCustomView(position, parent, R.layout.adapter_icon_spinner_dropdown_view);
     }
 
     private View getCustomView(int position, ViewGroup parent, int layout) {

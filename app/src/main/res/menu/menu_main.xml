@@ -20,7 +20,7 @@
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_favorite"
         android:title="@string/menu_about_title"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_pref"
