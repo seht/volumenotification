@@ -33,8 +33,8 @@ import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 import net.hyx.app.volumenotification.receiver.CreateNotificationReceiver;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
 
@@ -61,7 +61,7 @@ public class NotificationFactory {
     private final NotificationManager manager;
     private final AudioManager audio;
     private final SettingsModel settings;
-    private final ButtonsModel model;
+    private final VolumeControlModel model;
     private List<VolumeControl> items;
 
     private NotificationFactory(Context context) {
@@ -69,8 +69,8 @@ public class NotificationFactory {
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         settings = new SettingsModel(context);
-        model = new ButtonsModel(context);
-        items = model.getButtonList();
+        model = new VolumeControlModel(context);
+        items = model.getList();
         _package = context.getPackageName();
     }
 
@@ -135,9 +135,9 @@ public class NotificationFactory {
 
     @TargetApi(Build.VERSION_CODES.N)
     public void updateTile(Tile tile, int id) {
-        VolumeControl item = model.getParseButtonItem(id);
+        VolumeControl item = model.getParseItem(id);
         if (item != null) {
-            tile.setIcon(Icon.createWithResource(context, model.getButtonIconDrawable(item.icon)));
+            tile.setIcon(Icon.createWithResource(context, model.getIconDrawable(item.icon)));
             tile.setLabel(item.label);
             if (item.status == 1) {
                 tile.setState(Tile.STATE_ACTIVE);
@@ -184,7 +184,7 @@ public class NotificationFactory {
         view.removeAllViews(R.id.volume_control_wrapper);
 
         for (int pos = 0; pos < items.size(); pos++) {
-            VolumeControl item = model.getParseButtonItem(items.get(pos));
+            VolumeControl item = model.getParseItem(items.get(pos));
             if (item.status == 0) {
                 continue;
             }
@@ -194,7 +194,7 @@ public class NotificationFactory {
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
-            btn.setInt(R.id.btn_volume_control, "setImageResource", model.getButtonIconDrawable(item.icon));
+            btn.setInt(R.id.btn_volume_control, "setImageResource", model.getIconDrawable(item.icon));
             btn.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
             view.addView(R.id.volume_control_wrapper, btn);
         }

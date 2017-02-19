@@ -34,7 +34,7 @@ import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
-import net.hyx.app.volumenotification.model.ButtonsModel;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,12 +47,12 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
 
     private static List<VolumeControl> items;
     private final OnStartDragListener dragStartListener;
-    private final ButtonsModel model;
+    private final VolumeControlModel model;
 
     public ListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.dragStartListener = dragStartListener;
-        model = new ButtonsModel(context);
-        items = model.getButtonList();
+        model = new VolumeControlModel(context);
+        items = model.getList();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
-        VolumeControl item = model.getParseButtonItem(items.get(position));
+        VolumeControl item = model.getParseItem(items.get(position));
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = (LinearLayout) itemView.findViewById(R.id.list_item_wrapper);
@@ -74,9 +74,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
         TextView itemLabel = (TextView) itemView.findViewById(R.id.list_item_label);
         TextView itemHint = (TextView) itemView.findViewById(R.id.list_item_hint);
 
-        itemIcon.setImageResource(model.getButtonIconDrawable(item.icon));
+        itemIcon.setImageResource(model.getIconDrawable(item.icon));
         itemLabel.setText(item.label);
-        itemHint.setText(model.getDefaultButtonLabel(item.id));
+        itemHint.setText(model.getDefaultLabel(item.id));
 
         if (item.status == 0) {
             itemWrapper.setAlpha(ALPHA_DISABLED);
@@ -110,7 +110,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(items, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        model.saveButtonList(items);
+        model.saveList(items);
         return true;
     }
 
@@ -118,7 +118,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     public void onItemDismiss(int position, int direction) {
         VolumeControl item = items.get(position);
         item.status = (item.status == 1) ? 0 : 1;
-        model.saveButtonItem(item);
+        model.saveItem(item);
         //items.set(position, item);
         //notifyDataSetChanged();
         notifyItemChanged(position);

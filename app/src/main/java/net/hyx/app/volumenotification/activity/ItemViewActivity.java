@@ -39,8 +39,8 @@ import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
 import net.hyx.app.volumenotification.adapter.ListViewAdapter;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.model.ButtonsModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 
 import java.io.Serializable;
 
@@ -84,7 +84,7 @@ public class ItemViewActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 frag.item.status = (isChecked) ? 1 : 0;
-                frag.model.saveButtonItem(frag.item);
+                frag.model.saveItem(frag.item);
 
             }
         });
@@ -95,7 +95,7 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                frag.model.saveButtonItem(frag.item, false);
+                frag.model.saveItem(frag.item, false);
                 NavUtils.navigateUpFromSameTask(this);
                 break;
         }
@@ -107,7 +107,7 @@ public class ItemViewActivity extends AppCompatActivity {
         private static final String ARG_ITEM = "item";
 
         private VolumeControl item;
-        private ButtonsModel model;
+        private VolumeControlModel model;
 
         public static ButtonsItemFragment newInstance(Serializable item) {
             ButtonsItemFragment frag = new ButtonsItemFragment();
@@ -120,9 +120,9 @@ public class ItemViewActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            model = new ButtonsModel(getActivity());
+            model = new VolumeControlModel(getActivity());
             item = (VolumeControl) getArguments().getSerializable(ARG_ITEM);
-            item = model.getParseButtonItem(item);
+            item = model.getParseItem(item);
         }
 
         @Override
@@ -138,11 +138,11 @@ public class ItemViewActivity extends AppCompatActivity {
             Spinner iconInput = (Spinner) view.findViewById(R.id.pref_icon_input);
 
             iconInput.setAdapter(new IconSpinnerAdapter(getContext(),
-                    R.array.pref_buttons_icon_entries,
-                    model.getButtonIconEntries()));
+                    R.array.pref_icon_entries,
+                    model.getIconEntries()));
 
             labelInput.setText(item.label);
-            labelInput.setHint(model.getDefaultButtonLabel(item.id));
+            labelInput.setHint(model.getDefaultLabel(item.id));
             iconInput.setSelection(item.icon);
 
             labelInput.addTextChangedListener(new TextWatcher() {
@@ -159,7 +159,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
                     item.label = s.toString();
-                    model.saveButtonItem(item);
+                    model.saveItem(item);
                 }
             });
 
@@ -167,7 +167,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = position;
-                    model.saveButtonItem(item);
+                    model.saveItem(item);
                 }
 
                 @Override

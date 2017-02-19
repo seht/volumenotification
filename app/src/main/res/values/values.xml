@@ -48,7 +48,7 @@
         <item>theme_custom</item>
     </string-array>
 
-    <string-array name="pref_buttons_entries">
+    <string-array name="pref_volume_control_entries">
         <item>@string/btn_def_label_1</item>
         <item>@string/btn_def_label_2</item>
         <item>@string/btn_def_label_3</item>
@@ -58,7 +58,7 @@
         <item>@string/btn_def_label_7</item>
     </string-array>
 
-    <string-array name="pref_buttons_icon_entries">
+    <string-array name="pref_icon_entries">
         <item>@drawable/ic_btn_def_1</item>
         <item>@drawable/ic_btn_def_2</item>
         <item>@drawable/ic_btn_def_3</item>

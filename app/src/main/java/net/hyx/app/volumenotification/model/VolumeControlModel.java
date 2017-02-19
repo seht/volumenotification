@@ -28,28 +28,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ButtonsModel {
+public class VolumeControlModel {
 
     private final Context context;
     private final SettingsModel settings;
 
-    public ButtonsModel(Context context) {
+    public VolumeControlModel(Context context) {
         this.context = context;
         settings = new SettingsModel(context);
     }
 
-    public List<String> getButtonEntries() {
-        return Arrays.asList(settings.getResources().getStringArray(R.array.pref_buttons_entries));
+    public List<String> getEntries() {
+        return Arrays.asList(settings.getResources().getStringArray(R.array.pref_volume_control_entries));
     }
 
-    public List<String> getButtonIconEntries() {
-        return Arrays.asList(settings.getResources().getStringArray(R.array.pref_buttons_icon_entries));
+    public List<String> getIconEntries() {
+        return Arrays.asList(settings.getResources().getStringArray(R.array.pref_icon_entries));
     }
 
-    public List<VolumeControl> getButtonList() {
+    public List<VolumeControl> getList() {
         List<VolumeControl> list = new ArrayList<>();
-        for (int pos = 0; pos < getButtonEntries().size(); pos++) {
-            VolumeControl item = getButtonItem(pos);
+        for (int pos = 0; pos < getEntries().size(); pos++) {
+            VolumeControl item = getItem(pos);
             if (item != null) {
                 list.add(item);
             }
@@ -57,19 +57,19 @@ public class ButtonsModel {
         return list;
     }
 
-    public VolumeControl getButtonItem(int position) {
+    public VolumeControl getItem(int position) {
         String value = settings.getPreferences().getString("pref_buttons_list_item_" + position, "");
         if (!value.isEmpty()) {
             return (new Gson()).fromJson(value, VolumeControl.class);
         }
-        if (position >= getButtonEntries().size()) {
+        if (position >= getEntries().size()) {
             return null;
         }
-        return getDefaultButtonItem(position);
+        return getDefaultItem(position);
     }
 
-    public VolumeControl getButtonItemById(int id) {
-        List<VolumeControl> items = getButtonList();
+    public VolumeControl getItemById(int id) {
+        List<VolumeControl> items = getList();
         for (int pos = 0; pos < items.size(); pos++) {
             VolumeControl item = items.get(pos);
             if (item.id == id) {
@@ -79,66 +79,66 @@ public class ButtonsModel {
         return null;
     }
 
-    public VolumeControl getParseButtonItem(int id) {
-        VolumeControl item = getButtonItemById(id);
-        return getParseButtonItem(item);
+    public VolumeControl getParseItem(int id) {
+        VolumeControl item = getItemById(id);
+        return getParseItem(item);
     }
 
-    public VolumeControl getParseButtonItem(VolumeControl item) {
+    public VolumeControl getParseItem(VolumeControl item) {
         if (item == null) {
             return new VolumeControl(0, 0, 0, 0, "");
         }
-        if (item.icon == 0 || item.icon >= getButtonIconEntries().size()) {
-            item.icon = getDefaultButtonIcon(item.id);
+        if (item.icon == 0 || item.icon >= getIconEntries().size()) {
+            item.icon = getDefaultIcon(item.id);
         }
         if (item.label.isEmpty()) {
-            item.label = getDefaultButtonLabel(item.id);
+            item.label = getDefaultLabel(item.id);
         }
         return item;
     }
 
-    public VolumeControl getDefaultButtonItem(int position) {
+    public VolumeControl getDefaultItem(int position) {
         int id = position + 1;
         int status = (id <= 0 || id > 3) ? 0 : 1;
-        return new VolumeControl(id, position, status, getDefaultButtonIcon(id), getDefaultButtonLabel(id));
+        return new VolumeControl(id, position, status, getDefaultIcon(id), getDefaultLabel(id));
     }
 
-    public String getDefaultButtonLabel(int id) {
+    public String getDefaultLabel(int id) {
         int index = id - 1;
-        if (index < 0 || index >= getButtonEntries().size()) {
+        if (index < 0 || index >= getEntries().size()) {
             return "";
         }
-        return getButtonEntries().get(index);
+        return getEntries().get(index);
     }
 
-    public int getDefaultButtonIcon(int id) {
+    public int getDefaultIcon(int id) {
         int index = id - 1;
-        if (index < 0 || index >= getButtonIconEntries().size()) {
+        if (index < 0 || index >= getIconEntries().size()) {
             index = 0;
         }
         return index;
     }
 
-    public int getButtonIconDrawable(int index) {
-        return settings.getResourceDrawable(R.array.pref_buttons_icon_entries, index);
+    public int getIconDrawable(int index) {
+        return settings.getResourceDrawable(R.array.pref_icon_entries, index);
     }
 
-    public void saveButtonItem(VolumeControl item) {
-        saveButtonItem(item, true);
+    public void saveItem(VolumeControl item) {
+        saveItem(item, true);
     }
 
-    public void saveButtonItem(VolumeControl item, boolean submit) {
+    public void saveItem(VolumeControl item, boolean submit) {
         settings.edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
         if (submit) {
             NotificationFactory.newInstance(context).create();
         }
     }
 
-    public void saveButtonList(List<VolumeControl> list) {
+    public void saveList(List<VolumeControl> list) {
         for (int pos = 0; pos < list.size(); pos++) {
             VolumeControl item = list.get(pos);
             item.position = pos;
-            saveButtonItem(item, false);
+            saveItem(item, false);
         }
         NotificationFactory.newInstance(context).create();
     }
