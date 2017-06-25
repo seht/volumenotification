@@ -127,9 +127,9 @@ public class VolumeControlModel {
         saveItem(item, true);
     }
 
-    public void saveItem(VolumeControl item, boolean submit) {
-        settings.edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
-        if (submit) {
+    public void saveItem(VolumeControl item, boolean createNotification) {
+        settings.getPreferences().edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
+        if (createNotification) {
             NotificationFactory.newInstance(context).create();
         }
     }

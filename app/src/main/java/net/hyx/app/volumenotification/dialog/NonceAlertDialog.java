@@ -76,7 +76,7 @@ public class NonceAlertDialog extends DialogFragment {
             nonceInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    settings.edit().putBoolean("pref_dialog_alert_nonce_checked_" + id, isChecked).commit();
+                    settings.getPreferences().edit().putBoolean("pref_dialog_alert_nonce_checked_" + id, isChecked).commit();
                 }
             });
         } else {

@@ -41,5 +41,13 @@
         android:inputType="text"
         android:paddingLeft="32dp"
         android:paddingRight="32dp" />
+    <!--
+        <TextView android:id="@+id/pref_label_hint"
+                  style="@style/style_secondary_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text=""
+                  android:paddingTop="8dp" />
+    -->
 
 </LinearLayout>

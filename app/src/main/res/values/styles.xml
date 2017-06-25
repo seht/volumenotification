@@ -120,4 +120,10 @@
         <item name="android:showDividers">middle</item>
     </style>
 
+    <style name="style_secondary_text">
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
 </resources>

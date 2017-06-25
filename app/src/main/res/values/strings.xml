@@ -23,7 +23,7 @@
     <string name="menu_about_title">Show your love</string>
 
     <string name="hint_about_message">Made with all the love in the world.</string>
-    <string name="hint_about_action">Feedback</string>
+    <string name="hint_about_action">Show</string>
 
     <string name="target_api_welcome_message_N">Nice! Your device is running Android N.\n\nYou should give tiles a try. You can edit them at the top from your quick settings, by pulling the notification drawer and just dragging them in.\n\nThen you can just disable the notification from settings.</string>
 
@@ -79,5 +79,6 @@
 
     <string name="pref_toggle_silent_title">Toggle silent</string>
     <string name="pref_toggle_silent_summary">Ring volume to toggle mute</string>
+
 
 </resources>

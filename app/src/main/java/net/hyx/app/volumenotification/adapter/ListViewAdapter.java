@@ -44,10 +44,9 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
 
     public static final String EXTRA_ITEM = "item";
     public static final float ALPHA_DISABLED = 0.25f;
-
-    private static List<VolumeControl> items;
     private final OnStartDragListener dragStartListener;
-    private final VolumeControlModel model;
+    private List<VolumeControl> items;
+    private VolumeControlModel model;
 
     public ListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.dragStartListener = dragStartListener;
@@ -58,12 +57,11 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_view_item, parent, false);
-        return new ItemViewHolder(view);
+        return new ItemViewHolder(view, items, model);
     }
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
-
         VolumeControl item = model.getParseItem(items.get(position));
 
         View itemView = holder.itemView;
@@ -99,7 +97,6 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
                 int position = holder.getAdapterPosition();
                 Intent intent = new Intent(context, ItemViewActivity.class);
                 VolumeControl item = items.get(position);
-                item.position = position;
                 intent.putExtra(EXTRA_ITEM, item);
                 context.startActivity(intent);
             }
@@ -109,19 +106,22 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(items, fromPosition, toPosition);
+        VolumeControl fromItem = items.get(fromPosition);
+        VolumeControl toItem = items.get(toPosition);
+        fromItem.position = fromPosition;
+        toItem.position = toPosition;
+        items.set(fromPosition, fromItem);
+        items.set(toPosition, toItem);
         notifyItemMoved(fromPosition, toPosition);
-        model.saveList(items);
         return true;
     }
 
     @Override
     public void onItemDismiss(int position, int direction) {
         VolumeControl item = items.get(position);
-        item.status = (item.status == 1) ? 0 : 1;
-        model.saveItem(item);
-        //items.set(position, item);
-        //notifyDataSetChanged();
-        notifyItemChanged(position);
+        item.status = (item.status == 0) ? 1 : 0;
+        items.set(position, item);
+        notifyItemChanged(position, null);
     }
 
     @Override
@@ -135,18 +135,23 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
      */
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
-        public ItemViewHolder(View itemView) {
+        List<VolumeControl> items;
+        VolumeControlModel model;
+
+        public ItemViewHolder(View itemView, List<VolumeControl> items, VolumeControlModel model) {
             super(itemView);
+            this.items = items;
+            this.model = model;
         }
 
         @Override
         public void onItemSelected() {
-            //System.out.println("selected");
+
         }
 
         @Override
         public void onItemClear() {
-            //System.out.println("clear");
+            model.saveList(items);
         }
 
     }

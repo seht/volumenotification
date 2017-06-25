@@ -105,7 +105,6 @@ public class NotificationFactory {
         cancel();
         int id = 1;
         if (settings.getEnabled()) {
-
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setOngoing(true)
                     .setPriority(getPriority())
@@ -124,7 +123,7 @@ public class NotificationFactory {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             for (int pos = 0; pos < items.size(); pos++) {
                 VolumeControl item = items.get(pos);
-                TileService.requestListeningState(context, new ComponentName("net.hyx.app.volumenotification.service", "TileService" + item.id));
+                TileService.requestListeningState(context, new ComponentName(context, _package + ".service.TileService" + item.id));
             }
         }
     }
@@ -139,11 +138,7 @@ public class NotificationFactory {
         if (item != null) {
             tile.setIcon(Icon.createWithResource(context, model.getIconDrawable(item.icon)));
             tile.setLabel(item.label);
-            if (item.status == 1) {
-                tile.setState(Tile.STATE_ACTIVE);
-            } else {
-                tile.setState(Tile.STATE_INACTIVE);
-            }
+            tile.setState(Tile.STATE_ACTIVE);
             tile.updateTile();
         }
     }

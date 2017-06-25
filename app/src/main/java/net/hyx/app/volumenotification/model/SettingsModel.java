@@ -47,10 +47,6 @@ public class SettingsModel {
         return preferences;
     }
 
-    public SharedPreferences.Editor edit() {
-        return preferences.edit();
-    }
-
     public int getAppTheme() {
         if (getAppThemeDark()) {
             return R.style.style_app_theme_dark;

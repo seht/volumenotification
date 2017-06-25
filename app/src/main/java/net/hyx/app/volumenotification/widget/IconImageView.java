@@ -18,31 +18,31 @@ package net.hyx.app.volumenotification.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import net.hyx.app.volumenotification.model.SettingsModel;
 
-public class IconImageView extends ImageView {
+public class IconImageView extends AppCompatImageView {
 
     private SettingsModel settings;
 
     public IconImageView(Context context) {
         super(context);
-        _construct(context);
+        construct(context);
     }
 
     public IconImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        _construct(context);
+        construct(context);
     }
 
     public IconImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        _construct(context);
+        construct(context);
     }
 
-    private void _construct(final Context context) {
+    private void construct(final Context context) {
         settings = new SettingsModel(context);
     }
 

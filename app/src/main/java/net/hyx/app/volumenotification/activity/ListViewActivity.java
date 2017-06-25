@@ -111,7 +111,7 @@ public class ListViewActivity extends AppCompatActivity {
                 break;
             case R.id.menu_dark_app_theme:
                 boolean darkTheme = !item.isChecked();
-                settings.edit().putBoolean("pref_dark_app_theme", darkTheme).commit();
+                settings.getPreferences().edit().putBoolean("pref_dark_app_theme", darkTheme).commit();
                 item.setChecked(darkTheme);
                 setTheme(settings.getAppTheme());
                 recreate();
@@ -145,15 +145,15 @@ public class ListViewActivity extends AppCompatActivity {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            ListViewAdapter adapter = new ListViewAdapter(getContext(), this);
+            ListViewAdapter adapter = new ListViewAdapter(view.getContext(), this);
 
-            RecyclerView _view = (RecyclerView) view;
-            _view.setHasFixedSize(true);
-            _view.setAdapter(adapter);
-            _view.setLayoutManager(new LinearLayoutManager(getContext()));
+            RecyclerView listView = (RecyclerView) view;
+            listView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            listView.setAdapter(adapter);
+            listView.setHasFixedSize(true);
 
             itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
-            itemTouchHelper.attachToRecyclerView(_view);
+            itemTouchHelper.attachToRecyclerView(listView);
         }
 
         @Override
