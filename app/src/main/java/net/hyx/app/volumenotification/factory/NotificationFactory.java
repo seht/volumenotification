@@ -19,7 +19,6 @@ package net.hyx.app.volumenotification.factory;
 import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,7 +26,6 @@ import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.os.Build;
 import android.service.quicksettings.Tile;
-import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -120,12 +118,12 @@ public class NotificationFactory {
             builder.setDeleteIntent(deleteIntent);
             manager.notify(id, builder.build());
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            for (int pos = 0; pos < items.size(); pos++) {
-                VolumeControl item = items.get(pos);
-                TileService.requestListeningState(context, new ComponentName(context, _package + ".service.TileService" + item.id));
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            for (int pos = 0; pos < items.size(); pos++) {
+//                VolumeControl item = items.get(pos);
+//                TileService.requestListeningState(context, new ComponentName(context, _package + ".service.TileService" + item.id));
+//            }
+//        }
     }
 
     public void cancel() {
