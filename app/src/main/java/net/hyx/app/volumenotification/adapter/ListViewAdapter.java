@@ -62,7 +62,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
-        VolumeControl item = model.getParseItem(items.get(position));
+        VolumeControl item = model.parseItem(items.get(position));
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = (LinearLayout) itemView.findViewById(R.id.list_item_wrapper);
@@ -106,12 +106,6 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(items, fromPosition, toPosition);
-        VolumeControl fromItem = items.get(fromPosition);
-        VolumeControl toItem = items.get(toPosition);
-        fromItem.position = fromPosition;
-        toItem.position = toPosition;
-        items.set(fromPosition, fromItem);
-        items.set(toPosition, toItem);
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }

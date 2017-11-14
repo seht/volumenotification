@@ -95,7 +95,7 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                frag.model.saveItem(frag.item, false);
+                frag.model.saveItem(frag.item);
                 NavUtils.navigateUpFromSameTask(this);
                 break;
         }
@@ -122,7 +122,7 @@ public class ItemViewActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             model = new VolumeControlModel(getActivity());
             item = (VolumeControl) getArguments().getSerializable(ARG_ITEM);
-            item = model.getParseItem(item);
+            item = model.parseItem(item);
         }
 
         @Override

@@ -17,6 +17,7 @@
 package net.hyx.app.volumenotification.model;
 
 import android.content.Context;
+import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
 
@@ -62,10 +63,10 @@ public class VolumeControlModel {
         if (!value.isEmpty()) {
             return (new Gson()).fromJson(value, VolumeControl.class);
         }
-        if (position >= getEntries().size()) {
-            return null;
+        if (position >= 0 && position < getEntries().size()) {
+            return getDefaultItem(position);
         }
-        return getDefaultItem(position);
+        return null;
     }
 
     public VolumeControl getItemById(int id) {
@@ -79,66 +80,59 @@ public class VolumeControlModel {
         return null;
     }
 
-    public VolumeControl getParseItem(int id) {
-        VolumeControl item = getItemById(id);
-        return getParseItem(item);
-    }
-
-    public VolumeControl getParseItem(VolumeControl item) {
-        if (item == null) {
-            return new VolumeControl(0, 0, 0, 0, "");
+    public VolumeControl parseItem(VolumeControl item) {
+        if (item != null) {
+            if (item.icon <= 0 || item.icon >= getIconEntries().size()) {
+                item.icon = getDefaultIcon(item.id);
+            }
+            if (item.label.isEmpty()) {
+                item.label = getDefaultLabel(item.id);
+            }
+            return item;
         }
-        if (item.icon == 0 || item.icon >= getIconEntries().size()) {
-            item.icon = getDefaultIcon(item.id);
-        }
-        if (item.label.isEmpty()) {
-            item.label = getDefaultLabel(item.id);
-        }
-        return item;
+        return new VolumeControl(0, 0, 0, 0, "");
     }
 
     public VolumeControl getDefaultItem(int position) {
         int id = position + 1;
-        int status = (id <= 0 || id > 3) ? 0 : 1;
+        int status = (id >= 1 && id <= 3) ? 1 : 0;
         return new VolumeControl(id, position, status, getDefaultIcon(id), getDefaultLabel(id));
     }
 
     public String getDefaultLabel(int id) {
         int index = id - 1;
-        if (index < 0 || index >= getEntries().size()) {
-            return "";
+        if (index >= 0 && index < getEntries().size()) {
+            return getEntries().get(index);
         }
-        return getEntries().get(index);
+        return "";
     }
 
     public int getDefaultIcon(int id) {
         int index = id - 1;
-        if (index < 0 || index >= getIconEntries().size()) {
-            index = 0;
+        if (index >= 0 && index < getIconEntries().size()) {
+            return index;
         }
-        return index;
+        return 0;
     }
 
     public int getIconDrawable(int index) {
         return settings.getResourceDrawable(R.array.pref_icon_entries, index);
     }
 
-    public void saveItem(VolumeControl item) {
-        saveItem(item, true);
+    private Editor editItem(VolumeControl item) {
+        return settings.getPreferences().edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item));
     }
 
-    public void saveItem(VolumeControl item, boolean createNotification) {
-        settings.getPreferences().edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item)).commit();
-        if (createNotification) {
-            NotificationFactory.newInstance(context).create();
-        }
+    public void saveItem(VolumeControl item) {
+        editItem(item).commit();
+        NotificationFactory.newInstance(context).create();
     }
 
     public void saveList(List<VolumeControl> list) {
         for (int pos = 0; pos < list.size(); pos++) {
             VolumeControl item = list.get(pos);
             item.position = pos;
-            saveItem(item, false);
+            editItem(item).commit();
         }
         NotificationFactory.newInstance(context).create();
     }

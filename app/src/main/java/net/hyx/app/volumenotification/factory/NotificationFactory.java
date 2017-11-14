@@ -19,6 +19,7 @@ package net.hyx.app.volumenotification.factory;
 import android.annotation.TargetApi;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.os.Build;
 import android.service.quicksettings.Tile;
+import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -52,8 +54,6 @@ public class NotificationFactory {
             AudioManager.STREAM_SYSTEM,
             STREAM_BLUETOOTH
     };
-    private static boolean _mute = false;
-    private static boolean _silent = false;
     private static String _package;
     private final Context context;
     private final NotificationManager manager;
@@ -64,12 +64,12 @@ public class NotificationFactory {
 
     private NotificationFactory(Context context) {
         this.context = context;
-        manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        settings = new SettingsModel(context);
-        model = new VolumeControlModel(context);
+        manager = (NotificationManager) this.context.getSystemService(Context.NOTIFICATION_SERVICE);
+        audio = (AudioManager) this.context.getSystemService(Context.AUDIO_SERVICE);
+        settings = new SettingsModel(this.context);
+        model = new VolumeControlModel(this.context);
         items = model.getList();
-        _package = context.getPackageName();
+        _package = this.context.getPackageName();
     }
 
     public static NotificationFactory newInstance(Context context) {
@@ -77,31 +77,13 @@ public class NotificationFactory {
     }
 
     public void setVolume(int id) {
-        int index = id - 1;
-        int type = STREAM_TYPES[index];
-        int direction = AudioManager.ADJUST_SAME;
-
-        if (type == AudioManager.STREAM_MUSIC && settings.getToggleMute()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                direction = AudioManager.ADJUST_TOGGLE_MUTE;
-            } else {
-                _mute = !_mute;
-                audio.setStreamMute(type, _mute);
-            }
-        } else if (type == AudioManager.STREAM_RING && settings.getToggleSilent()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                direction = AudioManager.ADJUST_TOGGLE_MUTE;
-            } else {
-                _silent = !_silent;
-                audio.setStreamMute(type, _silent);
-            }
-        }
-        audio.adjustStreamVolume(type, direction, AudioManager.FLAG_SHOW_UI);
+        int type = getStreamType(id);
+        audio.adjustStreamVolume(type, getStreamFlag(type), AudioManager.FLAG_SHOW_UI);
     }
 
     public void create() {
-        cancel();
         int id = 1;
+        cancel();
         if (settings.getEnabled()) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setOngoing(true)
@@ -118,27 +100,50 @@ public class NotificationFactory {
             builder.setDeleteIntent(deleteIntent);
             manager.notify(id, builder.build());
         }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            for (int pos = 0; pos < items.size(); pos++) {
-//                VolumeControl item = items.get(pos);
-//                TileService.requestListeningState(context, new ComponentName(context, _package + ".service.TileService" + item.id));
-//            }
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            requestListeningTiles();
+        }
     }
 
     public void cancel() {
         manager.cancelAll();
     }
 
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public void requestListeningTiles() {
+        for (int pos = 0; pos < items.size(); pos++) {
+            VolumeControl item = items.get(pos);
+            TileService.requestListeningState(context, new ComponentName(context, _package + ".service.TileService" + item.id));
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.N)
     public void updateTile(Tile tile, int id) {
-        VolumeControl item = model.getParseItem(id);
-        if (item != null) {
+        VolumeControl item = model.parseItem(model.getItemById(id));
+        if (item != null && tile != null) {
             tile.setIcon(Icon.createWithResource(context, model.getIconDrawable(item.icon)));
             tile.setLabel(item.label);
             tile.setState(Tile.STATE_ACTIVE);
             tile.updateTile();
         }
+    }
+
+    private int getStreamType(int id) {
+        int index = id - 1;
+        if (index >= 0 && index < STREAM_TYPES.length) {
+            return STREAM_TYPES[index];
+        }
+        return AudioManager.USE_DEFAULT_STREAM_TYPE;
+    }
+
+    private int getStreamFlag(int type) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if ((type == AudioManager.STREAM_MUSIC && settings.getToggleMute()) || (type == AudioManager.STREAM_RING && settings.getToggleSilent())) {
+                return AudioManager.ADJUST_TOGGLE_MUTE;
+            }
+        }
+        return AudioManager.ADJUST_SAME;
     }
 
     private int getPriority() {
@@ -156,9 +161,7 @@ public class NotificationFactory {
     }
 
     private RemoteViews getCustomContentView() {
-
         RemoteViews view = new RemoteViews(_package, R.layout.view_layout_notification);
-
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", _package);
         int backgroundColor;
         int iconColor;
@@ -177,7 +180,7 @@ public class NotificationFactory {
         view.removeAllViews(R.id.volume_control_wrapper);
 
         for (int pos = 0; pos < items.size(); pos++) {
-            VolumeControl item = model.getParseItem(items.get(pos));
+            VolumeControl item = model.parseItem(items.get(pos));
             if (item.status == 0) {
                 continue;
             }

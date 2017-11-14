@@ -119,7 +119,7 @@ public class SettingsModel {
             if (!value.isEmpty()) {
                 color = Color.parseColor(value);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ex) {
             //
         }
         return color;
