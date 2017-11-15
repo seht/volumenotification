@@ -8,7 +8,7 @@
 
             <TextView
                 android:id="@+id/pref_dialog_alert_message"
-                style="@style/style_dialog_widget_vertical" />
+                style="@style/style_dialog_widget_vertical"/>
 
         </LinearLayout>
 
@@ -18,11 +18,11 @@
 
             <CheckBox
                 android:id="@+id/pref_nonce_input"
-                style="@style/style_dialog_widget_horizontal" />
+                style="@style/style_dialog_widget_horizontal"/>
 
             <TextView
                 style="@style/style_dialog_widget_horizontal"
-                android:text="@string/pref_dialog_alert_nonce_checked_label" />
+                android:text="@string/pref_dialog_alert_nonce_checked_label"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -11,11 +11,11 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:entries="@array/pref_icon_entries"
-        android:padding="0dp" />
+        android:padding="0dp"/>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="32dp" />
+        android:layout_height="32dp"/>
 
     <EditText
         android:id="@+id/pref_label_input"
@@ -25,7 +25,7 @@
         android:hint=""
         android:inputType="text"
         android:paddingLeft="32dp"
-        android:paddingRight="32dp" />
+        android:paddingRight="32dp"/>
     <!--
         <TextView android:id="@+id/pref_label_hint"
                   style="@style/style_secondary_text"

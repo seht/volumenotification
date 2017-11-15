@@ -3,19 +3,19 @@
             style="@style/style_dialog_viewport">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/style_dialog">
+                  style="@style/style_dialog">
 
         <LinearLayout style="@style/style_dialog_row_vertical">
 
             <TextView
                 style="@style/style_dialog_widget_vertical"
                 android:text="@string/pref_custom_theme_background_color_title"
-                android:textAppearance="@android:style/TextAppearance.Small" />
+                android:textAppearance="@android:style/TextAppearance.Small"/>
 
             <EditText
                 android:id="@+id/pref_background_color_input"
                 style="@style/style_dialog_widget_vertical"
-                android:inputType="text" />
+                android:inputType="text"/>
         </LinearLayout>
 
         <LinearLayout style="@style/style_dialog_row_vertical">
@@ -23,18 +23,18 @@
             <TextView
                 style="@style/style_dialog_widget_vertical"
                 android:text="@string/pref_custom_theme_icon_color_title"
-                android:textAppearance="@android:style/TextAppearance.Small" />
+                android:textAppearance="@android:style/TextAppearance.Small"/>
 
             <EditText
                 android:id="@+id/pref_icon_color_input"
                 style="@style/style_dialog_widget_vertical"
-                android:inputType="text" />
+                android:inputType="text"/>
 
             <TextView
                 style="@style/style_dialog_widget_vertical"
                 android:text="@string/pref_custom_theme_color_help"
                 android:textAppearance="@android:style/TextAppearance.Small"
-                android:textColor="?android:textColorSecondary" />
+                android:textColor="?android:textColorSecondary"/>
         </LinearLayout>
 
     </LinearLayout>

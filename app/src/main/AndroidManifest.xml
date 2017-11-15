@@ -3,7 +3,7 @@
           package="net.hyx.app.volumenotification"
           android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -15,10 +15,11 @@
 
         <activity android:name=".activity.ListViewActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES"/>
             </intent-filter>
         </activity>
         <activity
@@ -27,7 +28,7 @@
             android:parentActivityName=".activity.ListViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ListViewActivity" />
+                android:value=".activity.ListViewActivity"/>
         </activity>
         <activity
             android:name=".activity.ItemViewActivity"
@@ -35,32 +36,32 @@
             android:parentActivityName=".activity.ListViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ListViewActivity" />
+                android:value=".activity.ListViewActivity"/>
         </activity>
 
         <receiver android:name=".receiver.CreateNotificationReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.SetVolumeReceiver" />
+        <receiver android:name=".receiver.SetVolumeReceiver"/>
 
-        <service android:name=".service.NotificationService" />
+        <service android:name=".service.NotificationService"/>
         <service
             android:name=".service.TileService1"
             android:icon="@drawable/ic_btn_def_1"
             android:label="@string/btn_def_label_1"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
         <service
             android:name=".service.TileService2"
@@ -68,12 +69,12 @@
             android:label="@string/btn_def_label_2"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
         <service
             android:name=".service.TileService3"
@@ -81,12 +82,12 @@
             android:label="@string/btn_def_label_3"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
         <service
             android:name=".service.TileService4"
@@ -94,12 +95,12 @@
             android:label="@string/btn_def_label_4"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
         <service
             android:name=".service.TileService5"
@@ -107,12 +108,12 @@
             android:label="@string/btn_def_label_5"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
         <service
             android:name=".service.TileService6"
@@ -120,12 +121,12 @@
             android:label="@string/btn_def_label_6"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
         <service
             android:name=".service.TileService7"
@@ -133,12 +134,12 @@
             android:label="@string/btn_def_label_7"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
+                android:value="true"/>
         </service>
 
     </application>

@@ -1,8 +1,8 @@
 <resources>
 
-    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light.DarkActionBar" />
+    <style name="style_app_theme_light" parent="@style/Theme.AppCompat.Light.DarkActionBar"/>
 
-    <style name="style_app_theme_dark" parent="@style/Theme.AppCompat" />
+    <style name="style_app_theme_dark" parent="@style/Theme.AppCompat"/>
 
     <style name="style_theme_material">
         <item name="android:colorBackground">@color/theme_material_background_color</item>
