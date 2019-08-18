@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-             NotificationController.newInstance(getActivity().getApplicationContext()).create();
+             NotificationController.newInstance(getActivity()).create();
         }
 
     }

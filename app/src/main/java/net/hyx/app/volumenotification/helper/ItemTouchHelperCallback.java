@@ -32,10 +32,10 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  */
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    private final ItemTouchHelperAdapter _adapter;
+    private final ItemTouchHelperAdapter adapter;
 
     public ItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
-        _adapter = adapter;
+        this.adapter = adapter;
     }
 
     @Override
@@ -60,12 +60,12 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         if (source.getItemViewType() != target.getItemViewType()) {
             return false;
         }
-        return _adapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
+        return adapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        _adapter.onItemDismiss(viewHolder.getAdapterPosition(), direction);
+        adapter.onItemDismiss(viewHolder.getAdapterPosition(), direction);
     }
 
     @Override

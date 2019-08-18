@@ -24,7 +24,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,7 +47,7 @@ import java.io.Serializable;
 
 public class ItemViewActivity extends AppCompatActivity {
 
-    private ButtonsItemFragment frag;
+    private ItemFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +56,14 @@ public class ItemViewActivity extends AppCompatActivity {
         SettingsModel settings = new SettingsModel(getApplicationContext());
         VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.EXTRA_ITEM);
 
-        frag = ButtonsItemFragment.newInstance(item);
+        fragment = ItemFragment.newInstance(item);
 
         setTheme(settings.getAppTheme());
         setTitle(item.label);
         setContentView(R.layout.activity_frame_layout);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, frag)
+                .replace(R.id.content, fragment)
                 .commit();
 
         if (getSupportActionBar() != null) {
@@ -78,12 +77,12 @@ public class ItemViewActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
         LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
         Switch statusInput = (Switch) actionLayout.findViewById(R.id.menu_item_switch);
-        statusInput.setChecked((frag.item.status == 1));
+        statusInput.setChecked((fragment.item.status == 1));
         statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                frag.item.status = (isChecked) ? 1 : 0;
-                frag.model.saveItem(frag.item);
+                fragment.item.status = (isChecked) ? 1 : 0;
+                fragment.model.saveItem(fragment.item);
 
             }
         });
@@ -94,24 +93,24 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                frag.model.saveItem(frag.item);
+                fragment.model.saveItem(fragment.item);
                 NavUtils.navigateUpFromSameTask(this);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public static class ButtonsItemFragment extends Fragment {
+    public static class ItemFragment extends Fragment {
 
         private VolumeControl item;
         private VolumeControlModel model;
 
-        public static ButtonsItemFragment newInstance(Serializable item) {
-            ButtonsItemFragment frag = new ButtonsItemFragment();
+        public static ItemFragment newInstance(Serializable item) {
+            ItemFragment fragment = new ItemFragment();
             Bundle args = new Bundle();
             args.putSerializable(VolumeControlModel.EXTRA_ITEM, item);
-            frag.setArguments(args);
-            return frag;
+            fragment.setArguments(args);
+            return fragment;
         }
 
         @Override
@@ -159,6 +158,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     item.label = s.toString();
                     model.saveItem(item);
+                    NotificationController.newInstance(getActivity()).create();
                 }
             });
 
@@ -167,6 +167,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = position;
                     model.saveItem(item);
+                    NotificationController.newInstance(getActivity()).create();
                 }
 
                 @Override
