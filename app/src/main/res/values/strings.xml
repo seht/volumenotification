@@ -28,7 +28,7 @@
     <string name="btn_def_label_4">Alarm volume</string>
     <string name="btn_def_label_5">Notification volume</string>
     <string name="btn_def_label_6">System volume</string>
-    <string name="btn_def_label_7">Bluetooth volume</string>
+    <string name="btn_def_label_7">DTMF Tone volume</string>
 
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>

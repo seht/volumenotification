@@ -24,6 +24,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,6 +84,7 @@ public class ItemViewActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 fragment.item.status = (isChecked) ? 1 : 0;
                 fragment.model.saveItem(fragment.item);
+                NotificationController.newInstance(getApplicationContext()).create();
 
             }
         });
@@ -95,6 +97,7 @@ public class ItemViewActivity extends AppCompatActivity {
             case android.R.id.home:
                 fragment.model.saveItem(fragment.item);
                 NavUtils.navigateUpFromSameTask(this);
+                NotificationController.newInstance(getApplicationContext()).create();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -158,7 +161,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     item.label = s.toString();
                     model.saveItem(item);
-                    NotificationController.newInstance(getActivity()).create();
+                    //NotificationController.newInstance(getActivity()).create();
                 }
             });
 
@@ -167,7 +170,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = position;
                     model.saveItem(item);
-                    NotificationController.newInstance(getActivity()).create();
+                    //NotificationController.newInstance(getActivity()).create();
                 }
 
                 @Override

@@ -32,7 +32,6 @@ public class NotificationService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         NotificationController.newInstance(getApplicationContext()).create();
-        Log.d("test", "start service");
         stopSelf();
     }
 

@@ -54,8 +54,6 @@ public class ListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NotificationController.newInstance(getApplicationContext()).create();
-
         settings = new SettingsModel(getApplicationContext());
 
         setTheme(settings.getAppTheme());
@@ -78,6 +76,7 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             int id = 1;
             if (!settings.getDialogAlertNonceChecked(id)) {
@@ -138,7 +137,7 @@ public class ListViewActivity extends AppCompatActivity {
         private ItemTouchHelper itemTouchHelper;
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return new RecyclerView(container.getContext());
         }
 
