@@ -23,7 +23,7 @@ import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -32,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SettingsModel settings = new SettingsModel(this);
+        SettingsModel settings = new SettingsModel(getApplicationContext());
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationFactory.newInstance(getActivity()).create();
+             NotificationController.newInstance(getActivity().getApplicationContext()).create();
         }
 
     }

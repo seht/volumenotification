@@ -18,8 +18,9 @@ package net.hyx.app.volumenotification.service;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
 
 
 public class NotificationService extends IntentService {
@@ -30,7 +31,8 @@ public class NotificationService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        NotificationFactory.newInstance(this).create();
+        NotificationController.newInstance(getApplicationContext()).create();
+        Log.d("test", "start service");
         stopSelf();
     }
 

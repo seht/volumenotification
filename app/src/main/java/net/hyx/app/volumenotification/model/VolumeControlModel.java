@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+//import ;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,11 +31,12 @@ import java.util.List;
 
 public class VolumeControlModel {
 
-    private final Context context;
+    public static final String EXTRA_ITEM = "item";
+    public static final String EXTRA_ITEM_ID = "item_id";
+
     private final SettingsModel settings;
 
     public VolumeControlModel(Context context) {
-        this.context = context;
         settings = new SettingsModel(context);
     }
 
@@ -125,7 +126,6 @@ public class VolumeControlModel {
 
     public void saveItem(VolumeControl item) {
         editItem(item).commit();
-        NotificationFactory.newInstance(context).create();
     }
 
     public void saveList(List<VolumeControl> list) {
@@ -134,7 +134,6 @@ public class VolumeControlModel {
             item.position = pos;
             editItem(item).commit();
         }
-        NotificationFactory.newInstance(context).create();
     }
 
 }

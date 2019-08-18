@@ -18,6 +18,7 @@ package net.hyx.app.volumenotification.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,11 +43,10 @@ import java.util.List;
 
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
-    public static final String EXTRA_ITEM = "item";
-    public static final float ALPHA_DISABLED = 0.25f;
+    private static final float ALPHA_DISABLED = 0.25f;
     private final OnStartDragListener dragStartListener;
-    private List<VolumeControl> items;
-    private VolumeControlModel model;
+    private final List<VolumeControl> items;
+    private final VolumeControlModel model;
 
     public ListViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.dragStartListener = dragStartListener;
@@ -54,14 +54,15 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
         items = model.getList();
     }
 
+    @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_view_item, parent, false);
         return new ItemViewHolder(view, items, model);
     }
 
     @Override
-    public void onBindViewHolder(final ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
         VolumeControl item = model.parseItem(items.get(position));
 
         View itemView = holder.itemView;
@@ -83,11 +84,13 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
         itemHandle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     dragStartListener.onStartDrag(holder);
+                    //v.performClick();
                 }
                 return true;
             }
+
         });
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +100,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
                 int position = holder.getAdapterPosition();
                 Intent intent = new Intent(context, ItemViewActivity.class);
                 VolumeControl item = items.get(position);
-                intent.putExtra(EXTRA_ITEM, item);
+                intent.putExtra(VolumeControlModel.EXTRA_ITEM, item);
                 context.startActivity(intent);
             }
         });

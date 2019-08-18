@@ -35,36 +35,37 @@ public class NonceAlertDialog extends DialogFragment {
 
     private static final String ARG_ID = "id";
     private static final String ARG_MESSAGE = "message";
+    private static final String ARG_TITLE = "title";
 
-    private int id;
-    private String message;
-    private SettingsModel settings;
-
-    /*static DialogAlertNonce newInstance(String message) {
-        return newInstance(0, message);
-    }*/
-
-    public static NonceAlertDialog newInstance(int id, String message) {
-        NonceAlertDialog frag = new NonceAlertDialog();
+    public static NonceAlertDialog newInstance(int id, String message, String title) {
+        NonceAlertDialog dialog = new NonceAlertDialog();
         Bundle args = new Bundle();
         args.putInt(ARG_ID, id);
         args.putString(ARG_MESSAGE, message);
-        frag.setArguments(args);
-        return frag;
+        args.putString(ARG_TITLE, title);
+        dialog.setArguments(args);
+        return dialog;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        id = getArguments().getInt(ARG_ID);
-        message = getArguments().getString(ARG_MESSAGE);
-        settings = new SettingsModel(getContext());
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        if (getArguments() == null || getActivity() == null) {
+            return super.onCreateDialog(savedInstanceState);
+        }
+
+        final int id = getArguments().getInt(ARG_ID);
+        String message = getArguments().getString(ARG_MESSAGE);
+        String title = getArguments().getString(ARG_TITLE);
+
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        final SettingsModel settings = new SettingsModel(getActivity());
 
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_dialog_alert_nonce, null);
         TextView messageView = (TextView) view.findViewById(R.id.pref_dialog_alert_message);
@@ -84,10 +85,10 @@ public class NonceAlertDialog extends DialogFragment {
             nonceLayer.setVisibility(View.GONE);
         }
 
-        return new AlertDialog.Builder(getContext())
-                .setView(view)
-                .setPositiveButton(android.R.string.ok, null)
-                .create();
+        dialog.setView(view);
+        dialog.setTitle(title);
+        dialog.setPositiveButton(android.R.string.ok, null);
+        return dialog.create();
     }
 
 }

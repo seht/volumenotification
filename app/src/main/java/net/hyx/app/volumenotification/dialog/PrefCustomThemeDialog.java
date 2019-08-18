@@ -35,20 +35,20 @@ public class PrefCustomThemeDialog extends DialogPreference {
 
     public PrefCustomThemeDialog(Context context) {
         super(context, null);
-        _construct(context);
+        constructor(context);
     }
 
     public PrefCustomThemeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
-        _construct(context);
+        constructor(context);
     }
 
     public PrefCustomThemeDialog(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        _construct(context);
+        constructor(context);
     }
 
-    private void _construct(final Context context) {
+    private void constructor(final Context context) {
         settings = new SettingsModel(context);
         setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
     }

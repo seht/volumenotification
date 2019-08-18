@@ -9,9 +9,10 @@
     <string name="hint_about_message">Made with all the love in the world.</string>
     <string name="hint_about_action">Show</string>
 
-    <string name="target_api_welcome_message_N">Nice! Your device is running Android N.\n\nYou should give tiles a try. You can edit them at the top from your quick settings, by pulling the notification drawer and just dragging them in.\n\nThen you can just disable the notification from settings.</string>
+    <string name="target_api_welcome_title_N">Your device is running Android 7.0+</string>
+    <string name="target_api_welcome_message_N">You could try using the tiles in your quick settings. You should be able to edit them from your phone\'s notification drawer and then disabling the notification from the app settings.</string>
 
-    <string name="pref_dialog_alert_nonce_checked_label">Sweet! But don\'t remind me again.</string>
+    <string name="pref_dialog_alert_nonce_checked_label">Sweet! Don\'t remind me again.</string>
 
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_summary">Choose the notification theme</string>
@@ -44,7 +45,7 @@
     <string name="pref_translucent_summary">* Background transparency is only compatible with translucent launchers.</string>
 
     <string name="pref_enabled_title">Enable notification</string>
-    <string name="pref_enabled_summary">Enable or disable showing the notification</string>
+    <string name="pref_enabled_summary">* For Android 7.0+ and compatible phones consider using the tiles provided in quick settings and disabling the notification.</string>
 
     <string name="pref_boot_title">Start at boot</string>
     <string name="pref_boot_summary">Create notification when device starts</string>
@@ -56,10 +57,10 @@
     <string name="pref_hide_locked_summary">* To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
 
     <string name="pref_hide_status_title">Hide status bar icon</string>
-    <string name="pref_hide_status_summary">* When top priority is enabled, this will show a blank space in the status bar.</string>
+    <string name="pref_hide_status_summary">* When top priority is enabled, this could show a blank space in the status bar.</string>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
-    <string name="pref_toggle_mute_summary">Media volume to toggle mute</string>
+    <string name="pref_toggle_mute_summary">Media volume to toggle mute. (Android</string>
 
     <string name="pref_toggle_silent_title">Toggle silent</string>
     <string name="pref_toggle_silent_summary">Ring volume to toggle mute</string>

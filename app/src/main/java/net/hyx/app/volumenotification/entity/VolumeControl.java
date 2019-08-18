@@ -22,9 +22,9 @@ public class VolumeControl implements Serializable {
 
     public final int id;
     public int position;
-    public int status = 1;
-    public int icon = 0;
-    public String label = "";
+    public int status;
+    public int icon;
+    public String label;
 
     public VolumeControl(int id, int position, int status, int icon, String label) {
         this.id = id;

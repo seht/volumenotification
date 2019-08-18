@@ -31,9 +31,9 @@
 
     <style name="style_image_button">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">24dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:scaleType">centerInside</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
 
     <style name="style_image_button_compat" parent="@style/style_image_button">

@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -29,6 +30,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,23 +41,22 @@ import android.view.ViewGroup;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.ListViewAdapter;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperCallback;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class ListViewActivity extends AppCompatActivity {
 
-    private static boolean _created = false;
     private SettingsModel settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NotificationFactory.newInstance(this).create();
+        NotificationController.newInstance(getApplicationContext()).create();
 
-        settings = new SettingsModel(this);
+        settings = new SettingsModel(getApplicationContext());
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
@@ -72,16 +73,17 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        _created = true;
     }
 
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (!_created && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (!settings.getDialogAlertNonceChecked(1)) {
-                DialogFragment dialogFragment = NonceAlertDialog.newInstance(1,
-                        settings.getResources().getString(R.string.target_api_welcome_message_N));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            int id = 1;
+            if (!settings.getDialogAlertNonceChecked(id)) {
+                DialogFragment dialogFragment = NonceAlertDialog.newInstance(id,
+                        settings.getResources().getString(R.string.target_api_welcome_message_N),
+                        settings.getResources().getString(R.string.target_api_welcome_title_N));
                 dialogFragment.show(getSupportFragmentManager(), null);
             }
         }
@@ -135,14 +137,13 @@ public class ListViewActivity extends AppCompatActivity {
 
         private ItemTouchHelper itemTouchHelper;
 
-        @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return new RecyclerView(container.getContext());
         }
 
         @Override
-        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
             ListViewAdapter adapter = new ListViewAdapter(view.getContext(), this);

@@ -20,7 +20,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.service.quicksettings.TileService;
 
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class TileService5 extends TileService {
@@ -28,19 +28,19 @@ public class TileService5 extends TileService {
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        NotificationFactory.newInstance(this).updateTile(getQsTile(), 5);
+         NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 5);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        NotificationFactory.newInstance(this).updateTile(getQsTile(), 5);
+         NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 5);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        NotificationFactory.newInstance(this).setVolume(5);
+         NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(5);
     }
 
 }

@@ -60,13 +60,10 @@
         <item>@drawable/ic_btn_alt_phonelink_ring</item>
         <item>@drawable/ic_btn_alt_phone_android</item>
         <item>@drawable/ic_btn_alt_phone_iphone</item>
-        <item>@drawable/ic_btn_alt_bluetooth</item>
-        <item>@drawable/ic_btn_alt_bluetooth_audio</item>
         <item>@drawable/ic_btn_alt_speaker</item>
         <item>@drawable/ic_btn_alt_headset</item>
         <item>@drawable/ic_btn_alt_wifi</item>
         <item>@drawable/ic_btn_alt_tune</item>
-        <item>@drawable/ic_btn_alt_touch_app</item>
     </string-array>
 
 </resources>

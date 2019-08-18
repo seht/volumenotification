@@ -19,14 +19,17 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
 
 public class CreateNotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationFactory.newInstance(context).create();
+        if (intent.getAction() != null) {
+            NotificationController.newInstance(context).create();
+        }
     }
 
 }

@@ -17,12 +17,14 @@
 package net.hyx.app.volumenotification.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +39,7 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
-import net.hyx.app.volumenotification.adapter.ListViewAdapter;
+import net.hyx.app.volumenotification.controller.NotificationController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -52,12 +54,9 @@ public class ItemViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        VolumeControl item = (VolumeControl) getIntent().getExtras().getSerializable(ListViewAdapter.EXTRA_ITEM);
-        if (item == null) {
-            finish();
-            return;
-        }
-        SettingsModel settings = new SettingsModel(this);
+        SettingsModel settings = new SettingsModel(getApplicationContext());
+        VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.EXTRA_ITEM);
+
         frag = ButtonsItemFragment.newInstance(item);
 
         setTheme(settings.getAppTheme());
@@ -104,15 +103,13 @@ public class ItemViewActivity extends AppCompatActivity {
 
     public static class ButtonsItemFragment extends Fragment {
 
-        private static final String ARG_ITEM = "item";
-
         private VolumeControl item;
         private VolumeControlModel model;
 
         public static ButtonsItemFragment newInstance(Serializable item) {
             ButtonsItemFragment frag = new ButtonsItemFragment();
             Bundle args = new Bundle();
-            args.putSerializable(ARG_ITEM, item);
+            args.putSerializable(VolumeControlModel.EXTRA_ITEM, item);
             frag.setArguments(args);
             return frag;
         }
@@ -121,19 +118,21 @@ public class ItemViewActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             model = new VolumeControlModel(getActivity());
-            item = (VolumeControl) getArguments().getSerializable(ARG_ITEM);
-            item = model.parseItem(item);
+            if (getArguments() != null) {
+                item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.EXTRA_ITEM);
+                item = model.parseItem(item);
+            }
+
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_item_view, container, false);
         }
 
         @Override
-        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-
             EditText labelInput = (EditText) view.findViewById(R.id.pref_label_input);
             Spinner iconInput = (Spinner) view.findViewById(R.id.pref_icon_input);
 
@@ -148,12 +147,12 @@ public class ItemViewActivity extends AppCompatActivity {
             labelInput.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                    //
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                    //
                 }
 
                 @Override
@@ -172,7 +171,7 @@ public class ItemViewActivity extends AppCompatActivity {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
+                    //
                 }
             });
 

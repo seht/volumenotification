@@ -24,17 +24,14 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.util.TypedValue;
-
 import net.hyx.app.volumenotification.R;
 
 public class SettingsModel {
 
-    private final Context context;
     private final Resources resources;
     private final SharedPreferences preferences;
 
     public SettingsModel(Context context) {
-        this.context = context;
         resources = context.getResources();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -61,6 +58,10 @@ public class SettingsModel {
     public boolean getAppThemeDark() {
         boolean defValue = resources.getBoolean(R.bool.pref_dark_app_theme_default);
         return preferences.getBoolean("pref_dark_app_theme", defValue);
+    }
+
+    public int getStatusIcon() {
+        return (getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher;
     }
 
     public boolean getEnabled() {
@@ -133,8 +134,8 @@ public class SettingsModel {
         return drawable;
     }
 
-    public int getStyleAttributeColor(int style, int attribute) {
-        TypedArray attrs = context.obtainStyledAttributes(style, new int[]{attribute});
+    public int getStyleAttributeColor(Theme theme, int style, int attribute) {
+        TypedArray attrs = theme.obtainStyledAttributes(style, new int[]{attribute});
         int color = attrs.getColor(0, 0);
         attrs.recycle();
         return color;
@@ -143,7 +144,7 @@ public class SettingsModel {
     public int getThemeAttributeColor(Theme theme, int attribute) {
         TypedValue typedValue = new TypedValue();
         theme.resolveAttribute(attribute, typedValue, false);
-        return getStyleAttributeColor(typedValue.data, attribute);
+        return getStyleAttributeColor(theme, typedValue.data, attribute);
     }
 
 }

@@ -19,8 +19,9 @@ package net.hyx.app.volumenotification.service;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.service.quicksettings.TileService;
+import android.util.Log;
 
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class TileService1 extends TileService {
@@ -28,19 +29,19 @@ public class TileService1 extends TileService {
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        NotificationFactory.newInstance(this).updateTile(getQsTile(), 1);
+         NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 1);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        NotificationFactory.newInstance(this).updateTile(getQsTile(), 1);
+         NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 1);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        NotificationFactory.newInstance(this).setVolume(1);
+         NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(1);
     }
 
 }

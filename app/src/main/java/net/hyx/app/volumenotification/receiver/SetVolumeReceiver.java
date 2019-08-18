@@ -19,14 +19,17 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
-import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationController;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 
 public class SetVolumeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationFactory.newInstance(context).setVolume(intent.getExtras().getInt(NotificationFactory.EXTRA_ITEM_ID));
+        NotificationController.newInstance(context).audioManagerModel()
+                .setVolume(intent.getIntExtra(VolumeControlModel.EXTRA_ITEM_ID, 0));
     }
 
 }
