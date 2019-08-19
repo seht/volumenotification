@@ -24,7 +24,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
+import net.hyx.app.volumenotification.adapter.IconDropDownAdapter;
 import net.hyx.app.volumenotification.controller.NotificationController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
@@ -138,7 +137,7 @@ public class ItemViewActivity extends AppCompatActivity {
             EditText labelInput = (EditText) view.findViewById(R.id.pref_label_input);
             Spinner iconInput = (Spinner) view.findViewById(R.id.pref_icon_input);
 
-            iconInput.setAdapter(new IconSpinnerAdapter(getContext(),
+            iconInput.setAdapter(new IconDropDownAdapter(getContext(),
                     R.array.pref_icon_entries,
                     model.getIconEntries()));
 

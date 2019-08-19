@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/style_app_theme_light">
 
-        <activity android:name=".activity.ListViewActivity">
+        <activity android:name=".activity.RecyclerViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
@@ -25,18 +25,18 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/menu_pref_title"
-            android:parentActivityName=".activity.ListViewActivity">
+            android:parentActivityName=".activity.RecyclerViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ListViewActivity"/>
+                android:value=".activity.RecyclerViewActivity"/>
         </activity>
         <activity
             android:name=".activity.ItemViewActivity"
             android:label="Button"
-            android:parentActivityName=".activity.ListViewActivity">
+            android:parentActivityName=".activity.RecyclerViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ListViewActivity"/>
+                android:value=".activity.RecyclerViewActivity"/>
         </activity>
 
         <receiver android:name=".receiver.CreateNotificationReceiver">

@@ -28,12 +28,12 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 
 import java.util.List;
 
-public class IconSpinnerAdapter extends ArrayAdapter<String> {
+public class IconDropDownAdapter extends ArrayAdapter<String> {
 
     private final int resource;
     private final SettingsModel settings;
 
-    public IconSpinnerAdapter(Context context, int resource, List<String> objects) {
+    public IconDropDownAdapter(Context context, int resource, List<String> objects) {
         super(context, android.R.layout.simple_spinner_item, objects);
         this.resource = resource;
         settings = new SettingsModel(context);

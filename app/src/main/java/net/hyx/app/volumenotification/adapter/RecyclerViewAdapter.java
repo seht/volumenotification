@@ -19,9 +19,7 @@ package net.hyx.app.volumenotification.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,7 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
 
     private static final float ALPHA_DISABLED = 0.25f;
     private static final float ALPHA_ENABLED = 1.0f;
@@ -52,7 +50,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
     private final VolumeControlModel model;
     private final List<VolumeControl> items;
 
-    public ListViewAdapter(Context context, OnStartDragListener dragStartListener) {
+    public RecyclerViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.context = context;
         this.dragStartListener = dragStartListener;
         model = new VolumeControlModel(context);
@@ -90,7 +88,6 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ItemVi
 
         NotificationController.newInstance(context).create();
 
-        // @todo
         itemHandle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
