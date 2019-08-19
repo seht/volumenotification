@@ -24,6 +24,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.util.TypedValue;
+
 import net.hyx.app.volumenotification.R;
 
 public class SettingsModel {

@@ -28,19 +28,19 @@ public class TileService5 extends TileService {
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-         NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 5);
+        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 5);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-         NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 5);
+        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 5);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-         NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(5);
+        NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(5);
     }
 
 }
