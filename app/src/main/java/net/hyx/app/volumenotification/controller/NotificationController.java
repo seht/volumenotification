@@ -181,7 +181,7 @@ public class NotificationController {
         view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
 
         RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
-        //view.removeAllViews(R.id.notification_wrapper);
+        view.removeAllViews(R.id.notification_wrapper);
 
         view.addView(R.id.notification_layout, wrapperLayout);
 

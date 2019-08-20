@@ -122,10 +122,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onItemSwiped(int position) {
         VolumeControl item = items.get(position);
-        item.status = (item.status != 0) ? 0 : 1;
+        item.status = (item.status == 1) ? 0 : 1;
         items.set(position, item);
-        notifyItemChanged(position);
-        //notifyDataSetChanged();
+        model.saveList(items);
+        //notifyItemChanged(position);
+        notifyDataSetChanged();
     }
 
     @Override
