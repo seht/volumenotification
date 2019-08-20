@@ -141,6 +141,7 @@
                 android:name="android.service.quicksettings.ACTIVE_TILE"
                 android:value="true"/>
         </service>
+        <!--
         <service
             android:name=".service.TileServiceDefaultVolume"
             android:icon="@drawable/ic_baseline_volume_up_24px"
@@ -154,6 +155,7 @@
                 android:name="android.service.quicksettings.ACTIVE_TILE"
                 android:value="true"/>
         </service>
+        -->
 
     </application>
 
