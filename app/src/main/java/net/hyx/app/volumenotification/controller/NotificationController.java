@@ -29,6 +29,7 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
@@ -70,6 +71,9 @@ public class NotificationController {
             //TileServiceDefaultVolume.class.getName(),
     };
 
+    private static final int NOTIFICATION_ID = 1;
+    private static final String CHANNEL_ID = "DEFAULT";
+
     public NotificationController(Context context) {
         this.context = context;
         packageName = context.getPackageName();
@@ -109,29 +113,26 @@ public class NotificationController {
     public void create() {
         manager.cancelAll();
         if (settings.getEnabled()) {
-            int id = 1;
-            String channelId = packageName + id;
-
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                NotificationChannel notificationChannel = new NotificationChannel(channelId, packageName, getImportance());
+                NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, packageName, getImportance());
                 notificationChannel.setShowBadge(settings.getHideStatus());
                 manager.createNotificationChannel(notificationChannel);
             }
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
+            PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 100,
+                    new Intent(context, CreateNotificationReceiver.class),
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setOngoing(true)
                     .setPriority(getPriority())
                     .setVisibility(getVisibility())
                     .setCustomContentView(getCustomContentView())
                     .setSmallIcon(settings.getStatusIcon())
-                    .setColor(Color.TRANSPARENT);
+                    .setColor(Color.TRANSPARENT)
+                    .setDeleteIntent(deleteIntent);
 
-            PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0,
-                    new Intent(context, CreateNotificationReceiver.class),
-                    PendingIntent.FLAG_CANCEL_CURRENT);
-
-            builder.setDeleteIntent(deleteIntent);
-            manager.notify(id, builder.build());
+            manager.notify(NOTIFICATION_ID, builder.build());
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             requestListeningTiles();
@@ -164,6 +165,10 @@ public class NotificationController {
         RemoteViews view = new RemoteViews(packageName, R.layout.view_layout_notification);
         view.removeAllViews(R.id.notification_layout);
 
+        RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
+        wrapperLayout.removeAllViews(R.id.notification_wrapper);
+        view.addView(R.id.notification_layout, wrapperLayout);
+
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
         int backgroundColor;
         int iconColor;
@@ -179,11 +184,6 @@ public class NotificationController {
             backgroundColor = android.R.color.transparent;
         }
         view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
-
-        RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
-        view.removeAllViews(R.id.notification_wrapper);
-
-        view.addView(R.id.notification_layout, wrapperLayout);
 
         for (int pos = 0; pos < items.size(); pos++) {
             VolumeControl item = volumeControlModel.parseItem(items.get(pos));
