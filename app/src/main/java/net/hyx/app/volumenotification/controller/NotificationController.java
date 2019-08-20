@@ -187,7 +187,7 @@ public class NotificationController {
 
         for (int pos = 0; pos < items.size(); pos++) {
             VolumeControl item = volumeControlModel.parseItem(items.get(pos));
-            if (item.status == 0) {
+            if (item.status != 1) {
                 continue;
             }
             RemoteViews btn = new RemoteViews(packageName, R.layout.view_widget_volume_control);
