@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-//import ;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,16 +32,6 @@ public class VolumeControlModel {
 
     public static final String EXTRA_ITEM = "item";
     public static final String EXTRA_ITEM_ID = "item_id";
-/*
-        <string name="btn_def_label_media">Media volume</string>
-    <string name="btn_def_label_call">Call volume</string>
-    <string name="btn_def_label_ring">Ring volume</string>
-    <string name="btn_def_label_alarm">Alarm volume</string>
-    <string name="btn_def_label_notification">Notification volume</string>
-    <string name="btn_def_label_system">System volume</string>
-    <string name="btn_def_label_dial">Tone dialing volume</string>
-    <string name="btn_def_label_default">Default volume</string>*/
-
 
     private final SettingsModel settings;
 
