@@ -4,13 +4,4 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="fill">
-
-    <LinearLayout
-        android:id="@+id/volume_control_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-    </LinearLayout>
-
 </RelativeLayout>

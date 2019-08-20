@@ -37,8 +37,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.adapter.IconDropDownAdapter;
-import net.hyx.app.volumenotification.controller.NotificationController;
+import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -76,15 +75,13 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
         LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
-        Switch statusInput = (Switch) actionLayout.findViewById(R.id.menu_item_switch);
+        Switch statusInput = actionLayout.findViewById(R.id.menu_item_switch);
         statusInput.setChecked((fragment.item.status == 1));
         statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 fragment.item.status = (isChecked) ? 1 : 0;
                 fragment.model.saveItem(fragment.item);
-                NotificationController.newInstance(getApplicationContext()).create();
-
             }
         });
         return super.onCreateOptionsMenu(menu);
@@ -96,7 +93,6 @@ public class ItemViewActivity extends AppCompatActivity {
             case android.R.id.home:
                 fragment.model.saveItem(fragment.item);
                 NavUtils.navigateUpFromSameTask(this);
-                NotificationController.newInstance(getApplicationContext()).create();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -134,10 +130,10 @@ public class ItemViewActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            EditText labelInput = (EditText) view.findViewById(R.id.pref_label_input);
-            Spinner iconInput = (Spinner) view.findViewById(R.id.pref_icon_input);
+            EditText labelInput = view.findViewById(R.id.pref_label_input);
+            Spinner iconInput = view.findViewById(R.id.pref_icon_input);
 
-            iconInput.setAdapter(new IconDropDownAdapter(getContext(),
+            iconInput.setAdapter(new IconSpinnerAdapter(getContext(),
                     R.array.pref_icon_entries,
                     model.getIconEntries()));
 
@@ -160,7 +156,6 @@ public class ItemViewActivity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                     item.label = s.toString();
                     model.saveItem(item);
-                    //NotificationController.newInstance(getActivity()).create();
                 }
             });
 
@@ -169,7 +164,6 @@ public class ItemViewActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = position;
                     model.saveItem(item);
-                    //NotificationController.newInstance(getActivity()).create();
                 }
 
                 @Override

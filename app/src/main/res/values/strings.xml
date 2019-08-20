@@ -22,13 +22,14 @@
 
     <string name="pref_buttons_position_empty_label">Off</string>
 
-    <string name="btn_def_label_1">Media volume</string>
-    <string name="btn_def_label_2">Call volume</string>
-    <string name="btn_def_label_3">Ring volume</string>
-    <string name="btn_def_label_4">Alarm volume</string>
-    <string name="btn_def_label_5">Notification volume</string>
-    <string name="btn_def_label_6">System volume</string>
-    <string name="btn_def_label_7">DTMF Tone volume</string>
+    <string name="btn_def_label_media">Media volume</string>
+    <string name="btn_def_label_call">Call volume</string>
+    <string name="btn_def_label_ring">Ring volume</string>
+    <string name="btn_def_label_alarm">Alarm volume</string>
+    <string name="btn_def_label_notification">Notification volume</string>
+    <string name="btn_def_label_system">System volume</string>
+    <string name="btn_def_label_dial">Tone dialing volume</string>
+    <string name="btn_def_label_default">Default volume</string>
 
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>
@@ -40,6 +41,9 @@
     <string name="pref_custom_theme_icon_color_title">Icon color</string>
     <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
     <string name="pref_custom_theme_color_error_message">Invalid color name or format</string>
+
+    <string name="pref_notification_height_title">Notification size</string>
+    <string name="pref_notification_height_summary">Choose a default notification height</string>
 
     <string name="pref_translucent_title">Translucent background</string>
     <string name="pref_translucent_summary">* Background transparency is only compatible with translucent launchers.</string>

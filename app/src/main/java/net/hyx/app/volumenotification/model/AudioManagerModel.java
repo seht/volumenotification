@@ -30,7 +30,8 @@ public class AudioManagerModel {
             AudioManager.STREAM_ALARM,
             AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_SYSTEM,
-            AudioManager.STREAM_DTMF
+            AudioManager.STREAM_DTMF,
+            AudioManager.USE_DEFAULT_STREAM_TYPE
     };
 
     private final AudioManager audio;

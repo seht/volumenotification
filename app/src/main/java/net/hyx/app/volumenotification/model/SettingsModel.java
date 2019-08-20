@@ -115,6 +115,11 @@ public class SettingsModel {
         return preferences.getString("pref_custom_theme_icon_color", defValue);
     }
 
+    public String getNotificationHeight() {
+        String defValue = resources.getString(R.string.pref_notification_height_default);
+        return preferences.getString("pref_notification_height", defValue);
+    }
+
     public int getColor(String value) {
         int color = 0;
         try {

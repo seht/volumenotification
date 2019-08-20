@@ -40,6 +40,14 @@
             android:key="pref_translucent"
             android:summary="@string/pref_translucent_summary"
             android:title="@string/pref_translucent_title"/>
+        <ListPreference
+            android:defaultValue="@string/pref_notification_height_default"
+            android:dialogTitle="@string/pref_notification_height_title"
+            android:entries="@array/pref_notification_height_entries"
+            android:entryValues="@array/pref_notification_height_values"
+            android:key="pref_notification_height"
+            android:summary="@string/pref_notification_height_summary"
+            android:title="@string/pref_notification_height_title"/>
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/list_item_view"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:clickable="true"
-              android:divider="?android:listDivider"
-              android:focusable="true"
-              android:foreground="?selectableItemBackground"
-              android:orientation="vertical"
-              android:showDividers="end">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:divider="?android:listDivider"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    android:orientation="vertical"
+    android:showDividers="end">
 
     <LinearLayout
         android:id="@+id/list_item_wrapper"
@@ -23,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
-            android:scaleType="center"/>
+            android:scaleType="center" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -39,14 +40,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textAppearance="?android:textAppearanceMedium"/>
+                android:textAppearance="?android:textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/list_item_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textAppearance="?android:textAppearanceSmall"/>
+                android:textAppearance="?android:textAppearanceSmall" />
 
         </LinearLayout>
 
@@ -56,7 +57,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="fill_vertical"
             android:scaleType="center"
-            android:src="@drawable/ic_drag_handle"/>
+            app:srcCompat="@drawable/ic_baseline_drag_handle_24px" />
 
     </LinearLayout>
 

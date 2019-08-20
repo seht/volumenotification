@@ -61,7 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_view_item, parent, false);
-        return new ItemViewHolder(view, items, model);
+        return new ItemViewHolder(view, items, model, context);
     }
 
     @Override
@@ -69,12 +69,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         VolumeControl item = model.parseItem(items.get(position));
 
         View itemView = holder.itemView;
-        LinearLayout itemWrapper = (LinearLayout) itemView.findViewById(R.id.list_item_wrapper);
-        ImageView itemHandle = (ImageView) itemView.findViewById(R.id.list_item_handle);
+        LinearLayout itemWrapper = itemView.findViewById(R.id.list_item_wrapper);
+        ImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
 
-        ImageView itemIcon = (ImageView) itemView.findViewById(R.id.list_item_icon);
-        TextView itemLabel = (TextView) itemView.findViewById(R.id.list_item_label);
-        TextView itemHint = (TextView) itemView.findViewById(R.id.list_item_hint);
+        ImageView itemIcon = itemView.findViewById(R.id.list_item_icon);
+        TextView itemLabel = itemView.findViewById(R.id.list_item_label);
+        TextView itemHint = itemView.findViewById(R.id.list_item_hint);
 
         itemIcon.setImageResource(model.getIconDrawable(item.icon));
         itemLabel.setText(item.label);
@@ -85,8 +85,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         } else {
             itemWrapper.setAlpha(ALPHA_DISABLED);
         }
-
-        NotificationController.newInstance(context).create();
 
         itemHandle.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -110,15 +108,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 context.startActivity(intent);
             }
         });
+
+        NotificationController.newInstance(context).create();
     }
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(items, fromPosition, toPosition);
-        model.saveList(items);
         notifyItemMoved(fromPosition, toPosition);
-        notifyDataSetChanged();
-        //NotificationController.newInstance(context).create();
         return true;
     }
 
@@ -127,9 +124,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         VolumeControl item = items.get(position);
         item.status = (item.status != 0) ? 0 : 1;
         items.set(position, item);
-        model.saveList(items);
-        notifyDataSetChanged();
-        //NotificationController.newInstance(context).create();
+        notifyItemChanged(position);
+        //notifyDataSetChanged();
     }
 
     @Override
@@ -137,19 +133,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return items.size();
     }
 
-    /**
-     * Simple example of a view holder that implements {@link ItemTouchHelperViewHolder} and has a
-     * "handle" view that initiates a drag event when touched.
-     */
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
 
+        Context context;
         List<VolumeControl> items;
         VolumeControlModel model;
 
-        public ItemViewHolder(View itemView, List<VolumeControl> items, VolumeControlModel model) {
+        public ItemViewHolder(View itemView, List<VolumeControl> items, VolumeControlModel model, Context context) {
             super(itemView);
             this.items = items;
             this.model = model;
+            this.context = context;
         }
 
         @Override
@@ -160,6 +154,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onItemClear() {
             model.saveList(items);
+            NotificationController.newInstance(context).create();
         }
 
     }

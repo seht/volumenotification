@@ -51,9 +51,9 @@
 
         <service android:name=".service.NotificationService"/>
         <service
-            android:name=".service.TileService1"
-            android:icon="@drawable/ic_btn_def_1"
-            android:label="@string/btn_def_label_1"
+            android:name=".service.TileServiceMediaVolume"
+            android:icon="@drawable/ic_baseline_music_note_24px"
+            android:label="@string/btn_def_label_media"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -64,9 +64,9 @@
                 android:value="true"/>
         </service>
         <service
-            android:name=".service.TileService2"
-            android:icon="@drawable/ic_btn_def_2"
-            android:label="@string/btn_def_label_2"
+            android:name=".service.TileServiceCallVolume"
+            android:icon="@drawable/ic_baseline_phone_24px"
+            android:label="@string/btn_def_label_call"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -77,9 +77,9 @@
                 android:value="true"/>
         </service>
         <service
-            android:name=".service.TileService3"
-            android:icon="@drawable/ic_btn_def_3"
-            android:label="@string/btn_def_label_3"
+            android:name=".service.TileServiceRingVolume"
+            android:icon="@drawable/ic_baseline_notifications_24px"
+            android:label="@string/btn_def_label_notification"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -90,9 +90,9 @@
                 android:value="true"/>
         </service>
         <service
-            android:name=".service.TileService4"
-            android:icon="@drawable/ic_btn_def_4"
-            android:label="@string/btn_def_label_4"
+            android:name=".service.TileServiceAlarmVolume"
+            android:icon="@drawable/ic_baseline_alarm_24px"
+            android:label="@string/btn_def_label_alarm"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -103,9 +103,9 @@
                 android:value="true"/>
         </service>
         <service
-            android:name=".service.TileService5"
-            android:icon="@drawable/ic_btn_def_5"
-            android:label="@string/btn_def_label_5"
+            android:name=".service.TileServiceNotificationVolume"
+            android:icon="@drawable/ic_baseline_chat_bubble_24px"
+            android:label="@string/btn_def_label_notification"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -116,9 +116,9 @@
                 android:value="true"/>
         </service>
         <service
-            android:name=".service.TileService6"
-            android:icon="@drawable/ic_btn_def_6"
-            android:label="@string/btn_def_label_6"
+            android:name=".service.TileServiceSystemVolume"
+            android:icon="@drawable/ic_baseline_phone_android_24px"
+            android:label="@string/btn_def_label_system"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
@@ -129,9 +129,22 @@
                 android:value="true"/>
         </service>
         <service
-            android:name=".service.TileService7"
-            android:icon="@drawable/ic_btn_def_7"
-            android:label="@string/btn_def_label_7"
+            android:name=".service.TileServiceDialVolume"
+            android:icon="@drawable/ic_baseline_dialpad_24px"
+            android:label="@string/btn_def_label_dial"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true"/>
+        </service>
+        <service
+            android:name=".service.TileServiceDefaultVolume"
+            android:icon="@drawable/ic_baseline_volume_up_24px"
+            android:label="@string/btn_def_label_default"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>

@@ -16,11 +16,9 @@
 
 package net.hyx.app.volumenotification.helper;
 
-import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 
 /**
  * An implementation of {@link ItemTouchHelper.Callback} that enables basic drag & drop and

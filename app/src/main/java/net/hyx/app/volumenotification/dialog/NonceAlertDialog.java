@@ -68,7 +68,7 @@ public class NonceAlertDialog extends DialogFragment {
         final SettingsModel settings = new SettingsModel(getActivity());
 
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_dialog_alert_nonce, null);
-        TextView messageView = (TextView) view.findViewById(R.id.pref_dialog_alert_message);
+        TextView messageView = view.findViewById(R.id.pref_dialog_alert_message);
         messageView.setText(message);
 
         if (id != 0) {

@@ -29,7 +29,6 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
@@ -39,6 +38,14 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
 import net.hyx.app.volumenotification.receiver.CreateNotificationReceiver;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
+import net.hyx.app.volumenotification.service.TileServiceCallVolume;
+import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
+import net.hyx.app.volumenotification.service.TileServiceDefaultVolume;
+import net.hyx.app.volumenotification.service.TileServiceDialVolume;
+import net.hyx.app.volumenotification.service.TileServiceMediaVolume;
+import net.hyx.app.volumenotification.service.TileServiceNotificationVolume;
+import net.hyx.app.volumenotification.service.TileServiceRingVolume;
+import net.hyx.app.volumenotification.service.TileServiceSystemVolume;
 
 import java.util.List;
 
@@ -51,6 +58,17 @@ public class NotificationController {
     private final VolumeControlModel volumeControlModel;
     private final AudioManagerModel audioManagerModel;
     private final List<VolumeControl> items;
+
+    public static final String[] TILE_SERVICES = {
+            TileServiceMediaVolume.class.getName(),
+            TileServiceCallVolume.class.getName(),
+            TileServiceRingVolume.class.getName(),
+            TileServiceAlarmVolume.class.getName(),
+            TileServiceNotificationVolume.class.getName(),
+            TileServiceSystemVolume.class.getName(),
+            TileServiceDialVolume.class.getName(),
+            TileServiceDefaultVolume.class.getName(),
+    };
 
     public NotificationController(Context context) {
         this.context = context;
@@ -72,9 +90,8 @@ public class NotificationController {
 
     @TargetApi(Build.VERSION_CODES.N)
     private void requestListeningTiles() {
-        for (int pos = 0; pos < items.size(); pos++) {
-            VolumeControl item = items.get(pos);
-            TileService.requestListeningState(context, new ComponentName(context, packageName + ".service.TileService" + item.id));
+        for (int index = 0; index < items.size(); index++) {
+            TileService.requestListeningState(context, new ComponentName(context, TILE_SERVICES[index]));
         }
     }
 
@@ -145,6 +162,8 @@ public class NotificationController {
 
     private RemoteViews getCustomContentView() {
         RemoteViews view = new RemoteViews(packageName, R.layout.view_layout_notification);
+        view.removeAllViews(R.id.notification_layout);
+
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
         int backgroundColor;
         int iconColor;
@@ -160,7 +179,11 @@ public class NotificationController {
             backgroundColor = android.R.color.transparent;
         }
         view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
-        view.removeAllViews(R.id.volume_control_wrapper);
+
+        RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
+        //view.removeAllViews(R.id.notification_wrapper);
+
+        view.addView(R.id.notification_layout, wrapperLayout);
 
         for (int pos = 0; pos < items.size(); pos++) {
             VolumeControl item = volumeControlModel.parseItem(items.get(pos));
@@ -175,10 +198,28 @@ public class NotificationController {
             btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
             btn.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconDrawable(item.icon));
             btn.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
-            view.addView(R.id.volume_control_wrapper, btn);
+            view.addView(R.id.notification_wrapper, btn);
         }
 
         return view;
+    }
+
+    private int getWrapperLayout() {
+        switch(settings.getNotificationHeight()) {
+            default:
+            case "match_parent":
+                return R.layout.view_layout_notification_wrapper_match_parent;
+            case "wrap_content":
+                return R.layout.view_layout_notification_wrapper_wrap_content;
+            case "32dp":
+                return R.layout.view_layout_notification_wrapper_32dp;
+            case "40dp":
+                return R.layout.view_layout_notification_wrapper_40dp;
+            case "64dp":
+                return R.layout.view_layout_notification_wrapper_64dp;
+            case "70dp":
+                return R.layout.view_layout_notification_wrapper_70dp;
+        }
     }
 
 }
