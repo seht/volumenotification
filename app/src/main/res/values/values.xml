@@ -41,6 +41,7 @@
         <item>40dp</item>
         <item>64dp</item>
         <item>70dp</item>
+        <item>94dp</item>
     </string-array>
     <string-array name="pref_notification_height_values">
         <item>match_parent</item>
@@ -49,6 +50,7 @@
         <item>40dp</item>
         <item>64dp</item>
         <item>70dp</item>
+        <item>94dp</item>
     </string-array>
 
     <string-array name="pref_volume_control_entries">

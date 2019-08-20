@@ -219,6 +219,8 @@ public class NotificationController {
                 return R.layout.view_layout_notification_wrapper_64dp;
             case "70dp":
                 return R.layout.view_layout_notification_wrapper_70dp;
+            case "92dp":
+                return R.layout.view_layout_notification_wrapper_92dp;
         }
     }
 
