@@ -31,7 +31,7 @@ public class AudioManagerModel {
             AudioManager.STREAM_NOTIFICATION,
             AudioManager.STREAM_SYSTEM,
             AudioManager.STREAM_DTMF,
-            AudioManager.USE_DEFAULT_STREAM_TYPE
+            //AudioManager.USE_DEFAULT_STREAM_TYPE
     };
 
     private final AudioManager audio;
@@ -52,7 +52,8 @@ public class AudioManagerModel {
         if (index >= 0 && index < AudioManagerModel.STREAM_TYPES.length) {
             return AudioManagerModel.STREAM_TYPES[index];
         }
-        return AudioManager.USE_DEFAULT_STREAM_TYPE;
+        return AudioManagerModel.STREAM_TYPES[0];
+        //return AudioManager.USE_DEFAULT_STREAM_TYPE;
     }
 
     private int getStreamFlag(int type) {

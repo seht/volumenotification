@@ -59,7 +59,7 @@ public class NotificationController {
     private final AudioManagerModel audioManagerModel;
     private final List<VolumeControl> items;
 
-    public static final String[] TILE_SERVICES = {
+    private static final String[] TILE_SERVICES = {
             TileServiceMediaVolume.class.getName(),
             TileServiceCallVolume.class.getName(),
             TileServiceRingVolume.class.getName(),
@@ -67,7 +67,7 @@ public class NotificationController {
             TileServiceNotificationVolume.class.getName(),
             TileServiceSystemVolume.class.getName(),
             TileServiceDialVolume.class.getName(),
-            TileServiceDefaultVolume.class.getName(),
+            //TileServiceDefaultVolume.class.getName(),
     };
 
     public NotificationController(Context context) {
@@ -205,7 +205,7 @@ public class NotificationController {
     }
 
     private int getWrapperLayout() {
-        switch(settings.getNotificationHeight()) {
+        switch (settings.getNotificationHeight()) {
             default:
             case "match_parent":
                 return R.layout.view_layout_notification_wrapper_match_parent;

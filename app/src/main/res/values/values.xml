@@ -61,7 +61,9 @@
         <item>@string/btn_def_label_notification</item>
         <item>@string/btn_def_label_system</item>
         <item>@string/btn_def_label_dial</item>
+        <!--
         <item>@string/btn_def_label_default</item>
+        -->
     </string-array>
 
     <string-array name="pref_icon_entries">

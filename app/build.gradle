@@ -6,8 +6,8 @@ android {
         applicationId 'net.hyx.app.volumenotification'
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 98
-        versionName '0.9.8'
+        versionCode 99
+        versionName '0.9.9'
     }
     buildTypes {
         release {
