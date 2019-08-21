@@ -68,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
         VolumeControl item = items.get(position);
-        VolumeControl defaultItem = model.getDefaultControls().get(item.id);
+        VolumeControl defaultItem = model.getDefaultControls().get(item.type);
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = itemView.findViewById(R.id.list_item_wrapper);

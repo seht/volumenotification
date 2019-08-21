@@ -20,14 +20,14 @@ import java.io.Serializable;
 
 public class VolumeControl implements Serializable {
 
-    public final int id;
+    public final int type;
     public int position;
     public int status;
     public String icon;
     public String label;
 
-    public VolumeControl(int id, int position, int status, String icon, String label) {
-        this.id = id;
+    public VolumeControl(int type, int position, int status, String icon, String label) {
+        this.type = type;
         this.position = position;
         this.status = status;
         this.icon = icon;

@@ -131,7 +131,7 @@ public class ItemViewActivity extends AppCompatActivity {
             super.onViewCreated(view, savedInstanceState);
             EditText labelInput = view.findViewById(R.id.pref_label_input);
             Spinner iconInput = view.findViewById(R.id.pref_icon_input);
-            VolumeControl defaultItem = model.getDefaultControls().get(item.id);
+            VolumeControl defaultItem = model.getDefaultControls().get(item.type);
 
             IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), R.array.pref_icon_entries, model.getIconEntries(), model);
             iconInput.setAdapter(adapter);

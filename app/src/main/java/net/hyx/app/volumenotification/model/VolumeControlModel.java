@@ -123,7 +123,7 @@ public class VolumeControlModel {
     public VolumeControl getItemByType(int streamType) {
         for (int index = 0; index < getDefaultControls().size(); index++) {
             VolumeControl item = getItem(index);
-            if (item != null && item.id == streamType) {
+            if (item != null && item.type == streamType) {
                 return item;
             }
         }

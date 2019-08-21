@@ -71,7 +71,7 @@ public class NotificationController {
     };
 
     private static final int NOTIFICATION_ID = 1;
-    private static final String CHANNEL_ID = "DEFAULT";
+    private static final String CHANNEL_ID = "1";
 
     public NotificationController(Context context) {
         this.context = context;
@@ -191,8 +191,8 @@ public class NotificationController {
                 continue;
             }
             RemoteViews btn = new RemoteViews(packageName, R.layout.view_widget_volume_control);
-            PendingIntent event = PendingIntent.getBroadcast(context, item.id,
-                    new Intent(context, SetVolumeReceiver.class).putExtra(VolumeControlModel.EXTRA_ITEM_ID, item.id),
+            PendingIntent event = PendingIntent.getBroadcast(context, item.type,
+                    new Intent(context, SetVolumeReceiver.class).putExtra(VolumeControlModel.EXTRA_ITEM_ID, item.type),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
