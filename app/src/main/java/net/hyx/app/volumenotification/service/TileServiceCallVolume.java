@@ -17,6 +17,7 @@
 package net.hyx.app.volumenotification.service;
 
 import android.annotation.TargetApi;
+import android.media.AudioManager;
 import android.os.Build;
 import android.service.quicksettings.TileService;
 
@@ -28,19 +29,19 @@ public class TileServiceCallVolume extends TileService {
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 2);
+        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), AudioManager.STREAM_VOICE_CALL);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), 2);
+        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), AudioManager.STREAM_VOICE_CALL);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(2);
+        NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(AudioManager.STREAM_VOICE_CALL);
     }
 
 }

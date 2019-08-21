@@ -20,19 +20,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.Build;
 
-
 public class AudioManagerModel {
-
-    public static final int[] STREAM_TYPES = {
-            AudioManager.STREAM_MUSIC,
-            AudioManager.STREAM_VOICE_CALL,
-            AudioManager.STREAM_RING,
-            AudioManager.STREAM_ALARM,
-            AudioManager.STREAM_NOTIFICATION,
-            AudioManager.STREAM_SYSTEM,
-            AudioManager.STREAM_DTMF,
-            //AudioManager.USE_DEFAULT_STREAM_TYPE
-    };
 
     private final AudioManager audio;
     private final SettingsModel settings;
@@ -42,18 +30,8 @@ public class AudioManagerModel {
         settings = new SettingsModel(context);
     }
 
-    public void setVolume(int id) {
-        int type = getStreamType(id);
-        audio.adjustStreamVolume(type, getStreamFlag(type), AudioManager.FLAG_SHOW_UI);
-    }
-
-    private int getStreamType(int id) {
-        int index = id - 1;
-        if (index >= 0 && index < AudioManagerModel.STREAM_TYPES.length) {
-            return AudioManagerModel.STREAM_TYPES[index];
-        }
-        return AudioManagerModel.STREAM_TYPES[0];
-        //return AudioManager.USE_DEFAULT_STREAM_TYPE;
+    public void setVolume(int streamType) {
+        audio.adjustStreamVolume(streamType, getStreamFlag(streamType), AudioManager.FLAG_SHOW_UI);
     }
 
     private int getStreamFlag(int type) {

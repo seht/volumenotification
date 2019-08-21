@@ -18,6 +18,9 @@ package net.hyx.app.volumenotification.model;
 
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.util.SparseArray;
 
 import com.google.gson.Gson;
 
@@ -33,94 +36,102 @@ public class VolumeControlModel {
     public static final String EXTRA_ITEM = "item";
     public static final String EXTRA_ITEM_ID = "item_id";
 
+    private final Context context;
     private final SettingsModel settings;
+    private final ArrayList<Integer> defaultOrder;
+    private final SparseArray<VolumeControl> defaultControls;
 
     public VolumeControlModel(Context context) {
+        this.context = context;
         settings = new SettingsModel(context);
+        defaultOrder = new ArrayList<>();
+        defaultControls = new SparseArray<>();
+        setDefaultOrder();
+        setDefaultControls();
     }
 
-    public List<String> getEntries() {
-        return Arrays.asList(settings.getResources().getStringArray(R.array.pref_volume_control_entries));
+    private void setDefaultOrder() {
+        defaultOrder.add(AudioManager.STREAM_MUSIC);
+        defaultOrder.add(AudioManager.STREAM_VOICE_CALL);
+        defaultOrder.add(AudioManager.STREAM_RING);
+        defaultOrder.add(AudioManager.STREAM_ALARM);
+        defaultOrder.add(AudioManager.STREAM_NOTIFICATION);
+        defaultOrder.add(AudioManager.STREAM_SYSTEM);
+        defaultOrder.add(AudioManager.STREAM_DTMF);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            defaultOrder.add(AudioManager.STREAM_ACCESSIBILITY);
+        }
+        //defaultOrder.put(AudioManager.USE_DEFAULT_STREAM_TYPE);
+    }
+
+    private void setDefaultControls() {
+        defaultControls.put(AudioManager.STREAM_MUSIC, new VolumeControl(AudioManager.STREAM_MUSIC, 0, 1, "ic_baseline_music_note_24px", getDefaultLabel(R.string.control_label_media)));
+        defaultControls.put(AudioManager.STREAM_VOICE_CALL, new VolumeControl(AudioManager.STREAM_VOICE_CALL, 1, 1, "ic_baseline_phone_24px", getDefaultLabel(R.string.control_label_call)));
+        defaultControls.put(AudioManager.STREAM_RING, new VolumeControl(AudioManager.STREAM_RING, 2, 1, "ic_baseline_notifications_24px", getDefaultLabel(R.string.control_label_ring)));
+        defaultControls.put(AudioManager.STREAM_ALARM, new VolumeControl(AudioManager.STREAM_ALARM, 3, 0, "ic_baseline_alarm_24px", getDefaultLabel(R.string.control_label_alarm)));
+        defaultControls.put(AudioManager.STREAM_NOTIFICATION, new VolumeControl(AudioManager.STREAM_NOTIFICATION, 4, 0, "ic_baseline_chat_bubble_24px", getDefaultLabel(R.string.control_label_notification)));
+        defaultControls.put(AudioManager.STREAM_SYSTEM, new VolumeControl(AudioManager.STREAM_SYSTEM, 5, 0, "ic_baseline_phone_android_24px", getDefaultLabel(R.string.control_label_system)));
+        defaultControls.put(AudioManager.STREAM_DTMF, new VolumeControl(AudioManager.STREAM_DTMF, 6, 0, "ic_baseline_dialpad_24px", getDefaultLabel(R.string.control_label_dial)));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            defaultControls.put(AudioManager.STREAM_ACCESSIBILITY, new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_baseline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
+        }
+        //defaultControls.put(AudioManager.USE_DEFAULT_STREAM_TYPE, new VolumeControl(AudioManager.USE_DEFAULT_STREAM_TYPE, 8, 0, "control_icon_default", getDefaultLabel(R.string.control_label_default)));
+    }
+
+    public ArrayList<Integer> getDefaultOrder() {
+        return defaultOrder;
+    }
+
+    public SparseArray<VolumeControl> getDefaultControls() {
+        return defaultControls;
+    }
+
+    public List<VolumeControl> getItems() {
+        ArrayList<VolumeControl> items = new ArrayList<>(getDefaultControls().size());
+        for (int index = 0; index < getDefaultControls().size(); index++) {
+            VolumeControl item = getItem(index);
+            if (item != null) {
+                items.add(item);
+            } else {
+                VolumeControl defaultItem = defaultControls.get(getDefaultOrder().get(index));
+                items.add(defaultItem);
+            }
+        }
+        return items;
     }
 
     public List<String> getIconEntries() {
         return Arrays.asList(settings.getResources().getStringArray(R.array.pref_icon_entries));
     }
 
-    public List<VolumeControl> getList() {
-        List<VolumeControl> list = new ArrayList<>();
-        for (int pos = 0; pos < getEntries().size(); pos++) {
-            VolumeControl item = getItem(pos);
-            if (item != null) {
-                list.add(item);
-            }
-        }
-        return list;
+    public int getIconId(String drawableName) {
+        return settings.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
+    }
+
+    public String getDefaultLabel(int resourceId) {
+        return settings.getResources().getString(resourceId);
     }
 
     public VolumeControl getItem(int position) {
-        String value = settings.getPreferences().getString("pref_buttons_list_item_" + position, "");
-        if (!value.isEmpty()) {
-            return (new Gson()).fromJson(value, VolumeControl.class);
-        }
-        if (position >= 0 && position < getEntries().size()) {
-            return getDefaultItem(position);
+        String control = settings.getPreferences().getString("pref_control_list_item_" + position, null);
+        if (control != null) {
+            return (new Gson()).fromJson(control, VolumeControl.class);
         }
         return null;
     }
 
-    public VolumeControl getItemById(int id) {
-        List<VolumeControl> items = getList();
-        for (int pos = 0; pos < items.size(); pos++) {
-            VolumeControl item = items.get(pos);
-            if (item.id == id) {
+    public VolumeControl getItemByType(int streamType) {
+        for (int index = 0; index < getDefaultControls().size(); index++) {
+            VolumeControl item = getItem(index);
+            if (item != null && item.id == streamType) {
                 return item;
             }
         }
         return null;
     }
 
-    public VolumeControl parseItem(VolumeControl item) {
-        if (item != null) {
-            if (item.icon <= 0 || item.icon >= getIconEntries().size()) {
-                item.icon = getDefaultIcon(item.id);
-            }
-            if (item.label.isEmpty()) {
-                item.label = getDefaultLabel(item.id);
-            }
-            return item;
-        }
-        return new VolumeControl(0, 0, 0, 0, "");
-    }
-
-    public VolumeControl getDefaultItem(int position) {
-        int id = position + 1;
-        int status = (id >= 1 && id <= 3) ? 1 : 0;
-        return new VolumeControl(id, position, status, getDefaultIcon(id), getDefaultLabel(id));
-    }
-
-    public String getDefaultLabel(int id) {
-        int index = id - 1;
-        if (index >= 0 && index < getEntries().size()) {
-            return getEntries().get(index);
-        }
-        return "";
-    }
-
-    public int getDefaultIcon(int id) {
-        int index = id - 1;
-        if (index >= 0 && index < getIconEntries().size()) {
-            return index;
-        }
-        return 0;
-    }
-
-    public int getIconDrawable(int index) {
-        return settings.getResourceDrawable(R.array.pref_icon_entries, index);
-    }
-
     private Editor editItem(VolumeControl item) {
-        return settings.getPreferences().edit().putString("pref_buttons_list_item_" + item.position, (new Gson()).toJson(item));
+        return settings.getPreferences().edit().putString("pref_control_list_item_" + item.position, (new Gson()).toJson(item));
     }
 
     public void saveItem(VolumeControl item) {
@@ -128,10 +139,10 @@ public class VolumeControlModel {
     }
 
     public void saveList(List<VolumeControl> list) {
-        for (int pos = 0; pos < list.size(); pos++) {
-            VolumeControl item = list.get(pos);
-            item.position = pos;
-            editItem(item).commit();
+        for (int position = 0; position < list.size(); position++) {
+            VolumeControl item = list.get(position);
+            item.position = position;
+            editItem(item).apply();
         }
     }
 

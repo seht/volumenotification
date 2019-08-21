@@ -30,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -117,9 +118,7 @@ public class ItemViewActivity extends AppCompatActivity {
             model = new VolumeControlModel(getActivity());
             if (getArguments() != null) {
                 item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.EXTRA_ITEM);
-                item = model.parseItem(item);
             }
-
         }
 
         @Override
@@ -132,14 +131,14 @@ public class ItemViewActivity extends AppCompatActivity {
             super.onViewCreated(view, savedInstanceState);
             EditText labelInput = view.findViewById(R.id.pref_label_input);
             Spinner iconInput = view.findViewById(R.id.pref_icon_input);
+            VolumeControl defaultItem = model.getDefaultControls().get(item.id);
 
-            iconInput.setAdapter(new IconSpinnerAdapter(getContext(),
-                    R.array.pref_icon_entries,
-                    model.getIconEntries()));
+            IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), R.array.pref_icon_entries, model.getIconEntries(), model);
+            iconInput.setAdapter(adapter);
 
             labelInput.setText(item.label);
-            labelInput.setHint(model.getDefaultLabel(item.id));
-            iconInput.setSelection(item.icon);
+            labelInput.setHint(defaultItem.label);
+            iconInput.setSelection(adapter.getPosition(item.icon));
 
             labelInput.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -162,7 +161,7 @@ public class ItemViewActivity extends AppCompatActivity {
             iconInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    item.icon = position;
+                    item.icon = parent.getItemAtPosition(position).toString();
                     model.saveItem(item);
                 }
 

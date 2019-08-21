@@ -22,14 +22,15 @@
 
     <string name="pref_buttons_position_empty_label">Off</string>
 
-    <string name="btn_def_label_media">Media volume</string>
-    <string name="btn_def_label_call">Call volume</string>
-    <string name="btn_def_label_ring">Ring volume</string>
-    <string name="btn_def_label_alarm">Alarm volume</string>
-    <string name="btn_def_label_notification">Notification volume</string>
-    <string name="btn_def_label_system">System volume</string>
-    <string name="btn_def_label_dial">Tone dialing volume</string>
-    <string name="btn_def_label_default">Default volume</string>
+    <string name="control_label_media">Media volume</string>
+    <string name="control_label_call">Call volume</string>
+    <string name="control_label_ring">Ring volume</string>
+    <string name="control_label_alarm">Alarm volume</string>
+    <string name="control_label_notification">Notification volume</string>
+    <string name="control_label_system">System volume</string>
+    <string name="control_label_dial">Tone dialing volume</string>
+    <string name="control_label_accessibility">Accessibility volume</string>
+    <string name="control_label_default">Default volume</string>
 
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>
@@ -39,7 +40,7 @@
     <string name="pref_custom_theme_summary">Personalize the custom theme colors</string>
     <string name="pref_custom_theme_background_color_title">Background color</string>
     <string name="pref_custom_theme_icon_color_title">Icon color</string>
-    <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB, \"color name\"</string>
+    <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB</string>
     <string name="pref_custom_theme_color_error_message">Invalid color name or format</string>
 
     <string name="pref_notification_height_title">Notification size</string>

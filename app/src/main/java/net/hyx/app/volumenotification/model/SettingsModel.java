@@ -132,13 +132,13 @@ public class SettingsModel {
         return color;
     }
 
-    public int getResourceDrawable(int resource, int index) {
-        int drawable;
-        TypedArray drawables = resources.obtainTypedArray(resource);
-        drawable = drawables.getResourceId(index, 0);
-        drawables.recycle();
-        return drawable;
-    }
+//    public int getResourceDrawable(int resource, int index) {
+//        int drawable;
+//        TypedArray drawables = resources.obtainTypedArray(resource);
+//        drawable = drawables.getResourceId(index, 0);
+//        drawables.recycle();
+//        return drawable;
+//    }
 
     public int getStyleAttributeColor(Theme theme, int style, int attribute) {
         TypedArray attrs = theme.obtainStyledAttributes(style, new int[]{attribute});

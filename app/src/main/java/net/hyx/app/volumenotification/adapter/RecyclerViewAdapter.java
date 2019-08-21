@@ -49,12 +49,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final OnStartDragListener dragStartListener;
     private final VolumeControlModel model;
     private final List<VolumeControl> items;
+    private final static Boolean bound = false;
 
     public RecyclerViewAdapter(Context context, OnStartDragListener dragStartListener) {
         this.context = context;
         this.dragStartListener = dragStartListener;
         model = new VolumeControlModel(context);
-        items = model.getList();
+        items = model.getItems();
     }
 
     @NonNull
@@ -66,7 +67,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
-        VolumeControl item = model.parseItem(items.get(position));
+        VolumeControl item = items.get(position);
+        VolumeControl defaultItem = model.getDefaultControls().get(item.id);
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = itemView.findViewById(R.id.list_item_wrapper);
@@ -76,9 +78,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView itemLabel = itemView.findViewById(R.id.list_item_label);
         TextView itemHint = itemView.findViewById(R.id.list_item_hint);
 
-        itemIcon.setImageResource(model.getIconDrawable(item.icon));
+        itemIcon.setImageResource(model.getIconId(item.icon));
         itemLabel.setText(item.label);
-        itemHint.setText(model.getDefaultLabel(item.id));
+        itemHint.setText(defaultItem.label);
 
         if (item.status != 0) {
             itemWrapper.setAlpha(ALPHA_ENABLED);
@@ -109,7 +111,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
 
-        NotificationController.newInstance(context).create();
+        //NotificationController.newInstance(context).create();
     }
 
     @Override

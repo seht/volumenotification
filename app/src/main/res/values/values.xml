@@ -53,57 +53,62 @@
         <item>92dp</item>
     </string-array>
 
+
+
     <string-array name="pref_volume_control_entries">
-        <item>@string/btn_def_label_media</item>
-        <item>@string/btn_def_label_call</item>
-        <item>@string/btn_def_label_ring</item>
-        <item>@string/btn_def_label_alarm</item>
-        <item>@string/btn_def_label_notification</item>
-        <item>@string/btn_def_label_system</item>
-        <item>@string/btn_def_label_dial</item>
+        <item>@string/control_label_media</item>
+        <item>@string/control_label_call</item>
+        <item>@string/control_label_ring</item>
+        <item>@string/control_label_alarm</item>
+        <item>@string/control_label_notification</item>
+        <item>@string/control_label_system</item>
+        <item>@string/control_label_dial</item>
         <!--
         <item>@string/btn_def_label_default</item>
         -->
     </string-array>
 
     <string-array name="pref_icon_entries">
-        <item>@drawable/ic_baseline_music_note_24px</item>
-        <item>@drawable/ic_baseline_phone_24px</item>
-        <item>@drawable/ic_baseline_notifications_24px</item>
-        <item>@drawable/ic_baseline_alarm_24px</item>
-        <item>@drawable/ic_baseline_chat_bubble_24px</item>
-        <item>@drawable/ic_baseline_phone_android_24px</item>
-        <item>@drawable/ic_baseline_dialpad_24px</item>
-        <item>@drawable/ic_baseline_volume_up_24px</item>
+        <item>ic_baseline_music_note_24px</item>
+        <item>ic_baseline_phone_24px</item>
+        <item>ic_baseline_notifications_24px</item>
+        <item>ic_baseline_alarm_24px</item>
+        <item>ic_baseline_chat_bubble_24px</item>
+        <item>ic_baseline_phone_android_24px</item>
+        <item>ic_baseline_dialpad_24px</item>
+        <item>ic_baseline_volume_up_24px</item>
+        <item>ic_baseline_accessibility_new_24px</item>
+        <item>ic_baseline_volume_up_24px</item>
         <!-- -->
-        <item>@drawable/ic_baseline_headset_24px</item>
-        <item>@drawable/ic_baseline_speaker_24px</item>
-        <item>@drawable/ic_baseline_notifications_active_24px</item>
-        <item>@drawable/ic_baseline_notification_important_24px</item>
-        <item>@drawable/ic_baseline_phone_in_talk_24px</item>
-        <item>@drawable/ic_baseline_ring_volume_24px</item>
-        <item>@drawable/ic_baseline_phonelink_ring_24px</item>
-        <item>@drawable/ic_baseline_smartphone_24px</item>
-        <item>@drawable/ic_baseline_tune_24px</item>
+        <item>ic_baseline_headset_24px</item>
+        <item>ic_baseline_speaker_24px</item>
+        <item>ic_baseline_notifications_active_24px</item>
+        <item>ic_baseline_notification_important_24px</item>
+        <item>ic_baseline_phone_in_talk_24px</item>
+        <item>ic_baseline_ring_volume_24px</item>
+        <item>ic_baseline_phonelink_ring_24px</item>
+        <item>ic_baseline_smartphone_24px</item>
+        <item>ic_baseline_tune_24px</item>
         <!-- -->
-        <item>@drawable/ic_outline_music_note_24px</item>
-        <item>@drawable/ic_outline_phone_24px</item>
-        <item>@drawable/ic_outline_notifications_24px</item>
-        <item>@drawable/ic_outline_alarm_24px</item>
-        <item>@drawable/ic_outline_chat_bubble_outline_24px</item>
-        <item>@drawable/ic_outline_phone_android_24px</item>
-        <item>@drawable/ic_outline_dialpad_24px</item>
-        <item>@drawable/ic_outline_volume_up_24px</item>
+        <item>ic_outline_music_note_24px</item>
+        <item>ic_outline_phone_24px</item>
+        <item>ic_outline_notifications_24px</item>
+        <item>ic_outline_alarm_24px</item>
+        <item>ic_outline_chat_bubble_outline_24px</item>
+        <item>ic_outline_phone_android_24px</item>
+        <item>ic_outline_dialpad_24px</item>
+        <item>ic_outline_accessibility_new_24px</item>
+        <item>ic_outline_volume_up_24px</item>
         <!-- -->
-        <item>@drawable/ic_outline_headset_24px</item>
-        <item>@drawable/ic_outline_speaker_24px</item>
-        <item>@drawable/ic_outline_notifications_active_24px</item>
-        <item>@drawable/ic_outline_notification_important_24px</item>
-        <item>@drawable/ic_outline_phone_in_talk_24px</item>
-        <item>@drawable/ic_outline_ring_volume_24px</item>
-        <item>@drawable/ic_outline_phonelink_ring_24px</item>
-        <item>@drawable/ic_outline_smartphone_24px</item>
-        <item>@drawable/ic_outline_tune_24px</item>
+        <item>ic_outline_headset_24px</item>
+        <item>ic_outline_speaker_24px</item>
+        <item>ic_outline_notifications_active_24px</item>
+        <item>ic_outline_notification_important_24px</item>
+        <item>ic_outline_phone_in_talk_24px</item>
+        <item>ic_outline_ring_volume_24px</item>
+        <item>ic_outline_phonelink_ring_24px</item>
+        <item>ic_outline_smartphone_24px</item>
+        <item>ic_outline_tune_24px</item>
     </string-array>
 
 </resources>

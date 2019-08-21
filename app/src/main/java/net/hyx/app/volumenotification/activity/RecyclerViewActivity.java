@@ -29,6 +29,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +39,7 @@ import android.view.ViewGroup;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
+import net.hyx.app.volumenotification.controller.NotificationController;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
 import net.hyx.app.volumenotification.helper.ItemTouchHelperCallback;
 import net.hyx.app.volumenotification.helper.OnStartDragListener;
@@ -46,6 +48,8 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private SettingsModel settings;
+
+    private final static int DIALOG_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        NotificationController.newInstance(getApplicationContext()).create();
     }
 
     @Override
@@ -75,9 +81,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         super.onAttachedToWindow();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            int id = 1;
-            if (!settings.getDialogAlertNonceChecked(id)) {
-                DialogFragment dialogFragment = NonceAlertDialog.newInstance(id,
+            if (!settings.getDialogAlertNonceChecked(DIALOG_ID)) {
+                DialogFragment dialogFragment = NonceAlertDialog.newInstance(DIALOG_ID,
                         settings.getResources().getString(R.string.target_api_welcome_message_N),
                         settings.getResources().getString(R.string.target_api_welcome_title_N));
                 dialogFragment.show(getSupportFragmentManager(), null);

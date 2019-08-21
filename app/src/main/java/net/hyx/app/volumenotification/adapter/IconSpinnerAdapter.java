@@ -17,6 +17,8 @@
 package net.hyx.app.volumenotification.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 
 import java.util.List;
 
@@ -32,20 +36,25 @@ public class IconSpinnerAdapter extends ArrayAdapter<String> {
 
     private final int resource;
     private final SettingsModel settings;
+    private final List<String> objects;
+    private final VolumeControlModel model;
 
-    public IconSpinnerAdapter(Context context, int resource, List<String> objects) {
+    public IconSpinnerAdapter(Context context, int resource, List<String> objects, VolumeControlModel model) {
         super(context, android.R.layout.simple_spinner_item, objects);
         this.resource = resource;
         settings = new SettingsModel(context);
+        this.objects = objects;
+        this.model = model;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         return getCustomView(position, parent, R.layout.adapter_icon_spinner_view);
     }
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
         return getCustomView(position, parent, R.layout.adapter_icon_spinner_dropdown_view);
     }
 
@@ -53,7 +62,7 @@ public class IconSpinnerAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(layout, parent, false);
         ImageView image = view.findViewById(R.id.pref_icon_image);
-        image.setImageResource(settings.getResourceDrawable(resource, position));
+        image.setImageResource(model.getIconId(objects.get(position)));
         return view;
     }
 

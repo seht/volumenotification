@@ -23,25 +23,25 @@ import android.service.quicksettings.TileService;
 
 import net.hyx.app.volumenotification.controller.NotificationController;
 
-@TargetApi(Build.VERSION_CODES.N)
-public class TileServiceDefaultVolume extends TileService {
+@TargetApi(Build.VERSION_CODES.O)
+public class TileServiceAccessibilityVolume extends TileService {
 
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), AudioManager.USE_DEFAULT_STREAM_TYPE);
+        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), AudioManager.STREAM_ACCESSIBILITY);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), AudioManager.USE_DEFAULT_STREAM_TYPE);
+        NotificationController.newInstance(getApplicationContext()).updateTile(getQsTile(), AudioManager.STREAM_ACCESSIBILITY);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(AudioManager.USE_DEFAULT_STREAM_TYPE);
+        NotificationController.newInstance(getApplicationContext()).audioManagerModel().setVolume(AudioManager.STREAM_ACCESSIBILITY);
     }
 
 }

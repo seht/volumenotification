@@ -29,7 +29,6 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
@@ -41,7 +40,6 @@ import net.hyx.app.volumenotification.receiver.CreateNotificationReceiver;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
 import net.hyx.app.volumenotification.service.TileServiceCallVolume;
 import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
-import net.hyx.app.volumenotification.service.TileServiceDefaultVolume;
 import net.hyx.app.volumenotification.service.TileServiceDialVolume;
 import net.hyx.app.volumenotification.service.TileServiceMediaVolume;
 import net.hyx.app.volumenotification.service.TileServiceNotificationVolume;
@@ -68,6 +66,7 @@ public class NotificationController {
             TileServiceNotificationVolume.class.getName(),
             TileServiceSystemVolume.class.getName(),
             TileServiceDialVolume.class.getName(),
+            TileServiceDialVolume.class.getName(),
             //TileServiceDefaultVolume.class.getName(),
     };
 
@@ -81,7 +80,7 @@ public class NotificationController {
         settings = new SettingsModel(context);
         volumeControlModel = new VolumeControlModel(context);
         audioManagerModel = new AudioManagerModel(context);
-        items = volumeControlModel.getList();
+        items = volumeControlModel.getItems();
     }
 
     public static NotificationController newInstance(Context context) {
@@ -94,20 +93,21 @@ public class NotificationController {
 
     @TargetApi(Build.VERSION_CODES.N)
     private void requestListeningTiles() {
-        for (int index = 0; index < items.size(); index++) {
-            TileService.requestListeningState(context, new ComponentName(context, TILE_SERVICES[index]));
+        for (String service : TILE_SERVICES) {
+            TileService.requestListeningState(context, new ComponentName(context, service));
         }
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    public void updateTile(Tile tile, int id) {
-        VolumeControl item = volumeControlModel.parseItem(volumeControlModel.getItemById(id));
-        if (item != null && tile != null) {
-            tile.setIcon(Icon.createWithResource(context, volumeControlModel.getIconDrawable(item.icon)));
-            tile.setLabel(item.label);
-            tile.setState(Tile.STATE_ACTIVE);
-            tile.updateTile();
+    public void updateTile(Tile tile, int streamType) {
+        VolumeControl item = volumeControlModel.getItemByType(streamType);
+        if (item == null) {
+            item = volumeControlModel.getDefaultControls().get(streamType);
         }
+        tile.setIcon(Icon.createWithResource(context, volumeControlModel.getIconId(item.icon)));
+        tile.setLabel(item.label);
+        tile.setState(Tile.STATE_ACTIVE);
+        tile.updateTile();
     }
 
     public void create() {
@@ -139,7 +139,7 @@ public class NotificationController {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
+    @TargetApi(Build.VERSION_CODES.O)
     private int getImportance() {
         if (settings.getTopPriority()) {
             return NotificationManager.IMPORTANCE_MAX;
@@ -186,7 +186,7 @@ public class NotificationController {
         view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
 
         for (int pos = 0; pos < items.size(); pos++) {
-            VolumeControl item = volumeControlModel.parseItem(items.get(pos));
+            VolumeControl item = items.get(pos);
             if (item.status != 1) {
                 continue;
             }
@@ -196,7 +196,7 @@ public class NotificationController {
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
-            btn.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconDrawable(item.icon));
+            btn.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconId(item.icon));
             btn.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
             view.addView(R.id.notification_wrapper, btn);
         }
