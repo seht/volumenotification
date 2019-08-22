@@ -34,15 +34,11 @@ import java.util.List;
 
 public class IconSpinnerAdapter extends ArrayAdapter<String> {
 
-    private final int resource;
-    private final SettingsModel settings;
     private final List<String> objects;
     private final VolumeControlModel model;
 
-    public IconSpinnerAdapter(Context context, int resource, List<String> objects, VolumeControlModel model) {
+    public IconSpinnerAdapter(Context context, List<String> objects, VolumeControlModel model) {
         super(context, android.R.layout.simple_spinner_item, objects);
-        this.resource = resource;
-        settings = new SettingsModel(context);
         this.objects = objects;
         this.model = model;
     }

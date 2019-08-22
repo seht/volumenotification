@@ -30,7 +30,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -54,7 +53,7 @@ public class ItemViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SettingsModel settings = new SettingsModel(getApplicationContext());
-        VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.EXTRA_ITEM);
+        VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.ITEM_FIELD);
 
         fragment = ItemFragment.newInstance(item);
 
@@ -107,7 +106,7 @@ public class ItemViewActivity extends AppCompatActivity {
         public static ItemFragment newInstance(Serializable item) {
             ItemFragment fragment = new ItemFragment();
             Bundle args = new Bundle();
-            args.putSerializable(VolumeControlModel.EXTRA_ITEM, item);
+            args.putSerializable(VolumeControlModel.ITEM_FIELD, item);
             fragment.setArguments(args);
             return fragment;
         }
@@ -117,7 +116,7 @@ public class ItemViewActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             model = new VolumeControlModel(getActivity());
             if (getArguments() != null) {
-                item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.EXTRA_ITEM);
+                item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.ITEM_FIELD);
             }
         }
 
@@ -129,26 +128,25 @@ public class ItemViewActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            EditText labelInput = view.findViewById(R.id.pref_label_input);
+
             Spinner iconInput = view.findViewById(R.id.pref_icon_input);
+            EditText labelInput = view.findViewById(R.id.pref_label_input);
             VolumeControl defaultItem = model.getDefaultControls().get(item.type);
 
-            IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), R.array.pref_icon_entries, model.getIconEntries(), model);
+            IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), model.getIconEntries(), model);
             iconInput.setAdapter(adapter);
 
+            iconInput.setSelection(adapter.getPosition(item.icon));
             labelInput.setText(item.label);
             labelInput.setHint(defaultItem.label);
-            iconInput.setSelection(adapter.getPosition(item.icon));
 
             labelInput.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    //
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    //
                 }
 
                 @Override
@@ -167,7 +165,6 @@ public class ItemViewActivity extends AppCompatActivity {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-                    //
                 }
             });
 

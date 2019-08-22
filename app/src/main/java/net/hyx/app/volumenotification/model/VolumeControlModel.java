@@ -33,8 +33,8 @@ import java.util.List;
 
 public class VolumeControlModel {
 
-    public static final String EXTRA_ITEM = "item";
-    public static final String EXTRA_ITEM_ID = "item_id";
+    public static final String ITEM_FIELD = "item";
+    public static final String STREAM_TYPE_FIELD = "item_type";
 
     private final Context context;
     private final SettingsModel settings;

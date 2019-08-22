@@ -30,30 +30,31 @@ import android.widget.TextView;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ItemViewActivity;
-import net.hyx.app.volumenotification.controller.NotificationController;
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.helper.ItemTouchHelperAdapter;
-import net.hyx.app.volumenotification.helper.ItemTouchHelperViewHolder;
-import net.hyx.app.volumenotification.helper.OnStartDragListener;
+import net.hyx.app.volumenotification.helper.ItemTouchListener;
+import net.hyx.app.volumenotification.helper.DragHandleListener;
+import net.hyx.app.volumenotification.helper.RecyclerViewListener;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
+import net.hyx.app.volumenotification.widget.DragHandleImageView;
 
 import java.util.Collections;
 import java.util.List;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder> implements ItemTouchHelperAdapter {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder> implements ItemTouchListener {
 
     private static final float ALPHA_DISABLED = 0.25f;
     private static final float ALPHA_ENABLED = 1.0f;
+
     private final Context context;
-    private final OnStartDragListener dragStartListener;
+    private final DragHandleListener dragHandleAdapter;
     private final VolumeControlModel model;
     private final List<VolumeControl> items;
-    private final static Boolean bound = false;
 
-    public RecyclerViewAdapter(Context context, OnStartDragListener dragStartListener) {
-        this.context = context;
-        this.dragStartListener = dragStartListener;
+    public RecyclerViewAdapter(Context context, DragHandleListener dragHandleAdapter) {
+        this.context = context.getApplicationContext();
+        this.dragHandleAdapter = dragHandleAdapter;
         model = new VolumeControlModel(context);
         items = model.getItems();
     }
@@ -72,8 +73,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = itemView.findViewById(R.id.list_item_wrapper);
-        ImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
 
+        DragHandleImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
         ImageView itemIcon = itemView.findViewById(R.id.list_item_icon);
         TextView itemLabel = itemView.findViewById(R.id.list_item_label);
         TextView itemHint = itemView.findViewById(R.id.list_item_hint);
@@ -88,15 +89,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemWrapper.setAlpha(ALPHA_DISABLED);
         }
 
-        itemHandle.setOnTouchListener(new View.OnTouchListener() {
+        itemHandle.setOnTouchListener(new DragHandleImageView.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                    dragStartListener.onStartDrag(holder);
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        dragHandleAdapter.onStartDrag(holder);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        return v.performClick();
                 }
-                return true;
+                return false;
             }
-
         });
 
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -106,12 +110,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 int position = holder.getAdapterPosition();
                 VolumeControl item = items.get(position);
                 Intent intent = new Intent(context, ItemViewActivity.class);
-                intent.putExtra(VolumeControlModel.EXTRA_ITEM, item);
+                intent.putExtra(VolumeControlModel.ITEM_FIELD, item);
                 context.startActivity(intent);
             }
         });
-
-        //NotificationController.newInstance(context).create();
     }
 
     @Override
@@ -126,9 +128,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         VolumeControl item = items.get(position);
         item.status = (item.status == 1) ? 0 : 1;
         items.set(position, item);
-        model.saveList(items);
-        //notifyItemChanged(position);
-        notifyDataSetChanged();
+        notifyItemChanged(position);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return items.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
+    public static class ItemViewHolder extends RecyclerView.ViewHolder implements RecyclerViewListener {
 
         Context context;
         List<VolumeControl> items;
@@ -157,7 +157,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onItemClear() {
             model.saveList(items);
-            NotificationController.newInstance(context).create();
+            NotificationServiceController.newInstance(context).startService();
         }
 
     }

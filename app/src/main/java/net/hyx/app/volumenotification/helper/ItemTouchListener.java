@@ -14,21 +14,11 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.receiver;
+package net.hyx.app.volumenotification.helper;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+public interface ItemTouchListener {
 
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
-
-public class CreateNotificationReceiver extends BroadcastReceiver {
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (intent.getAction() != null) {
-            NotificationServiceController.newInstance(context.getApplicationContext()).startService();
-        }
-    }
-
+    boolean onItemMove(int fromPosition, int toPosition);
+    void onItemSwiped(int position);
 }
+

@@ -29,7 +29,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,10 +38,10 @@ import android.view.ViewGroup;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
-import net.hyx.app.volumenotification.controller.NotificationController;
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
-import net.hyx.app.volumenotification.helper.ItemTouchHelperCallback;
-import net.hyx.app.volumenotification.helper.OnStartDragListener;
+import net.hyx.app.volumenotification.helper.ItemTouchCallback;
+import net.hyx.app.volumenotification.helper.DragHandleListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class RecyclerViewActivity extends AppCompatActivity {
@@ -68,7 +67,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        NotificationController.newInstance(getApplicationContext()).create();
+        NotificationServiceController.newInstance(getApplicationContext()).startService();
     }
 
     @Override
@@ -134,7 +133,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class ListViewFragment extends Fragment implements OnStartDragListener {
+    public static class ListViewFragment extends Fragment implements DragHandleListener {
 
         private ItemTouchHelper itemTouchHelper;
 
@@ -154,7 +153,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
             listView.setHasFixedSize(true);
 
-            itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
+            itemTouchHelper = new ItemTouchHelper(new ItemTouchCallback(adapter));
             itemTouchHelper.attachToRecyclerView(listView);
         }
 

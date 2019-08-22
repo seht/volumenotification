@@ -14,25 +14,29 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.service;
+package net.hyx.app.volumenotification.widget;
 
-import android.app.IntentService;
-import android.content.Intent;
-import android.util.Log;
+import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
+import android.util.AttributeSet;
 
-import net.hyx.app.volumenotification.controller.NotificationController;
+public class DragHandleImageView extends AppCompatImageView {
 
+    public DragHandleImageView(Context context) {
+        super(context);
+    }
 
-public class NotificationService extends IntentService {
+    public DragHandleImageView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-    public NotificationService() {
-        super("NotificationService");
+    public DragHandleImageView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        NotificationController.newInstance(getApplicationContext()).create();
-        stopSelf();
+    public boolean performClick() {
+        return super.performClick();
     }
 
 }

@@ -4,6 +4,8 @@
           android:installLocation="auto">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <application
         android:name=".controller.ApplicationController"
         android:allowBackup="true"
@@ -49,7 +51,12 @@
         </receiver>
         <receiver android:name=".receiver.SetVolumeReceiver"/>
 
-        <service android:name=".service.NotificationService"/>
+        <service android:name=".service.BackgroundNotificationService"/>
+        <service
+            android:name=".service.ForegroundNotificationService"
+            android:enabled="true"
+            android:exported="true"/>
+
         <service
             android:name=".service.TileServiceMediaVolume"
             android:icon="@drawable/ic_baseline_music_note_24px"

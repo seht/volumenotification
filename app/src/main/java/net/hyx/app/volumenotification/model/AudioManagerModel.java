@@ -30,7 +30,7 @@ public class AudioManagerModel {
         settings = new SettingsModel(context);
     }
 
-    public void setVolume(int streamType) {
+    public void adjustVolume(int streamType) {
         audio.adjustStreamVolume(streamType, getStreamFlag(streamType), AudioManager.FLAG_SHOW_UI);
     }
 

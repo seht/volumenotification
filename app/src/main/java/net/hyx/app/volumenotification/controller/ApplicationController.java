@@ -6,6 +6,7 @@ public class ApplicationController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //NotificationController.newInstance(getApplicationContext()).create();
+        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        TileServiceController.newInstance(getApplicationContext()).requestListening();
     }
 }

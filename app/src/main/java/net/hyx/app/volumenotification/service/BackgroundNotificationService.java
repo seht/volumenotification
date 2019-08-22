@@ -14,12 +14,24 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.helper;
+package net.hyx.app.volumenotification.service;
 
-public interface ItemTouchHelperAdapter {
+import android.app.IntentService;
+import android.content.Intent;
 
-    boolean onItemMove(int fromPosition, int toPosition);
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 
-    void onItemSwiped(int position);
+
+public class BackgroundNotificationService extends IntentService {
+
+    public BackgroundNotificationService() {
+        super(BackgroundNotificationService.class.getSimpleName());
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        stopSelf();
+    }
+
 }
-

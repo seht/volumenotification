@@ -23,7 +23,7 @@ import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.controller.NotificationController;
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationController.newInstance(getActivity()).create();
+            NotificationServiceController.newInstance(getActivity()).startService();
         }
 
     }

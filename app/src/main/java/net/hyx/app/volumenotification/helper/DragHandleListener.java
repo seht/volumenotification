@@ -18,9 +18,7 @@ package net.hyx.app.volumenotification.helper;
 
 import android.support.v7.widget.RecyclerView;
 
-
-public interface OnStartDragListener {
+public interface DragHandleListener {
 
     void onStartDrag(RecyclerView.ViewHolder viewHolder);
-
 }

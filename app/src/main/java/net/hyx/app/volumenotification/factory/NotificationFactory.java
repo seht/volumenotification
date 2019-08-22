@@ -14,129 +14,87 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.controller;
+package net.hyx.app.volumenotification.factory;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.service.quicksettings.Tile;
-import android.service.quicksettings.TileService;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.model.AudioManagerModel;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-import net.hyx.app.volumenotification.receiver.CreateNotificationReceiver;
 import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
-import net.hyx.app.volumenotification.service.TileServiceCallVolume;
-import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
-import net.hyx.app.volumenotification.service.TileServiceDialVolume;
-import net.hyx.app.volumenotification.service.TileServiceMediaVolume;
-import net.hyx.app.volumenotification.service.TileServiceNotificationVolume;
-import net.hyx.app.volumenotification.service.TileServiceRingVolume;
-import net.hyx.app.volumenotification.service.TileServiceSystemVolume;
+import net.hyx.app.volumenotification.service.ForegroundNotificationService;
 
 import java.util.List;
 
-public class NotificationController {
+public class NotificationFactory {
 
     private final String packageName;
     private final Context context;
     private final NotificationManager manager;
     private final SettingsModel settings;
     private final VolumeControlModel volumeControlModel;
-    private final AudioManagerModel audioManagerModel;
+    //private final AudioManagerModel audioManagerModel;
     private final List<VolumeControl> items;
 
-    private static final String[] TILE_SERVICES = {
-            TileServiceMediaVolume.class.getName(),
-            TileServiceCallVolume.class.getName(),
-            TileServiceRingVolume.class.getName(),
-            TileServiceAlarmVolume.class.getName(),
-            TileServiceNotificationVolume.class.getName(),
-            TileServiceSystemVolume.class.getName(),
-            TileServiceDialVolume.class.getName(),
-            TileServiceDialVolume.class.getName(),
-            //TileServiceDefaultVolume.class.getName(),
-    };
-
     private static final int NOTIFICATION_ID = 1;
-    private static final String CHANNEL_ID = "1";
+    private static final String CHANNEL_ID = ForegroundNotificationService.class.getSimpleName();
 
-    public NotificationController(Context context) {
+    public NotificationFactory(Context context) {
         this.context = context;
         packageName = context.getPackageName();
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         settings = new SettingsModel(context);
         volumeControlModel = new VolumeControlModel(context);
-        audioManagerModel = new AudioManagerModel(context);
         items = volumeControlModel.getItems();
     }
 
-    public static NotificationController newInstance(Context context) {
-        return new NotificationController(context);
+    public int getNotificationId() {
+        return NotificationFactory.NOTIFICATION_ID;
     }
 
-    public AudioManagerModel audioManagerModel() {
-        return audioManagerModel;
+    public Notification createNotification() {
+        return getNotificationBuilder().build();
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
-    private void requestListeningTiles() {
-        for (String service : TILE_SERVICES) {
-            TileService.requestListeningState(context, new ComponentName(context, service));
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.N)
-    public void updateTile(Tile tile, int streamType) {
-        VolumeControl item = volumeControlModel.getItemByType(streamType);
-        if (item == null) {
-            item = volumeControlModel.getDefaultControls().get(streamType);
-        }
-        tile.setIcon(Icon.createWithResource(context, volumeControlModel.getIconId(item.icon)));
-        tile.setLabel(item.label);
-        tile.setState(Tile.STATE_ACTIVE);
-        tile.updateTile();
-    }
-
-    public void create() {
-        manager.cancelAll();
+    public void updateNotification() {
         if (settings.getEnabled()) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, packageName, getImportance());
-                notificationChannel.setShowBadge(settings.getHideStatus());
-                manager.createNotificationChannel(notificationChannel);
-            }
-
-            PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 100,
-                    new Intent(context, CreateNotificationReceiver.class),
-                    PendingIntent.FLAG_CANCEL_CURRENT);
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setOngoing(true)
-                    .setPriority(getPriority())
-                    .setVisibility(getVisibility())
-                    .setCustomContentView(getCustomContentView())
-                    .setSmallIcon(settings.getStatusIcon())
-                    .setColor(Color.TRANSPARENT)
-                    .setDeleteIntent(deleteIntent);
-
-            manager.notify(NOTIFICATION_ID, builder.build());
+            manager.notify(NOTIFICATION_ID, createNotification());
+        } else {
+            cancelNotification();
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            requestListeningTiles();
+    }
+
+    public void cancelNotification() {
+        manager.cancel(NOTIFICATION_ID);
+    }
+
+    private NotificationCompat.Builder getNotificationBuilder() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, packageName, getImportance());
+            notificationChannel.setShowBadge(settings.getHideStatus());
+            manager.createNotificationChannel(notificationChannel);
         }
+
+        return new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setOngoing(true)
+                .setPriority(getPriority())
+                .setVisibility(getVisibility())
+                .setCustomContentView(getCustomContentView())
+                .setSmallIcon(settings.getStatusIcon())
+                .setColor(Color.TRANSPARENT);
     }
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -162,13 +120,6 @@ public class NotificationController {
     }
 
     private RemoteViews getCustomContentView() {
-        RemoteViews view = new RemoteViews(packageName, R.layout.view_layout_notification);
-        view.removeAllViews(R.id.notification_layout);
-
-        RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
-        wrapperLayout.removeAllViews(R.id.notification_wrapper);
-        view.addView(R.id.notification_layout, wrapperLayout);
-
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
         int backgroundColor;
         int iconColor;
@@ -183,7 +134,9 @@ public class NotificationController {
         if (settings.getTranslucent()) {
             backgroundColor = android.R.color.transparent;
         }
-        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
+
+        RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
+        wrapperLayout.removeAllViews(R.id.notification_wrapper);
 
         for (int pos = 0; pos < items.size(); pos++) {
             VolumeControl item = items.get(pos);
@@ -192,14 +145,20 @@ public class NotificationController {
             }
             RemoteViews btn = new RemoteViews(packageName, R.layout.view_widget_volume_control);
             PendingIntent event = PendingIntent.getBroadcast(context, item.type,
-                    new Intent(context, SetVolumeReceiver.class).putExtra(VolumeControlModel.EXTRA_ITEM_ID, item.type),
+                    new Intent(context, SetVolumeReceiver.class).putExtra(VolumeControlModel.STREAM_TYPE_FIELD, item.type),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
             btn.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconId(item.icon));
             btn.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
-            view.addView(R.id.notification_wrapper, btn);
+            wrapperLayout.addView(R.id.notification_wrapper, btn);
         }
+
+        RemoteViews view = new RemoteViews(packageName, R.layout.view_layout_notification);
+        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
+
+        view.removeAllViews(R.id.notification_layout);
+        view.addView(R.id.notification_layout, wrapperLayout);
 
         return view;
     }
@@ -225,3 +184,4 @@ public class NotificationController {
     }
 
 }
+

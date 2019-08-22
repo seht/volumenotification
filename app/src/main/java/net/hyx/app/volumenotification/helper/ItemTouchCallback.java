@@ -17,24 +17,19 @@
 package net.hyx.app.volumenotification.helper;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 /**
- * An implementation of {@link ItemTouchHelper.Callback} that enables basic drag & drop and
- * swipe-to-dismiss. Drag events are automatically started by an item long-press.<br/>
- * </br/>
- * Expects the <code>RecyclerView.Adapter</code> to listen for {@link
- * ItemTouchHelperAdapter} callbacks and the <code>RecyclerView.ViewHolder</code> to implement
- * {@link ItemTouchHelperViewHolder}.
- *
- * @author Paul Burke (ipaulpro), Seht (https://github.com/seht)
+ * @author ipaulpro
+ * @author seht
  */
-public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
+public class ItemTouchCallback extends ItemTouchHelper.Callback {
 
-    private final ItemTouchHelperAdapter adapter;
+    private final ItemTouchListener adapter;
 
-    public ItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
+    public ItemTouchCallback(ItemTouchListener adapter) {
         this.adapter = adapter;
     }
 
@@ -69,10 +64,10 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+    public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
         super.onSelectedChanged(viewHolder, actionState);
         if (viewHolder != null) {
-            ItemTouchHelperViewHolder itemViewHolder = (ItemTouchHelperViewHolder) viewHolder;
+            RecyclerViewListener itemViewHolder = (RecyclerViewListener) viewHolder;
             itemViewHolder.onItemSelected();
         }
     }
@@ -80,7 +75,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
-        ItemTouchHelperViewHolder itemViewHolder = (ItemTouchHelperViewHolder) viewHolder;
+        RecyclerViewListener itemViewHolder = (RecyclerViewListener) viewHolder;
         itemViewHolder.onItemClear();
     }
 }
