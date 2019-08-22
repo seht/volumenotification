@@ -48,13 +48,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final float ALPHA_ENABLED = 1.0f;
 
     private final Context context;
-    private final DragHandleListener dragHandleAdapter;
+    private final DragHandleListener dragHandleListener;
     private final VolumeControlModel model;
     private final List<VolumeControl> items;
 
-    public RecyclerViewAdapter(Context context, DragHandleListener dragHandleAdapter) {
+    public RecyclerViewAdapter(Context context, DragHandleListener dragHandleListener) {
         this.context = context.getApplicationContext();
-        this.dragHandleAdapter = dragHandleAdapter;
+        this.dragHandleListener = dragHandleListener;
         model = new VolumeControlModel(context);
         items = model.getItems();
     }
@@ -94,7 +94,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        dragHandleAdapter.onStartDrag(holder);
+                        dragHandleListener.onStartDrag(holder);
                         return true;
                     case MotionEvent.ACTION_UP:
                         return v.performClick();

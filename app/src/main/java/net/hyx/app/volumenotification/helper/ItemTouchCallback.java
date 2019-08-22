@@ -21,16 +21,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-/**
- * @author ipaulpro
- * @author seht
- */
 public class ItemTouchCallback extends ItemTouchHelper.Callback {
 
-    private final ItemTouchListener adapter;
+    private final ItemTouchListener listener;
 
-    public ItemTouchCallback(ItemTouchListener adapter) {
-        this.adapter = adapter;
+    public ItemTouchCallback(ItemTouchListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -55,12 +51,12 @@ public class ItemTouchCallback extends ItemTouchHelper.Callback {
         if (source.getItemViewType() != target.getItemViewType()) {
             return false;
         }
-        return adapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
+        return listener.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
     }
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        adapter.onItemSwiped(viewHolder.getAdapterPosition());
+        listener.onItemSwiped(viewHolder.getAdapterPosition());
     }
 
     @Override
