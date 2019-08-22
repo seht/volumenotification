@@ -40,7 +40,7 @@ import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
-import net.hyx.app.volumenotification.helper.ItemTouchCallback;
+import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.helper.DragHandleListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
@@ -153,7 +153,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
             listView.setHasFixedSize(true);
 
-            itemTouchHelper = new ItemTouchHelper(new ItemTouchCallback(adapter));
+            itemTouchHelper = new ItemTouchHelper(new ItemTouchAdapter(adapter));
             itemTouchHelper.attachToRecyclerView(listView);
         }
 

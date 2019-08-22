@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.helper;
+package net.hyx.app.volumenotification.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-public class ItemTouchCallback extends ItemTouchHelper.Callback {
+import net.hyx.app.volumenotification.helper.ItemTouchListener;
+import net.hyx.app.volumenotification.helper.RecyclerViewListener;
+
+public class ItemTouchAdapter extends ItemTouchHelper.Callback {
 
     private final ItemTouchListener listener;
 
-    public ItemTouchCallback(ItemTouchListener listener) {
+    public ItemTouchAdapter(ItemTouchListener listener) {
         this.listener = listener;
     }
 
