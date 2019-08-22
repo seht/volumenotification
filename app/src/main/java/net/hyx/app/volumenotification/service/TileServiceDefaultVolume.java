@@ -25,24 +25,22 @@ import net.hyx.app.volumenotification.controller.NotificationServiceController;
 @TargetApi(Build.VERSION_CODES.N)
 public class TileServiceDefaultVolume extends VolumeTileService {
 
-    private static final int STREAM_TYPE = AudioManager.STREAM_SYSTEM;
-
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        updateTile(STREAM_TYPE);
+        updateTile(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        updateTile(STREAM_TYPE);
+        updateTile(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        adjustVolume(STREAM_TYPE);
+        adjustVolume(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
 }

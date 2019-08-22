@@ -23,24 +23,22 @@ import android.os.Build;
 @TargetApi(Build.VERSION_CODES.O)
 public class TileServiceAccessibilityVolume extends VolumeTileService {
 
-    private static final int STREAM_TYPE = AudioManager.STREAM_SYSTEM;
-
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        updateTile(STREAM_TYPE);
+        updateTile(AudioManager.STREAM_ACCESSIBILITY);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        updateTile(STREAM_TYPE);
+        updateTile(AudioManager.STREAM_ACCESSIBILITY);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        adjustVolume(STREAM_TYPE);
+        adjustVolume(AudioManager.STREAM_ACCESSIBILITY);
     }
 
 }

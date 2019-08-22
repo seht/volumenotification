@@ -17,28 +17,15 @@
 package net.hyx.app.volumenotification.controller;
 
 import android.annotation.TargetApi;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.RemoteViews;
 
-import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.model.AudioManagerModel;
-import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-import net.hyx.app.volumenotification.receiver.CreateNotificationReceiver;
-import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
 import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
 import net.hyx.app.volumenotification.service.TileServiceCallVolume;
 import net.hyx.app.volumenotification.service.TileServiceDialVolume;
@@ -46,8 +33,6 @@ import net.hyx.app.volumenotification.service.TileServiceMediaVolume;
 import net.hyx.app.volumenotification.service.TileServiceNotificationVolume;
 import net.hyx.app.volumenotification.service.TileServiceRingVolume;
 import net.hyx.app.volumenotification.service.TileServiceSystemVolume;
-
-import java.util.List;
 
 public class TileServiceController {
 

@@ -26,14 +26,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-import net.hyx.app.volumenotification.receiver.SetVolumeReceiver;
+import net.hyx.app.volumenotification.receiver.AdjustVolumeReceiver;
 import net.hyx.app.volumenotification.service.ForegroundNotificationService;
 
 import java.util.List;
@@ -145,7 +144,7 @@ public class NotificationFactory {
             }
             RemoteViews btn = new RemoteViews(packageName, R.layout.view_widget_volume_control);
             PendingIntent event = PendingIntent.getBroadcast(context, item.type,
-                    new Intent(context, SetVolumeReceiver.class).putExtra(VolumeControlModel.STREAM_TYPE_FIELD, item.type),
+                    new Intent(context, AdjustVolumeReceiver.class).putExtra(VolumeControlModel.STREAM_TYPE_FIELD, item.type),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             btn.setOnClickPendingIntent(R.id.btn_volume_control, event);

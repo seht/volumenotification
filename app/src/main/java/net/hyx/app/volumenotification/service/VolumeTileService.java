@@ -17,20 +17,26 @@
 package net.hyx.app.volumenotification.service;
 
 import android.annotation.TargetApi;
+import android.media.AudioManager;
 import android.os.Build;
 import android.service.quicksettings.TileService;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.controller.TileServiceController;
+import net.hyx.app.volumenotification.model.AudioManagerModel;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 
 @TargetApi(Build.VERSION_CODES.N)
 abstract public class VolumeTileService extends TileService {
 
     protected void updateTile(int streamType) {
-        //NotificationServiceController.newInstance(getApplicationContext()).updateTile(getQsTile(), streamType);
+        TileServiceController tileServiceController = TileServiceController.newInstance(getApplicationContext());
+        tileServiceController.updateTile(getQsTile(), streamType);
     }
 
     protected void adjustVolume(int streamType) {
-        //NotificationServiceController.newInstance(getApplicationContext()).audioManagerModel().adjustVolume(streamType);
+        AudioManagerModel audioManagerModel = new AudioManagerModel(getApplicationContext());
+        audioManagerModel.adjustVolume(streamType);
     }
 
 }
