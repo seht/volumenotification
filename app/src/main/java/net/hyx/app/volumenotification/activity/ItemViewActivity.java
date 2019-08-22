@@ -67,6 +67,7 @@ public class ItemViewActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_check_24px);
         }
 
     }
@@ -93,6 +94,7 @@ public class ItemViewActivity extends AppCompatActivity {
             case android.R.id.home:
                 fragment.model.saveItem(fragment.item);
                 NavUtils.navigateUpFromSameTask(this);
+                //NotificationServiceController.newInstance(getApplicationContext()).startService();
                 break;
         }
         return super.onOptionsItemSelected(item);

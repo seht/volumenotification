@@ -52,8 +52,12 @@ public class SettingsModel {
         return R.style.style_app_theme_light;
     }
 
-    public boolean getDialogAlertNonceChecked(int id) {
-        return preferences.getBoolean("pref_dialog_alert_nonce_checked_" + id, false);
+    public boolean getNonceDialogCancelled(int id) {
+        return preferences.getBoolean("pref_dialog_alert_nonce_cancel_" + id, false);
+    }
+
+    public void setNonceDialogCancelled(int id, boolean cancel) {
+        preferences.edit().putBoolean("pref_dialog_alert_nonce_cancel_" + id, cancel).apply();
     }
 
     public boolean getAppThemeDark() {

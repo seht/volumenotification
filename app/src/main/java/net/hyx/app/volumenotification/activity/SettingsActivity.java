@@ -19,9 +19,9 @@ package net.hyx.app.volumenotification.activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceFragmentCompat;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
@@ -38,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
 
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PrefFragment())
                 .commit();
 
@@ -48,7 +48,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    public static class PrefFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+    public static class PrefFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.preferences, rootKey);
+        }
 
         @Override
         public void onCreate(final Bundle savedInstanceState) {

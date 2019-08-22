@@ -41,7 +41,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.dialog.NonceAlertDialog;
+import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.helper.DragHandleListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
@@ -69,12 +69,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        NotificationServiceController.newInstance(getApplicationContext()).startService();
     }
 
     @Override
@@ -82,8 +82,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         super.onAttachedToWindow();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (!settings.getDialogAlertNonceChecked(DIALOG_ID)) {
-                DialogFragment dialogFragment = NonceAlertDialog.newInstance(DIALOG_ID,
+            if (!settings.getNonceDialogCancelled(DIALOG_ID)) {
+                DialogFragment dialogFragment = NonceDialogFragment.newInstance(DIALOG_ID,
                         settings.getResources().getString(R.string.target_api_welcome_message_N),
                         settings.getResources().getString(R.string.target_api_welcome_title_N));
                 dialogFragment.show(getSupportFragmentManager(), null);
