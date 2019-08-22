@@ -18,7 +18,6 @@ package net.hyx.app.volumenotification.model;
 
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.util.SparseArray;
 

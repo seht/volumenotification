@@ -17,12 +17,13 @@
 package net.hyx.app.volumenotification.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.model.VolumeControlModel;

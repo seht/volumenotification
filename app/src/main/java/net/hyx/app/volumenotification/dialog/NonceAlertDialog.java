@@ -16,11 +16,12 @@
 
 package net.hyx.app.volumenotification.dialog;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -55,7 +56,6 @@ public class NonceAlertDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         if (getArguments() == null || getActivity() == null) {
             return super.onCreateDialog(savedInstanceState);
         }
@@ -72,16 +72,16 @@ public class NonceAlertDialog extends DialogFragment {
         messageView.setText(message);
 
         if (id != 0) {
-            CheckBox nonceInput = (CheckBox) view.findViewById(R.id.pref_nonce_input);
+            CheckBox nonceInput = view.findViewById(R.id.pref_nonce_input);
             nonceInput.setChecked(settings.getDialogAlertNonceChecked(id));
             nonceInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    settings.getPreferences().edit().putBoolean("pref_dialog_alert_nonce_checked_" + id, isChecked).commit();
+                    settings.getPreferences().edit().putBoolean("pref_dialog_alert_nonce_checked_" + id, isChecked).apply();
                 }
             });
         } else {
-            LinearLayout nonceLayer = (LinearLayout) view.findViewById(R.id.pref_nonce_wrapper);
+            LinearLayout nonceLayer = view.findViewById(R.id.pref_nonce_wrapper);
             nonceLayer.setVisibility(View.GONE);
         }
 

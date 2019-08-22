@@ -57,8 +57,8 @@ public class PrefCustomThemeDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        backgroundColorInput = (EditText) view.findViewById(R.id.pref_background_color_input);
-        iconColorInput = (EditText) view.findViewById(R.id.pref_icon_color_input);
+        backgroundColorInput = view.findViewById(R.id.pref_background_color_input);
+        iconColorInput = view.findViewById(R.id.pref_icon_color_input);
         backgroundColorInput.setText(settings.getCustomThemeBackgroundColor());
         iconColorInput.setText(settings.getCustomThemeIconColor());
     }
@@ -74,10 +74,10 @@ public class PrefCustomThemeDialog extends DialogPreference {
             int iconColor = settings.getColor(iconColorValue);
 
             if (backgroundColor != 0) {
-                settings.getPreferences().edit().putString("pref_custom_theme_background_color", backgroundColorValue).commit();
+                settings.getPreferences().edit().putString("pref_custom_theme_background_color", backgroundColorValue).apply();
             }
             if (iconColor != 0) {
-                settings.getPreferences().edit().putString("pref_custom_theme_icon_color", iconColorValue).commit();
+                settings.getPreferences().edit().putString("pref_custom_theme_icon_color", iconColorValue).apply();
             }
             if (backgroundColor == 0 || iconColor == 0) {
                 Toast.makeText(getContext(), settings.getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();

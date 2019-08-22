@@ -17,8 +17,9 @@
 package net.hyx.app.volumenotification.widget;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 public class DragHandleImageView extends AppCompatImageView {
 
