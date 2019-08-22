@@ -28,7 +28,7 @@ public class ForegroundNotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         NotificationFactory factory = new NotificationFactory(getApplicationContext());
-        startForeground(factory.getNotificationId(), factory.createNotification());
+        startForeground(factory.getNotificationId(), factory.getNotification());
     }
 
     @Override

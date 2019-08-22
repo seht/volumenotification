@@ -19,6 +19,8 @@ package net.hyx.app.volumenotification.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+
 import net.hyx.app.volumenotification.service.ForegroundNotificationService;
 
 public class NotificationServiceController {

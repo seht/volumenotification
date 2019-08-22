@@ -29,6 +29,7 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -63,19 +64,20 @@ public class NotificationFactory {
         return NotificationFactory.NOTIFICATION_ID;
     }
 
-    public Notification createNotification() {
+    public Notification getNotification() {
         return getNotificationBuilder().build();
     }
 
     public void updateNotification() {
         if (settings.getEnabled()) {
-            manager.notify(NOTIFICATION_ID, createNotification());
+            manager.notify(NOTIFICATION_ID, getNotification());
         } else {
             cancelNotification();
         }
     }
 
     public void cancelNotification() {
+        NotificationServiceController.newInstance(context).stopService();
         manager.cancel(NOTIFICATION_ID);
     }
 

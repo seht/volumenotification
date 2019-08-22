@@ -60,6 +60,12 @@ public class TileServiceController {
         return new TileServiceController(context);
     }
 
+    public void requestListening() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            requestListeningTiles();
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.N)
     private void requestListeningTiles() {
         for (String service : TILE_SERVICES) {
@@ -77,12 +83,6 @@ public class TileServiceController {
         tile.setLabel(item.label);
         tile.setState(Tile.STATE_ACTIVE);
         tile.updateTile();
-    }
-
-    public void requestListening() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            requestListeningTiles();
-        }
     }
 
 }
