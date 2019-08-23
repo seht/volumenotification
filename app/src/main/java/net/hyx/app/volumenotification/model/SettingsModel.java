@@ -69,7 +69,7 @@ public class SettingsModel {
         return (getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher;
     }
 
-    public boolean getEnabled() {
+    public boolean isEnabled() {
         boolean defValue = resources.getBoolean(R.bool.pref_enabled_default);
         return preferences.getBoolean("pref_enabled", defValue);
     }

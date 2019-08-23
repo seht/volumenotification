@@ -74,7 +74,7 @@ public class NotificationFactory {
     }
 
     public void updateNotification() {
-        if (settings.getEnabled()) {
+        if (settings.isEnabled()) {
             manager.notify(NOTIFICATION_ID, getNotification());
         } else {
             cancelNotification();

@@ -21,13 +21,19 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class NotificationBackgroundService extends Service {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        NotificationServiceController.newInstance(getApplicationContext()).startForegroundService();
+        SettingsModel settings = new SettingsModel(getApplicationContext());
+        if (settings.isEnabled()) {
+            NotificationServiceController.newInstance(getApplicationContext()).startForegroundService();
+        } else {
+            NotificationServiceController.newInstance(getApplicationContext()).stopService();
+        }
         stopSelf();
     }
 
