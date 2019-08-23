@@ -19,10 +19,9 @@ package net.hyx.app.volumenotification.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 
 public class NotificationForegroundService extends Service {
 
