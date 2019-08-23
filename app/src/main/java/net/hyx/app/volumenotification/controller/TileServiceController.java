@@ -26,6 +26,7 @@ import android.service.quicksettings.TileService;
 
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
+import net.hyx.app.volumenotification.service.TileServiceAccessibilityVolume;
 import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
 import net.hyx.app.volumenotification.service.TileServiceCallVolume;
 import net.hyx.app.volumenotification.service.TileServiceDialVolume;
@@ -47,7 +48,7 @@ public class TileServiceController {
             TileServiceNotificationVolume.class.getName(),
             TileServiceSystemVolume.class.getName(),
             TileServiceDialVolume.class.getName(),
-            TileServiceDialVolume.class.getName(),
+            TileServiceAccessibilityVolume.class.getName(),
             //TileServiceDefaultVolume.class.getName(),
     };
 
