@@ -34,6 +34,7 @@ import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
 import net.hyx.app.volumenotification.receiver.AdjustVolumeReceiver;
+import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
 import net.hyx.app.volumenotification.service.NotificationService;
 
 import java.util.List;
@@ -89,13 +90,18 @@ public class NotificationFactory {
             manager.createNotificationChannel(notificationChannel);
         }
 
+        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0,
+                new Intent(context, StartServiceReceiver.class),
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
         return new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setOngoing(true)
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
                 .setCustomContentView(getCustomContentView())
                 .setSmallIcon(settings.getStatusIcon())
-                .setColor(Color.TRANSPARENT);
+                .setColor(Color.TRANSPARENT)
+                .setDeleteIntent(deleteIntent);
     }
 
     @TargetApi(Build.VERSION_CODES.O)
