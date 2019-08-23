@@ -20,7 +20,8 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.core.content.ContextCompat;
 
-import net.hyx.app.volumenotification.service.NotificationService;
+import net.hyx.app.volumenotification.service.NotificationBackgroundService;
+import net.hyx.app.volumenotification.service.NotificationForegroundService;
 
 public class NotificationServiceController {
 
@@ -34,12 +35,17 @@ public class NotificationServiceController {
         return new NotificationServiceController(context);
     }
 
+    public void startForegroundService() {
+        //ContextCompat.startForegroundService(context, new Intent(context, NotificationForegroundService.class));
+        context.startService(new Intent(context, NotificationForegroundService.class));
+    }
+
     public void startService() {
-        ContextCompat.startForegroundService(context, new Intent(context, NotificationService.class));
+        context.startService(new Intent(context, NotificationBackgroundService.class));
     }
 
     public void stopService() {
-        context.stopService(new Intent(context, NotificationService.class));
+        context.stopService(new Intent(context, NotificationForegroundService.class));
     }
 
 }

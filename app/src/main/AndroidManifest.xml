@@ -57,7 +57,12 @@
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
         <service
-            android:name=".service.NotificationService"
+            android:name=".service.NotificationForegroundService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".service.NotificationBackgroundService"
             android:enabled="true"
             android:exported="true" />
 

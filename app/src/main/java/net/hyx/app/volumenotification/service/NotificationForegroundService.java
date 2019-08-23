@@ -19,10 +19,12 @@ package net.hyx.app.volumenotification.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 
-public class NotificationService extends Service {
+public class NotificationForegroundService extends Service {
 
     @Override
     public void onCreate() {
@@ -40,8 +42,7 @@ public class NotificationService extends Service {
 
     @Override
     public void onDestroy() {
-        //super.onDestroy();
-        onCreate();
+        NotificationServiceController.newInstance(getApplicationContext()).startService();
     }
 
     @Override
