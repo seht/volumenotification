@@ -6,8 +6,8 @@ android {
         applicationId 'net.hyx.app.volumenotification'
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1010
-        versionName '1.0.1'
+        versionCode 1011
+        versionName '1.0.1.1-hotfix'
         vectorDrawables.useSupportLibrary true
     }
     buildTypes {
