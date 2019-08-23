@@ -19,15 +19,13 @@ package net.hyx.app.volumenotification.activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+//import androidx.core.app.NavUtils;
 //import androidx.preference.PreferenceScreen;
 
 import net.hyx.app.volumenotification.R;

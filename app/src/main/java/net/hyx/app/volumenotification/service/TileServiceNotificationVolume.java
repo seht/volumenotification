@@ -20,8 +20,6 @@ import android.annotation.TargetApi;
 import android.media.AudioManager;
 import android.os.Build;
 
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
-
 @TargetApi(Build.VERSION_CODES.N)
 public class TileServiceNotificationVolume extends VolumeTileService {
 
