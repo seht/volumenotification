@@ -80,11 +80,10 @@ public class SettingsActivity extends AppCompatActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-
-        final Bundle args = pref.getExtras();
+        //final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
                 getClassLoader(),
-                pref.getFragment(), args);
+                pref.getFragment());
         //fragment.setTargetFragment(caller, 0);
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, fragment)

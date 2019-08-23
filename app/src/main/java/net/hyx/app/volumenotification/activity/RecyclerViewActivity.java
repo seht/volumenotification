@@ -41,6 +41,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.helper.DragHandleListener;
@@ -71,6 +72,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         NotificationServiceController.newInstance(getApplicationContext()).startService();
+        TileServiceController.newInstance(getApplicationContext()).requestListening();
     }
 
     @Override
