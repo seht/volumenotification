@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.hyx.app.volumenotification"
-          android:installLocation="auto">
+          android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -41,7 +41,7 @@
                 android:value=".activity.RecyclerViewActivity"/>
         </activity>
 
-        <receiver android:name=".receiver.StartNotificationServiceReceiver">
+        <receiver android:enabled="true" android:exported="true" android:name=".receiver.StartServiceReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
@@ -51,9 +51,8 @@
         </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver"/>
 
-        <service android:name=".service.BackgroundNotificationService"/>
         <service
-            android:name=".service.ForegroundNotificationService"
+            android:name=".service.NotificationService"
             android:enabled="true"
             android:exported="true"/>
 

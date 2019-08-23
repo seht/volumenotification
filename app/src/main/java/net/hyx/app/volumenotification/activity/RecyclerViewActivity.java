@@ -63,12 +63,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new ListViewFragment())
+                .addToBackStack(null)
                 .commit();
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
     }
 
     @Override
@@ -107,15 +103,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                break;
+//            case android.R.id.home:
+//                NavUtils.navigateUpFromSameTask(this);
+//                break;
             case R.id.menu_pref:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case R.id.menu_dark_app_theme:
                 boolean darkTheme = !item.isChecked();
-                settings.getPreferences().edit().putBoolean("pref_dark_app_theme", darkTheme).commit();
+                settings.getPreferences().edit().putBoolean("pref_dark_app_theme", darkTheme).apply();
                 item.setChecked(darkTheme);
                 setTheme(settings.getAppTheme());
                 recreate();

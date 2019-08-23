@@ -19,19 +19,30 @@ package net.hyx.app.volumenotification.activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+//import androidx.preference.PreferenceScreen;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity
+        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
+        FragmentManager.OnBackStackChangedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         SettingsModel settings = new SettingsModel(getApplicationContext());
 
@@ -40,45 +51,101 @@ public class SettingsActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PrefFragment())
+                .addToBackStack(null)
                 .commit();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
 
+
+
+    @Override
+    public void onBackStackChanged() {
+        //super.onBackPressed();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        //super.onSupportNavigateUp();
+        getSupportFragmentManager().popBackStackImmediate();
+
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            finish();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+
+        final Bundle args = pref.getExtras();
+        final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
+                getClassLoader(),
+                pref.getFragment(), args);
+        //fragment.setTargetFragment(caller, 0);
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, fragment)
+                .addToBackStack(null)
+                .commit();
+
+
+        return true;
     }
 
     public static class PrefFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.preferences, rootKey);
-        }
-
-        @Override
-        public void onCreate(final Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences);
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            getPreferenceScreen().getSharedPreferences()
-                    .registerOnSharedPreferenceChangeListener(this);
-        }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            getPreferenceScreen().getSharedPreferences()
-                    .unregisterOnSharedPreferenceChangeListener(this);
+            setPreferencesFromResource(R.xml.settings_preferences, rootKey);
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             NotificationServiceController.newInstance(getActivity()).startService();
         }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        }
+
+
+    }
+
+    public static class NotificationThemeFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.notification_theme_preferences, rootKey);
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            NotificationServiceController.newInstance(getActivity()).startService();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        }
+
 
     }
 

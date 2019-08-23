@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="pref_cat_custom_theme"
+        android:title="@string/pref_custom_theme_title">
+
+    <EditTextPreference
+            android:key="pref_custom_theme_background_color"
+            android:title="@string/pref_custom_theme_background_color_title"
+            android:summary="@string/pref_custom_theme_color_help"
+            android:defaultValue="@string/pref_custom_theme_background_color_default" />
+
+    <EditTextPreference
+        android:key="pref_custom_theme_icon_color"
+        android:title="@string/pref_custom_theme_icon_color_title"
+        android:summary="@string/pref_custom_theme_color_help"
+        android:defaultValue="@string/pref_custom_theme_icon_color_default" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

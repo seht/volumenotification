@@ -65,7 +65,7 @@
     <string name="pref_hide_status_summary">* When top priority is enabled, this could show a blank space in the status bar.</string>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
-    <string name="pref_toggle_mute_summary">Media volume to toggle mute. (Android</string>
+    <string name="pref_toggle_mute_summary">Media volume to toggle mute</string>
 
     <string name="pref_toggle_silent_title">Toggle silent</string>
     <string name="pref_toggle_silent_summary">Ring volume to toggle mute</string>

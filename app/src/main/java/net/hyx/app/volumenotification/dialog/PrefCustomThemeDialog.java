@@ -50,38 +50,38 @@ public class PrefCustomThemeDialog extends DialogPreference {
 
     private void constructor(final Context context) {
         settings = new SettingsModel(context);
-        setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
+        //setDialogLayoutResource(R.layout.view_dialog_pref_custom_theme);
     }
 
     @Override
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        backgroundColorInput = view.findViewById(R.id.pref_background_color_input);
-        iconColorInput = view.findViewById(R.id.pref_icon_color_input);
-        backgroundColorInput.setText(settings.getCustomThemeBackgroundColor());
-        iconColorInput.setText(settings.getCustomThemeIconColor());
+//        backgroundColorInput = view.findViewById(R.id.pref_background_color_input);
+//        iconColorInput = view.findViewById(R.id.pref_icon_color_input);
+//        backgroundColorInput.setText(settings.getCustomThemeBackgroundColor());
+//        iconColorInput.setText(settings.getCustomThemeIconColor());
     }
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
 
-        if (positiveResult) {
-            String backgroundColorValue = backgroundColorInput.getText().toString();
-            String iconColorValue = iconColorInput.getText().toString();
-            int backgroundColor = settings.getColor(backgroundColorValue);
-            int iconColor = settings.getColor(iconColorValue);
-
-            if (backgroundColor != 0) {
-                settings.getPreferences().edit().putString("pref_custom_theme_background_color", backgroundColorValue).apply();
-            }
-            if (iconColor != 0) {
-                settings.getPreferences().edit().putString("pref_custom_theme_icon_color", iconColorValue).apply();
-            }
-            if (backgroundColor == 0 || iconColor == 0) {
-                Toast.makeText(getContext(), settings.getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();
-            }
-        }
+//        if (positiveResult) {
+//            String backgroundColorValue = backgroundColorInput.getText().toString();
+//            String iconColorValue = iconColorInput.getText().toString();
+//            int backgroundColor = settings.getColor(backgroundColorValue);
+//            int iconColor = settings.getColor(iconColorValue);
+//
+//            if (backgroundColor != 0) {
+//                settings.getPreferences().edit().putString("pref_custom_theme_background_color", backgroundColorValue).apply();
+//            }
+//            if (iconColor != 0) {
+//                settings.getPreferences().edit().putString("pref_custom_theme_icon_color", iconColorValue).apply();
+//            }
+//            if (backgroundColor == 0 || iconColor == 0) {
+//                Toast.makeText(getContext(), settings.getResources().getString(R.string.pref_custom_theme_color_error_message), Toast.LENGTH_SHORT).show();
+//            }
+//        }
     }
 }

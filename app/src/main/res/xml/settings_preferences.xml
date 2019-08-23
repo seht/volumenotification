@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="pref_cat_behavior"
         android:title="@string/pref_cat_behavior_title">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_toggle_mute_default"
             android:key="pref_toggle_mute"
             android:summary="@string/pref_toggle_mute_summary"
             android:title="@string/pref_toggle_mute_title"/>
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_toggle_silent_default"
             android:key="pref_toggle_silent"
             android:summary="@string/pref_toggle_silent_summary"
@@ -28,14 +28,15 @@
             android:key="pref_theme"
             android:summary="@string/pref_theme_summary"
             android:title="@string/pref_theme_title"/>
-        <net.hyx.app.volumenotification.dialog.PrefCustomThemeDialog
+        <Preference
             android:dialogTitle="@string/pref_custom_theme_title"
             android:key="pref_custom_theme_dialog"
             android:negativeButtonText="@android:string/cancel"
             android:positiveButtonText="@android:string/ok"
             android:summary="@string/pref_custom_theme_summary"
-            android:title="@string/pref_custom_theme_title"/>
-        <SwitchPreference
+            android:title="@string/pref_custom_theme_title"
+            android:fragment="net.hyx.app.volumenotification.activity.SettingsActivity$NotificationThemeFragment"/>
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_translucent_default"
             android:key="pref_translucent"
             android:summary="@string/pref_translucent_summary"
@@ -53,31 +54,31 @@
     <PreferenceCategory
         android:key="pref_cat_config"
         android:title="@string/pref_cat_config_title">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_enabled_default"
             android:key="pref_enabled"
             android:summary="@string/pref_enabled_summary"
             android:title="@string/pref_enabled_title"/>
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_boot_default"
             android:key="pref_boot"
             android:summary="@string/pref_boot_summary"
             android:title="@string/pref_boot_title"/>
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_top_priority_default"
             android:key="pref_top_priority"
             android:summary="@string/pref_top_priority_summary"
             android:title="@string/pref_top_priority_title"/>
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_hide_locked_default"
             android:key="pref_hide_locked"
             android:summary="@string/pref_hide_locked_summary"
             android:title="@string/pref_hide_locked_title"/>
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_hide_status_default"
             android:key="pref_hide_status"
             android:summary="@string/pref_hide_status_summary"
             android:title="@string/pref_hide_status_title"/>
     </PreferenceCategory>
 
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

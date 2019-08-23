@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.service;
+package net.hyx.app.volumenotification.receiver;
 
-import android.app.IntentService;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.controller.TileServiceController;
 
-
-public class BackgroundNotificationService extends IntentService {
-
-    public BackgroundNotificationService() {
-        super(BackgroundNotificationService.class.getSimpleName());
-    }
+public class StartServiceReceiver extends BroadcastReceiver {
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
-        stopSelf();
+    public void onReceive(Context context, Intent intent) {
+        if (intent.getAction() != null) {
+            NotificationServiceController.newInstance(context.getApplicationContext()).startService();
+            TileServiceController.newInstance(context.getApplicationContext()).requestListening();
+        }
     }
 
 }

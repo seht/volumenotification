@@ -22,7 +22,7 @@ import android.os.IBinder;
 
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 
-public class ForegroundNotificationService extends Service {
+public class NotificationService extends Service {
 
     @Override
     public void onCreate() {

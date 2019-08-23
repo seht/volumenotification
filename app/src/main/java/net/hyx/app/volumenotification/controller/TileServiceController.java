@@ -26,6 +26,7 @@ import android.service.quicksettings.TileService;
 
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
+import net.hyx.app.volumenotification.service.TileServiceAccessibilityVolume;
 import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
 import net.hyx.app.volumenotification.service.TileServiceCallVolume;
 import net.hyx.app.volumenotification.service.TileServiceDialVolume;
@@ -38,18 +39,6 @@ public class TileServiceController {
 
     private final Context context;
     private final VolumeControlModel volumeControlModel;
-
-    private static final String[] TILE_SERVICES = {
-            TileServiceMediaVolume.class.getName(),
-            TileServiceCallVolume.class.getName(),
-            TileServiceRingVolume.class.getName(),
-            TileServiceAlarmVolume.class.getName(),
-            TileServiceNotificationVolume.class.getName(),
-            TileServiceSystemVolume.class.getName(),
-            TileServiceDialVolume.class.getName(),
-            TileServiceDialVolume.class.getName(),
-            //TileServiceDefaultVolume.class.getName(),
-    };
 
     public TileServiceController(Context context) {
         this.context = context;
@@ -68,7 +57,18 @@ public class TileServiceController {
 
     @TargetApi(Build.VERSION_CODES.N)
     private void requestListeningTiles() {
-        for (String service : TILE_SERVICES) {
+        String[] tileServices = {
+                TileServiceMediaVolume.class.getName(),
+                TileServiceCallVolume.class.getName(),
+                TileServiceRingVolume.class.getName(),
+                TileServiceAlarmVolume.class.getName(),
+                TileServiceNotificationVolume.class.getName(),
+                TileServiceSystemVolume.class.getName(),
+                TileServiceDialVolume.class.getName(),
+                TileServiceAccessibilityVolume.class.getName(),
+                //TileServiceDefaultVolume.class.getName(),
+        };
+        for (String service : tileServices) {
             TileService.requestListeningState(context, new ComponentName(context, service));
         }
     }
