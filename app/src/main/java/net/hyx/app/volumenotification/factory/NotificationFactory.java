@@ -60,7 +60,7 @@ public class NotificationFactory {
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         settings = new SettingsModel(context);
         volumeControlModel = new VolumeControlModel(context);
-        items = volumeControlModel.getItems();
+        items = volumeControlModel.getList();
     }
 
     public int getNotificationId() {

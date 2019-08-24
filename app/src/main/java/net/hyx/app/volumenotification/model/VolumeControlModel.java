@@ -86,7 +86,7 @@ public class VolumeControlModel {
         return defaultControls;
     }
 
-    public List<VolumeControl> getItems() {
+    public List<VolumeControl> getList() {
         ArrayList<VolumeControl> items = new ArrayList<>(getDefaultControls().size());
         for (int index = 0; index < getDefaultControls().size(); index++) {
             VolumeControl item = getStorageItem(index);

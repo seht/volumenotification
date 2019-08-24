@@ -57,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context = context.getApplicationContext();
         this.dragHandleListener = dragHandleListener;
         model = new VolumeControlModel(context);
-        items = model.getItems();
+        items = model.getList();
     }
 
     @NonNull
