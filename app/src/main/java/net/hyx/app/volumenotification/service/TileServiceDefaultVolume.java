@@ -17,7 +17,7 @@
 package net.hyx.app.volumenotification.service;
 
 import android.annotation.TargetApi;
-import android.media.AudioManager;
+//import android.media.AudioManager;
 import android.os.Build;
 
 @TargetApi(Build.VERSION_CODES.N)
@@ -26,19 +26,19 @@ public class TileServiceDefaultVolume extends VolumeTileService {
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        updateTile(AudioManager.USE_DEFAULT_STREAM_TYPE);
+        //updateTile(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        updateTile(AudioManager.USE_DEFAULT_STREAM_TYPE);
+        //updateTile(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        adjustVolume(AudioManager.USE_DEFAULT_STREAM_TYPE);
+        //adjustVolume(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
 }
