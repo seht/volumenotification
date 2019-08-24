@@ -41,7 +41,7 @@
     <string name="pref_custom_theme_background_color_title">Background color</string>
     <string name="pref_custom_theme_icon_color_title">Icon color</string>
     <string name="pref_custom_theme_color_help">Formats: #RRGGBB, #AARRGGBB</string>
-    <string name="pref_custom_theme_color_error_message">Invalid color name or format</string>
+    <string name="pref_custom_theme_color_error_message">Invalid color!</string>
 
     <string name="pref_notification_height_title">Notification size</string>
     <string name="pref_notification_height_summary">Choose a default notification height</string>

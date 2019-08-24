@@ -19,7 +19,6 @@ package net.hyx.app.volumenotification.model;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
-import android.util.Log;
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
@@ -30,7 +29,6 @@ import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class VolumeControlModel {
