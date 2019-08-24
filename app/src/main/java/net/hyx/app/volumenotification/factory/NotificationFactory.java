@@ -25,7 +25,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+
 import androidx.core.app.NotificationCompat;
+
 import android.widget.RemoteViews;
 
 import net.hyx.app.volumenotification.R;
@@ -69,9 +71,9 @@ public class NotificationFactory {
         return getNotificationBuilder().build();
     }
 
-    public void createNotification() {
-        updateNotification();
-    }
+//    public void createNotification() {
+//        updateNotification();
+//    }
 
     public void updateNotification() {
         if (settings.isEnabled()) {
@@ -81,8 +83,8 @@ public class NotificationFactory {
         }
     }
 
-    public void cancelNotification() {
-        NotificationServiceController.newInstance(context).stopService();
+    private void cancelNotification() {
+        NotificationServiceController.newInstance(context).stopForegroundService();
         manager.cancel(NOTIFICATION_ID);
     }
 
@@ -90,7 +92,7 @@ public class NotificationFactory {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, packageName, getImportance());
-            notificationChannel.setShowBadge(settings.getHideStatus());
+            notificationChannel.setShowBadge(!settings.getHideStatus());
             manager.createNotificationChannel(notificationChannel);
         }
 
@@ -98,14 +100,16 @@ public class NotificationFactory {
                 new Intent(context, StartServiceReceiver.class),
                 PendingIntent.FLAG_CANCEL_CURRENT);
 
-        return new NotificationCompat.Builder(context, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID);
+        builder.setDeleteIntent(deleteIntent)
                 .setOngoing(true)
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
                 .setCustomContentView(getCustomContentView())
-                .setSmallIcon(settings.getStatusIcon())
                 .setColor(Color.TRANSPARENT)
-                .setDeleteIntent(deleteIntent);
+                .setSmallIcon(settings.getStatusIcon());
+
+        return builder;
     }
 
     @TargetApi(Build.VERSION_CODES.O)

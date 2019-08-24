@@ -104,6 +104,7 @@ public class ItemViewActivity extends AppCompatActivity {
 
         private VolumeControl item;
         private VolumeControlModel model;
+        private SettingsModel settings;
 
         public static ItemFragment newInstance(Serializable item) {
             ItemFragment fragment = new ItemFragment();
@@ -116,8 +117,9 @@ public class ItemViewActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            model = new VolumeControlModel(getActivity());
-            if (getArguments() != null) {
+            if (getArguments() != null && getContext() != null) {
+                model = new VolumeControlModel(getContext());
+                settings = new SettingsModel(getContext());
                 item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.ITEM_FIELD);
             }
         }
@@ -135,7 +137,7 @@ public class ItemViewActivity extends AppCompatActivity {
             EditText labelInput = view.findViewById(R.id.pref_label_input);
             VolumeControl defaultItem = model.getDefaultControls().get(item.type);
 
-            IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), model.getIconEntries(), model);
+            IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), settings.getIconEntries(), model);
             iconInput.setAdapter(adapter);
 
             iconInput.setSelection(adapter.getPosition(item.icon));

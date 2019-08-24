@@ -27,6 +27,9 @@ import android.util.TypedValue;
 
 import net.hyx.app.volumenotification.R;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class SettingsModel {
 
     private final Resources resources;
@@ -50,6 +53,10 @@ public class SettingsModel {
             return R.style.style_app_theme_dark;
         }
         return R.style.style_app_theme_light;
+    }
+
+    public List<String> getIconEntries() {
+        return Arrays.asList(resources.getStringArray(R.array.pref_icon_entries));
     }
 
     public boolean getNonceDialogCancelled(int id) {

@@ -35,16 +35,16 @@ public class NotificationServiceController {
         return new NotificationServiceController(context);
     }
 
+    public void startService() {
+        context.startService(new Intent(context, NotificationBackgroundService.class));
+    }
+
     public void startForegroundService() {
         //ContextCompat.startForegroundService(context, new Intent(context, NotificationForegroundService.class));
         context.startService(new Intent(context, NotificationForegroundService.class));
     }
 
-    public void startService() {
-        context.startService(new Intent(context, NotificationBackgroundService.class));
-    }
-
-    public void stopService() {
+    public void stopForegroundService() {
         context.stopService(new Intent(context, NotificationForegroundService.class));
     }
 

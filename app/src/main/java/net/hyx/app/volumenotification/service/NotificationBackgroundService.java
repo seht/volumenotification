@@ -32,7 +32,7 @@ public class NotificationBackgroundService extends Service {
         if (settings.isEnabled()) {
             NotificationServiceController.newInstance(getApplicationContext()).startForegroundService();
         } else {
-            NotificationServiceController.newInstance(getApplicationContext()).stopService();
+            NotificationServiceController.newInstance(getApplicationContext()).stopForegroundService();
         }
         stopSelf();
     }

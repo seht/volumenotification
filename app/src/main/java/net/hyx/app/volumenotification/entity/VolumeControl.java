@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 public class VolumeControl implements Serializable {
 
-    public final int type;
+    public int type;
     public int position;
     public int status;
     public String icon;

@@ -19,7 +19,10 @@ package net.hyx.app.volumenotification.model;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
+import android.util.Log;
 import android.util.SparseArray;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
@@ -88,9 +91,10 @@ public class VolumeControlModel {
     public List<VolumeControl> getItems() {
         ArrayList<VolumeControl> items = new ArrayList<>(getDefaultControls().size());
         for (int index = 0; index < getDefaultControls().size(); index++) {
-            VolumeControl item = getItem(index);
+            VolumeControl item = getStorageItem(index);
             if (item != null) {
-                items.add(item);
+                items.add(sanitizeItem(item));
+                //items.add(item);
             } else {
                 VolumeControl defaultItem = defaultControls.get(getDefaultOrder().get(index));
                 items.add(defaultItem);
@@ -99,29 +103,13 @@ public class VolumeControlModel {
         return items;
     }
 
-    public List<String> getIconEntries() {
-        return Arrays.asList(settings.getResources().getStringArray(R.array.pref_icon_entries));
-    }
-
     public int getIconId(String drawableName) {
         return settings.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
     }
 
-    public String getDefaultLabel(int resourceId) {
-        return settings.getResources().getString(resourceId);
-    }
-
-    public VolumeControl getItem(int position) {
-        String control = settings.getPreferences().getString("pref_control_list_item_" + position, null);
-        if (control != null) {
-            return (new Gson()).fromJson(control, VolumeControl.class);
-        }
-        return null;
-    }
-
     public VolumeControl getItemByType(int streamType) {
         for (int index = 0; index < getDefaultControls().size(); index++) {
-            VolumeControl item = getItem(index);
+            VolumeControl item = getStorageItem(index);
             if (item != null && item.type == streamType) {
                 return item;
             }
@@ -129,20 +117,45 @@ public class VolumeControlModel {
         return null;
     }
 
-    private Editor editItem(VolumeControl item) {
-        return settings.getPreferences().edit().putString("pref_control_list_item_" + item.position, (new Gson()).toJson(item));
-    }
-
     public void saveItem(VolumeControl item) {
-        editItem(item).commit();
+        editItem(item).apply();
     }
 
     public void saveList(List<VolumeControl> list) {
         for (int position = 0; position < list.size(); position++) {
             VolumeControl item = list.get(position);
             item.position = position;
-            editItem(item).apply();
+            editItem(sanitizeItem(item)).apply();
         }
+    }
+
+    private Editor editItem(VolumeControl item) {
+        return settings.getPreferences().edit().putString("pref_control_list_item_" + item.position, (new Gson()).toJson(item));
+    }
+
+    private String getDefaultLabel(int resourceId) {
+        return settings.getResources().getString(resourceId);
+    }
+
+    private VolumeControl getStorageItem(int position) {
+        String control = settings.getPreferences().getString("pref_control_list_item_" + position, null);
+        if (control != null) {
+            return (new Gson()).fromJson(control, VolumeControl.class);
+        }
+        return null;
+    }
+
+    private VolumeControl sanitizeItem(@NonNull VolumeControl item) {
+        if (item.position < 0 || item.position >= defaultOrder.size()) {
+            return defaultControls.get(AudioManager.STREAM_MUSIC);
+        }
+        if (!defaultOrder.contains(item.type)) {
+            item.type = defaultControls.get(item.position).type;
+        }
+        if (getIconId(item.icon) == 0) {
+            item.icon = defaultControls.get(item.type).icon;
+        }
+        return item;
     }
 
 }
