@@ -16,35 +16,48 @@
 
 package net.hyx.app.volumenotification.service;
 
-import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
+import android.util.Log;
+//import android.os.IBinder;
+//import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.model.SettingsModel;
+import net.hyx.app.volumenotification.controller.TileServiceController;
 
-public class NotificationBackgroundService extends Service {
+
+public class NotificationBackgroundService extends JobIntentService {
+
+    private static final int JOB_ID = 1;
+
+
+    public static void enqueueWork(Context context, Intent work) {
+        JobIntentService.enqueueWork(context, NotificationBackgroundService.class, JOB_ID, work);
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        SettingsModel settings = new SettingsModel(getApplicationContext());
-        if (settings.isEnabled()) {
-            NotificationServiceController.newInstance(getApplicationContext()).startForegroundService();
-        } else {
-            NotificationServiceController.newInstance(getApplicationContext()).stopForegroundService();
-        }
-        stopSelf();
+        //stopSelf();
+    }
+
+    @Override
+    protected void onHandleWork(@NonNull Intent intent) {
+        NotificationServiceController.newInstance(getApplicationContext()).checkStartForegroundService();
+        TileServiceController.newInstance(getApplicationContext()).requestListening();
+    }
+
+    @Override
+    public boolean onStopCurrentWork() {
+        return true;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
     }
 
 }

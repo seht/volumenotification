@@ -25,13 +25,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-
+import android.widget.RemoteViews;
 import androidx.core.app.NotificationCompat;
 
-import android.widget.RemoteViews;
-
 import net.hyx.app.volumenotification.R;
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -84,7 +81,6 @@ public class NotificationFactory {
     }
 
     private void cancelNotification() {
-        NotificationServiceController.newInstance(context).stopForegroundService();
         manager.cancel(NOTIFICATION_ID);
     }
 

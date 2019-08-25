@@ -19,18 +19,22 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.controller.TileServiceController;
+//import net.hyx.app.volumenotification.service.NotificationBackgroundService;
 
 public class StartServiceReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction() != null) {
-            NotificationServiceController.newInstance(context.getApplicationContext()).startService();
-            TileServiceController.newInstance(context.getApplicationContext()).requestListening();
+            Log.d("BROADCAST", "RECEIVED................................................... " + intent.getAction());
+            NotificationServiceController.newInstance(context).startService();
+            //NotificationBackgroundService.enqueueWork(context, new Intent(context, NotificationBackgroundService.class));
         }
     }
+
+
 
 }

@@ -19,9 +19,12 @@ package net.hyx.app.volumenotification.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
+//import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
 
 public class NotificationForegroundService extends Service {
 
@@ -41,7 +44,9 @@ public class NotificationForegroundService extends Service {
 
     @Override
     public void onDestroy() {
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        Log.d("DESTROYYYY", "...............................................SASASA");
+        sendBroadcast(new Intent(getApplicationContext(), StartServiceReceiver.class));
+        //NotificationServiceController.newInstance(this).startService();
     }
 
     @Override

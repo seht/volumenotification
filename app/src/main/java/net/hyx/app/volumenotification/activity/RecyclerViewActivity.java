@@ -71,7 +71,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         NotificationServiceController.newInstance(getApplicationContext()).startService();
-        TileServiceController.newInstance(getApplicationContext()).requestListening();
     }
 
     @Override
