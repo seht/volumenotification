@@ -5,12 +5,10 @@ import android.content.Intent;
 
 import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
 
-/**
- *
- */
+
 public class ApplicationController extends Application {
 
-    private static final String APPLICATION_START_BROADCAST = "net.hyx.app.broadcast.APPLICATION_START_BROADCAST";
+    public static final String APPLICATION_STARTED = "net.hyx.app.volumenotification.broadcast.APPLICATION_STARTED";
 
     @Override
     public void onCreate() {
@@ -19,7 +17,7 @@ public class ApplicationController extends Application {
         NotificationServiceController.newInstance(getApplicationContext()).checkEnableStartAtBoot();
 
         Intent intent = new Intent(getApplicationContext(), StartServiceReceiver.class);
-        intent.setAction(APPLICATION_START_BROADCAST);
+        intent.setAction(APPLICATION_STARTED);
         sendBroadcast(intent);
     }
 }

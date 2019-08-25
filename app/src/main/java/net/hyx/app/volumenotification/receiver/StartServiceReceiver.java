@@ -19,15 +19,12 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
+import net.hyx.app.volumenotification.controller.ApplicationController;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 
 
 public class StartServiceReceiver extends BroadcastReceiver {
-
-    public final static String MY_BROADCAST_FILTER = "net.hyx.app.broadcast.MY_BROADCAST_FILTER";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -37,7 +34,7 @@ public class StartServiceReceiver extends BroadcastReceiver {
 //        Toast toast = Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT);
 //        toast.show();
 
-        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) || intent.getAction().equals(MY_BROADCAST_FILTER)) {
+        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) || intent.getAction().equals(ApplicationController.APPLICATION_STARTED)) {
             NotificationServiceController.newInstance(context).startService();
         }
     }
