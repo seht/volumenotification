@@ -31,14 +31,17 @@ public class StartServiceReceiver extends BroadcastReceiver {
         if (intent.getAction() == null) {
             return;
         }
-//        Toast toast = Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT);
-//        toast.show();
-
-        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) || intent.getAction().equals(ApplicationController.APPLICATION_STARTED)) {
-            NotificationServiceController.newInstance(context).startService();
+        //Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
+        switch (intent.getAction()) {
+            case Intent.ACTION_MY_PACKAGE_REPLACED:
+            case Intent.ACTION_BOOT_COMPLETED:
+            case Intent.ACTION_LOCKED_BOOT_COMPLETED:
+            case ApplicationController.APPLICATION_STARTED:
+                NotificationServiceController.newInstance(context).startService();
+                break;
         }
-    }
 
+    }
 
 
 }
