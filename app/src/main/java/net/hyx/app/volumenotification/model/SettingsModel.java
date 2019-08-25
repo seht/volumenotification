@@ -81,6 +81,16 @@ public class SettingsModel {
         return preferences.getBoolean("pref_enabled", defValue);
     }
 
+    public boolean startsAtBoot() {
+        boolean defValue = resources.getBoolean(R.bool.pref_boot_default);
+        return preferences.getBoolean("pref_boot", defValue);
+    }
+
+    public boolean hasForegroundService() {
+        boolean defValue = resources.getBoolean(R.bool.pref_foreground_service_default);
+        return preferences.getBoolean("pref_foreground_service", defValue);
+    }
+
     public boolean getToggleMute() {
         boolean defValue = resources.getBoolean(R.bool.pref_toggle_mute_default);
         return preferences.getBoolean("pref_toggle_mute", defValue);

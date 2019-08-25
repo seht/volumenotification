@@ -28,7 +28,9 @@ import androidx.core.app.JobIntentService;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.controller.TileServiceController;
 
-
+/**
+ * @see {https://developer.android.com/reference/android/support/v4/app/JobIntentService}
+ */
 public class NotificationBackgroundService extends JobIntentService {
 
     private static final int JOB_ID = 1;
@@ -41,12 +43,11 @@ public class NotificationBackgroundService extends JobIntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        //stopSelf();
     }
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        NotificationServiceController.newInstance(getApplicationContext()).checkStartForegroundService();
+        NotificationServiceController.newInstance(getApplicationContext()).checkStartNotificationService();
         TileServiceController.newInstance(getApplicationContext()).requestListening();
     }
 

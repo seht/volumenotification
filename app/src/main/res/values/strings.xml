@@ -58,6 +58,9 @@
     <string name="pref_top_priority_title">Top priority</string>
     <string name="pref_top_priority_summary">* Enabling will keep the notification at the top but force a status bar icon.</string>
 
+    <string name="pref_foreground_service_title">Enable foreground service</string>
+    <string name="pref_foreground_service_summary">* Enabling will reinforce the notification priority and will restart the notification if stopped by the task manager.</string>
+
     <string name="pref_hide_locked_title">Hide from lock screen</string>
     <string name="pref_hide_locked_summary">* To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
 

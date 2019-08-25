@@ -19,6 +19,7 @@ package net.hyx.app.volumenotification.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
@@ -35,13 +36,12 @@ public class NotificationForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         NotificationFactory factory = new NotificationFactory(getApplicationContext());
-        factory.updateNotification();
+        factory.startNotification();
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        //sendBroadcast(new Intent(getApplicationContext(), StartServiceReceiver.class));
         NotificationServiceController.newInstance(getApplicationContext()).startService();
     }
 

@@ -44,27 +44,27 @@
 
         <receiver
             android:name=".receiver.StartServiceReceiver"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:enabled="false">
             <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
         <service
-            android:name=".service.NotificationForegroundService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <service
             android:name=".service.NotificationBackgroundService"
-            android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name=".service.NotificationForegroundService"
+            android:exported="true"
+            android:enabled="false" />
 
         <service
             android:name=".service.TileServiceMediaVolume"

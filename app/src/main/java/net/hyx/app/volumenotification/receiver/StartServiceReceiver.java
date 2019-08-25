@@ -20,18 +20,25 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
-//import net.hyx.app.volumenotification.service.NotificationBackgroundService;
+
 
 public class StartServiceReceiver extends BroadcastReceiver {
 
+    public final static String MY_BROADCAST_FILTER = "net.hyx.app.broadcast.MY_BROADCAST_FILTER";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction() != null) {
-            Log.d("BROADCAST", "RECEIVED................................................... " + intent.getAction());
+        if (intent.getAction() == null) {
+            return;
+        }
+//        Toast toast = Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT);
+//        toast.show();
+
+        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) || intent.getAction().equals(MY_BROADCAST_FILTER)) {
             NotificationServiceController.newInstance(context).startService();
-            //NotificationBackgroundService.enqueueWork(context, new Intent(context, NotificationBackgroundService.class));
         }
     }
 

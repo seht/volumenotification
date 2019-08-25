@@ -11,6 +11,7 @@
     <bool name="pref_dark_app_theme_default">false</bool>
     <bool name="pref_boot_default">true</bool>
     <bool name="pref_top_priority_default">true</bool>
+    <bool name="pref_foreground_service_default">false</bool>
     <bool name="pref_hide_locked_default">true</bool>
     <bool name="pref_hide_status_default">true</bool>
     <bool name="pref_toggle_mute_default">false</bool>

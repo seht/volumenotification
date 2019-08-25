@@ -70,6 +70,11 @@
             android:summary="@string/pref_top_priority_summary"
             android:title="@string/pref_top_priority_title"/>
         <SwitchPreferenceCompat
+            android:defaultValue="@bool/pref_foreground_service_default"
+            android:key="pref_foreground_service"
+            android:summary="@string/pref_foreground_service_summary"
+            android:title="@string/pref_foreground_service_title"/>
+        <SwitchPreferenceCompat
             android:defaultValue="@bool/pref_hide_locked_default"
             android:key="pref_hide_locked"
             android:summary="@string/pref_hide_locked_summary"

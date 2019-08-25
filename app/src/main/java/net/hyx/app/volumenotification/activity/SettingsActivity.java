@@ -39,10 +39,9 @@ public class SettingsActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-        SettingsModel settings = new SettingsModel(getApplicationContext());
+        SettingsModel settings = new SettingsModel(this);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
@@ -56,8 +55,6 @@ public class SettingsActivity extends AppCompatActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
-
 
     @Override
     public void onBackStackChanged() {
@@ -101,7 +98,12 @@ public class SettingsActivity extends AppCompatActivity
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationServiceController.newInstance(getActivity()).startService();
+            if (getActivity() != null) {
+                if (key.equals("pref_boot")) {
+                    NotificationServiceController.newInstance(getActivity()).checkEnableStartAtBoot();
+                }
+                NotificationServiceController.newInstance(getActivity()).startService();
+            }
         }
 
         @Override
@@ -128,7 +130,9 @@ public class SettingsActivity extends AppCompatActivity
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            NotificationServiceController.newInstance(getActivity()).startService();
+            if (getActivity() != null) {
+                NotificationServiceController.newInstance(getActivity()).startService();
+            }
         }
 
         @Override

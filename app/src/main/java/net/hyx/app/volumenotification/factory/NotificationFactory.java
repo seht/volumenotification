@@ -68,19 +68,11 @@ public class NotificationFactory {
         return getNotificationBuilder().build();
     }
 
-//    public void createNotification() {
-//        updateNotification();
-//    }
-
-    public void updateNotification() {
-        if (settings.isEnabled()) {
-            manager.notify(NOTIFICATION_ID, getNotification());
-        } else {
-            cancelNotification();
-        }
+    public void startNotification() {
+        manager.notify(NOTIFICATION_ID, getNotification());
     }
 
-    private void cancelNotification() {
+    public void cancelNotification() {
         manager.cancel(NOTIFICATION_ID);
     }
 
