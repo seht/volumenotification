@@ -8,7 +8,7 @@ import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
 
 public class ApplicationController extends Application {
 
-    public static final String APPLICATION_STARTED = "net.hyx.app.volumenotification.broadcast.APPLICATION_STARTED";
+    public static final String ACTION_APPLICATION_STARTED = "net.hyx.app.volumenotification.broadcast.APPLICATION_STARTED";
 
     @Override
     public void onCreate() {
@@ -17,7 +17,7 @@ public class ApplicationController extends Application {
         NotificationServiceController.newInstance(getApplicationContext()).checkEnableStartAtBoot();
 
         Intent intent = new Intent(getApplicationContext(), StartServiceReceiver.class);
-        intent.setAction(APPLICATION_STARTED);
+        intent.setAction(ACTION_APPLICATION_STARTED);
         sendBroadcast(intent);
     }
 }
