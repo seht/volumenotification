@@ -18,12 +18,10 @@ package net.hyx.app.volumenotification.controller;
 
 import android.content.Context;
 import android.content.Intent;
-//import androidx.core.content.ContextCompat;
-
 import androidx.core.content.ContextCompat;
 
 import net.hyx.app.volumenotification.model.SettingsModel;
-import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
+//import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
 import net.hyx.app.volumenotification.service.NotificationBackgroundService;
 import net.hyx.app.volumenotification.service.NotificationForegroundService;
 
