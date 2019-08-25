@@ -35,6 +35,7 @@ public class VolumeControlModel {
 
     public static final String ITEM_FIELD = "item";
     public static final String STREAM_TYPE_FIELD = "item_type";
+    public static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
     private final Context context;
     private final SettingsModel settings;

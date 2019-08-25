@@ -34,8 +34,7 @@ import net.hyx.app.volumenotification.controller.TileServiceController;
 public class NotificationBackgroundService extends JobIntentService {
 
     private static final int JOB_ID = 1;
-
-
+    
     public static void enqueueWork(Context context, Intent work) {
         JobIntentService.enqueueWork(context, NotificationBackgroundService.class, JOB_ID, work);
     }

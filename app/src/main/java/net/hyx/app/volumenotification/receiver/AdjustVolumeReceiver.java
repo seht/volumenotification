@@ -19,7 +19,6 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 
 import net.hyx.app.volumenotification.model.AudioManagerModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -29,8 +28,8 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         AudioManagerModel audioManagerModel = new AudioManagerModel(context.getApplicationContext());
+        audioManagerModel.adjustVolume(intent.getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, VolumeControlModel.DEFAULT_STREAM_TYPE));
         //audioManagerModel.adjustVolume(intent.getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, AudioManager.USE_DEFAULT_STREAM_TYPE));
-        audioManagerModel.adjustVolume(intent.getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, AudioManager.STREAM_MUSIC));
     }
 
 }

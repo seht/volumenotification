@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:key="pref_cat_custom_theme"
-        android:title="@string/pref_custom_theme_title">
+        app:key="pref_cat_custom_theme"
+        app:title="@string/pref_custom_theme_title">
 
-    <EditTextPreference
-            android:key="pref_custom_theme_background_color"
-            android:title="@string/pref_custom_theme_background_color_title"
-            android:summary="@string/pref_custom_theme_color_help"
-            android:defaultValue="@string/pref_custom_theme_background_color_default" />
+        <EditTextPreference
+            app:key="pref_custom_theme_background_color"
+            app:title="@string/pref_custom_theme_background_color_title"
+            app:summary="@string/pref_custom_theme_color_help"
+            app:defaultValue="@string/pref_custom_theme_background_color_default"
+            app:useSimpleSummaryProvider="true"/>
 
-    <EditTextPreference
-        android:key="pref_custom_theme_icon_color"
-        android:title="@string/pref_custom_theme_icon_color_title"
-        android:summary="@string/pref_custom_theme_color_help"
-        android:defaultValue="@string/pref_custom_theme_icon_color_default" />
+        <EditTextPreference
+            app:key="pref_custom_theme_icon_color"
+            app:title="@string/pref_custom_theme_icon_color_title"
+            app:summary="@string/pref_custom_theme_color_help"
+            app:defaultValue="@string/pref_custom_theme_icon_color_default"
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 

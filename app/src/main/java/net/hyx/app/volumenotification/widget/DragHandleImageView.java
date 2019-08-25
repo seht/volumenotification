@@ -17,22 +17,33 @@
 package net.hyx.app.volumenotification.widget;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
-
 import androidx.appcompat.widget.AppCompatImageView;
+
+import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class DragHandleImageView extends AppCompatImageView {
 
+    private SettingsModel settings;
+
     public DragHandleImageView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public DragHandleImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public DragHandleImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        settings = new SettingsModel(context);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        this.setColorFilter(settings.getThemeAttributeColor(getContext().getTheme(), android.R.attr.colorForeground));
     }
 
     @Override

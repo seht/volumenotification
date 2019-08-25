@@ -5,7 +5,7 @@
     <string name="pref_theme_default" translatable="false">theme_material_light</string>
     <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
     <string name="pref_custom_theme_background_color_default" translatable="false">#424242</string>
-    <string name="pref_notification_height_default" translatable="false">70dp</string>
+    <string name="pref_notification_height_default" translatable="false">40dp</string>
 
     <bool name="pref_enabled_default">true</bool>
     <bool name="pref_dark_app_theme_default">false</bool>
@@ -42,7 +42,6 @@
         <item>40dp</item>
         <item>64dp</item>
         <item>70dp</item>
-        <item>92dp</item>
     </string-array>
     <string-array name="pref_notification_height_values">
         <item>match_parent</item>
@@ -51,7 +50,6 @@
         <item>40dp</item>
         <item>64dp</item>
         <item>70dp</item>
-        <item>92dp</item>
     </string-array>
 
 

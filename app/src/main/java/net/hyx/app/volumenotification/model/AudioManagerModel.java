@@ -34,9 +34,9 @@ public class AudioManagerModel {
         audio.adjustStreamVolume(streamType, getStreamFlag(streamType), AudioManager.FLAG_SHOW_UI);
     }
 
-    private int getStreamFlag(int type) {
+    private int getStreamFlag(int streamType) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if ((type == AudioManager.STREAM_MUSIC && settings.getToggleMute()) || (type == AudioManager.STREAM_RING && settings.getToggleSilent())) {
+            if ((streamType == AudioManager.STREAM_MUSIC && settings.getToggleMute()) || (streamType == AudioManager.STREAM_RING && settings.getToggleSilent())) {
                 return AudioManager.ADJUST_TOGGLE_MUTE;
             }
         }

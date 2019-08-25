@@ -28,21 +28,15 @@ public class IconImageView extends AppCompatImageView {
     private SettingsModel settings;
 
     public IconImageView(Context context) {
-        super(context);
-        construct(context);
+        this(context, null);
     }
 
     public IconImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        construct(context);
+        this(context, attrs, 0);
     }
 
     public IconImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        construct(context);
-    }
-
-    private void construct(final Context context) {
         settings = new SettingsModel(context);
     }
 
