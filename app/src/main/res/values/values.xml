@@ -5,7 +5,7 @@
     <string name="pref_theme_default" translatable="false">theme_material_light</string>
     <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
     <string name="pref_custom_theme_background_color_default" translatable="false">#424242</string>
-    <string name="pref_notification_height_default" translatable="false">40dp</string>
+    <string name="pref_notification_height_default" translatable="false">match_parent</string>
 
     <bool name="pref_enabled_default">true</bool>
     <bool name="pref_dark_app_theme_default">false</bool>
