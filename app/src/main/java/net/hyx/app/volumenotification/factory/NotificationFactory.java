@@ -79,7 +79,7 @@ public class NotificationFactory {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, packageName, getImportance());
-            notificationChannel.setShowBadge(!settings.getHideStatus());
+            //notificationChannel.setShowBadge(true);
             manager.createNotificationChannel(notificationChannel);
         }
 
