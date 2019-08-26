@@ -45,7 +45,6 @@ public class NotificationFactory {
     private final NotificationManager manager;
     private final SettingsModel settings;
     private final VolumeControlModel volumeControlModel;
-    //private final AudioManagerModel audioManagerModel;
     private final List<VolumeControl> items;
 
     private static final int NOTIFICATION_ID = 1;

@@ -47,9 +47,7 @@
             android:enabled="false">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
-                <!--
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

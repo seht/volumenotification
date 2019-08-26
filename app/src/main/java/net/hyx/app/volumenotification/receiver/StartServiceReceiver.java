@@ -33,7 +33,7 @@ public class StartServiceReceiver extends BroadcastReceiver {
         }
         //Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
         switch (intent.getAction()) {
-            //case Intent.ACTION_MY_PACKAGE_REPLACED:
+            case Intent.ACTION_MY_PACKAGE_REPLACED:
             case Intent.ACTION_BOOT_COMPLETED:
             case Intent.ACTION_LOCKED_BOOT_COMPLETED:
             case ApplicationController.ACTION_APPLICATION_STARTED:
