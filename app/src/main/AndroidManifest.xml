@@ -44,10 +44,11 @@
 
         <receiver
             android:name=".receiver.StartServiceReceiver"
-            android:enabled="false">
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -57,13 +58,14 @@
 
         <service
             android:name=".service.NotificationBackgroundService"
+            android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service
             android:name=".service.NotificationForegroundService"
-            android:exported="true"
-            android:enabled="false" />
+            android:enabled="true"
+            android:exported="true" />
 
         <service
             android:name=".service.TileServiceMediaVolume"
