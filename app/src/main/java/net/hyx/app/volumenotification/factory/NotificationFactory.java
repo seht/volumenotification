@@ -34,7 +34,6 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
 import net.hyx.app.volumenotification.receiver.AdjustVolumeReceiver;
 import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
-import net.hyx.app.volumenotification.service.NotificationForegroundService;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class NotificationFactory {
     private final List<VolumeControl> items;
 
     private static final int NOTIFICATION_ID = 1;
-    private static final String CHANNEL_ID = NotificationForegroundService.class.getSimpleName();
+    private static final String CHANNEL_ID = "net.hyx.app.volumenotification.channel.DEFAULT";
 
     public NotificationFactory(Context context) {
         this.context = context;

@@ -3,10 +3,6 @@
     package="net.hyx.app.volumenotification"
     android:installLocation="internalOnly">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
         android:name=".controller.ApplicationController"
         android:allowBackup="true"
@@ -45,13 +41,14 @@
         <receiver
             android:name=".receiver.StartServiceReceiver"
             android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
@@ -188,5 +185,10 @@
         -->
 
     </application>
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>

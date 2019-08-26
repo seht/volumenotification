@@ -62,18 +62,16 @@ public class SettingsActivity extends AppCompatActivity
     @Override
     public void onBackStackChanged() {
         //super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            finish();
+        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         //super.onSupportNavigateUp();
         getSupportFragmentManager().popBackStackImmediate();
-
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            finish();
-        }
-
-        return true;
+        return (getSupportFragmentManager().getBackStackEntryCount() != 0);
     }
 
     @Override
@@ -82,7 +80,6 @@ public class SettingsActivity extends AppCompatActivity
         final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
                 getClassLoader(),
                 pref.getFragment());
-        //fragment.setTargetFragment(caller, 0);
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, fragment)
                 .addToBackStack(null)
@@ -158,13 +155,10 @@ public class SettingsActivity extends AppCompatActivity
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (getActivity() != null) {
-
-                if (key.equals("pref_custom_theme_background_color") || key.equals("pref_custom_theme_icon_color")) {
-
-                }
-                NotificationServiceController.newInstance(getActivity()).startService();
+            if (getActivity() == null) {
+                return;
             }
+            NotificationServiceController.newInstance(getActivity()).startService();
         }
 
         @Override
@@ -178,7 +172,6 @@ public class SettingsActivity extends AppCompatActivity
             super.onPause();
             getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         }
-
 
     }
 

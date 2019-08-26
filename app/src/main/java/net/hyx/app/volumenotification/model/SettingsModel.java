@@ -73,7 +73,7 @@ public class SettingsModel {
     }
 
     public int getStatusIcon() {
-        return (getHideStatus()) ? android.R.color.transparent : R.drawable.ic_launcher;
+        return (getHideStatus()) ? android.R.color.transparent : R.drawable.ic_status_icon;
     }
 
     public boolean isEnabled() {
