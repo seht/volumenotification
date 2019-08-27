@@ -105,9 +105,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case R.id.menu_dark_app_theme:
-                boolean darkTheme = !item.isChecked();
-                settings.getPreferences().edit().putBoolean("pref_dark_app_theme", darkTheme).apply();
-                item.setChecked(darkTheme);
+                settings.getPreferences().edit().putBoolean("pref_dark_app_theme", !item.isChecked()).apply();
                 setTheme(settings.getAppTheme());
                 recreate();
                 break;
