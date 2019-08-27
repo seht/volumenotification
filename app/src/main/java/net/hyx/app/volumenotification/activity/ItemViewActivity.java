@@ -38,6 +38,7 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -66,7 +67,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 .commit();
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_check_24px);
         }
 
@@ -89,15 +90,11 @@ public class ItemViewActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                fragment.model.saveItem(fragment.item);
-                NavUtils.navigateUpFromSameTask(this);
-                //NotificationServiceController.newInstance(getApplicationContext()).startService();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onSupportNavigateUp() {
+        fragment.model.saveItem(fragment.item);
+        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        finish();
+        return true;
     }
 
     public static class ItemFragment extends Fragment {

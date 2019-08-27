@@ -63,7 +63,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new ListViewFragment())
-                .addToBackStack(null)
                 .commit();
     }
 
@@ -76,7 +75,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (!settings.getNonceDialogCancelled(DIALOG_ID)) {
                 DialogFragment dialogFragment = NonceDialogFragment.newInstance(DIALOG_ID,
@@ -103,9 +101,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-//            case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
-//                break;
             case R.id.menu_pref:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;

@@ -156,10 +156,10 @@ public class NotificationFactory {
         }
 
         RemoteViews view = new RemoteViews(packageName, R.layout.view_layout_notification);
-        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
-
         view.removeAllViews(R.id.notification_layout);
         view.addView(R.id.notification_layout, wrapperLayout);
+
+        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
 
         return view;
     }

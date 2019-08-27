@@ -6,8 +6,8 @@ android {
         applicationId 'net.hyx.app.volumenotification'
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1062
-        versionName '1.0.6.2-alpha2'
+        versionCode 1063
+        versionName '1.0.6.3-alpha2'
         vectorDrawables.useSupportLibrary true
     }
     buildTypes {
@@ -33,4 +33,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.android.material:material:1.0.0'
     androidTestImplementation 'junit:junit:4.12'
+    //implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    //implementation 'androidx.navigation:navigation-ui:2.0.0'
 }

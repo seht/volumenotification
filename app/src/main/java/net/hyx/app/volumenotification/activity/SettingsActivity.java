@@ -35,6 +35,9 @@ import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
+/**
+ * @see {https://developer.android.com/guide/topics/ui/settings/organize-your-settings}
+ */
 public class SettingsActivity extends AppCompatActivity
         implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         FragmentManager.OnBackStackChangedListener {
@@ -61,7 +64,6 @@ public class SettingsActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        //super.onBackPressed();
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             finish();
         }
@@ -69,17 +71,19 @@ public class SettingsActivity extends AppCompatActivity
 
     @Override
     public boolean onSupportNavigateUp() {
-        //super.onSupportNavigateUp();
         getSupportFragmentManager().popBackStackImmediate();
-        return (getSupportFragmentManager().getBackStackEntryCount() != 0);
+        return (getSupportFragmentManager().getBackStackEntryCount() > 0);
     }
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-        //final Bundle args = pref.getExtras();
+        final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
                 getClassLoader(),
                 pref.getFragment());
+        fragment.setArguments(args);
+        fragment.setTargetFragment(caller, 0);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, fragment)
                 .addToBackStack(null)
@@ -130,15 +134,15 @@ public class SettingsActivity extends AppCompatActivity
                 return;
             }
             final SettingsModel settings = new SettingsModel(getActivity());
-            Preference.OnPreferenceChangeListener listener = new Preference.OnPreferenceChangeListener() {
+            Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    boolean isValidColor = (settings.getColor(newValue.toString()) != 0);
-                    if (!isValidColor) {
+                    if (settings.getColor(newValue.toString()) != 0) {
+                        return true;
+                    } else {
                         Toast.makeText(getActivity(), R.string.pref_custom_theme_color_error_message, Toast.LENGTH_SHORT).show();
                         return false;
                     }
-                    return true;
                 }
             };
 
@@ -146,10 +150,10 @@ public class SettingsActivity extends AppCompatActivity
             Preference iconColorPref = findPreference("pref_custom_theme_icon_color");
 
             if (backgroundColorPref != null) {
-                backgroundColorPref.setOnPreferenceChangeListener(listener);
+                backgroundColorPref.setOnPreferenceChangeListener(changeListener);
             }
             if (iconColorPref != null) {
-                iconColorPref.setOnPreferenceChangeListener(listener);
+                iconColorPref.setOnPreferenceChangeListener(changeListener);
             }
         }
 
