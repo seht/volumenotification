@@ -45,12 +45,13 @@ public class SettingsActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         SettingsModel settings = new SettingsModel(this);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
+
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new PrefFragment())
