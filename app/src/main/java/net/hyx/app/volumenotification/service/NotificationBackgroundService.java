@@ -29,7 +29,7 @@ import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.controller.TileServiceController;
 
 /**
- * @see {https://developer.android.com/reference/android/support/v4/app/JobIntentService}
+ * @see {https://developer.android.com/reference/androidx/core/app/JobIntentService}
  */
 public class NotificationBackgroundService extends JobIntentService {
 

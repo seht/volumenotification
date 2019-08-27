@@ -24,6 +24,9 @@ import android.util.Log;
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 
+/**
+ * @see {https://developer.android.com/guide/components/services}
+ */
 public class NotificationForegroundService extends Service {
 
     @Override
