@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <Spinner
         android:id="@+id/pref_icon_input"
@@ -11,11 +11,11 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:entries="@array/pref_icon_entries"
-        android:padding="0dp"/>
+        android:padding="0dp" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="32dp"/>
+        android:layout_height="32dp" />
 
     <EditText
         android:id="@+id/pref_label_input"
@@ -25,6 +25,6 @@
         android:hint=""
         android:inputType="text"
         android:paddingLeft="32dp"
-        android:paddingRight="32dp"/>
+        android:paddingRight="32dp" />
 
 </LinearLayout>

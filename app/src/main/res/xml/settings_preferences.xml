@@ -43,6 +43,7 @@
             app:key="pref_translucent"
             app:summary="@string/pref_translucent_summary"
             app:title="@string/pref_translucent_title"/>
+        <!--
         <ListPreference
             app:defaultValue="@string/pref_notification_height_default"
             app:dialogTitle="@string/pref_notification_height_title"
@@ -52,6 +53,7 @@
             app:summary="@string/pref_notification_height_summary"
             app:title="@string/pref_notification_height_title"
             app:useSimpleSummaryProvider="true"/>
+            -->
     </PreferenceCategory>
 
     <PreferenceCategory

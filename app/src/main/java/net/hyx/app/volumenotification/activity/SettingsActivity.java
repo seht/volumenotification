@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity
         SettingsModel settings = new SettingsModel(this);
 
         setTheme(settings.getAppTheme());
-        setContentView(R.layout.activity_frame_layout);
+        setContentView(R.layout.activity_layout);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())

@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +41,6 @@ import com.google.android.material.snackbar.Snackbar;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.helper.DragHandleListener;
@@ -61,7 +59,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         settings = new SettingsModel(getApplicationContext());
 
         setTheme(settings.getAppTheme());
-        setContentView(R.layout.activity_frame_layout);
+        setContentView(R.layout.activity_layout);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new ListViewFragment())

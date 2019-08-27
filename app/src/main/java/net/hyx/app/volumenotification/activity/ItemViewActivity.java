@@ -20,14 +20,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -61,7 +58,7 @@ public class ItemViewActivity extends AppCompatActivity {
 
         setTheme(settings.getAppTheme());
         setTitle(item.label);
-        setContentView(R.layout.activity_frame_layout);
+        setContentView(R.layout.activity_layout);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, fragment)

@@ -29,7 +29,6 @@ public class AdjustVolumeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         AudioManagerModel audioManagerModel = new AudioManagerModel(context.getApplicationContext());
         audioManagerModel.adjustVolume(intent.getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, VolumeControlModel.DEFAULT_STREAM_TYPE));
-        //audioManagerModel.adjustVolume(intent.getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, AudioManager.USE_DEFAULT_STREAM_TYPE));
     }
 
 }

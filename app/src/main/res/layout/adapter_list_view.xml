@@ -50,6 +50,7 @@
                 android:textAppearance="?android:textAppearanceSmall" />
 
         </LinearLayout>
+
         <net.hyx.app.volumenotification.widget.DragHandleImageView
             android:id="@+id/list_item_handle"
             android:layout_width="wrap_content"

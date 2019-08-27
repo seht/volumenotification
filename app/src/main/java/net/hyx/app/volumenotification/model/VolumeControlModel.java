@@ -93,7 +93,6 @@ public class VolumeControlModel {
             VolumeControl item = getStorageItem(index);
             if (item != null) {
                 items.add(sanitizeItem(item));
-                //items.add(item);
             } else {
                 VolumeControl defaultItem = defaultControls.get(getDefaultOrder().get(index));
                 items.add(defaultItem);

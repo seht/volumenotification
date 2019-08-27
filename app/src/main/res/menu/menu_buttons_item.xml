@@ -5,7 +5,7 @@
     <item
         android:id="@+id/item_btn_checked_layout"
         android:title=""
-        app:actionLayout="@layout/view_menu_item_switch"
+        app:actionLayout="@layout/widget_menu_switch"
         app:showAsAction="always"/>
 
 </menu>

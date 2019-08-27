@@ -63,7 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_view_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_view, parent, false);
         return new ItemViewHolder(view, items, model, context);
     }
 
@@ -84,7 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         itemLabel.setText(item.label);
         itemHint.setText(defaultItem.label);
 
-        if (item.status != 0) {
+        if (item.status == 1) {
             itemWrapper.setAlpha(ALPHA_ENABLED);
         } else {
             itemWrapper.setAlpha(ALPHA_DISABLED);

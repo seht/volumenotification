@@ -78,7 +78,6 @@ public class NotificationFactory {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, packageName, getImportance());
-            //notificationChannel.setShowBadge(true);
             manager.createNotificationChannel(notificationChannel);
         }
 
@@ -121,6 +120,10 @@ public class NotificationFactory {
     }
 
     private RemoteViews getCustomContentView() {
+
+        RemoteViews view = new RemoteViews(packageName, R.layout.notification_layout);
+        view.removeAllViews(R.id.notification_layout);
+
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
         int backgroundColor;
         int iconColor;
@@ -136,50 +139,27 @@ public class NotificationFactory {
             backgroundColor = android.R.color.transparent;
         }
 
-        RemoteViews wrapperLayout = new RemoteViews(packageName, getWrapperLayout());
-        wrapperLayout.removeAllViews(R.id.notification_wrapper);
+        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
 
-        for (int pos = 0; pos < items.size(); pos++) {
-            VolumeControl item = items.get(pos);
+        for (int position = 0; position < items.size(); position++) {
+            VolumeControl item = items.get(position);
             if (item.status != 1) {
                 continue;
             }
-            RemoteViews btn = new RemoteViews(packageName, R.layout.view_widget_volume_control);
-            PendingIntent event = PendingIntent.getBroadcast(context, item.type,
+            RemoteViews imageButton = new RemoteViews(packageName, R.layout.widget_volume_control);
+            PendingIntent clickEvent = PendingIntent.getBroadcast(context, item.type,
                     new Intent(context, AdjustVolumeReceiver.class).putExtra(VolumeControlModel.STREAM_TYPE_FIELD, item.type),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            btn.setOnClickPendingIntent(R.id.btn_volume_control, event);
-            btn.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconId(item.icon));
-            btn.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
-            wrapperLayout.addView(R.id.notification_wrapper, btn);
+            imageButton.setOnClickPendingIntent(R.id.btn_volume_control, clickEvent);
+            imageButton.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconId(item.icon));
+            imageButton.setInt(R.id.btn_volume_control, "setColorFilter", iconColor);
+            imageButton.setCharSequence(R.id.btn_volume_control, "setContentDescription", item.label);
+
+            view.addView(R.id.notification_layout, imageButton);
         }
-
-        RemoteViews view = new RemoteViews(packageName, R.layout.view_layout_notification);
-        view.removeAllViews(R.id.notification_layout);
-        view.addView(R.id.notification_layout, wrapperLayout);
-
-        view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
 
         return view;
-    }
-
-    private int getWrapperLayout() {
-        switch (settings.getNotificationHeight()) {
-            default:
-            case "match_parent":
-                return R.layout.view_layout_notification_wrapper_match_parent;
-            case "wrap_content":
-                return R.layout.view_layout_notification_wrapper_wrap_content;
-            case "32dp":
-                return R.layout.view_layout_notification_wrapper_32dp;
-            case "40dp":
-                return R.layout.view_layout_notification_wrapper_40dp;
-            case "64dp":
-                return R.layout.view_layout_notification_wrapper_64dp;
-            case "70dp":
-                return R.layout.view_layout_notification_wrapper_70dp;
-        }
     }
 
 }
