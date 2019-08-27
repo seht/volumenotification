@@ -117,7 +117,7 @@ public class VolumeControlModel {
     }
 
     public void saveItem(VolumeControl item) {
-        editItem(item).apply();
+        editItem(sanitizeItem(item)).apply();
     }
 
     public void saveList(List<VolumeControl> list) {

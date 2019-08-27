@@ -24,6 +24,7 @@ import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,7 +68,7 @@ public class ItemViewActivity extends AppCompatActivity {
                 .commit();
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_check_24px);
         }
 
@@ -93,8 +94,7 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         fragment.model.saveItem(fragment.item);
         NotificationServiceController.newInstance(getApplicationContext()).startService();
-        finish();
-        return true;
+        return super.onSupportNavigateUp();
     }
 
     public static class ItemFragment extends Fragment {
@@ -104,8 +104,8 @@ public class ItemViewActivity extends AppCompatActivity {
         private SettingsModel settings;
 
         public static ItemFragment newInstance(Serializable item) {
-            ItemFragment fragment = new ItemFragment();
             Bundle args = new Bundle();
+            ItemFragment fragment = new ItemFragment();
             args.putSerializable(VolumeControlModel.ITEM_FIELD, item);
             fragment.setArguments(args);
             return fragment;
@@ -153,7 +153,6 @@ public class ItemViewActivity extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
                     item.label = s.toString();
-                    model.saveItem(item);
                 }
             });
 
@@ -161,7 +160,6 @@ public class ItemViewActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     item.icon = parent.getItemAtPosition(position).toString();
-                    model.saveItem(item);
                 }
 
                 @Override

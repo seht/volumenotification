@@ -16,8 +16,6 @@
 
 package net.hyx.app.volumenotification.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -25,7 +23,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+//import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 //import androidx.core.app.NavUtils;
@@ -37,10 +35,10 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 
 /**
  * @see {https://developer.android.com/guide/topics/ui/settings/organize-your-settings}
+ * @see {https://github.com/googlesamples/android-preferences}
  */
 public class SettingsActivity extends AppCompatActivity
-        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
-        FragmentManager.OnBackStackChangedListener {
+        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +49,8 @@ public class SettingsActivity extends AppCompatActivity
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_frame_layout);
 
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
-
         getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new PrefFragment())
-                .addToBackStack(null)
+                .replace(android.R.id.content, new SettingsFragment())
                 .commit();
 
         if (getSupportActionBar() != null) {
@@ -64,16 +59,11 @@ public class SettingsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackStackChanged() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            finish();
-        }
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
-        getSupportFragmentManager().popBackStackImmediate();
-        return (getSupportFragmentManager().getBackStackEntryCount() > 0);
+        if (getSupportFragmentManager().popBackStackImmediate()) {
+            return true;
+        }
+        return super.onSupportNavigateUp();
     }
 
     @Override
@@ -93,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity
         return true;
     }
 
-    public static class PrefFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
+    public static class SettingsFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -122,7 +112,6 @@ public class SettingsActivity extends AppCompatActivity
             super.onPause();
             getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         }
-
 
     }
 
