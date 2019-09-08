@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:gravity="fill"
         android:orientation="horizontal"
+        android:background="@drawable/shape_dialog_divider_vertical"
         android:padding="16dp">
 
         <net.hyx.app.volumenotification.widget.IconImageView

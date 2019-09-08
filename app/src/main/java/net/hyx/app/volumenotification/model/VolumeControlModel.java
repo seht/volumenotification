@@ -92,7 +92,10 @@ public class VolumeControlModel {
         for (int index = 0; index < getDefaultControls().size(); index++) {
             VolumeControl item = getStorageItem(index);
             if (item != null) {
-                items.add(sanitizeItem(item));
+                item = sanitizeItem(item);
+                if (item != null) {
+                    items.add(item);
+                }
             } else {
                 VolumeControl defaultItem = defaultControls.get(getDefaultOrder().get(index));
                 items.add(defaultItem);
@@ -116,14 +119,17 @@ public class VolumeControlModel {
     }
 
     public void saveItem(VolumeControl item) {
-        editItem(sanitizeItem(item)).apply();
+        item = sanitizeItem(item);
+        if (item != null) {
+            editItem(item).apply();
+        }
     }
 
     public void saveList(List<VolumeControl> list) {
         for (int position = 0; position < list.size(); position++) {
             VolumeControl item = list.get(position);
             item.position = position;
-            editItem(sanitizeItem(item)).apply();
+            saveItem(item);
         }
     }
 
@@ -145,7 +151,7 @@ public class VolumeControlModel {
 
     private VolumeControl sanitizeItem(@NonNull VolumeControl item) {
         if (item.position < 0 || item.position >= defaultOrder.size()) {
-            return defaultControls.get(AudioManager.STREAM_MUSIC);
+            return null;
         }
         if (!defaultOrder.contains(item.type)) {
             item.type = defaultControls.get(item.position).type;

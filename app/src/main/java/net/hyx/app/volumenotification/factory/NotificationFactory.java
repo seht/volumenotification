@@ -29,6 +29,7 @@ import android.widget.RemoteViews;
 import androidx.core.app.NotificationCompat;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.controller.ApplicationController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -81,13 +82,14 @@ public class NotificationFactory {
             manager.createNotificationChannel(notificationChannel);
         }
 
-        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0,
-                new Intent(context, StartServiceReceiver.class),
-                PendingIntent.FLAG_CANCEL_CURRENT);
+        Intent receiverIntent = new Intent(context, StartServiceReceiver.class);
+        receiverIntent.setAction(ApplicationController.ACTION_APPLICATION_STARTED);
+        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID);
         builder.setDeleteIntent(deleteIntent)
                 .setOngoing(true)
+                .setOnlyAlertOnce(true)
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
                 .setCustomContentView(getCustomContentView())
@@ -121,7 +123,7 @@ public class NotificationFactory {
 
     private RemoteViews getCustomContentView() {
 
-        RemoteViews view = new RemoteViews(packageName, R.layout.notification_layout);
+        RemoteViews view = new RemoteViews(packageName, getNotificationLayout());
         view.removeAllViews(R.id.notification_layout);
 
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
@@ -160,6 +162,24 @@ public class NotificationFactory {
         }
 
         return view;
+    }
+
+    private int getNotificationLayout() {
+        switch (settings.getNotificationHeight()) {
+            default:
+            case "match_parent":
+                return R.layout.notification_layout_match_parent;
+            case "wrap_content":
+                return R.layout.notification_layout_wrap_content;
+            case "32dp":
+                return R.layout.notification_layout_32dp;
+            case "40dp":
+                return R.layout.notification_layout_40dp;
+            case "48dp":
+                return R.layout.notification_layout_48dp;
+            case "64dp":
+                return R.layout.notification_layout_64dp;
+        }
     }
 
 }

@@ -19,13 +19,17 @@ package net.hyx.app.volumenotification.activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 //import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 //import androidx.core.app.NavUtils;
 //import androidx.preference.PreferenceScreen;
 
@@ -38,7 +42,9 @@ import net.hyx.app.volumenotification.model.SettingsModel;
  * @see {https://github.com/googlesamples/android-preferences}
  */
 public class SettingsActivity extends AppCompatActivity
-        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
+        PreferenceFragmentCompat.OnPreferenceStartScreenCallback,
+        OnSharedPreferenceChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,26 @@ public class SettingsActivity extends AppCompatActivity
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals("pref_boot")) {
+            NotificationServiceController.newInstance(this).checkEnableStartAtBoot();
+        }
+        NotificationServiceController.newInstance(this).startService();
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         if (getSupportFragmentManager().popBackStackImmediate()) {
             return true;
@@ -73,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity
                 getClassLoader(),
                 pref.getFragment());
         fragment.setArguments(args);
-        fragment.setTargetFragment(caller, 0);
+        fragment.setTargetFragment(caller, caller.getTargetRequestCode());
 
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, fragment)
@@ -83,39 +109,67 @@ public class SettingsActivity extends AppCompatActivity
         return true;
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
+    @Override
+    public boolean onPreferenceStartScreen(PreferenceFragmentCompat caller, PreferenceScreen pref) {
+        //caller.setPreferenceScreen(pref);
+        final Bundle args = pref.getExtras();
+        final SettingsFragment fragment = new SettingsFragment();
+        args.putString(PreferenceFragmentCompat.ARG_PREFERENCE_ROOT, pref.getKey());
+        fragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, fragment, pref.getKey())
+                .addToBackStack(null)
+                .commit();
+
+        return true;
+    }
+
+    public static class SettingsFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public Fragment getCallbackFragment() {
+            return this;
+        }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings_preferences, rootKey);
-        }
-
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (getActivity() == null) {
                 return;
             }
-            if (key.equals("pref_boot")) {
-                NotificationServiceController.newInstance(getActivity()).checkEnableStartAtBoot();
+            final SettingsModel settings = new SettingsModel(getActivity());
+            Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (settings.getColor(newValue.toString()) != 0) {
+                        return true;
+                    } else {
+                        Toast.makeText(getActivity(), R.string.pref_custom_theme_color_error_message, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            };
+
+            Preference backgroundColorPref = findPreference("pref_custom_theme_background_color");
+            Preference iconColorPref = findPreference("pref_custom_theme_icon_color");
+
+            if (backgroundColorPref != null) {
+                backgroundColorPref.setOnPreferenceChangeListener(changeListener);
             }
-            NotificationServiceController.newInstance(getActivity()).startService();
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-        }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+            if (iconColorPref != null) {
+                iconColorPref.setOnPreferenceChangeListener(changeListener);
+            }
         }
 
     }
 
-    public static class NotificationThemeFragment extends PreferenceFragmentCompat implements OnSharedPreferenceChangeListener {
+    public static class NotificationThemeFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public Fragment getCallbackFragment() {
+            return this;
+        }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -145,26 +199,7 @@ public class SettingsActivity extends AppCompatActivity
             if (iconColorPref != null) {
                 iconColorPref.setOnPreferenceChangeListener(changeListener);
             }
-        }
 
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (getActivity() == null) {
-                return;
-            }
-            NotificationServiceController.newInstance(getActivity()).startService();
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-        }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         }
 
     }

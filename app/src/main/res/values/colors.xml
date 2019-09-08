@@ -2,7 +2,7 @@
 <resources>
 
     <color name="app_green">#03DAC6</color>
-    <color name="ic_launcher_background">#FFFFFF</color>
+<!--    <color name="ic_launcher_background">#FFFFFF</color>-->
 
     <item name="theme_material_background_color" type="color">#212121</item>
     <item name="theme_material_icon_color" type="color">#ffffff</item>

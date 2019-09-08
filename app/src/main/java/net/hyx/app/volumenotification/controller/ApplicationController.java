@@ -13,7 +13,6 @@ public class ApplicationController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         NotificationServiceController.newInstance(getApplicationContext()).checkEnableStartAtBoot();
 
         Intent intent = new Intent(getApplicationContext(), StartServiceReceiver.class);

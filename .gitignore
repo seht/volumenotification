@@ -7,5 +7,6 @@
 /build
 /app/build
 /app/release
+/app/debug
 /gradle
 /gradlew*

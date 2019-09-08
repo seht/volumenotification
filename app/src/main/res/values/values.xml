@@ -40,16 +40,16 @@
         <item>Wrap content</item>
         <item>32dp</item>
         <item>40dp</item>
+        <item>48dp</item>
         <item>64dp</item>
-        <item>70dp</item>
     </string-array>
     <string-array name="pref_notification_height_values">
         <item>match_parent</item>
         <item>wrap_content</item>
         <item>32dp</item>
         <item>40dp</item>
+        <item>48dp</item>
         <item>64dp</item>
-        <item>70dp</item>
     </string-array>
 
 

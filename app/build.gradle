@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1063
-        versionName '1.0.6.3-alpha2'
+        versionName '1.0.6.4-alpha3'
         vectorDrawables.useSupportLibrary true
     }
     buildTypes {
@@ -26,10 +26,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.preference:preference:1.1.0-rc01'
-    implementation 'androidx.fragment:fragment:1.2.0-alpha02'
+    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'androidx.fragment:fragment:1.2.0-alpha03'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.google.android.material:material:1.0.0'
     androidTestImplementation 'junit:junit:4.12'

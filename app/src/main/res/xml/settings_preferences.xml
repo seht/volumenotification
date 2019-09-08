@@ -32,18 +32,43 @@
             app:summary="@string/pref_theme_summary"
             app:title="@string/pref_theme_title"
             app:useSimpleSummaryProvider="true"/>
+        <androidx.preference.PreferenceScreen
+            app:key="pref_screen_custom_theme"
+            app:summary="@string/pref_custom_theme_summary"
+            app:title="@string/pref_custom_theme_title">
+
+            <PreferenceCategory
+                app:key="pref_cat_custom_theme"
+                app:title="@string/pref_custom_theme_title">
+
+                <EditTextPreference
+                    app:key="pref_custom_theme_background_color"
+                    app:title="@string/pref_custom_theme_background_color_title"
+                    app:summary="@string/pref_custom_theme_color_help"
+                    app:defaultValue="@string/pref_custom_theme_background_color_default"
+                    app:useSimpleSummaryProvider="true"/>
+
+                <EditTextPreference
+                    app:key="pref_custom_theme_icon_color"
+                    app:title="@string/pref_custom_theme_icon_color_title"
+                    app:summary="@string/pref_custom_theme_color_help"
+                    app:defaultValue="@string/pref_custom_theme_icon_color_default"
+                    app:useSimpleSummaryProvider="true"/>
+
+            </PreferenceCategory>
+        </androidx.preference.PreferenceScreen>
+        <!--
         <Preference
-            app:dialogTitle="@string/pref_custom_theme_title"
-            app:key="pref_custom_theme_dialog"
+            app:key="pref_custom_theme_preference"
             app:summary="@string/pref_custom_theme_summary"
             app:title="@string/pref_custom_theme_title"
             app:fragment="net.hyx.app.volumenotification.activity.SettingsActivity$NotificationThemeFragment"/>
+            -->
         <SwitchPreferenceCompat
             app:defaultValue="@bool/pref_translucent_default"
             app:key="pref_translucent"
             app:summary="@string/pref_translucent_summary"
             app:title="@string/pref_translucent_title"/>
-        <!--
         <ListPreference
             app:defaultValue="@string/pref_notification_height_default"
             app:dialogTitle="@string/pref_notification_height_title"
@@ -53,7 +78,6 @@
             app:summary="@string/pref_notification_height_summary"
             app:title="@string/pref_notification_height_title"
             app:useSimpleSummaryProvider="true"/>
-            -->
     </PreferenceCategory>
 
     <PreferenceCategory
