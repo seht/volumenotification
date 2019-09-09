@@ -41,8 +41,8 @@ import net.hyx.app.volumenotification.model.SettingsModel;
  * @see {https://developer.android.com/guide/topics/ui/settings/organize-your-settings}
  * @see {https://github.com/googlesamples/android-preferences}
  */
-public class SettingsActivity extends AppCompatActivity
-        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
+public class SettingsActivity extends AppCompatActivity implements
+        //PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         PreferenceFragmentCompat.OnPreferenceStartScreenCallback,
         OnSharedPreferenceChangeListener {
 
@@ -92,22 +92,22 @@ public class SettingsActivity extends AppCompatActivity
         return super.onSupportNavigateUp();
     }
 
-    @Override
-    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-        final Bundle args = pref.getExtras();
-        final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
-                getClassLoader(),
-                pref.getFragment());
-        fragment.setArguments(args);
-        fragment.setTargetFragment(caller, caller.getTargetRequestCode());
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, fragment)
-                .addToBackStack(null)
-                .commit();
-
-        return true;
-    }
+//    @Override
+//    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+//        final Bundle args = pref.getExtras();
+//        final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
+//                getClassLoader(),
+//                pref.getFragment());
+//        fragment.setArguments(args);
+//        fragment.setTargetFragment(caller, caller.getTargetRequestCode());
+//
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(android.R.id.content, fragment)
+//                .addToBackStack(null)
+//                .commit();
+//
+//        return true;
+//    }
 
     @Override
     public boolean onPreferenceStartScreen(PreferenceFragmentCompat caller, PreferenceScreen pref) {
@@ -164,44 +164,44 @@ public class SettingsActivity extends AppCompatActivity
 
     }
 
-    public static class NotificationThemeFragment extends PreferenceFragmentCompat {
-
-        @Override
-        public Fragment getCallbackFragment() {
-            return this;
-        }
-
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.notification_theme_preferences, rootKey);
-            if (getActivity() == null) {
-                return;
-            }
-            final SettingsModel settings = new SettingsModel(getActivity());
-            Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (settings.getColor(newValue.toString()) != 0) {
-                        return true;
-                    } else {
-                        Toast.makeText(getActivity(), R.string.pref_custom_theme_color_error_message, Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                }
-            };
-
-            Preference backgroundColorPref = findPreference("pref_custom_theme_background_color");
-            Preference iconColorPref = findPreference("pref_custom_theme_icon_color");
-
-            if (backgroundColorPref != null) {
-                backgroundColorPref.setOnPreferenceChangeListener(changeListener);
-            }
-            if (iconColorPref != null) {
-                iconColorPref.setOnPreferenceChangeListener(changeListener);
-            }
-
-        }
-
-    }
+//    public static class NotificationThemeFragment extends PreferenceFragmentCompat {
+//
+//        @Override
+//        public Fragment getCallbackFragment() {
+//            return this;
+//        }
+//
+//        @Override
+//        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+//            setPreferencesFromResource(R.xml.notification_theme_preferences, rootKey);
+//            if (getActivity() == null) {
+//                return;
+//            }
+//            final SettingsModel settings = new SettingsModel(getActivity());
+//            Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
+//                @Override
+//                public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                    if (settings.getColor(newValue.toString()) != 0) {
+//                        return true;
+//                    } else {
+//                        Toast.makeText(getActivity(), R.string.pref_custom_theme_color_error_message, Toast.LENGTH_SHORT).show();
+//                        return false;
+//                    }
+//                }
+//            };
+//
+//            Preference backgroundColorPref = findPreference("pref_custom_theme_background_color");
+//            Preference iconColorPref = findPreference("pref_custom_theme_icon_color");
+//
+//            if (backgroundColorPref != null) {
+//                backgroundColorPref.setOnPreferenceChangeListener(changeListener);
+//            }
+//            if (iconColorPref != null) {
+//                iconColorPref.setOnPreferenceChangeListener(changeListener);
+//            }
+//
+//        }
+//
+//    }
 
 }

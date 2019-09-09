@@ -53,7 +53,7 @@ public class NotificationServiceController {
 
     public void checkEnableStartAtBoot() {
         PackageManager pm = context.getPackageManager();
-        ComponentName receiver = new ComponentName(context.getApplicationContext(), StartServiceReceiver.class);
+        ComponentName receiver = new ComponentName(context, StartServiceReceiver.class);
 
         if (settings.startsAtBoot()) {
             pm.setComponentEnabledSetting(receiver,
