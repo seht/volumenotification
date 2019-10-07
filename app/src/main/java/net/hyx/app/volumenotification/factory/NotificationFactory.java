@@ -95,7 +95,8 @@ public class NotificationFactory {
                 .setVisibility(getVisibility())
                 .setCustomContentView(getCustomContentView())
                 .setColor(Color.TRANSPARENT)
-                .setSmallIcon(settings.getStatusIcon());
+                .setSmallIcon(settings.getStatusIcon())
+                .setSound(null);
 
         return builder;
     }
