@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_about_url" translatable="false">https://github.com/seht/volumenotification/issues</string>
+    <string name="pref_theme_default" translatable="false">theme_material_light</string>
+    <string name="pref_custom_theme_icon_color_default" translatable="false">#00BFA5</string>
+    <string name="pref_custom_theme_background_color_default" translatable="false">#424242</string>
+    <string name="pref_notification_height_default" translatable="false">match_parent</string>
+
+    <bool name="pref_enabled_default">true</bool>
+    <bool name="pref_dark_app_theme_default">false</bool>
+    <bool name="pref_boot_default">true</bool>
+    <bool name="pref_top_priority_default">true</bool>
+    <bool name="pref_foreground_service_default">false</bool>
+    <bool name="pref_hide_locked_default">true</bool>
+    <bool name="pref_hide_status_default">true</bool>
+    <bool name="pref_toggle_mute_default">false</bool>
+    <bool name="pref_toggle_silent_default">false</bool>
+    <bool name="pref_translucent_default">false</bool>
+
+    <string-array name="pref_theme_entries">
+        <item>深色</item>
+        <item>浅色</item>
+        <item>蓝灰色</item>
+        <item>暗色</item>
+        <item>亮色</item>
+        <item>自定义</item>
+    </string-array>
+    <string-array name="pref_theme_values">
+        <item>theme_material</item>
+        <item>theme_material_light</item>
+        <item>theme_material_blue_grey</item>
+        <item>theme_holo</item>
+        <item>theme_holo_light</item>
+        <item>theme_custom</item>
+    </string-array>
+
+    <string-array name="pref_notification_height_entries">
+        <item>默认高度</item>
+        <item>内容高度</item>
+        <item>32dp</item>
+        <item>40dp</item>
+        <item>48dp</item>
+        <item>64dp</item>
+    </string-array>
+    <string-array name="pref_notification_height_values">
+        <item>match_parent</item>
+        <item>wrap_content</item>
+        <item>32dp</item>
+        <item>40dp</item>
+        <item>48dp</item>
+        <item>64dp</item>
+    </string-array>
+
+
+
+    <string-array name="pref_volume_control_entries">
+        <item>@string/control_label_media</item>
+        <item>@string/control_label_call</item>
+        <item>@string/control_label_ring</item>
+        <item>@string/control_label_alarm</item>
+        <item>@string/control_label_notification</item>
+        <item>@string/control_label_system</item>
+        <item>@string/control_label_dial</item>
+        <!--
+        <item>@string/btn_def_label_default</item>
+        -->
+    </string-array>
+
+    <string-array name="pref_icon_entries">
+        <item>ic_baseline_music_note_24px</item>
+        <item>ic_baseline_phone_24px</item>
+        <item>ic_baseline_notifications_24px</item>
+        <item>ic_baseline_alarm_24px</item>
+        <item>ic_baseline_chat_bubble_24px</item>
+        <item>ic_baseline_phone_android_24px</item>
+        <item>ic_baseline_dialpad_24px</item>
+        <item>ic_baseline_volume_up_24px</item>
+        <item>ic_baseline_accessibility_new_24px</item>
+        <item>ic_baseline_volume_up_24px</item>
+        <!-- -->
+        <item>ic_baseline_headset_24px</item>
+        <item>ic_baseline_speaker_24px</item>
+        <item>ic_baseline_notifications_active_24px</item>
+        <item>ic_baseline_notification_important_24px</item>
+        <item>ic_baseline_phone_in_talk_24px</item>
+        <item>ic_baseline_ring_volume_24px</item>
+        <item>ic_baseline_phonelink_ring_24px</item>
+        <item>ic_baseline_smartphone_24px</item>
+        <item>ic_baseline_tune_24px</item>
+        <!-- -->
+        <item>ic_outline_music_note_24px</item>
+        <item>ic_outline_phone_24px</item>
+        <item>ic_outline_notifications_24px</item>
+        <item>ic_outline_alarm_24px</item>
+        <item>ic_outline_chat_bubble_outline_24px</item>
+        <item>ic_outline_phone_android_24px</item>
+        <item>ic_outline_dialpad_24px</item>
+        <item>ic_outline_accessibility_new_24px</item>
+        <item>ic_outline_volume_up_24px</item>
+        <!-- -->
+        <item>ic_outline_headset_24px</item>
+        <item>ic_outline_speaker_24px</item>
+        <item>ic_outline_notifications_active_24px</item>
+        <item>ic_outline_notification_important_24px</item>
+        <item>ic_outline_phone_in_talk_24px</item>
+        <item>ic_outline_ring_volume_24px</item>
+        <item>ic_outline_phonelink_ring_24px</item>
+        <item>ic_outline_smartphone_24px</item>
+        <item>ic_outline_tune_24px</item>
+    </string-array>
+
+</resources>
