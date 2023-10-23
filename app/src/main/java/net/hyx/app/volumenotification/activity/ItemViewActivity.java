@@ -20,6 +20,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,7 +37,7 @@ import android.widget.Switch;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
+// import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -90,7 +91,7 @@ public class ItemViewActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         fragment.model.saveItem(fragment.item);
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        // NotificationServiceController.newInstance(getApplicationContext()).startService();
         return super.onSupportNavigateUp();
     }
 

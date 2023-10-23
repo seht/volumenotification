@@ -35,10 +35,8 @@ public class AudioManagerModel {
     }
 
     private int getStreamFlag(int streamType) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if ((streamType == AudioManager.STREAM_MUSIC && settings.getToggleMute()) || (streamType == AudioManager.STREAM_RING && settings.getToggleSilent())) {
-                return AudioManager.ADJUST_TOGGLE_MUTE;
-            }
+        if ((streamType == AudioManager.STREAM_MUSIC && settings.getToggleMute()) || (streamType == AudioManager.STREAM_RING && settings.getToggleSilent())) {
+            return AudioManager.ADJUST_TOGGLE_MUTE;
         }
         return AudioManager.ADJUST_SAME;
     }

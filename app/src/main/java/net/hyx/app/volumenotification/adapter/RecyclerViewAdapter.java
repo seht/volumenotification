@@ -156,7 +156,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onItemClear() {
             model.saveList(items);
-            NotificationServiceController.newInstance(context).startService();
+            // NotificationServiceController.newInstance(context).startService();
         }
 
     }

@@ -59,9 +59,7 @@ public class VolumeControlModel {
         defaultOrder.add(AudioManager.STREAM_NOTIFICATION);
         defaultOrder.add(AudioManager.STREAM_SYSTEM);
         defaultOrder.add(AudioManager.STREAM_DTMF);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            defaultOrder.add(AudioManager.STREAM_ACCESSIBILITY);
-        }
+        defaultOrder.add(AudioManager.STREAM_ACCESSIBILITY);
         //defaultOrder.put(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
@@ -73,9 +71,7 @@ public class VolumeControlModel {
         defaultControls.put(AudioManager.STREAM_NOTIFICATION, new VolumeControl(AudioManager.STREAM_NOTIFICATION, 4, 0, "ic_outline_chat_bubble_outline_24px", getDefaultLabel(R.string.control_label_notification)));
         defaultControls.put(AudioManager.STREAM_SYSTEM, new VolumeControl(AudioManager.STREAM_SYSTEM, 5, 0, "ic_outline_phone_android_24px", getDefaultLabel(R.string.control_label_system)));
         defaultControls.put(AudioManager.STREAM_DTMF, new VolumeControl(AudioManager.STREAM_DTMF, 6, 0, "ic_outline_dialpad_24px", getDefaultLabel(R.string.control_label_dial)));
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            defaultControls.put(AudioManager.STREAM_ACCESSIBILITY, new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_outline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
-        }
+        defaultControls.put(AudioManager.STREAM_ACCESSIBILITY, new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_outline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
         //defaultControls.put(AudioManager.USE_DEFAULT_STREAM_TYPE, new VolumeControl(AudioManager.USE_DEFAULT_STREAM_TYPE, 8, 0, "ic_outline_volume_up_24px", getDefaultLabel(R.string.control_label_default)));
     }
 

@@ -18,12 +18,12 @@ package net.hyx.app.volumenotification.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
+// import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+// import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,8 +40,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
+// import net.hyx.app.volumenotification.controller.NotificationServiceController;
+// import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.helper.DragHandleListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
@@ -49,8 +49,6 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 public class RecyclerViewActivity extends AppCompatActivity {
 
     private SettingsModel settings;
-
-    private final static int DIALOG_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +67,21 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        // NotificationServiceController.newInstance(getApplicationContext()).startService();
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (!settings.getNonceDialogCancelled(DIALOG_ID)) {
-                DialogFragment dialogFragment = NonceDialogFragment.newInstance(DIALOG_ID,
-                        settings.getResources().getString(R.string.target_api_welcome_message_N),
-                        settings.getResources().getString(R.string.target_api_welcome_title_N));
-                dialogFragment.show(getSupportFragmentManager(), null);
-            }
-        }
-    }
+//    @Override
+//    public void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            if (!settings.getNonceDialogCancelled(DIALOG_ID)) {
+//                DialogFragment dialogFragment = NonceDialogFragment.newInstance(DIALOG_ID,
+//                        settings.getResources().getString(R.string.target_api_welcome_message_N),
+//                        settings.getResources().getString(R.string.target_api_welcome_title_N));
+//                dialogFragment.show(getSupportFragmentManager(), null);
+//            }
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

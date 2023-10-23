@@ -31,6 +31,8 @@ import net.hyx.app.volumenotification.controller.TileServiceController;
 /**
  * @see {https://developer.android.com/reference/androidx/core/app/JobIntentService}
  */
+
+@Deprecated
 public class NotificationBackgroundService extends JobIntentService {
 
     private static final int JOB_ID = 1000;
@@ -46,7 +48,6 @@ public class NotificationBackgroundService extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        NotificationServiceController.newInstance(getApplicationContext()).checkStartNotificationService();
         TileServiceController.newInstance(getApplicationContext()).requestListening();
     }
 

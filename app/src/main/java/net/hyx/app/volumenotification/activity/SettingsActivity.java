@@ -78,10 +78,10 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals("pref_boot")) {
-            NotificationServiceController.newInstance(this).checkEnableStartAtBoot();
-        }
-        NotificationServiceController.newInstance(this).startService();
+//        if (key.equals("pref_boot")) {
+//            NotificationServiceController.newInstance(this).checkEnableStartAtBoot();
+//        }
+//        NotificationServiceController.newInstance(this).startService();
     }
 
     @Override
@@ -135,31 +135,31 @@ public class SettingsActivity extends AppCompatActivity implements
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.settings_preferences, rootKey);
-            if (getActivity() == null) {
-                return;
-            }
-            final SettingsModel settings = new SettingsModel(getActivity());
-            Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (settings.getColor(newValue.toString()) != 0) {
-                        return true;
-                    } else {
-                        Toast.makeText(getActivity(), R.string.pref_custom_theme_color_error_message, Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                }
-            };
-
-            Preference backgroundColorPref = findPreference("pref_custom_theme_background_color");
-            Preference iconColorPref = findPreference("pref_custom_theme_icon_color");
-
-            if (backgroundColorPref != null) {
-                backgroundColorPref.setOnPreferenceChangeListener(changeListener);
-            }
-            if (iconColorPref != null) {
-                iconColorPref.setOnPreferenceChangeListener(changeListener);
-            }
+//            if (getActivity() == null) {
+//                return;
+//            }
+//            final SettingsModel settings = new SettingsModel(getActivity());
+//            Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
+//                @Override
+//                public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                    if (settings.getColor(newValue.toString()) != 0) {
+//                        return true;
+//                    } else {
+//                        Toast.makeText(getActivity(), R.string.pref_custom_theme_color_error_message, Toast.LENGTH_SHORT).show();
+//                        return false;
+//                    }
+//                }
+//            };
+//
+//            Preference backgroundColorPref = findPreference("pref_custom_theme_background_color");
+//            Preference iconColorPref = findPreference("pref_custom_theme_icon_color");
+//
+//            if (backgroundColorPref != null) {
+//                backgroundColorPref.setOnPreferenceChangeListener(changeListener);
+//            }
+//            if (iconColorPref != null) {
+//                iconColorPref.setOnPreferenceChangeListener(changeListener);
+//            }
         }
 
     }

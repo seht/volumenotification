@@ -5,7 +5,6 @@
     <application
         android:name=".controller.ApplicationController"
         android:allowBackup="true"
-        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -38,31 +37,7 @@
                 android:value=".activity.RecyclerViewActivity" />
         </activity>
 
-        <receiver
-            android:name=".receiver.StartServiceReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
-
-        <service
-            android:name=".service.NotificationBackgroundService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service
-            android:name=".service.NotificationForegroundService"
-            android:enabled="true"
-            android:exported="true" />
 
         <service
             android:name=".service.TileServiceMediaVolume"
@@ -176,27 +151,7 @@
                 android:name="android.service.quicksettings.ACTIVE_TILE"
                 android:value="true" />
         </service>
-        <!--
-        <service
-            android:name=".service.TileServiceDefaultVolume"
-            android:icon="@drawable/ic_baseline_volume_up_24px"
-            android:label="@string/btn_def_label_default"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true"/>
-        </service>
-        -->
 
     </application>
-
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>

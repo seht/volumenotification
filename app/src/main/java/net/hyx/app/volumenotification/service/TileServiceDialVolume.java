@@ -20,7 +20,7 @@ import android.annotation.TargetApi;
 import android.media.AudioManager;
 import android.os.Build;
 
-@TargetApi(Build.VERSION_CODES.N)
+
 public class TileServiceDialVolume extends VolumeTileService {
 
     @Override

@@ -50,12 +50,9 @@ public class TileServiceController {
     }
 
     public void requestListening() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            requestListeningTiles();
-        }
+        requestListeningTiles();
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
     private void requestListeningTiles() {
         String[] tileServices = {
                 TileServiceMediaVolume.class.getName(),
@@ -73,7 +70,6 @@ public class TileServiceController {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
     public void updateTile(Tile tile, int streamType) {
         VolumeControl item = volumeControlModel.getItemByType(streamType);
         if (item == null) {
@@ -81,7 +77,11 @@ public class TileServiceController {
         }
         tile.setIcon(Icon.createWithResource(context, volumeControlModel.getIconId(item.icon)));
         tile.setLabel(item.label);
-        tile.setState(Tile.STATE_ACTIVE);
+        if (item.status == 1) {
+            tile.setState(Tile.STATE_ACTIVE);
+        } else {
+            tile.setState(Tile.STATE_INACTIVE);
+        }
         tile.updateTile();
     }
 

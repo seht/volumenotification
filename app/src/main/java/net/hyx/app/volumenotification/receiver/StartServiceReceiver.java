@@ -19,30 +19,17 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-//import android.widget.Toast;
 
-//import net.hyx.app.volumenotification.controller.ApplicationController;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 
-
+@Deprecated
 public class StartServiceReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction() != null) {
-            //Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
             NotificationServiceController.newInstance(context.getApplicationContext()).startService();
         }
-//        switch (intent.getAction()) {
-//            case Intent.ACTION_BOOT_COMPLETED:
-//            case Intent.ACTION_LOCKED_BOOT_COMPLETED:
-//            case ApplicationController.ACTION_APPLICATION_STARTED:
-//                //Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
-//                NotificationServiceController.newInstance(context).startService();
-//                break;
-//        }
-
     }
-
 
 }

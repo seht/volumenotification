@@ -16,11 +16,8 @@
 
 package net.hyx.app.volumenotification.service;
 
-import android.annotation.TargetApi;
 import android.media.AudioManager;
-import android.os.Build;
 
-@TargetApi(Build.VERSION_CODES.N)
 public class TileServiceSystemVolume extends VolumeTileService {
 
     @Override
