@@ -85,7 +85,7 @@ public class NotificationFactory {
 
         Intent receiverIntent = new Intent(context, StartServiceReceiver.class);
         receiverIntent.setAction(ApplicationController.ACTION_APPLICATION_STARTED);
-        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID);
         builder.setDeleteIntent(deleteIntent)
