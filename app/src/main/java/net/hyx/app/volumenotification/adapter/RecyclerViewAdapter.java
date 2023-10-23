@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ItemViewActivity;
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.helper.ItemTouchListener;
 import net.hyx.app.volumenotification.helper.DragHandleListener;
