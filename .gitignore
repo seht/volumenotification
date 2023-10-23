@@ -10,3 +10,4 @@
 /app/debug
 /gradle
 /gradlew*
+*.hprof
