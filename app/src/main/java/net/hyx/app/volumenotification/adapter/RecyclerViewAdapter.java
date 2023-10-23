@@ -32,11 +32,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ItemViewActivity;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.helper.ItemTouchListener;
-import net.hyx.app.volumenotification.helper.DragHandleListener;
-import net.hyx.app.volumenotification.helper.RecyclerViewListener;
+import net.hyx.app.volumenotification.listener.ItemTouchListener;
+import net.hyx.app.volumenotification.listener.DragHandleListener;
+import net.hyx.app.volumenotification.listener.RecyclerViewListener;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-import net.hyx.app.volumenotification.widget.DragHandleImageView;
+import net.hyx.app.volumenotification.view.DragHandleImageView;
 
 import java.util.Collections;
 import java.util.List;
@@ -73,8 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = itemView.findViewById(R.id.list_item_wrapper);
-
-        DragHandleImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
+        // DragHandleImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
         ImageView itemIcon = itemView.findViewById(R.id.list_item_icon);
         TextView itemLabel = itemView.findViewById(R.id.list_item_label);
         TextView itemHint = itemView.findViewById(R.id.list_item_hint);
@@ -89,24 +88,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemWrapper.setAlpha(ALPHA_DISABLED);
         }
 
-        itemHandle.setOnTouchListener(new DragHandleImageView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        dragHandleListener.onStartDrag(holder);
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        return v.performClick();
-                }
-                return false;
-            }
-        });
+//        itemHandle.setOnTouchListener(new DragHandleImageView.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        dragHandleListener.onStartDrag(holder);
+//                        return true;
+//                    case MotionEvent.ACTION_UP:
+//                        return v.performClick();
+//                }
+//                return false;
+//            }
+//        });
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VolumeControl item = items.get(holder.getAdapterPosition());
+                VolumeControl item = items.get(holder.getAbsoluteAdapterPosition());
                 Intent intent = new Intent(v.getContext(), ItemViewActivity.class);
                 intent.putExtra(VolumeControlModel.ITEM_FIELD, item);
                 v.getContext().startActivity(intent);
@@ -116,9 +115,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(items, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
+//        Collections.swap(items, fromPosition, toPosition);
+//        notifyItemMoved(fromPosition, toPosition);
+//        return true;
+        // Disable moving
+        return false;
     }
 
     @Override

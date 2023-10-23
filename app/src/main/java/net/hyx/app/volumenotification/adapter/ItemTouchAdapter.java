@@ -21,8 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.hyx.app.volumenotification.helper.ItemTouchListener;
-import net.hyx.app.volumenotification.helper.RecyclerViewListener;
+import net.hyx.app.volumenotification.listener.ItemTouchListener;
+import net.hyx.app.volumenotification.listener.RecyclerViewListener;
 
 public class ItemTouchAdapter extends ItemTouchHelper.Callback {
 
@@ -55,12 +55,12 @@ public class ItemTouchAdapter extends ItemTouchHelper.Callback {
         if (source.getItemViewType() != target.getItemViewType()) {
             return false;
         }
-        return listener.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
+        return listener.onItemMove(source.getAbsoluteAdapterPosition(), target.getAbsoluteAdapterPosition());
     }
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        listener.onItemSwiped(viewHolder.getAdapterPosition());
+        listener.onItemSwiped(viewHolder.getAbsoluteAdapterPosition());
     }
 
     @Override

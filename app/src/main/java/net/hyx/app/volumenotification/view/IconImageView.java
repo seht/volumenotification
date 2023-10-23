@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.widget;
+package net.hyx.app.volumenotification.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

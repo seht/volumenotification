@@ -43,7 +43,7 @@ import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
 // import net.hyx.app.volumenotification.controller.NotificationServiceController;
 // import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
-import net.hyx.app.volumenotification.helper.DragHandleListener;
+import net.hyx.app.volumenotification.listener.DragHandleListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class RecyclerViewActivity extends AppCompatActivity {
