@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="internalOnly">
 
+<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+
     <application
         android:name=".controller.ApplicationController"
         android:allowBackup="true"
@@ -10,23 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/style_app_theme_light">
 
+        <receiver android:name=".receiver.AdjustVolumeReceiver" />
+
         <activity android:name=".activity.RecyclerViewActivity"
             android:exported="true">
             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.NOTIFICATION_PREFERENCES" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:label="@string/menu_pref_title"
-            android:parentActivityName=".activity.RecyclerViewActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.RecyclerViewActivity" />
         </activity>
         <activity
             android:name=".activity.ItemViewActivity"
@@ -36,8 +30,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.RecyclerViewActivity" />
         </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/menu_pref_title"
+            android:parentActivityName=".activity.RecyclerViewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.RecyclerViewActivity" />
+        </activity>
 
-        <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
         <service
             android:name=".service.TileServiceMediaVolume"
