@@ -44,7 +44,7 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder> implements ItemTouchListener {
 
-    private static final float ALPHA_DISABLED = 0.25f;
+    private static final float ALPHA_DISABLED = 0.5f;
     private static final float ALPHA_ENABLED = 1.0f;
 
     private final Context context;
