@@ -51,20 +51,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.RecyclerViewActivity" />
         </activity>
-        <activity
-            android:name=".activity.ScreenshotActivity"
-            android:label="Screenshot"
-            android:exported="true">
-<!--            <intent-filter>-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-
-        <service
-            android:name=".service.ScreenshotForegroundService"
-            android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="mediaProjection" />
 
         <service
             android:name=".service.tile.MediaVolume"
@@ -168,20 +154,6 @@
             android:name=".service.tile.AccessibilityVolume"
             android:icon="@drawable/ic_baseline_accessibility_new_24px"
             android:label="@string/control_label_accessibility"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true" />
-        </service>
-        <service
-            android:name=".service.ScreenshotTileService"
-            android:icon="@drawable/ic_baseline_accessibility_new_24px"
-            android:label="Screenshots"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
             <intent-filter>
