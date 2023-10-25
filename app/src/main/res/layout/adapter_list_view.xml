@@ -52,13 +52,13 @@
 
         </LinearLayout>
 
-<!--        <net.hyx.app.volumenotification.view.DragHandleImageView-->
-<!--            android:id="@+id/list_item_handle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="fill_vertical"-->
-<!--            android:scaleType="center"-->
-<!--            app:srcCompat="@drawable/ic_baseline_drag_handle_24px" />-->
+        <net.hyx.app.volumenotification.view.DragHandleImageView
+            android:id="@+id/list_item_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_vertical"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_baseline_drag_handle_24px" />
 
     </LinearLayout>
 

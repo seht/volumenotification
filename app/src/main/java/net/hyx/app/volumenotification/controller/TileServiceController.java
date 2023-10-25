@@ -16,24 +16,22 @@
 
 package net.hyx.app.volumenotification.controller;
 
-import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.drawable.Icon;
-import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-import net.hyx.app.volumenotification.service.TileServiceAccessibilityVolume;
-import net.hyx.app.volumenotification.service.TileServiceAlarmVolume;
-import net.hyx.app.volumenotification.service.TileServiceCallVolume;
-import net.hyx.app.volumenotification.service.TileServiceDialVolume;
-import net.hyx.app.volumenotification.service.TileServiceMediaVolume;
-import net.hyx.app.volumenotification.service.TileServiceNotificationVolume;
-import net.hyx.app.volumenotification.service.TileServiceRingVolume;
-import net.hyx.app.volumenotification.service.TileServiceSystemVolume;
+import net.hyx.app.volumenotification.service.tile.AccessibilityVolume;
+import net.hyx.app.volumenotification.service.tile.AlarmVolume;
+import net.hyx.app.volumenotification.service.tile.CallVolume;
+import net.hyx.app.volumenotification.service.tile.DialVolume;
+import net.hyx.app.volumenotification.service.tile.MediaVolume;
+import net.hyx.app.volumenotification.service.tile.NotificationVolume;
+import net.hyx.app.volumenotification.service.tile.RingVolume;
+import net.hyx.app.volumenotification.service.tile.SystemVolume;
 
 public class TileServiceController {
 
@@ -55,14 +53,14 @@ public class TileServiceController {
 
     private void requestListeningTiles() {
         String[] tileServices = {
-                TileServiceMediaVolume.class.getName(),
-                TileServiceCallVolume.class.getName(),
-                TileServiceRingVolume.class.getName(),
-                TileServiceAlarmVolume.class.getName(),
-                TileServiceNotificationVolume.class.getName(),
-                TileServiceSystemVolume.class.getName(),
-                TileServiceDialVolume.class.getName(),
-                TileServiceAccessibilityVolume.class.getName(),
+                MediaVolume.class.getName(),
+                CallVolume.class.getName(),
+                RingVolume.class.getName(),
+                AlarmVolume.class.getName(),
+                NotificationVolume.class.getName(),
+                SystemVolume.class.getName(),
+                DialVolume.class.getName(),
+                AccessibilityVolume.class.getName(),
                 //TileServiceDefaultVolume.class.getName(),
         };
         for (String service : tileServices) {

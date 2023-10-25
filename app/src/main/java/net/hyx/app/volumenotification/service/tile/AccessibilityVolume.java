@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.service;
+package net.hyx.app.volumenotification.service.tile;
 
 import android.media.AudioManager;
 
-public class TileServiceAccessibilityVolume extends VolumeTileService {
+import net.hyx.app.volumenotification.service.VolumeTileService;
+
+public class AccessibilityVolume extends VolumeTileService {
 
     @Override
     public void onTileAdded() {

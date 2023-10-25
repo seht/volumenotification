@@ -73,7 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         View itemView = holder.itemView;
         LinearLayout itemWrapper = itemView.findViewById(R.id.list_item_wrapper);
-        // DragHandleImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
+        DragHandleImageView itemHandle = itemView.findViewById(R.id.list_item_handle);
         ImageView itemIcon = itemView.findViewById(R.id.list_item_icon);
         TextView itemLabel = itemView.findViewById(R.id.list_item_label);
         TextView itemHint = itemView.findViewById(R.id.list_item_hint);
@@ -88,19 +88,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemWrapper.setAlpha(ALPHA_DISABLED);
         }
 
-//        itemHandle.setOnTouchListener(new DragHandleImageView.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        dragHandleListener.onStartDrag(holder);
-//                        return true;
-//                    case MotionEvent.ACTION_UP:
-//                        return v.performClick();
-//                }
-//                return false;
-//            }
-//        });
+        itemHandle.setOnTouchListener(new DragHandleImageView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        dragHandleListener.onStartDrag(holder);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        return v.performClick();
+                }
+                return false;
+            }
+        });
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +115,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-//        Collections.swap(items, fromPosition, toPosition);
-//        notifyItemMoved(fromPosition, toPosition);
-//        return true;
-        // Disable moving
-        return false;
+        Collections.swap(items, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+        return true;
     }
 
     @Override

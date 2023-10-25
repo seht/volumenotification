@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="internalOnly">
 
-<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".controller.ApplicationController"
@@ -12,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/style_app_theme_light">
 
+        <receiver
+            android:name=".receiver.TileServiceReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
         <activity android:name=".activity.RecyclerViewActivity"
@@ -38,10 +51,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.RecyclerViewActivity" />
         </activity>
-
+        <activity
+            android:name=".activity.ScreenshotActivity"
+            android:label="Screenshot"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
 
         <service
-            android:name=".service.TileServiceMediaVolume"
+            android:name=".service.ScreenshotForegroundService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="mediaProjection" />
+
+        <service
+            android:name=".service.tile.MediaVolume"
             android:icon="@drawable/ic_baseline_music_note_24px"
             android:label="@string/control_label_media"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -55,7 +81,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceCallVolume"
+            android:name=".service.tile.CallVolume"
             android:icon="@drawable/ic_baseline_phone_24px"
             android:label="@string/control_label_call"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -69,7 +95,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceRingVolume"
+            android:name=".service.tile.RingVolume"
             android:icon="@drawable/ic_baseline_notifications_24px"
             android:label="@string/control_label_ring"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -83,7 +109,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceAlarmVolume"
+            android:name=".service.tile.AlarmVolume"
             android:icon="@drawable/ic_baseline_alarm_24px"
             android:label="@string/control_label_alarm"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -97,7 +123,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceNotificationVolume"
+            android:name=".service.tile.NotificationVolume"
             android:icon="@drawable/ic_baseline_chat_bubble_24px"
             android:label="@string/control_label_notification"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -111,7 +137,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceSystemVolume"
+            android:name=".service.tile.SystemVolume"
             android:icon="@drawable/ic_baseline_phone_android_24px"
             android:label="@string/control_label_system"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -125,7 +151,7 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceDialVolume"
+            android:name=".service.tile.DialVolume"
             android:icon="@drawable/ic_baseline_dialpad_24px"
             android:label="@string/control_label_dial"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -139,9 +165,23 @@
                 android:value="true" />
         </service>
         <service
-            android:name=".service.TileServiceAccessibilityVolume"
+            android:name=".service.tile.AccessibilityVolume"
             android:icon="@drawable/ic_baseline_accessibility_new_24px"
             android:label="@string/control_label_accessibility"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+        </service>
+        <service
+            android:name=".service.ScreenshotTileService"
+            android:icon="@drawable/ic_baseline_accessibility_new_24px"
+            android:label="Screenshots"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
             <intent-filter>

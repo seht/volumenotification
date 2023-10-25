@@ -38,6 +38,7 @@ import android.widget.Spinner;
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
 // import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
@@ -91,7 +92,7 @@ public class ItemViewActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         fragment.model.saveItem(fragment.item);
-        // NotificationServiceController.newInstance(getApplicationContext()).startService();
+        TileServiceController.newInstance(getApplicationContext()).requestListening();
         return super.onSupportNavigateUp();
     }
 

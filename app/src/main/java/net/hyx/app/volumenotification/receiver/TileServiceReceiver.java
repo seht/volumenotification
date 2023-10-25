@@ -14,31 +14,22 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.service;
+package net.hyx.app.volumenotification.receiver;
 
-import android.annotation.TargetApi;
-import android.media.AudioManager;
-import android.os.Build;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 
+import net.hyx.app.volumenotification.controller.TileServiceController;
 
-public class TileServiceDialVolume extends VolumeTileService {
-
-    @Override
-    public void onTileAdded() {
-        super.onTileAdded();
-        updateTile(AudioManager.STREAM_DTMF);
-    }
+public class TileServiceReceiver extends BroadcastReceiver {
 
     @Override
-    public void onStartListening() {
-        super.onStartListening();
-        updateTile(AudioManager.STREAM_DTMF);
-    }
-
-    @Override
-    public void onClick() {
-        super.onClick();
-        adjustVolume(AudioManager.STREAM_DTMF);
+    public void onReceive(Context context, Intent intent) {
+        if (intent.getAction() != null) {
+            // Intent.ACTION_BOOT_COMPLETED | ...
+            TileServiceController.newInstance(context.getApplicationContext()).requestListening();
+        }
     }
 
 }

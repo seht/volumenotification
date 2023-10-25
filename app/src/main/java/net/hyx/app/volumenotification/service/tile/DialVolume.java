@@ -14,28 +14,31 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.service;
+package net.hyx.app.volumenotification.service.tile;
 
 import android.media.AudioManager;
 
-public class TileServiceSystemVolume extends VolumeTileService {
+import net.hyx.app.volumenotification.service.VolumeTileService;
+
+
+public class DialVolume extends VolumeTileService {
 
     @Override
     public void onTileAdded() {
         super.onTileAdded();
-        updateTile(AudioManager.STREAM_SYSTEM);
+        updateTile(AudioManager.STREAM_DTMF);
     }
 
     @Override
     public void onStartListening() {
         super.onStartListening();
-        updateTile(AudioManager.STREAM_SYSTEM);
+        updateTile(AudioManager.STREAM_DTMF);
     }
 
     @Override
     public void onClick() {
         super.onClick();
-        adjustVolume(AudioManager.STREAM_SYSTEM);
+        adjustVolume(AudioManager.STREAM_DTMF);
     }
 
 }
