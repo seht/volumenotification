@@ -1,0 +1,77 @@
+<resources>
+
+    <string name="app_name">通知栏音量调节</string>
+
+    <string name="menu_pref_title">设置</string>
+    <string name="menu_dark_app_theme_title">深色主题</string>
+    <string name="menu_about_title">表达你的爱</string>
+
+    <string name="hint_about_message">用世界上所有的爱制作</string>
+    <string name="hint_about_action">反馈</string>
+
+    <string name="target_api_welcome_title_N">您的安卓版本高于7.0</string>
+    <string name="target_api_welcome_message_N">您可以尝试在快速设置中使用开关按钮。您应该能够从手机的通知抽屉中编辑它们，然后从本应用的设置中禁用通知。</string>
+
+    <string name="pref_dialog_alert_nonce_checked_label">太好了！关闭提醒。</string>
+
+    <string name="pref_theme_title">主题</string>
+    <string name="pref_theme_summary">选择通知主题</string>
+
+    <string name="pref_buttons_title">音量按钮和开关按钮</string>
+    <string name="pref_buttons_summary">自定义通知和快速设置</string>
+
+    <string name="pref_buttons_position_empty_label">关闭</string>
+
+    <string name="control_label_media">媒体音量</string>
+    <string name="control_label_call">通话音量</string>
+    <string name="control_label_ring">铃声音量</string>
+    <string name="control_label_alarm">闹钟音量</string>
+    <string name="control_label_notification">通知音量</string>
+    <string name="control_label_system">系统音量</string>
+    <string name="control_label_dial">拨号音量</string>
+    <string name="control_label_accessibility">辅助音量</string>
+    <string name="control_label_default">默认音量</string>
+
+    <string name="pref_cat_style_title">通知外观</string>
+    <string name="pref_cat_config_title">通知设置</string>
+    <string name="pref_cat_behavior_title">行为</string>
+
+    <string name="pref_custom_theme_title">自定义主题</string>
+    <string name="pref_custom_theme_summary">个性化定制主题颜色</string>
+    <string name="pref_custom_theme_background_color_title">背景色</string>
+    <string name="pref_custom_theme_icon_color_title">图标颜色</string>
+    <string name="pref_custom_theme_color_help">#AARRGGBB, #RRGGBB, 颜色名称</string>
+    <string name="pref_custom_theme_color_error_message">无效的颜色</string>
+
+    <string name="pref_notification_height_title">通知尺寸</string>
+    <string name="pref_notification_height_summary">选择默认通知高度</string>
+
+    <string name="pref_translucent_title">半透明背景</string>
+    <string name="pref_translucent_summary">* 背景透明度只与半透明启动器兼容。</string>
+
+    <string name="pref_enabled_title">启用通知</string>
+    <string name="pref_enabled_summary">* 对于安卓版本高于7.0和兼容手机，请考虑使用快速设置中的开关按钮并禁用通知。</string>
+
+    <string name="pref_boot_title">开机启动</string>
+    <string name="pref_boot_summary">设备启动时显示通知</string>
+
+    <string name="pref_top_priority_title">最高优先级</string>
+    <string name="pref_top_priority_summary">* 启用将使通知保持在顶部，但强制显示状态栏图标。</string>
+
+    <string name="pref_foreground_service_title">启用前台服务</string>
+    <string name="pref_foreground_service_summary">* 启用将增强通知优先级，并在任务管理器停止时重新启动通知。</string>
+
+    <string name="pref_hide_locked_title">锁屏时隐藏</string>
+    <string name="pref_hide_locked_summary">* 需要先开启最高优先级，系统设置中开启锁屏时隐藏通知内容。</string>
+
+    <string name="pref_hide_status_title">隐藏状态栏图标</string>
+    <string name="pref_hide_status_summary">* 需要先开启最高优先级，将隐藏状态栏中本应用图标。</string>
+
+    <string name="pref_toggle_mute_title">媒体切换静音</string>
+    <string name="pref_toggle_mute_summary">媒体音量切换为静音</string>
+
+    <string name="pref_toggle_silent_title">铃声切换静音</string>
+    <string name="pref_toggle_silent_summary">铃声音量切换为静音</string>
+
+
+</resources>

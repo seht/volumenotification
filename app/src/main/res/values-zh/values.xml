@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_theme_entries">
+        <item>深色</item>
+        <item>浅色</item>
+        <item>蓝灰色</item>
+        <item>暗色</item>
+        <item>亮色</item>
+        <item>自定义</item>
+    </string-array>
+
+    <string-array name="pref_notification_height_entries">
+        <item>默认高度</item>
+        <item>内容高度</item>
+        <item>32dp</item>
+        <item>40dp</item>
+        <item>48dp</item>
+        <item>64dp</item>
+    </string-array>
+
+</resources>
