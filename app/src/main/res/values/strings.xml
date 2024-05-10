@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Volume Notification</string>
+    <string name="app_name">Volume Tiles</string>
 
     <string name="menu_pref_title">Settings</string>
     <string name="menu_dark_app_theme_title">Dark theme</string>
