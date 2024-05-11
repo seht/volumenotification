@@ -4,10 +4,10 @@ android {
     compileSdk 34
     defaultConfig {
         applicationId 'net.hyx.app.volumenotification'
-        minSdkVersion 26
+        minSdk 24
         targetSdk 34
-        versionCode 1110
-        versionName '1.1.1-beta1'
+        versionCode 1113
+        versionName '1.1.1-beta3'
         vectorDrawables.useSupportLibrary true
     }
     buildTypes {
