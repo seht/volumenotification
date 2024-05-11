@@ -21,8 +21,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.preference.PreferenceManager;
+//import android.graphics.Color;
+//import android.preference.PreferenceManager;
 import android.util.TypedValue;
 
 import net.hyx.app.volumenotification.R;
@@ -37,7 +37,7 @@ public class SettingsModel {
 
     public SettingsModel(Context context) {
         resources = context.getResources();
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences = context.getSharedPreferences("settings_preferences", Context.MODE_PRIVATE);
     }
 
     public Resources getResources() {
