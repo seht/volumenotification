@@ -66,7 +66,6 @@ public class TileServiceController {
                 TileServiceSystemVolume.class.getName(),
                 TileServiceDialVolume.class.getName(),
                 TileServiceAccessibilityVolume.class.getName(),
-                //TileServiceDefaultVolume.class.getName(),
         };
         for (String service : tileServices) {
             TileService.requestListeningState(context, new ComponentName(context, service));

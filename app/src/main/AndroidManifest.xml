@@ -3,6 +3,7 @@
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -179,21 +180,6 @@
                 android:name="android.service.quicksettings.ACTIVE_TILE"
                 android:value="true" />
         </service>
-        <!--
-        <service
-            android:name=".service.TileServiceDefaultVolume"
-            android:icon="@drawable/ic_baseline_volume_up_24px"
-            android:label="@string/btn_def_label_default"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.quicksettings.ACTIVE_TILE"
-                android:value="true"/>
-        </service>
-        -->
 
     </application>
 

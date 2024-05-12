@@ -32,6 +32,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 // import android.widget.Switch;
 import androidx.appcompat.widget.SwitchCompat;
 
