@@ -37,7 +37,7 @@ public class SettingsModel {
 
     public SettingsModel(Context context) {
         resources = context.getResources();
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences = context.getSharedPreferences("settings_preferences", Context.MODE_PRIVATE);
     }
 
     public Resources getResources() {
