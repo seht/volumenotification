@@ -18,46 +18,33 @@ package net.hyx.app.volumenotification.service;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-//import android.os.IBinder;
-//import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.JobIntentService;
 
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.controller.TileServiceController;
 
-/**
- * @see {https://developer.android.com/reference/androidx/core/app/JobIntentService}
- */
-public class NotificationBackgroundService extends JobIntentService {
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
-    private static final int JOB_ID = 1000;
-    
+public class NotificationBackgroundService extends Worker {
+
     public static void enqueueWork(Context context, Intent work) {
-        JobIntentService.enqueueWork(context, NotificationBackgroundService.class, JOB_ID, work);
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationBackgroundService.class).build();
+        WorkManager.getInstance(context).enqueue(workRequest);
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    public NotificationBackgroundService(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
     }
 
+    @NonNull
     @Override
-    protected void onHandleWork(@NonNull Intent intent) {
+    public Result doWork() {
         NotificationServiceController.newInstance(getApplicationContext()).checkStartNotificationService();
         TileServiceController.newInstance(getApplicationContext()).requestListening();
+        return Result.success();
     }
-
-    @Override
-    public boolean onStopCurrentWork() {
-        return true;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
 }

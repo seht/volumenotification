@@ -32,7 +32,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
+// import android.widget.Switch;
+import androidx.appcompat.widget.SwitchCompat;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
@@ -75,7 +76,7 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
         LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
-        Switch statusInput = actionLayout.findViewById(R.id.menu_item_switch);
+        SwitchCompat statusInput = actionLayout.findViewById(R.id.menu_item_switch);
         statusInput.setChecked((fragment.item.status == 1));
         statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
