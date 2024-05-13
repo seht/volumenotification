@@ -50,22 +50,22 @@
     <string name="pref_translucent_summary">* Background transparency is only compatible with translucent launchers.</string>
 
     <string name="pref_enabled_title">Enable notification</string>
-    <string name="pref_enabled_summary">* For Android 7.0+ and compatible phones consider using the tiles provided in quick settings and disabling the notification.</string>
+    <string name="pref_enabled_summary">For Android 7.0+ and compatible phones consider using the new volume buttons available in quick settings and disabling the notification.</string>
 
     <string name="pref_boot_title">Start at boot</string>
     <string name="pref_boot_summary">Create notification when device starts</string>
 
     <string name="pref_top_priority_title">Top priority</string>
-    <string name="pref_top_priority_summary">* Enabling will keep the notification at the top but force a status bar icon.</string>
+    <string name="pref_top_priority_summary">Enabling will keep the notification at the top but force a status bar icon.</string>
 
     <string name="pref_foreground_service_title">Enable foreground service</string>
-    <string name="pref_foreground_service_summary">* Enabling will reinforce the notification priority and will restart the notification if stopped by the task manager.</string>
+    <string name="pref_foreground_service_summary">Enabling will reinforce the notification priority and will restart the notification if stopped by the task manager.</string>
 
     <string name="pref_hide_locked_title">Hide from lock screen</string>
-    <string name="pref_hide_locked_summary">* To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
+    <string name="pref_hide_locked_summary">To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
 
     <string name="pref_hide_status_title">Hide status bar icon</string>
-    <string name="pref_hide_status_summary">* When top priority is enabled, this could show a blank space in the status bar.</string>
+    <string name="pref_hide_status_summary">When top priority is enabled, this could show a blank space in the status bar.</string>
 
     <string name="pref_toggle_mute_title">Toggle mute</string>
     <string name="pref_toggle_mute_summary">Media volume to toggle mute</string>
