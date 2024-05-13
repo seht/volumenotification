@@ -153,7 +153,7 @@ public class NotificationFactory {
             RemoteViews imageButton = new RemoteViews(packageName, R.layout.widget_volume_control);
             PendingIntent clickEvent = PendingIntent.getBroadcast(context, item.type,
                     new Intent(context, AdjustVolumeReceiver.class).putExtra(VolumeControlModel.STREAM_TYPE_FIELD, item.type),
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
             imageButton.setOnClickPendingIntent(R.id.btn_volume_control, clickEvent);
             imageButton.setInt(R.id.btn_volume_control, "setImageResource", volumeControlModel.getIconId(item.icon));

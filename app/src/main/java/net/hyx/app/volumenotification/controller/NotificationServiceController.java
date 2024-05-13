@@ -20,6 +20,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -46,6 +47,9 @@ public class NotificationServiceController {
         return new NotificationServiceController(context);
     }
 
+    /**
+     * Using a background service because of starting at boot, and then it was.
+     */
     public void startService() {
         NotificationBackgroundService.enqueueWork(context);
     }

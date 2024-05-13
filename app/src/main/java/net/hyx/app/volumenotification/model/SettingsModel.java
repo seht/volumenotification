@@ -37,7 +37,7 @@ public class SettingsModel {
 
     public SettingsModel(Context context) {
         resources = context.getResources();
-        preferences = context.getSharedPreferences("settings_preferences", Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences("net.hyx.app.volumenotification_preferences", Context.MODE_PRIVATE);
     }
 
     public Resources getResources() {
