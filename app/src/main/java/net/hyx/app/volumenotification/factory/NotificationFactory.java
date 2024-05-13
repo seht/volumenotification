@@ -94,6 +94,7 @@ public class NotificationFactory {
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
                 .setCustomContentView(getCustomContentView())
+                .setCustomBigContentView(getCustomContentView())
                 .setColor(Color.TRANSPARENT)
                 .setSmallIcon(settings.getStatusIcon())
                 .setSound(null);
