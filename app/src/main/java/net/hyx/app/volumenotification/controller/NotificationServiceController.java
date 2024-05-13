@@ -20,7 +20,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -48,7 +47,7 @@ public class NotificationServiceController {
     }
 
     public void startService() {
-        NotificationBackgroundService.enqueueWork(context, new Intent(context, NotificationBackgroundService.class));
+        NotificationBackgroundService.enqueueWork(context);
     }
 
     public void checkEnableStartAtBoot() {

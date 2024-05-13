@@ -20,31 +20,32 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
-
-import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.controller.TileServiceController;
-
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-public class NotificationBackgroundService extends Worker {
+import net.hyx.app.volumenotification.controller.NotificationServiceController;
+import net.hyx.app.volumenotification.controller.TileServiceController;
 
-    public static void enqueueWork(Context context, Intent work) {
+public class NotificationBackgroundService extends Worker {
+    private final Context context;
+
+    public static void enqueueWork(Context context) {
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(NotificationBackgroundService.class).build();
         WorkManager.getInstance(context).enqueue(workRequest);
     }
 
     public NotificationBackgroundService(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
+        this.context = context;
     }
 
     @NonNull
     @Override
     public Result doWork() {
-        NotificationServiceController.newInstance(getApplicationContext()).checkStartNotificationService();
-        TileServiceController.newInstance(getApplicationContext()).requestListening();
+        NotificationServiceController.newInstance(this.context).checkStartNotificationService();
+        TileServiceController.newInstance(this.context).requestListening();
         return Result.success();
     }
 }

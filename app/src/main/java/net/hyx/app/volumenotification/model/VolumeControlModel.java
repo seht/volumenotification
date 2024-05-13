@@ -62,7 +62,6 @@ public class VolumeControlModel {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             defaultOrder.add(AudioManager.STREAM_ACCESSIBILITY);
         }
-        //defaultOrder.put(AudioManager.USE_DEFAULT_STREAM_TYPE);
     }
 
     private void setDefaultControls() {
@@ -76,7 +75,6 @@ public class VolumeControlModel {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             defaultControls.put(AudioManager.STREAM_ACCESSIBILITY, new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_outline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
         }
-        //defaultControls.put(AudioManager.USE_DEFAULT_STREAM_TYPE, new VolumeControl(AudioManager.USE_DEFAULT_STREAM_TYPE, 8, 0, "ic_outline_volume_up_24px", getDefaultLabel(R.string.control_label_default)));
     }
 
     public ArrayList<Integer> getDefaultOrder() {

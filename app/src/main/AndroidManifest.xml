@@ -58,15 +58,10 @@
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
         <service
-            android:name=".service.NotificationBackgroundService"
+            android:name=".service.NotificationForegroundService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service
-            android:name=".service.NotificationForegroundService"
-            android:enabled="true"
-            android:exported="true" />
 
         <service
             android:name=".service.TileServiceMediaVolume"
