@@ -66,17 +66,16 @@ public class NotificationServiceController {
     }
 
     public void checkStartNotificationService() {
+        NotificationFactory factory = new NotificationFactory(context);
         if (settings.isEnabled()) {
             if (settings.hasForegroundService()) {
                 startForegroundService();
             } else {
                 stopForegroundService();
             }
-            NotificationFactory factory = new NotificationFactory(context);
             factory.startNotification();
         } else {
             stopForegroundService();
-            NotificationFactory factory = new NotificationFactory(context);
             factory.cancelNotification();
         }
     }

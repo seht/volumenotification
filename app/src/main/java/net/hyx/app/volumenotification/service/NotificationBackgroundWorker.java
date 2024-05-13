@@ -10,15 +10,18 @@ import net.hyx.app.volumenotification.controller.TileServiceController;
 
 public class NotificationBackgroundWorker extends Worker {
 
+    private final Context context;
+
     public NotificationBackgroundWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
+        this.context = context;
     }
 
     @NonNull
     @Override
     public Result doWork() {
-        NotificationServiceController.newInstance(getApplicationContext()).checkStartNotificationService();
-        TileServiceController.newInstance(getApplicationContext()).requestListening();
+        NotificationServiceController.newInstance(this.context).checkStartNotificationService();
+        TileServiceController.newInstance(this.context).requestListening();
         return Result.success();
     }
 }
