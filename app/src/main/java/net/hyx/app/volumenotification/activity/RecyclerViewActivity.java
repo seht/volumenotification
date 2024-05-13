@@ -50,7 +50,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private SettingsModel settings;
 
-    private final static int DIALOG_ID = 1;
+    private final static int DIALOG_ID = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +130,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            assert container != null;
             return new RecyclerView(container.getContext());
         }
 

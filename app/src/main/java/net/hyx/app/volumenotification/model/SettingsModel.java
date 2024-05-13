@@ -32,12 +32,13 @@ import java.util.List;
 
 public class SettingsModel {
 
+    public static final String SHARED_PREF_NAME  = "net.hyx.app.volumenotification_preferences";
     private final Resources resources;
     private final SharedPreferences preferences;
 
     public SettingsModel(Context context) {
         resources = context.getResources();
-        preferences = context.getSharedPreferences("net.hyx.app.volumenotification_preferences", Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
     }
 
     public Resources getResources() {

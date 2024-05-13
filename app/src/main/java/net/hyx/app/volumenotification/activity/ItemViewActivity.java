@@ -55,6 +55,7 @@ public class ItemViewActivity extends AppCompatActivity {
 
         SettingsModel settings = new SettingsModel(getApplicationContext());
         VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.ITEM_FIELD);
+        assert item != null;
 
         fragment = ItemFragment.newInstance(item);
 
@@ -77,6 +78,7 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
         LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
+        assert actionLayout != null;
         SwitchCompat statusInput = actionLayout.findViewById(R.id.menu_item_switch);
         statusInput.setChecked((fragment.item.status == 1));
         statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

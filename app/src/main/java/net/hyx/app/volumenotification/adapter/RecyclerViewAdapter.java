@@ -107,7 +107,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VolumeControl item = items.get(holder.getAdapterPosition());
+                VolumeControl item = items.get(holder.getBindingAdapterPosition());
                 Intent intent = new Intent(v.getContext(), ItemViewActivity.class);
                 intent.putExtra(VolumeControlModel.ITEM_FIELD, item);
                 v.getContext().startActivity(intent);

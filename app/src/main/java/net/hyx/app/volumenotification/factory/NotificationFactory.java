@@ -47,7 +47,7 @@ public class NotificationFactory {
     private final VolumeControlModel volumeControlModel;
     private final List<VolumeControl> items;
 
-    private static final int NOTIFICATION_ID = 1000;
+    private static final int NOTIFICATION_ID = 100;
     private static final String CHANNEL_ID = "net.hyx.app.volumenotification.channel.DEFAULT";
 
     public NotificationFactory(Context context) {
@@ -128,6 +128,7 @@ public class NotificationFactory {
         RemoteViews view = new RemoteViews(packageName, getNotificationLayout());
         view.removeAllViews(R.id.notification_layout);
 
+        // @TODO
         int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
         int backgroundColor;
         int iconColor;

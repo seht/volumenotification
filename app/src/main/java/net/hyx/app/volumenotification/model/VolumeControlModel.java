@@ -102,6 +102,8 @@ public class VolumeControlModel {
         return items;
     }
 
+
+    // @TODO
     public int getIconId(String drawableName) {
         return settings.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
     }
