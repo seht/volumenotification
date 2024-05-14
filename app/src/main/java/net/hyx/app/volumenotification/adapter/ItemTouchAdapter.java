@@ -21,8 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.hyx.app.volumenotification.helper.ItemTouchListener;
-import net.hyx.app.volumenotification.helper.RecyclerViewListener;
+import net.hyx.app.volumenotification.listener.ItemTouchListener;
+import net.hyx.app.volumenotification.listener.RecyclerViewListener;
 
 public class ItemTouchAdapter extends ItemTouchHelper.Callback {
 

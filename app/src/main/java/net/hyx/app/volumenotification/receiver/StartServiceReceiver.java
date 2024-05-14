@@ -19,9 +19,7 @@ package net.hyx.app.volumenotification.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-//import android.widget.Toast;
 
-//import net.hyx.app.volumenotification.controller.ApplicationController;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 
 

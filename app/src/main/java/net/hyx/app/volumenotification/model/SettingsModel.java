@@ -22,7 +22,6 @@ import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.util.TypedValue;
 
 import net.hyx.app.volumenotification.R;

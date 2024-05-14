@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.helper;
+package net.hyx.app.volumenotification.listener;
 
-public interface RecyclerViewListener {
+public interface ItemTouchListener {
 
-    void onItemSelected();
-    void onItemClear();
+    boolean onItemMove(int fromPosition, int toPosition);
+    void onItemSwiped(int position);
 }
 

@@ -20,7 +20,7 @@
         android:background="@drawable/shape_dialog_divider_vertical"
         android:padding="16dp">
 
-        <net.hyx.app.volumenotification.widget.IconImageView
+        <net.hyx.app.volumenotification.view.IconImageView
             android:id="@+id/list_item_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
 
         </LinearLayout>
 
-        <net.hyx.app.volumenotification.widget.DragHandleImageView
+        <net.hyx.app.volumenotification.view.DragHandleImageView
             android:id="@+id/list_item_handle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

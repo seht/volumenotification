@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package net.hyx.app.volumenotification.helper;
+package net.hyx.app.volumenotification.listener;
 
-public interface ItemTouchListener {
+import androidx.recyclerview.widget.RecyclerView;
 
-    boolean onItemMove(int fromPosition, int toPosition);
-    void onItemSwiped(int position);
+public interface DragHandleListener {
+    void onStartDrag(RecyclerView.ViewHolder viewHolder);
 }
-

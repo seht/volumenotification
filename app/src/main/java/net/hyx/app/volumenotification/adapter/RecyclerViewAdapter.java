@@ -33,11 +33,11 @@ import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.activity.ItemViewActivity;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
-import net.hyx.app.volumenotification.helper.ItemTouchListener;
-import net.hyx.app.volumenotification.helper.DragHandleListener;
-import net.hyx.app.volumenotification.helper.RecyclerViewListener;
+import net.hyx.app.volumenotification.listener.ItemTouchListener;
+import net.hyx.app.volumenotification.listener.DragHandleListener;
+import net.hyx.app.volumenotification.listener.RecyclerViewListener;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-import net.hyx.app.volumenotification.widget.DragHandleImageView;
+import net.hyx.app.volumenotification.view.DragHandleImageView;
 
 import java.util.Collections;
 import java.util.List;

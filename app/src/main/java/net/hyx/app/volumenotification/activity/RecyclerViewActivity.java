@@ -44,7 +44,7 @@ import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
-import net.hyx.app.volumenotification.helper.DragHandleListener;
+import net.hyx.app.volumenotification.listener.DragHandleListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class RecyclerViewActivity extends AppCompatActivity {
@@ -79,7 +79,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (!settings.getNonceDialogCancelled(DIALOG_ID)) {
+            if (settings.isEnabled() && !settings.getNonceDialogCancelled(DIALOG_ID)) {
                 DialogFragment dialogFragment = NonceDialogFragment.newInstance(DIALOG_ID,
                         settings.getResources().getString(R.string.target_api_welcome_message_N),
                         settings.getResources().getString(R.string.target_api_welcome_title_N));
