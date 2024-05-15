@@ -6,15 +6,14 @@ android {
         applicationId 'net.hyx.app.volumenotification'
         minSdkVersion 21
         targetSdk 34
-        versionCode 12340
-        versionName '1.2.3.4'
+        versionCode 12410
+        versionName '1.2.4.1'
         vectorDrawables.useSupportLibrary true
-        versionNameSuffix 'yes'
     }
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
+            // shrinkResources true
             pseudoLocalesEnabled true
         }
         debug {
