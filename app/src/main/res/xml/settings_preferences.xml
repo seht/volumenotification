@@ -102,8 +102,7 @@
             app:defaultValue="@bool/pref_foreground_service_default"
             app:key="pref_foreground_service"
             app:summary="@string/pref_foreground_service_summary"
-            app:title="@string/pref_foreground_service_title"
-            android:enabled="false" />
+            app:title="@string/pref_foreground_service_title"/>
         <SwitchPreferenceCompat
             app:defaultValue="@bool/pref_hide_locked_default"
             app:key="pref_hide_locked"

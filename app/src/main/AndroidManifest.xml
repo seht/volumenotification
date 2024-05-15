@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     
@@ -58,16 +58,16 @@
         </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
-<!--        <service-->
-<!--            android:name=".service.NotificationForegroundService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"-->
-<!--            android:permission="android.permission.BIND_JOB_SERVICE"-->
-<!--            android:foregroundServiceType="specialUse">-->
-<!--            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"-->
-<!--                android:value="sticky_notification"/>-->
+        <service
+            android:name=".service.NotificationForegroundService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="sticky_notification"/>
 
-<!--        </service>-->
+        </service>
 
         <service
             android:name=".service.TileServiceMediaVolume"
