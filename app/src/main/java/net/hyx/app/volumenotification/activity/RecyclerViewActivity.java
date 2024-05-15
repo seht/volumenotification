@@ -90,10 +90,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
                             settings.getResources().getString(R.string.target_api_welcome_title_N));
                     dialogFragment.show(getSupportFragmentManager(), null);
                 }
-                if (!notificationServiceController.areNotificationsEnabled()) {
-                    // @TODO Alert for redirect.
-                    notificationServiceController.startNotificationPermissionSettings();
-                }
+//                if (!notificationServiceController.areNotificationsEnabled()) {
+//                    // @TODO Alert for redirect.
+//                    notificationServiceController.startNotificationPermissionSettings();
+//                }
             }
         }
     }
