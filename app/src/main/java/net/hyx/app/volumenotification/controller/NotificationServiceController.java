@@ -16,11 +16,15 @@
 
 package net.hyx.app.volumenotification.controller;
 
+import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
-//import android.content.Intent;
 //import androidx.core.content.ContextCompat;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.model.SettingsModel;
@@ -34,15 +38,22 @@ import net.hyx.app.volumenotification.service.NotificationBackgroundService;
 public class NotificationServiceController {
 
     private final Context context;
+
+    private final NotificationFactory factory;
     private final SettingsModel settings;
 
     public NotificationServiceController(Context context) {
         this.context = context;
         settings = new SettingsModel(context);
+        factory = new NotificationFactory(context);
     }
 
     public static NotificationServiceController newInstance(Context context) {
         return new NotificationServiceController(context);
+    }
+
+    public NotificationFactory getFactory() {
+        return factory;
     }
 
     /**
@@ -68,7 +79,6 @@ public class NotificationServiceController {
     }
 
     public void checkStartNotificationService() {
-        NotificationFactory factory = new NotificationFactory(context);
         if (settings.isEnabled()) {
 //            if (settings.hasForegroundService()) {
 //                startForegroundService();
@@ -80,6 +90,25 @@ public class NotificationServiceController {
             // stopForegroundService();
             factory.cancelNotification();
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public boolean areNotificationsEnabled() {
+        return factory.getManager().areNotificationsEnabled();
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public void startNotificationPermissionSettings() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, this.context.getPackageName());
+        } else {
+            intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", this.context.getPackageName(), null);
+            intent.setData(uri);
+        }
+        this.context.startActivity(intent);
     }
 
 //    private void startForegroundService() {

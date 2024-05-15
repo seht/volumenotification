@@ -24,7 +24,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.widget.RemoteViews;
 import androidx.core.app.NotificationCompat;
 
@@ -61,6 +63,10 @@ public class NotificationFactory {
 
     public int getNotificationId() {
         return NotificationFactory.NOTIFICATION_ID;
+    }
+
+    public NotificationManager getManager() {
+        return manager;
     }
 
     public Notification getNotification() {

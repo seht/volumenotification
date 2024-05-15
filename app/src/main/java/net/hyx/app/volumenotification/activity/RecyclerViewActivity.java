@@ -51,7 +51,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private SettingsModel settings;
 
-    private final static int DIALOG_ID = 10;
+    private NotificationServiceController notificationServiceController;
+
+    private final static int TILES_DIALOG_ID = 10;
+    // private final static int NOTIFICATION_PERMISSION_DIALOG_ID = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +73,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // NotificationServiceController.newInstance(getApplicationContext()).startService();
-        NotificationServiceController.newInstance(getApplicationContext()).checkStartNotificationService();
+//        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        notificationServiceController = NotificationServiceController.newInstance(getApplicationContext());
+        notificationServiceController.checkStartNotificationService();
         TileServiceController.newInstance(getApplicationContext()).requestListening();
     }
 
@@ -79,11 +83,17 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (settings.isEnabled() && !settings.getNonceDialogCancelled(DIALOG_ID)) {
-                DialogFragment dialogFragment = NonceDialogFragment.newInstance(DIALOG_ID,
-                        settings.getResources().getString(R.string.target_api_welcome_message_N),
-                        settings.getResources().getString(R.string.target_api_welcome_title_N));
-                dialogFragment.show(getSupportFragmentManager(), null);
+            if (settings.isEnabled()) {
+                if (!settings.getNonceDialogCancelled(TILES_DIALOG_ID)) {
+                    DialogFragment dialogFragment = NonceDialogFragment.newInstance(TILES_DIALOG_ID,
+                            settings.getResources().getString(R.string.target_api_welcome_message_N),
+                            settings.getResources().getString(R.string.target_api_welcome_title_N));
+                    dialogFragment.show(getSupportFragmentManager(), null);
+                }
+                if (!notificationServiceController.areNotificationsEnabled()) {
+                    // @TODO Alert for redirect.
+                    notificationServiceController.startNotificationPermissionSettings();
+                }
             }
         }
     }
