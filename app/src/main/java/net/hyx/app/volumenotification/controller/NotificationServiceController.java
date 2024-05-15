@@ -18,16 +18,15 @@ package net.hyx.app.volumenotification.controller;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
+//import android.content.Intent;
+//import androidx.core.content.ContextCompat;
 import android.content.pm.PackageManager;
-
-import androidx.core.content.ContextCompat;
 
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.receiver.StartServiceReceiver;
 import net.hyx.app.volumenotification.service.NotificationBackgroundService;
-import net.hyx.app.volumenotification.service.NotificationForegroundService;
+//import net.hyx.app.volumenotification.service.NotificationForegroundService;
 
 /**
  * @see {https://developer.android.com/training/scheduling/alarms.html#boot}
@@ -71,24 +70,24 @@ public class NotificationServiceController {
     public void checkStartNotificationService() {
         NotificationFactory factory = new NotificationFactory(context);
         if (settings.isEnabled()) {
-            if (settings.hasForegroundService()) {
-                startForegroundService();
-            } else {
-                stopForegroundService();
-            }
+//            if (settings.hasForegroundService()) {
+//                startForegroundService();
+//            } else {
+//                stopForegroundService();
+//            }
             factory.startNotification();
         } else {
-            stopForegroundService();
+            // stopForegroundService();
             factory.cancelNotification();
         }
     }
 
-    private void startForegroundService() {
-        ContextCompat.startForegroundService(context, new Intent(context, NotificationForegroundService.class));
-    }
+//    private void startForegroundService() {
+//        ContextCompat.startForegroundService(context, new Intent(context, NotificationForegroundService.class));
+//    }
 
-    private void stopForegroundService() {
-        context.stopService(new Intent(context, NotificationForegroundService.class));
-    }
+//    private void stopForegroundService() {
+//        context.stopService(new Intent(context, NotificationForegroundService.class));
+//    }
 
 }

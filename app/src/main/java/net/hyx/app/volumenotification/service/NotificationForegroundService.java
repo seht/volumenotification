@@ -26,30 +26,32 @@ import net.hyx.app.volumenotification.controller.NotificationServiceController;
 /**
  * @see {https://developer.android.com/guide/components/services}
  */
-public class NotificationForegroundService extends Service {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        NotificationFactory factory = new NotificationFactory(getApplicationContext());
-        startForeground(factory.getNotificationId(), factory.getNotification());
-    }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        NotificationFactory factory = new NotificationFactory(getApplicationContext());
-        factory.startNotification();
-        return START_STICKY;
-    }
-
-    @Override
-    public void onDestroy() {
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-}
+//public class NotificationForegroundService extends Service {
+//
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//        NotificationFactory factory = new NotificationFactory(getApplicationContext());
+//        startForeground(factory.getNotificationId(), factory.getNotification());
+//    }
+//
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+//        NotificationFactory factory = new NotificationFactory(getApplicationContext());
+//        factory.startNotification();
+//        return START_STICKY;
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        NotificationServiceController.newInstance(getApplicationContext()).startService();
+//    }
+//
+//    @Override
+//    public IBinder onBind(Intent intent) {
+//        return null;
+//    }
+//
+//}
