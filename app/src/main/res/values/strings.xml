@@ -53,7 +53,7 @@
     <string name="pref_translucent_summary">Background transparency is only compatible with translucent launchers.</string>
 
     <string name="pref_enabled_title">Enable notification</string>
-    <string name="pref_enabled_summary">Notifications permission must be enabled. For Android 7.0+ consider using the new volume buttons available in quick settings and disabling the notification.</string>
+    <string name="pref_enabled_summary">Notification permissions have to be enabled. For Android 7.0+ consider using the new volume buttons available in quick settings and disabling the notification.</string>
 
     <string name="pref_boot_title">Start at boot</string>
     <string name="pref_boot_summary">Create notification when device starts</string>
