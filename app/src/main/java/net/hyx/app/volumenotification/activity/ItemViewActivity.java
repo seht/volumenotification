@@ -16,6 +16,7 @@
 
 package net.hyx.app.volumenotification.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,12 +47,16 @@ import java.io.Serializable;
 public class ItemViewActivity extends AppCompatActivity {
 
     private ItemFragment fragment;
+    private NotificationServiceController notificationServiceController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SettingsModel settings = new SettingsModel(getApplicationContext());
+        Context context = getBaseContext();
+        SettingsModel settings = new SettingsModel(context);
+        notificationServiceController = NotificationServiceController.newInstance(context);
+
         VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.ITEM_FIELD);
         assert item != null;
 
@@ -92,7 +97,7 @@ public class ItemViewActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         fragment.model.saveItem(fragment.item);
-        NotificationServiceController.newInstance(getApplicationContext()).startService();
+        notificationServiceController.startService();
         return super.onSupportNavigateUp();
     }
 
@@ -114,9 +119,10 @@ public class ItemViewActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (getArguments() != null && getContext() != null) {
-                model = new VolumeControlModel(getContext());
-                settings = new SettingsModel(getContext());
+                Context context = getContext();
                 item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.ITEM_FIELD);
+                model = new VolumeControlModel(context);
+                settings = new SettingsModel(context);
             }
         }
 

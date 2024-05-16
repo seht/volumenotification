@@ -12,6 +12,9 @@
     <string name="target_api_welcome_title_N">Your device is running Android 7.0+</string>
     <string name="target_api_welcome_message_N">Try using the new Volume buttons available in your Android quick settings (pencil icon) instead of the notification.</string>
 
+    <string name="notification_permission_title_N">Enable notification permissions</string>
+    <string name="notification_permission_message_N">You have the notification feature enabled but the app does not have permission to post notifications. You will be redirected to enable permissions.</string>
+
     <string name="pref_dialog_alert_nonce_checked_label">Sweet! Don\'t remind me again.</string>
 
     <string name="pref_theme_title">Theme</string>

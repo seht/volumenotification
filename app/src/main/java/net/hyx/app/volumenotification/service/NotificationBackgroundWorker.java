@@ -20,8 +20,8 @@ public class NotificationBackgroundWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotificationServiceController.newInstance(this.context).checkStartNotificationService();
-        TileServiceController.newInstance(this.context).requestListening();
+        NotificationServiceController.newInstance(context).checkStartNotification();
+        TileServiceController.newInstance(context).requestListening();
         return Result.success();
     }
 }

@@ -23,17 +23,26 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
+import net.hyx.app.volumenotification.listener.OnDialogClickListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class NonceDialogFragment extends DialogFragment {
 
+    private static final String LIMIT_FIELD = "limit";
     private static final String DIALOG_ID_FIELD = "id";
     private static final String MESSAGE_FIELD = "message";
     private static final String TITLE_FIELD = "title";
+    private OnDialogClickListener listener;
 
-    public static NonceDialogFragment newInstance(int id, String message, String title) {
+    public void setOnDialogClickListener(OnDialogClickListener listener) {
+        this.listener = listener;
+    }
+
+    public static NonceDialogFragment newInstance(int limit, int id, String message, String title) {
         NonceDialogFragment dialog = new NonceDialogFragment();
         Bundle args = new Bundle();
+        args.putInt(LIMIT_FIELD, limit);
         args.putInt(DIALOG_ID_FIELD, id);
         args.putString(MESSAGE_FIELD, message);
         args.putString(TITLE_FIELD, title);
@@ -53,21 +62,32 @@ public class NonceDialogFragment extends DialogFragment {
             return super.onCreateDialog(savedInstanceState);
         }
 
+        final int limit = getArguments().getInt(LIMIT_FIELD);
         final int dialogId = getArguments().getInt(DIALOG_ID_FIELD);
         final String message = getArguments().getString(MESSAGE_FIELD);
         final String title = getArguments().getString(TITLE_FIELD);
         final SettingsModel settings = new SettingsModel(getActivity());
 
         return new AlertDialog.Builder(getActivity()).setMessage(message)
-                .setTitle(title)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+            .setTitle(title)
+            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    if (listener != null) {
+                        listener.onPositiveClick(dialogId);
                     }
-                }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        settings.setNonceDialogCancelled(dialogId, true);
+                }
+            }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    if (limit > 0) {
+                        int count = settings.getNonceDialogCount(dialogId);
+                        if (count >= 0 && count < limit) {
+                            settings.setNonceDialogCount(dialogId, count + 1);
+                        } else {
+                            settings.setNonceDialogCount(dialogId, -1);
+                        }
                     }
-                }).create();
+                }
+            }).create();
     }
 
 }

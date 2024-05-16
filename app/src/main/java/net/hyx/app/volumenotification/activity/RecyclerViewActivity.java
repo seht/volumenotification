@@ -16,6 +16,8 @@
 
 package net.hyx.app.volumenotification.activity;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -29,6 +31,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,22 +49,25 @@ import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
 import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.listener.DragHandleListener;
+import net.hyx.app.volumenotification.listener.OnDialogClickListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 
+    private Context context;
     private SettingsModel settings;
-
     private NotificationServiceController notificationServiceController;
 
     private final static int TILES_DIALOG_ID = 10;
-    // private final static int NOTIFICATION_PERMISSION_DIALOG_ID = 20;
+    private final static int NOTIFICATION_PERMISSION_DIALOG_ID = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settings = new SettingsModel(getApplicationContext());
+        context = getBaseContext();
+        settings = new SettingsModel(context);
+        notificationServiceController = NotificationServiceController.newInstance(context);
 
         setTheme(settings.getAppTheme());
         setContentView(R.layout.activity_layout);
@@ -70,13 +77,18 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 .commit();
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-//        NotificationServiceController.newInstance(getApplicationContext()).startService();
-        notificationServiceController = NotificationServiceController.newInstance(getApplicationContext());
-        notificationServiceController.checkStartNotificationService();
-        TileServiceController.newInstance(getApplicationContext()).requestListening();
+        // notificationServiceController.startService();
+        notificationServiceController.checkStartNotification();
+        TileServiceController.newInstance(context).requestListening();
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    private void startNotificationPermissionSettings() {
+
     }
 
     @Override
@@ -84,16 +96,34 @@ public class RecyclerViewActivity extends AppCompatActivity {
         super.onAttachedToWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (settings.isEnabled()) {
-                if (!settings.getNonceDialogCancelled(TILES_DIALOG_ID)) {
-                    DialogFragment dialogFragment = NonceDialogFragment.newInstance(TILES_DIALOG_ID,
+                if (settings.getNonceDialogCount(TILES_DIALOG_ID) < 1) {
+                    NonceDialogFragment tilesDialogFragment = NonceDialogFragment.newInstance(1, TILES_DIALOG_ID,
                             settings.getResources().getString(R.string.target_api_welcome_message_N),
                             settings.getResources().getString(R.string.target_api_welcome_title_N));
-                    dialogFragment.show(getSupportFragmentManager(), null);
+                    tilesDialogFragment.show(getSupportFragmentManager(), null);
                 }
-//                if (!notificationServiceController.areNotificationsEnabled()) {
-//                    // @TODO Alert for redirect.
-//                    notificationServiceController.startNotificationPermissionSettings();
-//                }
+                if (!notificationServiceController.areNotificationsEnabled()) {
+                    NonceDialogFragment permsDialogFragment = NonceDialogFragment.newInstance(0, NOTIFICATION_PERMISSION_DIALOG_ID,
+                            settings.getResources().getString(R.string.notification_permission_message_N),
+                            settings.getResources().getString(R.string.notification_permission_title_N));
+                    permsDialogFragment.setOnDialogClickListener(new OnDialogClickListener() {
+                        @Override
+                        public void onPositiveClick(int dialogId) {
+                            Intent intent;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                                intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
+                            } else {
+                                intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+                                intent.setData(uri);
+                            }
+                            startActivity(intent);
+                        }
+                    });
+
+                    permsDialogFragment.show(getSupportFragmentManager(), null);
+                }
             }
         }
     }

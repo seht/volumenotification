@@ -78,7 +78,7 @@ public class NotificationServiceController {
         }
     }
 
-    public void checkStartNotificationService() {
+    public void checkStartNotification() {
         if (settings.isEnabled()) {
 //            if (settings.hasForegroundService()) {
 //                startForegroundService();
@@ -97,19 +97,7 @@ public class NotificationServiceController {
         return factory.getManager().areNotificationsEnabled();
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
-    public void startNotificationPermissionSettings() {
-        Intent intent;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
-            intent.putExtra(Settings.EXTRA_APP_PACKAGE, this.context.getPackageName());
-        } else {
-            intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            Uri uri = Uri.fromParts("package", this.context.getPackageName(), null);
-            intent.setData(uri);
-        }
-        this.context.startActivity(intent);
-    }
+
 
 //    private void startForegroundService() {
 //        ContextCompat.startForegroundService(context, new Intent(context, NotificationForegroundService.class));

@@ -49,8 +49,8 @@ public class NotificationFactory {
     private final VolumeControlModel volumeControlModel;
     private final List<VolumeControl> items;
 
-    private static final int NOTIFICATION_ID = 1;
-    private static final String CHANNEL_ID = "net.hyx.app.volumenotification.channel.STICKY_NOTIFICATION";
+    public static final int NOTIFICATION_ID = 1;
+    public static final String CHANNEL_ID = "STICKY_NOTIFICATION";
 
     public NotificationFactory(Context context) {
         this.context = context;
@@ -59,10 +59,6 @@ public class NotificationFactory {
         settings = new SettingsModel(context);
         volumeControlModel = new VolumeControlModel(context);
         items = volumeControlModel.getList();
-    }
-
-    public int getNotificationId() {
-        return NotificationFactory.NOTIFICATION_ID;
     }
 
     public NotificationManager getManager() {

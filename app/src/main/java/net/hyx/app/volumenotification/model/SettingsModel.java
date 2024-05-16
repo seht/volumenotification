@@ -59,12 +59,12 @@ public class SettingsModel {
         return Arrays.asList(resources.getStringArray(R.array.pref_icon_entries));
     }
 
-    public boolean getNonceDialogCancelled(int id) {
-        return preferences.getBoolean("pref_dialog_alert_nonce_cancel_" + id, false);
+    public int getNonceDialogCount(int id) {
+        return preferences.getInt("pref_dialog_alert_nonce_count_" + id, 0);
     }
 
-    public void setNonceDialogCancelled(int id, boolean cancel) {
-        preferences.edit().putBoolean("pref_dialog_alert_nonce_cancel_" + id, cancel).apply();
+    public void setNonceDialogCount(int id, int count) {
+        preferences.edit().putInt("pref_dialog_alert_nonce_count_" + id, count).apply();
     }
 
     public boolean getAppThemeDark() {
