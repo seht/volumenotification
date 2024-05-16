@@ -25,14 +25,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -94,36 +92,28 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (settings.isEnabled()) {
-                if (settings.getNonceDialogCount(TILES_DIALOG_ID) < 1) {
-                    NonceDialogFragment tilesDialogFragment = NonceDialogFragment.newInstance(1, TILES_DIALOG_ID,
-                            settings.getResources().getString(R.string.target_api_welcome_message_N),
-                            settings.getResources().getString(R.string.target_api_welcome_title_N));
-                    tilesDialogFragment.show(getSupportFragmentManager(), null);
-                }
-                if (!notificationServiceController.areNotificationsEnabled()) {
-                    NonceDialogFragment permsDialogFragment = NonceDialogFragment.newInstance(0, NOTIFICATION_PERMISSION_DIALOG_ID,
-                            settings.getResources().getString(R.string.notification_permission_message_N),
-                            settings.getResources().getString(R.string.notification_permission_title_N));
-                    permsDialogFragment.setOnDialogClickListener(new OnDialogClickListener() {
-                        @Override
-                        public void onPositiveClick(int dialogId) {
-                            Intent intent;
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
-                                intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
-                            } else {
-                                intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", context.getPackageName(), null);
-                                intent.setData(uri);
-                            }
-                            startActivity(intent);
-                        }
-                    });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && settings.isEnabled()) {
+            if (settings.getNonceDialogCount(TILES_DIALOG_ID) < 1) {
+                NonceDialogFragment tilesDialogFragment = NonceDialogFragment.newInstance(1, TILES_DIALOG_ID,
+                        settings.getResources().getString(R.string.target_api_welcome_message_N),
+                        settings.getResources().getString(R.string.target_api_welcome_title_N));
+                tilesDialogFragment.show(getSupportFragmentManager(), null);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !notificationServiceController.areNotificationsEnabled()) {
+                NonceDialogFragment permsDialogFragment = NonceDialogFragment.newInstance(0, NOTIFICATION_PERMISSION_DIALOG_ID,
+                        settings.getResources().getString(R.string.notification_permission_message_N),
+                        settings.getResources().getString(R.string.notification_permission_title_N));
+                permsDialogFragment.setOnDialogClickListener(new OnDialogClickListener() {
+                    @Override
+                    public void onPositiveClick(int dialogId) {
+                        Intent intent;
+                        intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                        intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
+                        startActivity(intent);
+                    }
+                });
 
-                    permsDialogFragment.show(getSupportFragmentManager(), null);
-                }
+                permsDialogFragment.show(getSupportFragmentManager(), null);
             }
         }
     }
