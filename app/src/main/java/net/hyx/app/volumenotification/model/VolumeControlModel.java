@@ -63,15 +63,23 @@ public class VolumeControlModel {
     }
 
     private void setDefaultControls() {
-        defaultControls.put(AudioManager.STREAM_MUSIC, new VolumeControl(AudioManager.STREAM_MUSIC, 0, 1, "ic_outline_music_note_24px", getDefaultLabel(R.string.control_label_media)));
-        defaultControls.put(AudioManager.STREAM_VOICE_CALL, new VolumeControl(AudioManager.STREAM_VOICE_CALL, 1, 1, "ic_outline_phone_24px", getDefaultLabel(R.string.control_label_call)));
-        defaultControls.put(AudioManager.STREAM_RING, new VolumeControl(AudioManager.STREAM_RING, 2, 1, "ic_outline_notifications_24px", getDefaultLabel(R.string.control_label_ring)));
-        defaultControls.put(AudioManager.STREAM_ALARM, new VolumeControl(AudioManager.STREAM_ALARM, 3, 0, "ic_outline_alarm_24px", getDefaultLabel(R.string.control_label_alarm)));
-        defaultControls.put(AudioManager.STREAM_NOTIFICATION, new VolumeControl(AudioManager.STREAM_NOTIFICATION, 4, 0, "ic_outline_chat_bubble_outline_24px", getDefaultLabel(R.string.control_label_notification)));
-        defaultControls.put(AudioManager.STREAM_SYSTEM, new VolumeControl(AudioManager.STREAM_SYSTEM, 5, 0, "ic_outline_phone_android_24px", getDefaultLabel(R.string.control_label_system)));
-        defaultControls.put(AudioManager.STREAM_DTMF, new VolumeControl(AudioManager.STREAM_DTMF, 6, 0, "ic_outline_dialpad_24px", getDefaultLabel(R.string.control_label_dial)));
+        defaultControls.put(AudioManager.STREAM_MUSIC,
+                new VolumeControl(AudioManager.STREAM_MUSIC, 0, 1, "ic_outline_music_note_24px", getDefaultLabel(R.string.control_label_media)));
+        defaultControls.put(AudioManager.STREAM_VOICE_CALL,
+                new VolumeControl(AudioManager.STREAM_VOICE_CALL, 1, 1, "ic_outline_phone_24px", getDefaultLabel(R.string.control_label_call)));
+        defaultControls.put(AudioManager.STREAM_RING,
+                new VolumeControl(AudioManager.STREAM_RING, 2, 1, "ic_outline_notifications_24px", getDefaultLabel(R.string.control_label_ring)));
+        defaultControls.put(AudioManager.STREAM_ALARM,
+                new VolumeControl(AudioManager.STREAM_ALARM, 3, 0, "ic_outline_alarm_24px", getDefaultLabel(R.string.control_label_alarm)));
+        defaultControls.put(AudioManager.STREAM_NOTIFICATION,
+                new VolumeControl(AudioManager.STREAM_NOTIFICATION, 4, 0, "ic_outline_chat_bubble_outline_24px", getDefaultLabel(R.string.control_label_notification)));
+        defaultControls.put(AudioManager.STREAM_SYSTEM,
+                new VolumeControl(AudioManager.STREAM_SYSTEM, 5, 0, "ic_outline_phone_android_24px", getDefaultLabel(R.string.control_label_system)));
+        defaultControls.put(AudioManager.STREAM_DTMF,
+                new VolumeControl(AudioManager.STREAM_DTMF, 6, 0, "ic_outline_dialpad_24px", getDefaultLabel(R.string.control_label_dial)));
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            defaultControls.put(AudioManager.STREAM_ACCESSIBILITY, new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_outline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
+            defaultControls.put(AudioManager.STREAM_ACCESSIBILITY,
+                    new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_outline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
         }
     }
 
@@ -162,14 +170,10 @@ public class VolumeControlModel {
                 return R.drawable.ic_baseline_alarm_24px;
             case "ic_baseline_chat_bubble_24px":
                 return R.drawable.ic_baseline_chat_bubble_24px;
-            case "ic_baseline_check_24px":
-                return R.drawable.ic_baseline_check_24px;
             case "ic_baseline_dialpad_24px":
                 return R.drawable.ic_baseline_dialpad_24px;
             case "ic_baseline_drag_handle_24px":
                 return R.drawable.ic_baseline_drag_handle_24px;
-            case "ic_baseline_favorite_24px":
-                return R.drawable.ic_baseline_favorite_24px;
             case "ic_baseline_headset_24px":
                 return R.drawable.ic_baseline_headset_24px;
             case "ic_baseline_music_note_24px":
@@ -190,8 +194,6 @@ public class VolumeControlModel {
                 return R.drawable.ic_baseline_phonelink_ring_24px;
             case "ic_baseline_ring_volume_24px":
                 return R.drawable.ic_baseline_ring_volume_24px;
-            case "ic_baseline_settings_20px":
-                return R.drawable.ic_baseline_settings_20px;
             case "ic_baseline_smartphone_24px":
                 return R.drawable.ic_baseline_smartphone_24px;
             case "ic_baseline_speaker_24px":
@@ -201,8 +203,6 @@ public class VolumeControlModel {
             case "ic_baseline_volume_up_24px":
                 return R.drawable.ic_baseline_volume_up_24px;
             case "ic_launcher_foreground":
-                return R.drawable.ic_launcher_foreground;
-            case "ic_outline_accessibility_new_24px":
                 return R.drawable.ic_outline_accessibility_new_24px;
             case "ic_outline_alarm_24px":
                 return R.drawable.ic_outline_alarm_24px;
