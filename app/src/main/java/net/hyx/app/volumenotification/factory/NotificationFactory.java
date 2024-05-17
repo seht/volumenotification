@@ -128,11 +128,10 @@ public class NotificationFactory {
 
     private RemoteViews getCustomContentView() {
 
-        RemoteViews view = new RemoteViews(packageName, getNotificationLayout());
+        RemoteViews view = new RemoteViews(packageName, getNotificationLayout(settings.getNotificationHeight()));
         view.removeAllViews(R.id.notification_layout);
 
-        // @TODO
-        int style = settings.getResources().getIdentifier("style_" + settings.getTheme(), "style", packageName);
+        int style = getThemeId(settings.getTheme());
         int backgroundColor;
         int iconColor;
 
@@ -170,8 +169,24 @@ public class NotificationFactory {
         return view;
     }
 
-    private int getNotificationLayout() {
-        switch (settings.getNotificationHeight()) {
+    public int getThemeId(String themeName) {
+        switch (themeName) {
+            default:
+            case "theme_material":
+                return R.style.style_theme_material;
+            case "theme_material_light":
+                return R.style.style_theme_material_light;
+            case "theme_material_blue_grey":
+                return R.style.style_theme_material_blue_grey;
+            case "theme_holo":
+                return R.style.style_theme_holo;
+            case "theme_holo_light":
+                return R.style.style_theme_holo_light;
+        }
+    }
+
+    private int getNotificationLayout(String layoutName) {
+        switch (layoutName) {
             default:
             case "match_parent":
                 return R.layout.notification_layout_match_parent;

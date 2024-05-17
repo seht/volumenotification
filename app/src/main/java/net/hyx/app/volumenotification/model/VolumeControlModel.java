@@ -37,13 +37,11 @@ public class VolumeControlModel {
     public static final String STREAM_TYPE_FIELD = "item_type";
     public static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
-    private final Context context;
     private final SettingsModel settings;
     private final ArrayList<Integer> defaultOrder;
     private final SparseArray<VolumeControl> defaultControls;
 
     public VolumeControlModel(Context context) {
-        this.context = context;
         settings = new SettingsModel(context);
         defaultOrder = new ArrayList<>();
         defaultControls = new SparseArray<>();
@@ -102,12 +100,6 @@ public class VolumeControlModel {
         return items;
     }
 
-
-    // @TODO
-    public int getIconId(String drawableName) {
-        return settings.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
-    }
-
     public VolumeControl getItemByType(int streamType) {
         for (int index = 0; index < getDefaultControls().size(); index++) {
             VolumeControl item = getStorageItem(index);
@@ -160,6 +152,95 @@ public class VolumeControlModel {
             item.icon = defaultControls.get(item.type).icon;
         }
         return item;
+    }
+
+    public int getIconId(String iconName) {
+        switch (iconName) {
+            case "ic_baseline_accessibility_new_24px":
+                return R.drawable.ic_baseline_accessibility_new_24px;
+            case "ic_baseline_alarm_24px":
+                return R.drawable.ic_baseline_alarm_24px;
+            case "ic_baseline_chat_bubble_24px":
+                return R.drawable.ic_baseline_chat_bubble_24px;
+            case "ic_baseline_check_24px":
+                return R.drawable.ic_baseline_check_24px;
+            case "ic_baseline_dialpad_24px":
+                return R.drawable.ic_baseline_dialpad_24px;
+            case "ic_baseline_drag_handle_24px":
+                return R.drawable.ic_baseline_drag_handle_24px;
+            case "ic_baseline_favorite_24px":
+                return R.drawable.ic_baseline_favorite_24px;
+            case "ic_baseline_headset_24px":
+                return R.drawable.ic_baseline_headset_24px;
+            case "ic_baseline_music_note_24px":
+                return R.drawable.ic_baseline_music_note_24px;
+            case "ic_baseline_notification_important_24px":
+                return R.drawable.ic_baseline_notification_important_24px;
+            case "ic_baseline_notifications_24px":
+                return R.drawable.ic_baseline_notifications_24px;
+            case "ic_baseline_notifications_active_24px":
+                return R.drawable.ic_baseline_notifications_active_24px;
+            case "ic_baseline_phone_24px":
+                return R.drawable.ic_baseline_phone_24px;
+            case "ic_baseline_phone_android_24px":
+                return R.drawable.ic_baseline_phone_android_24px;
+            case "ic_baseline_phone_in_talk_24px":
+                return R.drawable.ic_baseline_phone_in_talk_24px;
+            case "ic_baseline_phonelink_ring_24px":
+                return R.drawable.ic_baseline_phonelink_ring_24px;
+            case "ic_baseline_ring_volume_24px":
+                return R.drawable.ic_baseline_ring_volume_24px;
+            case "ic_baseline_settings_20px":
+                return R.drawable.ic_baseline_settings_20px;
+            case "ic_baseline_smartphone_24px":
+                return R.drawable.ic_baseline_smartphone_24px;
+            case "ic_baseline_speaker_24px":
+                return R.drawable.ic_baseline_speaker_24px;
+            case "ic_baseline_tune_24px":
+                return R.drawable.ic_baseline_tune_24px;
+            case "ic_baseline_volume_up_24px":
+                return R.drawable.ic_baseline_volume_up_24px;
+            case "ic_launcher_foreground":
+                return R.drawable.ic_launcher_foreground;
+            case "ic_outline_accessibility_new_24px":
+                return R.drawable.ic_outline_accessibility_new_24px;
+            case "ic_outline_alarm_24px":
+                return R.drawable.ic_outline_alarm_24px;
+            case "ic_outline_chat_bubble_outline_24px":
+                return R.drawable.ic_outline_chat_bubble_outline_24px;
+            case "ic_outline_dialpad_24px":
+                return R.drawable.ic_outline_dialpad_24px;
+            case "ic_outline_headset_24px":
+                return R.drawable.ic_outline_headset_24px;
+            case "ic_outline_music_note_24px":
+                return R.drawable.ic_outline_music_note_24px;
+            case "ic_outline_notification_important_24px":
+                return R.drawable.ic_outline_notification_important_24px;
+            case "ic_outline_notifications_24px":
+                return R.drawable.ic_outline_notifications_24px;
+            case "ic_outline_notifications_active_24px":
+                return R.drawable.ic_outline_notifications_active_24px;
+            case "ic_outline_phone_24px":
+                return R.drawable.ic_outline_phone_24px;
+            case "ic_outline_phone_android_24px":
+                return R.drawable.ic_outline_phone_android_24px;
+            case "ic_outline_phone_in_talk_24px":
+                return R.drawable.ic_outline_phone_in_talk_24px;
+            case "ic_outline_phonelink_ring_24px":
+                return R.drawable.ic_outline_phonelink_ring_24px;
+            case "ic_outline_ring_volume_24px":
+                return R.drawable.ic_outline_ring_volume_24px;
+            case "ic_outline_smartphone_24px":
+                return R.drawable.ic_outline_smartphone_24px;
+            case "ic_outline_speaker_24px":
+                return R.drawable.ic_outline_speaker_24px;
+            case "ic_outline_tune_24px":
+                return R.drawable.ic_outline_tune_24px;
+            case "ic_outline_volume_up_24px":
+                return R.drawable.ic_outline_volume_up_24px;
+            default:
+                return 0;
+        }
     }
 
 }

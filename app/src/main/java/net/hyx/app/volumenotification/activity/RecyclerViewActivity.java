@@ -84,11 +84,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
         TileServiceController.newInstance(context).requestListening();
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
-    private void startNotificationPermissionSettings() {
-
-    }
-
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -133,26 +128,23 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_pref:
-                startActivity(new Intent(this, SettingsActivity.class));
-                break;
-            case R.id.menu_dark_app_theme:
-                settings.getPreferences().edit().putBoolean("pref_dark_app_theme", !item.isChecked()).apply();
-                setTheme(settings.getAppTheme());
-                recreate();
-                break;
-            case R.id.menu_about:
-                Snackbar.make(findViewById(android.R.id.content), R.string.hint_about_message, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.hint_about_action, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Uri url = Uri.parse(getResources().getString(R.string.menu_about_url));
-                                startActivity(new Intent(Intent.ACTION_VIEW, url));
-                            }
-                        })
-                        .show();
-                break;
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_pref) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else if (itemId == R.id.menu_dark_app_theme) {
+            settings.getPreferences().edit().putBoolean("pref_dark_app_theme", !item.isChecked()).apply();
+            setTheme(settings.getAppTheme());
+            recreate();
+        } else if (itemId == R.id.menu_about) {
+            Snackbar.make(findViewById(android.R.id.content), R.string.hint_about_message, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.hint_about_action, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Uri url = Uri.parse(getResources().getString(R.string.menu_about_url));
+                            startActivity(new Intent(Intent.ACTION_VIEW, url));
+                        }
+                    })
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }
