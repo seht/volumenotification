@@ -31,7 +31,7 @@ import java.util.List;
 
 public class SettingsModel {
 
-    public static final String SHARED_PREF_NAME  = "net.hyx.app.volumenotification_preferences";
+    public static final String SHARED_PREF_NAME  = "net.hyx.app.volumenotification.SHARED_PREFERENCES";
     private final Resources resources;
     private final SharedPreferences preferences;
 

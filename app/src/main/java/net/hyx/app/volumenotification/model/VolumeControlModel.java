@@ -32,10 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VolumeControlModel {
-
-    public static final String ITEM_FIELD = "item";
     public static final String STREAM_TYPE_FIELD = "item_type";
-    public static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
+    public static final int DEFAULT_STREAM_TYPE = AudioManager.USE_DEFAULT_STREAM_TYPE;
 
     private final SettingsModel settings;
     private final ArrayList<Integer> defaultOrder;
@@ -115,7 +113,7 @@ public class VolumeControlModel {
                 return item;
             }
         }
-        return null;
+        return getDefaultControls().get(streamType);
     }
 
     public void saveItem(VolumeControl item) {

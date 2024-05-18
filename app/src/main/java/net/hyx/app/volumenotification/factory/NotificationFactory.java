@@ -24,9 +24,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.widget.RemoteViews;
 import androidx.core.app.NotificationCompat;
 
@@ -50,7 +48,7 @@ public class NotificationFactory {
     private final List<VolumeControl> items;
 
     public static final int NOTIFICATION_ID = 1;
-    public static final String CHANNEL_ID = "STICKY_NOTIFICATION";
+    private static final String CHANNEL_ID = "net.hyx.app.volumenotification.DEFAULT";
 
     public NotificationFactory(Context context) {
         this.context = context;

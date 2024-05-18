@@ -57,7 +57,9 @@ public class ItemViewActivity extends AppCompatActivity {
         SettingsModel settings = new SettingsModel(context);
         notificationServiceController = NotificationServiceController.newInstance(context);
 
-        VolumeControl item = (VolumeControl) getIntent().getSerializableExtra(VolumeControlModel.ITEM_FIELD);
+        VolumeControlModel model = new VolumeControlModel(context);
+        int itemType = getIntent().getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, VolumeControlModel.DEFAULT_STREAM_TYPE);
+        VolumeControl item = model.getItemByType(itemType);
         assert item != null;
 
         fragment = ItemFragment.newInstance(item);
@@ -107,10 +109,10 @@ public class ItemViewActivity extends AppCompatActivity {
         private VolumeControlModel model;
         private SettingsModel settings;
 
-        public static ItemFragment newInstance(Serializable item) {
+        public static ItemFragment newInstance(VolumeControl item) {
             Bundle args = new Bundle();
             ItemFragment fragment = new ItemFragment();
-            args.putSerializable(VolumeControlModel.ITEM_FIELD, item);
+            args.putInt(VolumeControlModel.STREAM_TYPE_FIELD, item.type);
             fragment.setArguments(args);
             return fragment;
         }
@@ -120,8 +122,9 @@ public class ItemViewActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             if (getArguments() != null && getContext() != null) {
                 Context context = getContext();
-                item = (VolumeControl) getArguments().getSerializable(VolumeControlModel.ITEM_FIELD);
+                int itemType = getArguments().getInt(VolumeControlModel.STREAM_TYPE_FIELD);
                 model = new VolumeControlModel(context);
+                item = model.getItemByType(itemType);
                 settings = new SettingsModel(context);
             }
         }

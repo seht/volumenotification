@@ -75,13 +75,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 .commit();
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
-        // notificationServiceController.startService();
-        notificationServiceController.checkStartNotification();
-        TileServiceController.newInstance(context).requestListening();
+        // @TODO/TEMP Delegate to BG service.
+        notificationServiceController.startService();
+//        notificationServiceController.checkStartNotification();
+//        TileServiceController.newInstance(context).requestListening();
     }
 
     @Override
