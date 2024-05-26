@@ -33,7 +33,7 @@ import java.util.List;
 
 public class VolumeControlModel {
     public static final String STREAM_TYPE_FIELD = "item_type";
-    public static final int DEFAULT_STREAM_TYPE = AudioManager.USE_DEFAULT_STREAM_TYPE;
+    public static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
     private final SettingsModel settings;
     private final ArrayList<Integer> defaultOrder;

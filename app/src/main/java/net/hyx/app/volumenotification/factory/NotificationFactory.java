@@ -169,7 +169,6 @@ public class NotificationFactory {
 
     public int getThemeId(String themeName) {
         switch (themeName) {
-            default:
             case "theme_material":
                 return R.style.style_theme_material;
             case "theme_material_light":
@@ -180,6 +179,9 @@ public class NotificationFactory {
                 return R.style.style_theme_holo;
             case "theme_holo_light":
                 return R.style.style_theme_holo_light;
+            case "theme_custom":
+            default:
+                return 0;
         }
     }
 

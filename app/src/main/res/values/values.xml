@@ -62,9 +62,6 @@
         <item>@string/control_label_notification</item>
         <item>@string/control_label_system</item>
         <item>@string/control_label_dial</item>
-        <!--
-        <item>@string/btn_def_label_default</item>
-        -->
     </string-array>
 
     <string-array name="pref_icon_entries">
@@ -77,7 +74,6 @@
         <item>ic_baseline_dialpad_24px</item>
         <item>ic_baseline_volume_up_24px</item>
         <item>ic_baseline_accessibility_new_24px</item>
-        <item>ic_baseline_volume_up_24px</item>
         <!-- -->
         <item>ic_baseline_headset_24px</item>
         <item>ic_baseline_speaker_24px</item>
