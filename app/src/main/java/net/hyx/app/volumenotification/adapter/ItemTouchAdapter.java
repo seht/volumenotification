@@ -34,16 +34,6 @@ public class ItemTouchAdapter extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public boolean isLongPressDragEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        return true;
-    }
-
-    @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
         int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;

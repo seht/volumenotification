@@ -187,11 +187,6 @@ public class NotificationFactory {
 
     private int getNotificationLayout(String layoutName) {
         switch (layoutName) {
-            default:
-            case "match_parent":
-                return R.layout.notification_layout_match_parent;
-            case "wrap_content":
-                return R.layout.notification_layout_wrap_content;
             case "32dp":
                 return R.layout.notification_layout_32dp;
             case "40dp":
@@ -200,6 +195,11 @@ public class NotificationFactory {
                 return R.layout.notification_layout_48dp;
             case "64dp":
                 return R.layout.notification_layout_64dp;
+            case "wrap_content":
+                return R.layout.notification_layout_wrap_content;
+            case "match_parent":
+            default:
+                return R.layout.notification_layout_match_parent;
         }
     }
 
