@@ -19,6 +19,7 @@ package net.hyx.app.volumenotification.listener;
 public interface RecyclerViewListener {
 
     void onItemSelected();
+
     void onItemClear();
 }
 

@@ -41,15 +41,14 @@ import java.util.List;
 
 public class NotificationFactory {
 
+    public static final int NOTIFICATION_ID = 1;
+    private static final String CHANNEL_ID = "net.hyx.app.volumenotification.channels.DEFAULT";
     private final String packageName;
     private final Context context;
     private final NotificationManager manager;
     private final SettingsModel settings;
     private final VolumeControlModel volumeControlModel;
     private final List<VolumeControl> items;
-
-    public static final int NOTIFICATION_ID = 1;
-    private static final String CHANNEL_ID = "net.hyx.app.volumenotification.channels.DEFAULT";
 
     public NotificationFactory(Context context) {
         this.context = context;

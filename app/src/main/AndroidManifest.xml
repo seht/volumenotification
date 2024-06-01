@@ -3,11 +3,11 @@
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />-->
-<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />-->
+    <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />-->
+    <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    
+
     <application
         android:name=".controller.ApplicationController"
         android:allowBackup="true"
@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/style_app_theme_light">
 
-        <activity android:name=".activity.RecyclerViewActivity"
+        <activity
+            android:name=".activity.RecyclerViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,23 +59,23 @@
         </receiver>
         <receiver android:name=".receiver.AdjustVolumeReceiver" />
 
-<!--        <service-->
-<!--            android:name=".service.NotificationForegroundService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"-->
-<!--            android:permission="android.permission.BIND_JOB_SERVICE"-->
-<!--            android:foregroundServiceType="specialUse">-->
-<!--            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"-->
-<!--                android:value="sticky_notification"/>-->
+        <!--        <service-->
+        <!--            android:name=".service.NotificationForegroundService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true"-->
+        <!--            android:permission="android.permission.BIND_JOB_SERVICE"-->
+        <!--            android:foregroundServiceType="specialUse">-->
+        <!--            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"-->
+        <!--                android:value="sticky_notification"/>-->
 
-<!--        </service>-->
+        <!--        </service>-->
 
         <service
             android:name=".service.TileServiceMediaVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_music_note_24px"
             android:label="@string/control_label_media"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -85,10 +86,10 @@
         </service>
         <service
             android:name=".service.TileServiceCallVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_phone_24px"
             android:label="@string/control_label_call"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -99,10 +100,10 @@
         </service>
         <service
             android:name=".service.TileServiceRingVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_notifications_24px"
             android:label="@string/control_label_ring"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -113,10 +114,10 @@
         </service>
         <service
             android:name=".service.TileServiceAlarmVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_alarm_24px"
             android:label="@string/control_label_alarm"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -127,10 +128,10 @@
         </service>
         <service
             android:name=".service.TileServiceNotificationVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_chat_bubble_24px"
             android:label="@string/control_label_notification"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -141,10 +142,10 @@
         </service>
         <service
             android:name=".service.TileServiceSystemVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_phone_android_24px"
             android:label="@string/control_label_system"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -155,10 +156,10 @@
         </service>
         <service
             android:name=".service.TileServiceDialVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_dialpad_24px"
             android:label="@string/control_label_dial"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -169,10 +170,10 @@
         </service>
         <service
             android:name=".service.TileServiceAccessibilityVolume"
+            android:exported="true"
             android:icon="@drawable/ic_baseline_accessibility_new_24px"
             android:label="@string/control_label_accessibility"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>

@@ -19,6 +19,7 @@ package net.hyx.app.volumenotification.listener;
 public interface ItemTouchListener {
 
     boolean onItemMove(int fromPosition, int toPosition);
+
     void onItemSwiped(int position);
 }
 

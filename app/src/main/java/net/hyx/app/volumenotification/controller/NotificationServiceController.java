@@ -94,7 +94,6 @@ public class NotificationServiceController {
     }
 
 
-
 //    private void startForegroundService() {
 //        ContextCompat.startForegroundService(context, new Intent(context, NotificationForegroundService.class));
 //    }

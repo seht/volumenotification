@@ -49,12 +49,11 @@ import net.hyx.app.volumenotification.model.SettingsModel;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 
+    private final static int TILES_DIALOG_ID = 10;
+    private final static int NOTIFICATION_PERMISSION_DIALOG_ID = 20;
     private Context context;
     private SettingsModel settings;
     private NotificationServiceController notificationServiceController;
-
-    private final static int TILES_DIALOG_ID = 10;
-    private final static int NOTIFICATION_PERMISSION_DIALOG_ID = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

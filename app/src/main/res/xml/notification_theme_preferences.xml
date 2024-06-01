@@ -7,18 +7,18 @@
         app:title="@string/pref_custom_theme_title">
 
         <EditTextPreference
-            app:key="pref_custom_theme_background_color"
-            app:title="@string/pref_custom_theme_background_color_title"
-            app:summary="@string/pref_custom_theme_color_help"
             app:defaultValue="@string/pref_custom_theme_background_color_default"
-            app:useSimpleSummaryProvider="true"/>
+            app:key="pref_custom_theme_background_color"
+            app:summary="@string/pref_custom_theme_color_help"
+            app:title="@string/pref_custom_theme_background_color_title"
+            app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
-            app:key="pref_custom_theme_icon_color"
-            app:title="@string/pref_custom_theme_icon_color_title"
-            app:summary="@string/pref_custom_theme_color_help"
             app:defaultValue="@string/pref_custom_theme_icon_color_default"
-            app:useSimpleSummaryProvider="true"/>
+            app:key="pref_custom_theme_icon_color"
+            app:summary="@string/pref_custom_theme_color_help"
+            app:title="@string/pref_custom_theme_icon_color_title"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 

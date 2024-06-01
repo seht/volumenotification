@@ -15,9 +15,9 @@
         android:id="@+id/list_item_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/shape_dialog_divider_vertical"
         android:gravity="fill"
         android:orientation="horizontal"
-        android:background="@drawable/shape_dialog_divider_vertical"
         android:padding="16dp">
 
         <net.hyx.app.volumenotification.view.IconImageView
