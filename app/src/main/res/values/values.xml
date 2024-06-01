@@ -53,16 +53,6 @@
     </string-array>
 
 
-    <string-array name="pref_volume_control_entries">
-        <item>@string/control_label_media</item>
-        <item>@string/control_label_call</item>
-        <item>@string/control_label_ring</item>
-        <item>@string/control_label_alarm</item>
-        <item>@string/control_label_notification</item>
-        <item>@string/control_label_system</item>
-        <item>@string/control_label_dial</item>
-    </string-array>
-
     <string-array name="pref_icon_entries">
         <item>ic_baseline_music_note_24px</item>
         <item>ic_baseline_phone_24px</item>

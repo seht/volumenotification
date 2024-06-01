@@ -40,11 +40,6 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
-    <style name="style_dialog_viewport">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-
     <style name="style_dialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -61,10 +56,6 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
-    <style name="style_dialog_with_footer" parent="@style/style_dialog">
-        <item name="android:paddingBottom">0dp</item>
-    </style>
-
     <style name="style_dialog_widget">
         <item name="android:layout_margin">0dp</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
@@ -74,40 +65,6 @@
     <style name="style_dialog_widget_horizontal" parent="@style/style_dialog_widget">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="style_dialog_widget_text_inline" parent="@style/style_dialog_widget_vertical">
-        <item name="android:paddingTop">0dp</item>
-    </style>
-
-    <style name="style_dialog_widget_vertical" parent="@style/style_dialog_widget">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="style_dialog_row">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="style_dialog_row_vertical" parent="@style/style_dialog_row">
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="style_dialog_row_horizontal" parent="@style/style_dialog_row">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="style_dialog_row_horizontal_with_padding" parent="@style/style_dialog_row">
-        <item name="android:orientation">horizontal</item>
-        <item name="android:divider">@drawable/shape_dialog_divider_horizontal</item>
-        <item name="android:showDividers">middle</item>
-    </style>
-
-    <style name="style_secondary_text">
-        <item name="android:layout_margin">0dp</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
 </resources>

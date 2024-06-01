@@ -15,15 +15,8 @@
     <string name="notification_permission_title_N">Enable notification permissions</string>
     <string name="notification_permission_message_N">You have the notification feature enabled but the app does not have permission to post notifications. You will be redirected to enable permissions.</string>
 
-    <string name="pref_dialog_alert_nonce_checked_label">Sweet! Don\'t remind me again.</string>
-
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_summary">Choose the notification theme</string>
-
-    <string name="pref_buttons_title">Volume buttons and tiles</string>
-    <string name="pref_buttons_summary">Customize the notification and quick settings</string>
-
-    <string name="pref_buttons_position_empty_label">Off</string>
 
     <string name="control_label_media">Media volume</string>
     <string name="control_label_call">Call volume</string>
@@ -33,7 +26,6 @@
     <string name="control_label_system">System volume</string>
     <string name="control_label_dial">Tone dialing volume</string>
     <string name="control_label_accessibility">Accessibility volume</string>
-    <string name="control_label_default">Default volume</string>
 
     <string name="pref_cat_style_title">Notification appearance</string>
     <string name="pref_cat_config_title">Notification settings</string>
@@ -60,9 +52,6 @@
 
     <string name="pref_top_priority_title">Top priority</string>
     <string name="pref_top_priority_summary">Enabling will keep the notification at the top but force a status bar icon.</string>
-
-    <string name="pref_foreground_service_title">Enable foreground service</string>
-    <string name="pref_foreground_service_summary">Enabling will reinforce the notification priority and will restart the notification if stopped by the task manager.</string>
 
     <string name="pref_hide_locked_title">Hide from lock screen</string>
     <string name="pref_hide_locked_summary">To hide from lock screen when top priority is enabled, notification privacy should be enabled in your device settings.</string>
