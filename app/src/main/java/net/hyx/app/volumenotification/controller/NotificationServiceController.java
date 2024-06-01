@@ -19,12 +19,8 @@ package net.hyx.app.volumenotification.controller;
 import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
-//import androidx.core.content.ContextCompat;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 
 import net.hyx.app.volumenotification.factory.NotificationFactory;
 import net.hyx.app.volumenotification.model.SettingsModel;

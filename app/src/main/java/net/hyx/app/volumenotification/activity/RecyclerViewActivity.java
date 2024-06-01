@@ -16,20 +16,11 @@
 
 package net.hyx.app.volumenotification.activity;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,14 +29,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import net.hyx.app.volumenotification.R;
+import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.adapter.RecyclerViewAdapter;
 import net.hyx.app.volumenotification.controller.NotificationServiceController;
-import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.dialog.NonceDialogFragment;
-import net.hyx.app.volumenotification.adapter.ItemTouchAdapter;
 import net.hyx.app.volumenotification.listener.DragHandleListener;
 import net.hyx.app.volumenotification.listener.OnDialogClickListener;
 import net.hyx.app.volumenotification.model.SettingsModel;

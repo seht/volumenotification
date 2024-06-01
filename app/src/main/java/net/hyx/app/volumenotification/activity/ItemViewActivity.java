@@ -18,10 +18,6 @@ package net.hyx.app.volumenotification.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -33,7 +29,12 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.adapter.IconSpinnerAdapter;
@@ -41,8 +42,6 @@ import net.hyx.app.volumenotification.controller.NotificationServiceController;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
-
-import java.io.Serializable;
 
 public class ItemViewActivity extends AppCompatActivity {
 

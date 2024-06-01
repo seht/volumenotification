@@ -19,6 +19,7 @@ package net.hyx.app.volumenotification.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+
 import androidx.appcompat.widget.AppCompatImageView;
 
 import net.hyx.app.volumenotification.model.SettingsModel;
