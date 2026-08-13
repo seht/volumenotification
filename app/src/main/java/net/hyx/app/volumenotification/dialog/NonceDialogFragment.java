@@ -66,7 +66,7 @@ public class NonceDialogFragment extends DialogFragment {
         final int dialogId = getArguments().getInt(DIALOG_ID_FIELD);
         final String message = getArguments().getString(MESSAGE_FIELD);
         final String title = getArguments().getString(TITLE_FIELD);
-        final SettingsModel settings = new SettingsModel(getActivity());
+        final SettingsModel settings = SettingsModel.getInstance(requireContext().getApplicationContext());
 
         return new AlertDialog.Builder(getActivity()).setMessage(message)
                 .setTitle(title)
@@ -75,17 +75,14 @@ public class NonceDialogFragment extends DialogFragment {
                         if (listener != null) {
                             listener.onPositiveClick(dialogId);
                         }
+                        dialog.dismiss();
                     }
                 }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (limit > 0) {
-                            int count = settings.getNonceDialogCount(dialogId);
-                            if (count >= 0 && count < limit) {
-                                settings.setNonceDialogCount(dialogId, count + 1);
-                            } else {
-                                settings.setNonceDialogCount(dialogId, -1);
-                            }
+                            settings.setNonceDialogCount(dialogId, limit);
                         }
+                        dialog.dismiss();
                     }
                 }).create();
     }

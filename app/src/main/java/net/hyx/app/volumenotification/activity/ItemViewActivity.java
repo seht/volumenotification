@@ -30,10 +30,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
@@ -44,7 +42,7 @@ import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.SettingsModel;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
 
-public class ItemViewActivity extends AppCompatActivity {
+public class ItemViewActivity extends BaseActivity {
 
     private ItemFragment fragment;
     private NotificationServiceController notificationServiceController;
@@ -52,10 +50,7 @@ public class ItemViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Context context = getApplicationContext();
-        SettingsModel settings = SettingsModel.getInstance(context);
-        setTheme(settings.getAppTheme());
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
 
         notificationServiceController = NotificationServiceController.newInstance(context);
 

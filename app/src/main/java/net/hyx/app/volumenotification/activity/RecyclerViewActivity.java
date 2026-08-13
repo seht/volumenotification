@@ -29,9 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -49,7 +47,7 @@ import net.hyx.app.volumenotification.listener.DragHandleListener;
 import net.hyx.app.volumenotification.listener.OnDialogClickListener;
 import net.hyx.app.volumenotification.model.SettingsModel;
 
-public class RecyclerViewActivity extends AppCompatActivity {
+public class RecyclerViewActivity extends BaseActivity {
 
     private final static int TILES_DIALOG_ID = 10;
     private final static int NOTIFICATION_PERMISSION_DIALOG_ID = 20;
@@ -60,10 +58,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
-        settings = SettingsModel.getInstance(context);
-        setTheme(settings.getAppTheme());
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        settings = getSettingsModel();
         notificationServiceController = NotificationServiceController.newInstance(context);
         setContentView(R.layout.activity_layout);
 

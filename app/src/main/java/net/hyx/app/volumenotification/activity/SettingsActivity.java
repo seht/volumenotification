@@ -22,9 +22,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
@@ -37,7 +35,7 @@ import net.hyx.app.volumenotification.model.SettingsModel;
  * @see {https://developer.android.com/guide/topics/ui/settings/organize-your-settings}
  * @see {https://github.com/googlesamples/android-preferences}
  */
-public class SettingsActivity extends AppCompatActivity implements
+public class SettingsActivity extends BaseActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         //PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         PreferenceFragmentCompat.OnPreferenceStartScreenCallback,
@@ -47,10 +45,8 @@ public class SettingsActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        settings = SettingsModel.getInstance(getApplicationContext());
-        setTheme(settings.getAppTheme());
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        settings = getSettingsModel();
         setContentView(R.layout.activity_layout);
 
         getSupportFragmentManager().beginTransaction()
