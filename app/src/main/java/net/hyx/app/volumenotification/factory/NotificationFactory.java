@@ -54,7 +54,7 @@ public class NotificationFactory {
         this.context = context;
         packageName = context.getPackageName();
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        settings = new SettingsModel(context);
+        settings = SettingsModel.getInstance(context);
         volumeControlModel = new VolumeControlModel(context);
         items = volumeControlModel.getList();
     }
@@ -85,16 +85,17 @@ public class NotificationFactory {
 
         Intent receiverIntent = new Intent(context, StartServiceReceiver.class);
         receiverIntent.setAction(ApplicationController.ACTION_APPLICATION_STARTED);
-        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent deleteIntent = PendingIntent.getBroadcast(context, -1, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
+        RemoteViews contentView = getCustomContentView();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID);
         builder.setDeleteIntent(deleteIntent)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
                 .setPriority(getPriority())
                 .setVisibility(getVisibility())
-                .setCustomContentView(getCustomContentView())
-                .setCustomBigContentView(getCustomContentView())
+                .setCustomContentView(contentView)
+                .setCustomBigContentView(contentView)
                 .setColor(Color.TRANSPARENT)
                 .setSmallIcon(settings.getStatusIcon())
                 .setSound(null);
@@ -141,7 +142,7 @@ public class NotificationFactory {
             iconColor = settings.getColor(settings.getCustomThemeIconColor());
         }
         if (settings.getTranslucent()) {
-            backgroundColor = android.R.color.transparent;
+            backgroundColor = Color.TRANSPARENT;
         }
 
         view.setInt(R.id.notification_layout, "setBackgroundColor", backgroundColor);
@@ -174,7 +175,7 @@ public class NotificationFactory {
             case "theme_material_light":
                 return R.style.style_theme_material_light;
             case "theme_material_blue_grey":
-                return R.style.style_theme_material_blue_grey;
+                return R.style.style_theme_material;
             case "theme_holo":
                 return R.style.style_theme_holo;
             case "theme_holo_light":
@@ -204,4 +205,3 @@ public class NotificationFactory {
     }
 
 }
-

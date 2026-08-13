@@ -27,7 +27,7 @@ public class AudioManagerModel {
 
     public AudioManagerModel(Context context) {
         audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        settings = new SettingsModel(context);
+        settings = SettingsModel.getInstance(context);
     }
 
     public void adjustVolume(int streamType) {

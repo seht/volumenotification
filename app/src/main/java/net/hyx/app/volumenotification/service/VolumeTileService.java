@@ -26,14 +26,34 @@ import net.hyx.app.volumenotification.model.AudioManagerModel;
 @TargetApi(Build.VERSION_CODES.N)
 abstract public class VolumeTileService extends TileService {
 
-    protected void updateTile(int streamType) {
-        TileServiceController tileServiceController = TileServiceController.newInstance(getApplicationContext());
-        tileServiceController.updateTile(getQsTile(), streamType);
+    @Override
+    public void onTileAdded() {
+        super.onTileAdded();
+        updateTile();
     }
 
-    protected void adjustVolume(int streamType) {
+    @Override
+    public void onStartListening() {
+        super.onStartListening();
+        updateTile();
+    }
+
+    @Override
+    public void onClick() {
+        super.onClick();
+        adjustVolume();
+    }
+
+    protected abstract int getStreamType();
+
+    private void updateTile() {
+        TileServiceController tileServiceController = TileServiceController.newInstance(getApplicationContext());
+        tileServiceController.updateTile(getQsTile(), getStreamType());
+    }
+
+    private void adjustVolume() {
         AudioManagerModel audioManagerModel = new AudioManagerModel(getApplicationContext());
-        audioManagerModel.adjustVolume(streamType);
+        audioManagerModel.adjustVolume(getStreamType());
     }
 
 }

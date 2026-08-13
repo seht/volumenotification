@@ -21,7 +21,6 @@
     <string-array name="pref_theme_entries">
         <item>Material: Dark</item>
         <item>Material: Light</item>
-        <item>Material: Blue Grey</item>
         <item>Holo: Dark</item>
         <item>Holo: Light</item>
         <item>Custom theme</item>
@@ -29,7 +28,6 @@
     <string-array name="pref_theme_values">
         <item>theme_material</item>
         <item>theme_material_light</item>
-        <item>theme_material_blue_grey</item>
         <item>theme_holo</item>
         <item>theme_holo_light</item>
         <item>theme_custom</item>

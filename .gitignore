@@ -12,3 +12,4 @@
 /gradlew*
 *.hprof
 .github
+/tmp

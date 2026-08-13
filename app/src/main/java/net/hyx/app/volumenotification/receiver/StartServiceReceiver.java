@@ -28,10 +28,8 @@ public class StartServiceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction() != null) {
-            //Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
             NotificationServiceController.newInstance(context.getApplicationContext()).startService();
         }
-
     }
 
 

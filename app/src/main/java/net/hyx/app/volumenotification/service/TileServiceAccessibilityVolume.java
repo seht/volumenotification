@@ -24,21 +24,8 @@ import android.os.Build;
 public class TileServiceAccessibilityVolume extends VolumeTileService {
 
     @Override
-    public void onTileAdded() {
-        super.onTileAdded();
-        updateTile(AudioManager.STREAM_ACCESSIBILITY);
-    }
-
-    @Override
-    public void onStartListening() {
-        super.onStartListening();
-        updateTile(AudioManager.STREAM_ACCESSIBILITY);
-    }
-
-    @Override
-    public void onClick() {
-        super.onClick();
-        adjustVolume(AudioManager.STREAM_ACCESSIBILITY);
+    protected int getStreamType() {
+        return AudioManager.STREAM_ACCESSIBILITY;
     }
 
 }

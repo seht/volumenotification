@@ -24,21 +24,8 @@ import android.os.Build;
 public class TileServiceSystemVolume extends VolumeTileService {
 
     @Override
-    public void onTileAdded() {
-        super.onTileAdded();
-        updateTile(AudioManager.STREAM_SYSTEM);
-    }
-
-    @Override
-    public void onStartListening() {
-        super.onStartListening();
-        updateTile(AudioManager.STREAM_SYSTEM);
-    }
-
-    @Override
-    public void onClick() {
-        super.onClick();
-        adjustVolume(AudioManager.STREAM_SYSTEM);
+    protected int getStreamType() {
+        return AudioManager.STREAM_SYSTEM;
     }
 
 }

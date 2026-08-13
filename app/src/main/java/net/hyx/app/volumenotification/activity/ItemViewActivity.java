@@ -50,20 +50,23 @@ public class ItemViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Context context = getApplicationContext();
+        SettingsModel settings = SettingsModel.getInstance(context);
+        setTheme(settings.getAppTheme());
         super.onCreate(savedInstanceState);
 
-        Context context = getBaseContext();
-        SettingsModel settings = new SettingsModel(context);
         notificationServiceController = NotificationServiceController.newInstance(context);
 
         VolumeControlModel model = new VolumeControlModel(context);
         int itemType = getIntent().getIntExtra(VolumeControlModel.STREAM_TYPE_FIELD, VolumeControlModel.DEFAULT_STREAM_TYPE);
         VolumeControl item = model.getItemByType(itemType);
-        assert item != null;
+        if (item == null) {
+            finish();
+            return;
+        }
 
         fragment = ItemFragment.newInstance(item);
 
-        setTheme(settings.getAppTheme());
         setTitle(item.label);
         setContentView(R.layout.activity_layout);
 
@@ -82,7 +85,9 @@ public class ItemViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_buttons_item, menu);
         LinearLayout actionLayout = (LinearLayout) menu.findItem(R.id.item_btn_checked_layout).getActionView();
-        assert actionLayout != null;
+        if (actionLayout == null) {
+            return super.onCreateOptionsMenu(menu);
+        }
         SwitchCompat statusInput = actionLayout.findViewById(R.id.menu_item_switch);
         statusInput.setChecked((fragment.item.status == 1));
         statusInput.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -119,13 +124,14 @@ public class ItemViewActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            if (getArguments() != null && getContext() != null) {
-                Context context = getContext();
-                int itemType = getArguments().getInt(VolumeControlModel.STREAM_TYPE_FIELD);
-                model = new VolumeControlModel(context);
-                item = model.getItemByType(itemType);
-                settings = new SettingsModel(context);
+            if (getArguments() == null || getContext() == null) {
+                return;
             }
+            Context context = getContext();
+            int itemType = getArguments().getInt(VolumeControlModel.STREAM_TYPE_FIELD);
+            model = new VolumeControlModel(context);
+            item = model.getItemByType(itemType);
+            settings = SettingsModel.getInstance(context);
         }
 
         @Override
@@ -136,15 +142,27 @@ public class ItemViewActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            if (item == null) {
+                if (getActivity() != null) {
+                    getActivity().finish();
+                }
+                return;
+            }
 
             Spinner iconInput = view.findViewById(R.id.pref_icon_input);
             EditText labelInput = view.findViewById(R.id.pref_label_input);
             VolumeControl defaultItem = model.getDefaultControls().get(item.type);
+            if (defaultItem == null) {
+                defaultItem = item;
+            }
 
             IconSpinnerAdapter adapter = new IconSpinnerAdapter(getContext(), settings.getIconEntries(), model);
             iconInput.setAdapter(adapter);
 
-            iconInput.setSelection(adapter.getPosition(item.icon));
+            int iconPosition = adapter.getPosition(item.icon);
+            if (iconPosition >= 0) {
+                iconInput.setSelection(iconPosition);
+            }
             labelInput.setText(item.label);
             labelInput.setHint(defaultItem.label);
 

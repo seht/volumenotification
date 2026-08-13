@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,13 +58,11 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        context = getBaseContext();
-        settings = new SettingsModel(context);
-        notificationServiceController = NotificationServiceController.newInstance(context);
-
+        context = getApplicationContext();
+        settings = SettingsModel.getInstance(context);
         setTheme(settings.getAppTheme());
+        super.onCreate(savedInstanceState);
+        notificationServiceController = NotificationServiceController.newInstance(context);
         setContentView(R.layout.activity_layout);
 
         getSupportFragmentManager().beginTransaction()
@@ -128,7 +127,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
         if (itemId == R.id.menu_pref) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (itemId == R.id.menu_dark_app_theme) {
-            settings.getPreferences().edit().putBoolean("pref_dark_app_theme", !item.isChecked()).apply();
+            boolean darkTheme = !settings.getAppThemeDark();
+            settings.setAppThemeDark(darkTheme);
+            item.setChecked(darkTheme);
+            AppCompatDelegate.setDefaultNightMode(settings.getAppNightMode());
             setTheme(settings.getAppTheme());
             recreate();
         } else if (itemId == R.id.menu_about) {
@@ -151,8 +153,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            assert container != null;
-            return new RecyclerView(container.getContext());
+            return new RecyclerView(requireContext());
         }
 
         @Override

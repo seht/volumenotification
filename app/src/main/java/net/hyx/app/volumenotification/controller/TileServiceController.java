@@ -24,6 +24,7 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
+import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
 import net.hyx.app.volumenotification.model.VolumeControlModel;
 import net.hyx.app.volumenotification.service.TileServiceAccessibilityVolume;
@@ -56,17 +57,17 @@ public class TileServiceController {
 
 
     private void requestListeningTiles() {
-        String[] tileServices = {
-                TileServiceMediaVolume.class.getName(),
-                TileServiceCallVolume.class.getName(),
-                TileServiceRingVolume.class.getName(),
-                TileServiceAlarmVolume.class.getName(),
-                TileServiceNotificationVolume.class.getName(),
-                TileServiceSystemVolume.class.getName(),
-                TileServiceDialVolume.class.getName(),
-                TileServiceAccessibilityVolume.class.getName(),
+        Class<?>[] tileServices = {
+                TileServiceMediaVolume.class,
+                TileServiceCallVolume.class,
+                TileServiceRingVolume.class,
+                TileServiceAlarmVolume.class,
+                TileServiceNotificationVolume.class,
+                TileServiceSystemVolume.class,
+                TileServiceDialVolume.class,
+                TileServiceAccessibilityVolume.class,
         };
-        for (String service : tileServices) {
+        for (Class<?> service : tileServices) {
             TileService.requestListeningState(context, new ComponentName(context, service));
         }
     }
@@ -76,7 +77,11 @@ public class TileServiceController {
         if (item == null) {
             item = volumeControlModel.getDefaultControls().get(streamType);
         }
-        tile.setIcon(Icon.createWithResource(context, volumeControlModel.getIconId(item.icon)));
+        if (item == null) {
+            return;
+        }
+        int iconId = volumeControlModel.getIconId(item.icon);
+        tile.setIcon(Icon.createWithResource(context, iconId != 0 ? iconId : R.drawable.ic_outline_volume_up_24px));
         tile.setLabel(item.label);
         if (item.status == 1) {
             tile.setState(Tile.STATE_ACTIVE);

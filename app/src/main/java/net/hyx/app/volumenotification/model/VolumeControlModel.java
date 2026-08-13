@@ -19,11 +19,13 @@ package net.hyx.app.volumenotification.model;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
+import android.os.Build;
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import net.hyx.app.volumenotification.R;
 import net.hyx.app.volumenotification.entity.VolumeControl;
@@ -34,30 +36,32 @@ import java.util.List;
 public class VolumeControlModel {
     public static final String STREAM_TYPE_FIELD = "item_type";
     public static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
+    private static final Gson GSON = new Gson();
+
+    private static final ArrayList<Integer> DEFAULT_ORDER = buildDefaultOrder();
 
     private final SettingsModel settings;
-    private final ArrayList<Integer> defaultOrder;
     private final SparseArray<VolumeControl> defaultControls;
 
-    public VolumeControlModel(Context context) {
-        settings = new SettingsModel(context);
-        defaultOrder = new ArrayList<>();
-        defaultControls = new SparseArray<>();
-        setDefaultOrder();
-        setDefaultControls();
+    private static ArrayList<Integer> buildDefaultOrder() {
+        ArrayList<Integer> order = new ArrayList<>();
+        order.add(AudioManager.STREAM_MUSIC);
+        order.add(AudioManager.STREAM_VOICE_CALL);
+        order.add(AudioManager.STREAM_RING);
+        order.add(AudioManager.STREAM_ALARM);
+        order.add(AudioManager.STREAM_NOTIFICATION);
+        order.add(AudioManager.STREAM_SYSTEM);
+        order.add(AudioManager.STREAM_DTMF);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            order.add(AudioManager.STREAM_ACCESSIBILITY);
+        }
+        return order;
     }
 
-    private void setDefaultOrder() {
-        defaultOrder.add(AudioManager.STREAM_MUSIC);
-        defaultOrder.add(AudioManager.STREAM_VOICE_CALL);
-        defaultOrder.add(AudioManager.STREAM_RING);
-        defaultOrder.add(AudioManager.STREAM_ALARM);
-        defaultOrder.add(AudioManager.STREAM_NOTIFICATION);
-        defaultOrder.add(AudioManager.STREAM_SYSTEM);
-        defaultOrder.add(AudioManager.STREAM_DTMF);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            defaultOrder.add(AudioManager.STREAM_ACCESSIBILITY);
-        }
+    public VolumeControlModel(Context context) {
+        settings = SettingsModel.getInstance(context);
+        defaultControls = new SparseArray<>();
+        setDefaultControls();
     }
 
     private void setDefaultControls() {
@@ -75,14 +79,14 @@ public class VolumeControlModel {
                 new VolumeControl(AudioManager.STREAM_SYSTEM, 5, 0, "ic_outline_phone_android_24px", getDefaultLabel(R.string.control_label_system)));
         defaultControls.put(AudioManager.STREAM_DTMF,
                 new VolumeControl(AudioManager.STREAM_DTMF, 6, 0, "ic_outline_dialpad_24px", getDefaultLabel(R.string.control_label_dial)));
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             defaultControls.put(AudioManager.STREAM_ACCESSIBILITY,
                     new VolumeControl(AudioManager.STREAM_ACCESSIBILITY, 7, 0, "ic_outline_accessibility_new_24px", getDefaultLabel(R.string.control_label_accessibility)));
         }
     }
 
     public ArrayList<Integer> getDefaultOrder() {
-        return defaultOrder;
+        return DEFAULT_ORDER;
     }
 
     public SparseArray<VolumeControl> getDefaultControls() {
@@ -124,15 +128,21 @@ public class VolumeControlModel {
     }
 
     public void saveList(List<VolumeControl> list) {
+        if (list == null) {
+            return;
+        }
         for (int position = 0; position < list.size(); position++) {
             VolumeControl item = list.get(position);
+            if (item == null) {
+                continue;
+            }
             item.position = position;
             saveItem(item);
         }
     }
 
     private Editor editItem(VolumeControl item) {
-        return settings.getPreferences().edit().putString("pref_control_list_item_" + item.position, (new Gson()).toJson(item));
+        return settings.getPreferences().edit().putString(SettingsModel.PREF_CONTROL_LIST_ITEM_PREFIX + item.position, GSON.toJson(item));
     }
 
     private String getDefaultLabel(int resourceId) {
@@ -140,19 +150,23 @@ public class VolumeControlModel {
     }
 
     private VolumeControl getStorageItem(int position) {
-        String control = settings.getPreferences().getString("pref_control_list_item_" + position, null);
+        String control = settings.getPreferences().getString(SettingsModel.PREF_CONTROL_LIST_ITEM_PREFIX + position, null);
         if (control != null) {
-            return (new Gson()).fromJson(control, VolumeControl.class);
+            try {
+                return GSON.fromJson(control, VolumeControl.class);
+            } catch (JsonSyntaxException ex) {
+                return null;
+            }
         }
         return null;
     }
 
     private VolumeControl sanitizeItem(@NonNull VolumeControl item) {
-        if (item.position < 0 || item.position >= defaultOrder.size()) {
+        if (item.position < 0 || item.position >= DEFAULT_ORDER.size()) {
             return null;
         }
-        if (!defaultOrder.contains(item.type)) {
-            item.type = defaultControls.get(item.position).type;
+        if (!DEFAULT_ORDER.contains(item.type)) {
+            item.type = DEFAULT_ORDER.get(item.position);
         }
         if (getIconId(item.icon) == 0) {
             item.icon = defaultControls.get(item.type).icon;
@@ -161,6 +175,9 @@ public class VolumeControlModel {
     }
 
     public int getIconId(String iconName) {
+        if (iconName == null || iconName.trim().isEmpty()) {
+            return 0;
+        }
         switch (iconName) {
             case "ic_baseline_music_note_24px":
                 return R.drawable.ic_baseline_music_note_24px;

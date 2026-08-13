@@ -30,38 +30,11 @@
             app:summary="@string/pref_theme_summary"
             app:title="@string/pref_theme_title"
             app:useSimpleSummaryProvider="true" />
-        <androidx.preference.PreferenceScreen
+        <Preference
             app:key="pref_screen_custom_theme"
             app:summary="@string/pref_custom_theme_summary"
-            app:title="@string/pref_custom_theme_title">
-
-            <PreferenceCategory
-                app:key="pref_cat_custom_theme"
-                app:title="@string/pref_custom_theme_title">
-
-                <EditTextPreference
-                    app:defaultValue="@string/pref_custom_theme_background_color_default"
-                    app:key="pref_custom_theme_background_color"
-                    app:summary="@string/pref_custom_theme_color_help"
-                    app:title="@string/pref_custom_theme_background_color_title"
-                    app:useSimpleSummaryProvider="true" />
-
-                <EditTextPreference
-                    app:defaultValue="@string/pref_custom_theme_icon_color_default"
-                    app:key="pref_custom_theme_icon_color"
-                    app:summary="@string/pref_custom_theme_color_help"
-                    app:title="@string/pref_custom_theme_icon_color_title"
-                    app:useSimpleSummaryProvider="true" />
-
-            </PreferenceCategory>
-        </androidx.preference.PreferenceScreen>
-        <!--
-        <Preference
-            app:key="pref_custom_theme_preference"
-            app:summary="@string/pref_custom_theme_summary"
             app:title="@string/pref_custom_theme_title"
-            app:fragment="net.hyx.app.volumenotification.activity.SettingsActivity$NotificationThemeFragment"/>
-            -->
+            app:fragment="net.hyx.app.volumenotification.activity.SettingsActivity$NotificationThemeFragment" />
         <SwitchPreferenceCompat
             app:defaultValue="@bool/pref_translucent_default"
             app:key="pref_translucent"

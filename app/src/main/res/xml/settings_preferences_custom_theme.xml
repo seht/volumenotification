@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        app:defaultValue="@string/pref_custom_theme_background_color_default"
+        app:key="pref_custom_theme_background_color"
+        app:summary="@string/pref_custom_theme_color_help"
+        app:title="@string/pref_custom_theme_background_color_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <EditTextPreference
+        app:defaultValue="@string/pref_custom_theme_icon_color_default"
+        app:key="pref_custom_theme_icon_color"
+        app:summary="@string/pref_custom_theme_color_help"
+        app:title="@string/pref_custom_theme_icon_color_title"
+        app:useSimpleSummaryProvider="true" />
+
+</androidx.preference.PreferenceScreen>

@@ -40,7 +40,7 @@ public class NotificationServiceController {
 
     public NotificationServiceController(Context context) {
         this.context = context;
-        settings = new SettingsModel(context);
+        settings = SettingsModel.getInstance(context);
         factory = new NotificationFactory(context);
     }
 

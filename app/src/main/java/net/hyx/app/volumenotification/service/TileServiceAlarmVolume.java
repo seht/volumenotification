@@ -24,21 +24,8 @@ import android.os.Build;
 public class TileServiceAlarmVolume extends VolumeTileService {
 
     @Override
-    public void onTileAdded() {
-        super.onTileAdded();
-        updateTile(AudioManager.STREAM_ALARM);
-    }
-
-    @Override
-    public void onStartListening() {
-        super.onStartListening();
-        updateTile(AudioManager.STREAM_ALARM);
-    }
-
-    @Override
-    public void onClick() {
-        super.onClick();
-        adjustVolume(AudioManager.STREAM_ALARM);
+    protected int getStreamType() {
+        return AudioManager.STREAM_ALARM;
     }
 
 }

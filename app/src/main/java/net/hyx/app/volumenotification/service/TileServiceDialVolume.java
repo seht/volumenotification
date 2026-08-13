@@ -24,21 +24,8 @@ import android.os.Build;
 public class TileServiceDialVolume extends VolumeTileService {
 
     @Override
-    public void onTileAdded() {
-        super.onTileAdded();
-        updateTile(AudioManager.STREAM_DTMF);
-    }
-
-    @Override
-    public void onStartListening() {
-        super.onStartListening();
-        updateTile(AudioManager.STREAM_DTMF);
-    }
-
-    @Override
-    public void onClick() {
-        super.onClick();
-        adjustVolume(AudioManager.STREAM_DTMF);
+    protected int getStreamType() {
+        return AudioManager.STREAM_DTMF;
     }
 
 }

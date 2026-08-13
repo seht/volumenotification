@@ -57,21 +57,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.AdjustVolumeReceiver" />
+        <receiver
+            android:name=".receiver.AdjustVolumeReceiver"
+            android:exported="true" />
 
-        <!--        <service-->
-        <!--            android:name=".service.NotificationForegroundService"-->
-        <!--            android:enabled="true"-->
-        <!--            android:exported="true"-->
-        <!--            android:permission="android.permission.BIND_JOB_SERVICE"-->
-        <!--            android:foregroundServiceType="specialUse">-->
-        <!--            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"-->
-        <!--                android:value="sticky_notification"/>-->
-
-        <!--        </service>-->
-
-        <service
-            android:name=".service.TileServiceMediaVolume"
+            <service
+                android:name=".service.TileServiceMediaVolume"
             android:exported="true"
             android:icon="@drawable/ic_baseline_music_note_24px"
             android:label="@string/control_label_media"
