@@ -105,6 +105,12 @@ public class SettingsModel {
         preferences.edit().putInt(PREF_DIALOG_ALERT_NONCE_COUNT_PREFIX + id, count).apply();
     }
 
+    public void initDarkThemeIfUnset() {
+        if (!preferences.getBoolean(PREF_DARK_APP_THEME_SET, false)) {
+            setAppThemeDark(isSystemDarkMode());
+        }
+    }
+
     public boolean getAppThemeDark() {
         if (!preferences.getBoolean(PREF_DARK_APP_THEME_SET, false)) {
             return isSystemDarkMode();

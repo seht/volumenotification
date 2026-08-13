@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -62,6 +63,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         settings = SettingsModel.getInstance(context);
         setTheme(settings.getAppTheme());
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         notificationServiceController = NotificationServiceController.newInstance(context);
         setContentView(R.layout.activity_layout);
 

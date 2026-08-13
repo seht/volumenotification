@@ -16,7 +16,9 @@ public class ApplicationController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AppCompatDelegate.setDefaultNightMode(SettingsModel.getInstance(getApplicationContext()).getAppNightMode());
+        SettingsModel settings = SettingsModel.getInstance(getApplicationContext());
+        settings.initDarkThemeIfUnset();
+        AppCompatDelegate.setDefaultNightMode(settings.getAppNightMode());
         new Thread(() -> NotificationServiceController.newInstance(getApplicationContext()).checkEnableStartAtBoot()).start();
 
         Intent intent = new Intent(getApplicationContext(), StartServiceReceiver.class);

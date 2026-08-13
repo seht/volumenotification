@@ -22,6 +22,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
@@ -49,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity implements
         settings = SettingsModel.getInstance(getApplicationContext());
         setTheme(settings.getAppTheme());
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_layout);
 
         getSupportFragmentManager().beginTransaction()

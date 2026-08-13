@@ -6,19 +6,20 @@ android {
         applicationId 'net.hyx.app.volumenotification'
         minSdkVersion 21
         targetSdk 35
-        versionCode 13300
-        versionName '1.3.3'
+        versionCode 13310
+        versionName '1.3.3.1'
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
             minifyEnabled = true
-            // shrinkResources true
+            shrinkResources = true
             pseudoLocalesEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled = true
+            shrinkResources = true
             pseudoLocalesEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
