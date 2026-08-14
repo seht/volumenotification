@@ -170,17 +170,15 @@ public class NotificationFactory {
 
     public int getThemeId(String themeName) {
         switch (themeName) {
-            case "theme_material":
+            case SettingsModel.THEME_MATERIAL:
                 return R.style.style_theme_material;
-            case "theme_material_light":
+            case SettingsModel.THEME_MATERIAL_LIGHT:
                 return R.style.style_theme_material_light;
-            case "theme_material_blue_grey":
-                return R.style.style_theme_material;
-            case "theme_holo":
+            case SettingsModel.THEME_HOLO:
                 return R.style.style_theme_holo;
-            case "theme_holo_light":
+            case SettingsModel.THEME_HOLO_LIGHT:
                 return R.style.style_theme_holo_light;
-            case "theme_custom":
+            case SettingsModel.THEME_CUSTOM:
             default:
                 return 0;
         }
@@ -188,17 +186,17 @@ public class NotificationFactory {
 
     private int getNotificationLayout(String layoutName) {
         switch (layoutName) {
-            case "32dp":
+            case SettingsModel.NOTIFICATION_HEIGHT_32DP:
                 return R.layout.notification_layout_32dp;
-            case "40dp":
+            case SettingsModel.NOTIFICATION_HEIGHT_40DP:
                 return R.layout.notification_layout_40dp;
-            case "48dp":
+            case SettingsModel.NOTIFICATION_HEIGHT_48DP:
                 return R.layout.notification_layout_48dp;
-            case "64dp":
+            case SettingsModel.NOTIFICATION_HEIGHT_64DP:
                 return R.layout.notification_layout_64dp;
-            case "wrap_content":
+            case SettingsModel.NOTIFICATION_HEIGHT_WRAP_CONTENT:
                 return R.layout.notification_layout_wrap_content;
-            case "match_parent":
+            case SettingsModel.NOTIFICATION_HEIGHT_MATCH_PARENT:
             default:
                 return R.layout.notification_layout_match_parent;
         }

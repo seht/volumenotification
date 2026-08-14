@@ -61,7 +61,7 @@
             android:name=".receiver.AdjustVolumeReceiver"
             android:exported="true" />
 
-            <service
+        <service
                 android:name=".service.TileServiceMediaVolume"
             android:exported="true"
             android:icon="@drawable/ic_baseline_music_note_24px"

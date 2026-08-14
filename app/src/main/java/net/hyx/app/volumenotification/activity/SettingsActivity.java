@@ -126,6 +126,11 @@ public class SettingsActivity extends BaseActivity implements
                 return;
             }
             final SettingsModel settings = SettingsModel.getInstance(getActivity());
+            if (!settings.getPreferences().contains(SettingsModel.PREF_THEME)) {
+                settings.getPreferences().edit()
+                        .putString(SettingsModel.PREF_THEME, settings.getDefaultNotificationTheme())
+                        .apply();
+            }
             Preference.OnPreferenceChangeListener changeListener = new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {

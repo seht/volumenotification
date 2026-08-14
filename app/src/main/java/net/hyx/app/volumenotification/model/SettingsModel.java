@@ -26,20 +26,16 @@ import android.graphics.Color;
 import android.util.TypedValue;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceManager;
 
 import net.hyx.app.volumenotification.R;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class SettingsModel {
 
     public static final String SHARED_PREF_NAME = "net.hyx.app.volumenotification_preferences";
     public static final String PREF_DARK_APP_THEME = "pref_dark_app_theme";
-    public static final String PREF_DARK_APP_THEME_SET = "pref_dark_app_theme_set";
     public static final String PREF_ENABLED = "pref_enabled";
     public static final String PREF_BOOT = "pref_boot";
     public static final String PREF_FOREGROUND_SERVICE = "pref_foreground_service";
@@ -53,8 +49,21 @@ public class SettingsModel {
     public static final String PREF_CUSTOM_THEME_BACKGROUND_COLOR = "pref_custom_theme_background_color";
     public static final String PREF_CUSTOM_THEME_ICON_COLOR = "pref_custom_theme_icon_color";
     public static final String PREF_NOTIFICATION_HEIGHT = "pref_notification_height";
+    public static final String THEME_MATERIAL = "theme_material";
+    public static final String THEME_MATERIAL_LIGHT = "theme_material_light";
+    public static final String THEME_HOLO = "theme_holo";
+    public static final String THEME_HOLO_LIGHT = "theme_holo_light";
+    public static final String THEME_CUSTOM = "theme_custom";
+    public static final String NOTIFICATION_HEIGHT_MATCH_PARENT = "match_parent";
+    public static final String NOTIFICATION_HEIGHT_WRAP_CONTENT = "wrap_content";
+    public static final String NOTIFICATION_HEIGHT_32DP = "32dp";
+    public static final String NOTIFICATION_HEIGHT_40DP = "40dp";
+    public static final String NOTIFICATION_HEIGHT_48DP = "48dp";
+    public static final String NOTIFICATION_HEIGHT_64DP = "64dp";
     public static final String PREF_CONTROL_LIST_ITEM_PREFIX = "pref_control_list_item_";
     public static final String PREF_DIALOG_ALERT_NONCE_COUNT_PREFIX = "pref_dialog_alert_nonce_count_";
+    public static final String PREF_SETTINGS_FORMAT_VERSION = "pref_settings_format_version";
+    private static final int CURRENT_SETTINGS_FORMAT_VERSION = 1;
 
     private static volatile SettingsModel instance;
 
@@ -75,7 +84,7 @@ public class SettingsModel {
     public SettingsModel(Context context) {
         resources = context.getResources();
         preferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        migrateLegacyDefaultPreferences(context.getApplicationContext());
+        ensureCurrentPreferenceFormat();
     }
 
     public Resources getResources() {
@@ -105,31 +114,15 @@ public class SettingsModel {
         preferences.edit().putInt(PREF_DIALOG_ALERT_NONCE_COUNT_PREFIX + id, count).apply();
     }
 
-    public void initDarkThemeIfUnset() {
-        if (!preferences.getBoolean(PREF_DARK_APP_THEME_SET, false)) {
-            setAppThemeDark(isSystemDarkMode());
-        }
-    }
-
     public boolean getAppThemeDark() {
-        if (!preferences.getBoolean(PREF_DARK_APP_THEME_SET, false)) {
-            return isSystemDarkMode();
-        }
-        boolean defValue = resources.getBoolean(R.bool.pref_dark_app_theme_default);
-        return preferences.getBoolean(PREF_DARK_APP_THEME, defValue);
+        return preferences.getBoolean(PREF_DARK_APP_THEME, isSystemDarkMode());
     }
 
     public void setAppThemeDark(boolean value) {
-        preferences.edit()
-                .putBoolean(PREF_DARK_APP_THEME, value)
-                .putBoolean(PREF_DARK_APP_THEME_SET, true)
-                .apply();
+        preferences.edit().putBoolean(PREF_DARK_APP_THEME, value).apply();
     }
 
     public int getAppNightMode() {
-        if (!preferences.getBoolean(PREF_DARK_APP_THEME_SET, false)) {
-            return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
-        }
         return getAppThemeDark() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
     }
 
@@ -188,8 +181,41 @@ public class SettingsModel {
     }
 
     public String getTheme() {
-        String defValue = resources.getString(R.string.pref_theme_default);
+        String defValue = getDefaultNotificationTheme();
         return preferences.getString(PREF_THEME, defValue);
+    }
+
+    public String getDefaultNotificationTheme() {
+        return getAppThemeDark() ? THEME_MATERIAL : THEME_MATERIAL_LIGHT;
+    }
+
+    private void ensureCurrentPreferenceFormat() {
+        int storedFormatVersion = preferences.getInt(PREF_SETTINGS_FORMAT_VERSION, 0);
+        if (storedFormatVersion == CURRENT_SETTINGS_FORMAT_VERSION) {
+            return;
+        }
+
+        boolean darkTheme = isSystemDarkMode();
+        SharedPreferences.Editor editor = preferences.edit().clear();
+        applyDefaultPreferences(editor, darkTheme);
+        editor.putInt(PREF_SETTINGS_FORMAT_VERSION, CURRENT_SETTINGS_FORMAT_VERSION).apply();
+    }
+
+    private void applyDefaultPreferences(SharedPreferences.Editor editor, boolean darkTheme) {
+        editor.putBoolean(PREF_DARK_APP_THEME, darkTheme);
+        editor.putBoolean(PREF_ENABLED, resources.getBoolean(R.bool.pref_enabled_default));
+        editor.putBoolean(PREF_BOOT, resources.getBoolean(R.bool.pref_boot_default));
+        editor.putBoolean(PREF_FOREGROUND_SERVICE, resources.getBoolean(R.bool.pref_foreground_service_default));
+        editor.putBoolean(PREF_TOGGLE_MUTE, resources.getBoolean(R.bool.pref_toggle_mute_default));
+        editor.putBoolean(PREF_TOGGLE_SILENT, resources.getBoolean(R.bool.pref_toggle_silent_default));
+        editor.putBoolean(PREF_TOP_PRIORITY, resources.getBoolean(R.bool.pref_top_priority_default));
+        editor.putBoolean(PREF_HIDE_STATUS, resources.getBoolean(R.bool.pref_hide_status_default));
+        editor.putBoolean(PREF_HIDE_LOCKED, resources.getBoolean(R.bool.pref_hide_locked_default));
+        editor.putBoolean(PREF_TRANSLUCENT, resources.getBoolean(R.bool.pref_translucent_default));
+        editor.putString(PREF_THEME, darkTheme ? THEME_MATERIAL : THEME_MATERIAL_LIGHT);
+        editor.putString(PREF_CUSTOM_THEME_BACKGROUND_COLOR, resources.getString(R.string.pref_custom_theme_background_color_default));
+        editor.putString(PREF_CUSTOM_THEME_ICON_COLOR, resources.getString(R.string.pref_custom_theme_icon_color_default));
+        editor.putString(PREF_NOTIFICATION_HEIGHT, resources.getString(R.string.pref_notification_height_default));
     }
 
     public String getCustomThemeBackgroundColor() {
@@ -241,47 +267,6 @@ public class SettingsModel {
         TypedValue typedValue = new TypedValue();
         theme.resolveAttribute(attribute, typedValue, false);
         return getStyleAttributeColor(theme, typedValue.data, attribute);
-    }
-
-    private void migrateLegacyDefaultPreferences(Context context) {
-        SharedPreferences legacyPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        if (legacyPreferences.getAll().isEmpty()) {
-            return;
-        }
-
-        SharedPreferences.Editor editor = preferences.edit();
-        boolean copiedValue = false;
-        for (Map.Entry<String, ?> entry : legacyPreferences.getAll().entrySet()) {
-            String key = entry.getKey();
-            if (preferences.contains(key)) {
-                continue;
-            }
-
-            Object value = entry.getValue();
-            if (value instanceof String) {
-                editor.putString(key, (String) value);
-            } else if (value instanceof Boolean) {
-                editor.putBoolean(key, (Boolean) value);
-            } else if (value instanceof Integer) {
-                editor.putInt(key, (Integer) value);
-            } else if (value instanceof Long) {
-                editor.putLong(key, (Long) value);
-            } else if (value instanceof Float) {
-                editor.putFloat(key, (Float) value);
-            } else if (value instanceof Set) {
-                @SuppressWarnings("unchecked")
-                Set<String> setValue = (Set<String>) value;
-                editor.putStringSet(key, setValue);
-            }
-            if (PREF_DARK_APP_THEME.equals(key) && Boolean.TRUE.equals(value)) {
-                editor.putBoolean(PREF_DARK_APP_THEME_SET, true);
-            }
-            copiedValue = true;
-        }
-
-        if (copiedValue) {
-            editor.apply();
-        }
     }
 
 }
