@@ -3,8 +3,8 @@
     android:installLocation="internalOnly">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />-->
-    <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/style_app_theme_light">
 
+        <activity
+            android:name=".activity.AdjustVolumeActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:exported="false" />
         <activity
             android:name=".activity.RecyclerViewActivity"
             android:exported="true">
@@ -60,6 +66,15 @@
         <receiver
             android:name=".receiver.AdjustVolumeReceiver"
             android:exported="true" />
+
+        <service
+            android:name=".service.NotificationForegroundService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Persistent volume control panel" />
+        </service>
 
         <service
                 android:name=".service.TileServiceMediaVolume"

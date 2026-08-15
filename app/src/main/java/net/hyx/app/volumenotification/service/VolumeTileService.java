@@ -17,11 +17,15 @@
 package net.hyx.app.volumenotification.service;
 
 import android.annotation.TargetApi;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.service.quicksettings.TileService;
 
+import net.hyx.app.volumenotification.activity.AdjustVolumeActivity;
 import net.hyx.app.volumenotification.controller.TileServiceController;
 import net.hyx.app.volumenotification.model.AudioManagerModel;
+import net.hyx.app.volumenotification.model.VolumeControlModel;
 
 @TargetApi(Build.VERSION_CODES.N)
 abstract public class VolumeTileService extends TileService {
@@ -41,7 +45,15 @@ abstract public class VolumeTileService extends TileService {
     @Override
     public void onClick() {
         super.onClick();
-        adjustVolume();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            startActivityAndCollapse(PendingIntent.getActivity(this, getStreamType(),
+                    new Intent(this, AdjustVolumeActivity.class)
+                            .putExtra(VolumeControlModel.STREAM_TYPE_FIELD, getStreamType())
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK),
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
+        } else {
+            adjustVolume();
+        }
     }
 
     protected abstract int getStreamType();
