@@ -3,6 +3,7 @@
 *.iml
 .gradle
 .idea
+.vscode
 /local.properties
 /build
 /app/build
